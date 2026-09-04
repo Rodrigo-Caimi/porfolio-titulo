@@ -9,7 +9,7 @@
   --line: #E2E2E2;
   --container: 1200px;
   --gutter: 32px;
-  --header-h: 72px;
+  --header-h: 88px;
   --brand: #111111;
   --brand-hover: #333333;
   --brand-soft: rgba(17, 17, 17, 0.06);
@@ -84,13 +84,13 @@ header {
   gap: 16px;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 16px var(--gutter);
+  padding: 18px var(--gutter);
   position: relative;
 }
 
 .logo-mark {
-  height: 44px;
-  width: 44px;
+  height: 58px;
+  width: 58px;
   display: block;
   border-radius: 50%;
   object-fit: cover;
@@ -219,7 +219,7 @@ header.is-nav-open .nav-toggle-bars::after {
 .actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: nowrap;
 }
 
@@ -228,8 +228,8 @@ header.is-nav-open .nav-toggle-bars::after {
 }
 
 .icon-btn {
-  width: 36px;
-  height: 36px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   border: 1px solid var(--brand);
   display: flex;
@@ -243,6 +243,8 @@ header.is-nav-open .nav-toggle-bars::after {
 
 .icon-btn svg {
   display: block;
+  width: 22px;
+  height: 22px;
   overflow: visible;
   transform-origin: 50% 50%;
   transition: transform .28s cubic-bezier(0.34, 1.35, 0.64, 1);
@@ -425,11 +427,11 @@ section.hero::after {
    ============================================ */
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(36px, 5vw, 72px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(36px, 5vw, 64px);
   align-items: center;
   justify-content: center;
-  max-width: min(1320px, 94vw);
+  max-width: min(1480px, 96vw);
   width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
@@ -460,11 +462,11 @@ section.hero::after {
 
 .hero-role {
   display: block;
-  margin-top: 18px;
+  margin-top: 14px;
   color: var(--muted);
-  font-size: clamp(24px, 2.5vw, 36px);
-  line-height: 1.3;
-  font-weight: 500;
+  font-size: clamp(18px, 1.6vw, 24px);
+  line-height: 1.35;
+  font-weight: 400;
   letter-spacing: 0.01em;
 }
 
@@ -493,7 +495,7 @@ section.hero::after {
 }
 
 .hero-image {
-  width: min(560px, 40vw);
+  width: min(700px, 48vw);
   max-width: 100%;
   aspect-ratio: 1 / 1;
   height: auto;
@@ -1552,7 +1554,7 @@ textarea {
   }
 
   .hero-image {
-    width: min(420px, 38vw);
+    width: min(500px, 44vw);
   }
 }
 
@@ -1604,7 +1606,7 @@ textarea {
 @media (max-width: 920px) {
   :root {
     --gutter: 32px;
-    --header-h: 64px;
+    --header-h: 74px;
   }
 
   html,
@@ -1655,14 +1657,19 @@ textarea {
     gap: 8px;
   }
 
+  .logo-mark {
+    height: 50px;
+    width: 50px;
+  }
+
   .icon-btn {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
   }
 
   .icon-btn svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
   }
 
   .hero {
@@ -1707,7 +1714,7 @@ textarea {
 
   .hero-image {
     justify-self: center;
-    width: min(320px, calc(100% - (var(--gutter) * 2)));
+    width: min(360px, calc(100% - (var(--gutter) * 2)));
   }
 
   section.hero {
