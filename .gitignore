@@ -1,7 +1,5 @@
-# Video pesado: se hospeda en Google Drive
-Videos/*.mp4
-Videos/*.mov
-Videos/*.avi
+# Diagnóstico local (no forma parte del sitio)
+_diag/
 
 # Sistema
 .DS_Store
