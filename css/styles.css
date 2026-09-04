@@ -107,14 +107,14 @@ header {
 .site-nav a {
   color: var(--brand);
   text-decoration: none;
-  margin: 0 12px;
-  font-size: 18px;
-  font-weight: 500;
+  margin: 0 16px;
+  font-size: 22px;
+  font-weight: 600;
   letter-spacing: 0.01em;
   transition: color .2s ease;
   white-space: nowrap;
   position: relative;
-  padding-bottom: 2px;
+  padding-bottom: 3px;
 }
 
 .site-nav a::after {
