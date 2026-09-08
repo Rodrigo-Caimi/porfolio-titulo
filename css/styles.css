@@ -1946,11 +1946,10 @@ textarea {
 }
 
 .work-detail-hero {
-  max-width: var(--container);
+  max-width: min(1400px, 96vw);
   width: 100%;
   margin: 0 auto;
-  padding: 28px var(--gutter) 0;
-  /* section global usa align-items:center; sin esto la galería se colapsa */
+  padding: 32px var(--gutter) 8px;
   align-items: stretch;
 }
 
@@ -1959,52 +1958,189 @@ textarea {
   align-self: stretch;
 }
 
-/* Galería: imagen principal + miniaturas */
+/* Galería: composición distinta por proyecto, foto completa sin letterbox */
 .gallery {
   display: grid;
-  grid-template-columns: 4fr 1fr;
-  gap: 20px;
-  align-items: stretch;
-}
-
-.main-image {
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  overflow: hidden;
+  gap: 16px;
   width: 100%;
-  height: 640px;
-  min-width: 0;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  position: relative;
+  max-width: min(1360px, 100%);
+  margin: 0 auto;
+  align-items: start;
+  justify-content: center;
 }
 
-.main-image img,
-.main-image video {
+.shot {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: transparent;
+  align-self: start;
+}
+
+.shot img,
+.shot video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: unset;
+  background: transparent;
+}
+
+.shot--video {
+  aspect-ratio: var(--shot-ratio, 16 / 9);
+}
+
+.shot--video img,
+.shot--video video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  background: #111;
 }
 
-.main-image iframe.drive-embed {
+.shot iframe.drive-embed {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   border: 0;
-  background: #111;
-  /* Evita que Safari recorte controles del player */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+  background: #f3f3f3;
 }
 
-.main-image.is-drive-playing {
-  overflow: visible;
-  border-radius: 12px;
-  z-index: 2;
+.shot.is-drive-playing {
+  overflow: hidden;
+}
+
+.shot-stack {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  align-content: start;
+}
+
+/* Horizonte: pieza urbana ancha + aplicaciones */
+.gallery--spread {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gallery--spread .shot:first-child {
+  grid-column: 1 / -1;
+}
+
+/* Mayo Amarillo: afiche protagonista + feed */
+.gallery--poster {
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+}
+
+/* Totem: tira de pantallas */
+.gallery--screens {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Fotografía: ensayo, la primera manda */
+.gallery--essay {
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+}
+
+.gallery--essay > .shot:last-child {
+  grid-column: 1 / -1;
+}
+
+/* ORT: tira de reel / fotogramas verticales */
+.gallery--storyboard {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* Noir: interior + detalle + cierre ancho */
+.gallery--boutique {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+}
+
+.gallery--boutique > .shot:last-child {
+  grid-column: 1 / -1;
+}
+
+/* Don Pascual: campaña en bloque */
+.gallery--campaign {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.gallery--campaign .shot:nth-child(1) {
+  grid-column: 1 / span 4;
+}
+
+.gallery--campaign .shot:nth-child(2) {
+  grid-column: 5 / span 2;
+}
+
+.gallery--campaign .shot:nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+.gallery--campaign .shot:nth-child(4) {
+  grid-column: 1 / span 2;
+}
+
+.gallery--campaign .shot:nth-child(5) {
+  grid-column: 3 / span 2;
+}
+
+.gallery--campaign .shot:nth-child(6) {
+  grid-column: 5 / span 2;
+}
+
+@media (max-width: 1100px) {
+  .gallery--screens,
+  .gallery--storyboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .gallery--spread,
+  .gallery--campaign {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gallery--spread .shot,
+  .gallery--campaign .shot {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .gallery--spread .shot:first-child,
+  .gallery--campaign .shot:nth-child(1),
+  .gallery--campaign .shot:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .gallery--screens,
+  .gallery--storyboard,
+  .gallery--spread,
+  .gallery--poster,
+  .gallery--essay,
+  .gallery--boutique,
+  .gallery--campaign {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery--screens .shot,
+  .gallery--storyboard .shot,
+  .gallery--spread .shot,
+  .gallery--poster .shot,
+  .gallery--essay .shot,
+  .gallery--boutique .shot,
+  .gallery--campaign .shot {
+    grid-column: auto;
+    grid-row: auto;
+  }
 }
 
 .drive-fallback,
@@ -2080,16 +2216,6 @@ textarea {
 }
 
 @media (max-width: 920px) {
-  .main-image {
-    height: min(52vh, 420px);
-    min-height: 240px;
-  }
-
-  .main-image.is-drive-playing {
-    /* No embeber en móvil; por si queda iframe residual */
-    overflow: hidden;
-  }
-
   .drive-poster-label {
     bottom: 14px;
     font-size: 13px;
@@ -2097,338 +2223,17 @@ textarea {
   }
 }
 
-/* Solo espaciado header → cajas (igual en todos, como Café). No cambia layout de galerías. */
-body[data-proyecto-id="1"] .work-detail-hero,
-body[data-proyecto-id="2"] .work-detail-hero,
-body[data-proyecto-id="3"] .work-detail-hero,
-body[data-proyecto-id="4"] .work-detail-hero,
-body[data-proyecto-id="5"] .work-detail-hero,
-body[data-proyecto-id="6"] .work-detail-hero,
-body[data-proyecto-id="7"] .work-detail-hero {
-  padding-top: 28px !important;
-}
-
-body[data-proyecto-id="1"] .gallery,
-body[data-proyecto-id="5"] .gallery {
-  margin-top: 28px;
-}
-
-/* Galería vertical: Mayo Amarillo + Totem de Café */
-body[data-proyecto-id="2"] .gallery,
-body[data-proyecto-id="3"] .gallery {
-  grid-template-columns: minmax(0, 4fr) minmax(110px, 1fr);
-  gap: 16px;
-  align-items: stretch;
-  max-width: 980px;
-  margin: 28px auto 0;
-}
-
-body[data-proyecto-id="2"] .main-image,
-body[data-proyecto-id="3"] .main-image {
-  height: auto;
-  aspect-ratio: 9 / 16;
-  max-height: min(78vh, 780px);
-  width: 100%;
-  border-radius: 20px;
-  background: #F0F0F0;
-}
-
-body[data-proyecto-id="3"] .main-image {
-  aspect-ratio: 972 / 1243;
-  background: #E8E8E8;
-}
-
-body[data-proyecto-id="2"] .main-image img {
-  object-fit: contain !important;
-  object-position: center center;
-  background: inherit;
-}
-
-body[data-proyecto-id="3"] .main-image img {
-  object-fit: contain !important;
-  object-position: center center;
-  background: #E8E8E8;
-  image-rendering: auto;
-}
-
-body[data-proyecto-id="2"] .thumbnails,
-body[data-proyecto-id="3"] .thumbnails {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1fr);
-  gap: 12px;
-  height: 100%;
-  align-self: stretch;
-  max-height: min(78vh, 780px);
-}
-
-body[data-proyecto-id="2"] .thumb-item,
-body[data-proyecto-id="3"] .thumb-item {
-  border-radius: 12px;
-  height: 100%;
-  min-height: 0;
-  overflow: hidden;
-}
-
-body[data-proyecto-id="2"] .thumb-item img,
-body[data-proyecto-id="3"] .thumb-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-@media (max-width: 920px) {
-  body[data-proyecto-id="2"] .gallery,
-  body[data-proyecto-id="3"] .gallery {
-    grid-template-columns: 1fr;
-    max-width: 420px;
-  }
-
-  body[data-proyecto-id="2"] .main-image,
-  body[data-proyecto-id="3"] .main-image {
-    max-height: none;
-  }
-
-  body[data-proyecto-id="2"] .thumbnails,
-  body[data-proyecto-id="3"] .thumbnails {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: none;
-    max-height: none;
-    height: auto;
-  }
-
-  body[data-proyecto-id="2"] .thumb-item,
-  body[data-proyecto-id="3"] .thumb-item {
-    aspect-ratio: 9 / 16;
-  }
-
-  body[data-proyecto-id="3"] .thumb-item {
-    aspect-ratio: 972 / 1243;
-  }
-}
-
-.thumb-item.is-active {
-  border-color: var(--brand);
-}
-
-.thumb-item.is-video {
-  position: relative;
-}
-
-.thumb-item.is-video::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M3 1.5v9l8-4.5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 55% 50%;
-}
-
-.thumbnails {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-
-.thumb-item {
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform .15s ease, border-color .2s ease;
-}
-
-.thumb-item:hover {
-  transform: translateY(-2px);
-  border-color: var(--brand);
-}
-
-.thumb-item img {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
-  display: block;
-}
-
-/* Proyecto Fotográfico + Noir Estudio: caja ancha + thumbs abajo */
-body[data-proyecto-id="4"] .gallery,
-body[data-proyecto-id="6"] .gallery {
-  display: grid !important;
-  grid-template-columns: 1fr !important;
-  gap: 20px;
-  width: 100% !important;
-  max-width: 960px !important;
-  margin: 28px auto 0;
-  box-sizing: border-box;
-}
-
-body[data-proyecto-id="4"] .main-image,
-body[data-proyecto-id="6"] .main-image {
-  position: relative !important;
-  width: 100% !important;
-  max-width: none !important;
-  height: min(68vh, 620px) !important;
-  min-height: 420px !important;
-  max-height: 620px !important;
-  aspect-ratio: auto !important;
-  border-radius: 20px;
-  background: #111;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-body[data-proyecto-id="4"] .main-image img,
-body[data-proyecto-id="6"] .main-image img {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  max-height: none !important;
-  object-fit: contain !important;
-  object-position: center center;
-  display: block;
-  background: #111;
-  margin: 0;
-}
-
-body[data-proyecto-id="4"] .thumbnails,
-body[data-proyecto-id="6"] .thumbnails {
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  grid-template-rows: none !important;
-  gap: 14px;
-  width: 100% !important;
-  height: auto !important;
-  max-height: none !important;
-}
-
-body[data-proyecto-id="4"] .thumb-item,
-body[data-proyecto-id="6"] .thumb-item {
-  border-radius: 14px;
-  aspect-ratio: 4 / 3;
-  height: auto !important;
-  min-height: 0;
-  overflow: hidden;
-  background: #111;
-  display: block;
-  position: relative;
-}
-
-body[data-proyecto-id="4"] .thumb-item img,
-body[data-proyecto-id="6"] .thumb-item img {
-  position: absolute;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  max-height: none;
-  object-fit: contain !important;
-  object-position: center center;
-  display: block;
-  background: #111;
-}
-
-@media (max-width: 920px) {
-  body[data-proyecto-id="4"] .thumbnails,
-  body[data-proyecto-id="6"] .thumbnails {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
-  body[data-proyecto-id="4"] .main-image,
-  body[data-proyecto-id="6"] .main-image {
-    height: min(58vh, 480px) !important;
-    min-height: 320px !important;
-    max-height: 480px !important;
-  }
-
-  body[data-proyecto-id="4"] .main-image img,
-  body[data-proyecto-id="6"] .main-image img {
-    max-height: none;
-  }
-}
-
-/* Campaña Reel ORT + Don Pascual: más ancho (sin subir la altura) */
-body[data-proyecto-id="5"] .work-detail-hero,
+/* Campaña Reel ORT + Don Pascual: texto y proceso al mismo ancho del bloque de fotos */
 body[data-proyecto-id="5"] .golden-section,
 body[data-proyecto-id="5"] .project-meta-section,
 body[data-proyecto-id="5"] .project-actions-section,
-body[data-proyecto-id="7"] .work-detail-hero,
 body[data-proyecto-id="7"] .golden-section,
 body[data-proyecto-id="7"] .project-meta-section,
 body[data-proyecto-id="7"] .project-actions-section {
-  max-width: min(1600px, 96vw);
+  max-width: min(1400px, 96vw);
   width: 100%;
   padding-left: clamp(16px, 3vw, 40px);
   padding-right: clamp(16px, 3vw, 40px);
-}
-
-body[data-proyecto-id="5"] .gallery,
-body[data-proyecto-id="7"] .gallery {
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
-
-body[data-proyecto-id="5"] .main-image,
-body[data-proyecto-id="7"] .main-image {
-  width: 100%;
-  height: 640px;
-  min-height: 0;
-  border-radius: 24px;
-}
-
-body[data-proyecto-id="5"] .main-image img,
-body[data-proyecto-id="5"] .main-image video,
-body[data-proyecto-id="7"] .main-image img,
-body[data-proyecto-id="7"] .main-image video {
-  object-fit: contain;
-  background: #151515;
-}
-
-/* Ómnibus: recorte apaisado — llenar sin franjas negras y priorizar el aviso */
-body[data-proyecto-id="7"] .main-image img[src*="omnibus"] {
-  object-fit: cover;
-  object-position: center 58%;
-}
-
-/* Mockup campaña: imagen completa, marco al ratio real (sin letterbox ni crop) */
-body[data-proyecto-id="7"] .main-image:has(img[src*="campana"]) {
-  height: auto;
-  aspect-ratio: 1983 / 793;
-  max-height: min(68vh, 520px);
-}
-
-body[data-proyecto-id="7"] .main-image img[src*="campana"] {
-  object-fit: contain;
-  object-position: center center;
-  background: #1a1210;
-}
-
-body[data-proyecto-id="5"] .thumbnails,
-body[data-proyecto-id="7"] .thumbnails {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 16px;
-}
-
-body[data-proyecto-id="5"] .thumb-item,
-body[data-proyecto-id="7"] .thumb-item {
-  border-radius: 14px;
-  width: 100%;
-}
-
-body[data-proyecto-id="5"] .thumb-item img,
-body[data-proyecto-id="7"] .thumb-item img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
 }
 
 body[data-proyecto-id="5"] .golden-vertical,
@@ -2458,34 +2263,6 @@ body[data-proyecto-id="7"] .golden-vertical .golden-item p {
 }
 
 @media (max-width: 920px) {
-  body[data-proyecto-id="5"] .main-image,
-  body[data-proyecto-id="7"] .main-image {
-    height: 520px;
-  }
-
-  /* Marco acorde al recorte del bondi: sin letterbox y con el aviso legible */
-  body[data-proyecto-id="7"] .main-image:has(img[src*="omnibus"]) {
-    height: auto;
-    aspect-ratio: 3 / 2;
-    max-height: 58vh;
-  }
-
-  body[data-proyecto-id="7"] .main-image:has(img[src*="campana"]) {
-    height: auto;
-    aspect-ratio: 1983 / 793;
-    max-height: 48vh;
-  }
-
-  body[data-proyecto-id="5"] .thumbnails,
-  body[data-proyecto-id="7"] .thumbnails {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  body[data-proyecto-id="5"] .thumb-item img,
-  body[data-proyecto-id="7"] .thumb-item img {
-    height: 100px;
-  }
-
   body[data-proyecto-id="5"] .golden-vertical .golden-item,
   body[data-proyecto-id="7"] .golden-vertical .golden-item {
     padding: 18px 20px;
@@ -2534,17 +2311,6 @@ body[data-proyecto-id="7"] .golden-vertical .golden-item p {
   line-height: 1.7;
   margin: 0;
   color: var(--fg);
-}
-
-@media (max-width: 920px) {
-  .main-image {
-    height: min(52vh, 420px);
-    min-height: 240px;
-  }
-
-  .gallery {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ============================================
@@ -2847,11 +2613,6 @@ html.js-motion .hero-image {
   transform: translateY(18px);
 }
 
-html.js-motion .hero-scroll {
-  opacity: 0;
-  transform: translateX(-50%) translateY(12px);
-}
-
 html.js-motion .hero.is-ready .hero-name {
   animation: motionIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
@@ -2872,21 +2633,10 @@ html.js-motion .hero.is-ready .hero-image {
   animation: motionInPhoto 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
 }
 
-html.js-motion .hero.is-ready .hero-scroll {
-  animation: motionInScroll 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
-}
-
 @keyframes motionIn {
   to {
     opacity: 1;
     transform: none;
-  }
-}
-
-@keyframes motionInScroll {
-  to {
-    opacity: 1;
-    transform: translateX(-50%);
   }
 }
 
@@ -2901,51 +2651,13 @@ html.js-motion .hero.is-ready .hero-scroll {
   }
 }
 
-.hero-scroll {
-  position: absolute;
-  left: 50%;
-  bottom: 22px;
-  transform: translateX(-50%);
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  z-index: 3;
-}
-
-.hero-scroll svg {
-  display: block;
-}
-
-html.js-motion .hero.is-ready .hero-scroll svg {
-  animation: scrollCue 1.8s ease-in-out 1s infinite;
-}
-
-@keyframes scrollCue {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
-
-@media (max-width: 920px) {
-  .hero-scroll {
-    display: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html.js-motion .reveal,
   html.js-motion .hero-name,
   html.js-motion .hero-role,
   html.js-motion .hero .desc,
   html.js-motion .hero .cta,
-  html.js-motion .hero-image,
-  html.js-motion .hero-scroll {
+  html.js-motion .hero-image {
     opacity: 1;
     transform: none;
     animation: none !important;

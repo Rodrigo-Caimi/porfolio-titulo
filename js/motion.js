@@ -32,7 +32,8 @@
     watchList('#trabajos h2, #proceso h2, #contacto h2, .section-lead, .contact-intro, #contact-form');
     watchList('.work-container .card', 70);
     watchList('.step', 90);
-    watchList('.project-detail-title, .work-detail-hero, .project-meta-section, .project-actions-section');
+    watchList('.project-detail-title, .project-meta-section, .project-actions-section');
+    watchList('.shot', 70);
     watchList('.golden-item', 80);
     watchList('.other-project-card', 90);
     watchList('.about-page h1, .about-intro, .availability-card, .tools-horizontal');
@@ -55,6 +56,18 @@
         retries += 1;
         if (grid.children.length || retries > 20) {
           window.clearInterval(timer);
+          bindReveals();
+        }
+      }, 50);
+    }
+
+    var gallery = document.querySelector('[data-proyecto-gallery]');
+    if (gallery && !gallery.querySelector('.shot')) {
+      var galleryRetries = 0;
+      var galleryTimer = window.setInterval(function () {
+        galleryRetries += 1;
+        if (gallery.querySelector('.shot') || galleryRetries > 20) {
+          window.clearInterval(galleryTimer);
           bindReveals();
         }
       }, 50);

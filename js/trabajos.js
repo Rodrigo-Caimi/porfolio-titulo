@@ -99,58 +99,75 @@
     );
   }
 
+  function renderShot(item, index) {
+    const eager = index === 0;
+    const loading = eager ? 'eager' : 'lazy';
+    const isMedia = isVideoItem(item) || isDriveItem(item);
+    let media;
+
+    if (isDriveItem(item)) {
+      const preview = drivePreviewUrl(item.src);
+      const viewUrl = driveViewUrl(item.src);
+      const poster = asset(item.poster || '');
+      if (preview || viewUrl) {
+        media = drivePosterHtml(preview, viewUrl, poster, item.alt, 'shot-media', eager);
+      } else {
+        media = '<img class="shot-media" src="' + poster + '" alt="' + (item.alt || '') + '" loading="' + loading + '" decoding="async" />';
+      }
+    } else if (isVideoItem(item)) {
+      media = '<video class="shot-media" controls playsinline poster="' + asset(item.poster || '') + '" src="' + asset(item.src) + '"></video>';
+    } else {
+      media =
+        '<img class="shot-media" src="' + asset(item.src) + '" alt="' + (item.alt || '') + '" loading="' + loading + '" decoding="async"' +
+        (eager ? ' fetchpriority="high"' : '') +
+        ' />';
+    }
+
+    return '<figure class="shot' + (isMedia ? ' shot--video' : '') + '">' + media + '</figure>';
+  }
+
+  function bindShotRatio(shot) {
+    const media = shot.querySelector('img, video');
+    if (!media) return;
+
+    function apply() {
+      const w = media.naturalWidth || media.videoWidth;
+      const h = media.naturalHeight || media.videoHeight;
+      if (!w || !h) return;
+      shot.style.setProperty('--shot-ratio', w + ' / ' + h);
+    }
+
+    if (media.tagName === 'VIDEO') {
+      media.addEventListener('loadedmetadata', apply);
+      return;
+    }
+
+    if (media.complete && media.naturalWidth) apply();
+    else media.addEventListener('load', apply);
+  }
+
   function renderGallery(container, proyecto) {
     if (!container || !proyecto.gallery.length) return;
 
-    const mainClass = proyecto.galleryContain ? 'img-contain' : '';
-    const first = proyecto.gallery[0];
-    let mainMedia;
+    const layout = proyecto.galleryLayout || 'spread';
+    const shots = proyecto.gallery.map(renderShot);
+    var inner;
 
-    if (isDriveItem(first)) {
-      const preview = drivePreviewUrl(first.src);
-      const viewUrl = driveViewUrl(first.src);
-      const poster = asset(first.poster || '');
-      if (preview || viewUrl) {
-        mainMedia = drivePosterHtml(preview, viewUrl, poster, first.alt, mainClass, true);
-      } else {
-        mainMedia =
-          '<div class="drive-fallback">' +
-            '<img id="main-media" class="' + mainClass + '" src="' + poster + '" alt="' + first.alt + '" decoding="async" />' +
-          '</div>';
-      }
-    } else if (isVideoItem(first)) {
-      mainMedia = '<video id="main-media" class="' + mainClass + '" controls playsinline poster="' + asset(first.poster || '') + '" src="' + asset(first.src) + '"></video>';
+    if (layout === 'poster') {
+      inner = shots[0] + '<div class="shot-stack">' + shots.slice(1).join('') + '</div>';
+    } else if (layout === 'essay' || layout === 'boutique') {
+      inner = shots[0] + '<div class="shot-stack">' + shots.slice(1, 3).join('') + '</div>' + shots.slice(3).join('');
     } else {
-      mainMedia = '<img id="main-media" class="' + mainClass + '" loading="eager" decoding="async" fetchpriority="high" src="' + asset(first.src) + '" alt="' + first.alt + '" />';
+      inner = shots.join('');
     }
 
-    const thumbs = proyecto.gallery.map(function (item, index) {
-      const thumbSrc = asset(item.thumb || item.poster || item.src);
-      const poster = asset(item.poster || item.src);
-      let attrs;
-
-      if (isDriveItem(item)) {
-        attrs = ' data-type="drive" data-full="' + drivePreviewUrl(item.src) + '" data-view="' + driveViewUrl(item.src) + '" data-poster="' + poster + '"';
-      } else if (isVideoItem(item)) {
-        attrs = ' data-type="video" data-full="' + asset(item.src) + '" data-poster="' + poster + '"';
-      } else {
-        attrs = ' data-type="image" data-full="' + asset(item.src) + '"';
-      }
-
-      return (
-        '<div class="thumb-item' + ((isVideoItem(item) || isDriveItem(item)) ? ' is-video' : '') + (index === 0 ? ' is-active' : '') + '"' + attrs + '>' +
-          '<img class="thumb-img" loading="lazy" decoding="async" src="' + thumbSrc + '" alt="' + item.alt + '" />' +
-        '</div>'
-      );
-    }).join('');
-
     container.innerHTML =
-      '<div class="gallery" data-gallery>' +
-        '<div class="main-image">' + mainMedia + '</div>' +
-        '<div class="thumbnails">' + thumbs + '</div>' +
-      '</div>';
+      '<div class="gallery gallery--' + layout + '" data-gallery>' + inner + '</div>';
 
-    initGallery(container.querySelector('[data-gallery]'), mainClass);
+    container.querySelectorAll('.shot').forEach(function (shot) {
+      bindShotRatio(shot);
+      bindDrivePoster(shot);
+    });
   }
 
   function loadDriveEmbed(mainWrap, preview, title) {
@@ -165,51 +182,6 @@
     if (!url) return false;
     window.open(url, '_blank', 'noopener');
     return true;
-  }
-
-  function showMainMedia(mainWrap, type, src, poster, alt, mainClass, viewUrl) {
-    if (!mainWrap) return;
-    mainWrap.classList.remove('is-drive-playing');
-
-    if (type === 'drive') {
-      if (src || viewUrl) {
-        // Poster + click: en móvil abre Drive; en desktop carga iframe al pedir
-        mainWrap.innerHTML = drivePosterHtml(src, viewUrl, poster, alt, mainClass, false);
-        bindDrivePoster(mainWrap);
-      } else {
-        mainWrap.innerHTML =
-          '<div class="drive-fallback">' +
-            '<img id="main-media" class="' + mainClass + '" src="' + (poster || '') + '" alt="' + (alt || '') + '" decoding="async" />' +
-          '</div>';
-      }
-      return;
-    }
-
-    if (type === 'video') {
-      mainWrap.innerHTML =
-        '<video id="main-media" class="' + mainClass + '" controls playsinline webkit-playsinline autoplay poster="' + (poster || '') + '" src="' + src + '"></video>';
-      return;
-    }
-
-    // Reutilizar la misma <img> para evitar saltos de scroll al cambiar fotos
-    var existing = mainWrap.querySelector('#main-media');
-    if (existing && existing.tagName === 'IMG') {
-      // Si venimos de un poster/button, volver a un img suelto
-      if (existing.closest('.drive-poster, .drive-fallback')) {
-        mainWrap.innerHTML =
-          '<img id="main-media" class="' + mainClass + '" src="' + src + '" alt="' + (alt || '') + '" decoding="async" />';
-        return;
-      }
-      existing.className = mainClass || '';
-      existing.alt = alt || '';
-      if (existing.getAttribute('src') !== src) {
-        existing.setAttribute('src', src);
-      }
-      return;
-    }
-
-    mainWrap.innerHTML =
-      '<img id="main-media" class="' + mainClass + '" src="' + src + '" alt="' + (alt || '') + '" decoding="async" />';
   }
 
   function bindDrivePoster(mainWrap) {
@@ -234,40 +206,6 @@
       }
 
       openDriveExternal(viewUrl, preview);
-    });
-  }
-
-  function initGallery(gallery, mainClass) {
-    if (!gallery) return;
-
-    const mainWrap = gallery.querySelector('.main-image');
-    const thumbItems = gallery.querySelectorAll('.thumb-item');
-
-    bindDrivePoster(mainWrap);
-
-    thumbItems.forEach(function (item) {
-      item.addEventListener('click', function (event) {
-        event.preventDefault();
-        const type = item.getAttribute('data-type') || 'image';
-        const full = item.getAttribute('data-full') || '';
-        const poster = item.getAttribute('data-poster') || '';
-        const viewUrl = item.getAttribute('data-view') || '';
-        const alt = item.querySelector('.thumb-img') ? item.querySelector('.thumb-img').alt : '';
-        const scrollY = window.scrollY || window.pageYOffset || 0;
-
-        thumbItems.forEach(function (thumb) { thumb.classList.remove('is-active'); });
-        item.classList.add('is-active');
-
-        showMainMedia(mainWrap, type, full, poster, alt, mainClass || '', viewUrl);
-
-        // Mantener la posición al cambiar (evita el salto en Aurora / fotos horizontales)
-        requestAnimationFrame(function () {
-          window.scrollTo(0, scrollY);
-          requestAnimationFrame(function () {
-            window.scrollTo(0, scrollY);
-          });
-        });
-      });
     });
   }
 

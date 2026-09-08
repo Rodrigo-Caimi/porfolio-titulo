@@ -10,6 +10,7 @@ const PROYECTOS = [
     role: 'Identidad de marca: concepto, sistema visual y aplicaciones',
     tools: 'Illustrator, Photoshop',
     galleryContain: false,
+    galleryLayout: 'spread',
     gallery: [
       { src: 'IMAGENES/horizonte-calle.jpg', thumb: 'IMAGENES/horizonte-calle-thumb.jpg', alt: 'Horizonte en calle' },
       { src: 'IMAGENES/horizonte-tarjeta.jpg', thumb: 'IMAGENES/horizonte-tarjeta-thumb.jpg', alt: 'Tarjeta de presentación Horizonte' },
@@ -51,6 +52,7 @@ const PROYECTOS = [
     role: 'Campaña de concientización: concepto, piezas gráficas y piezas digitales',
     tools: 'Photoshop, Illustrator',
     galleryContain: true,
+    galleryLayout: 'poster',
     gallery: [
       { src: 'IMAGENES/Afiche-de-campana.webp', alt: 'Afiche de campaña Mayo Amarillo' },
       { src: 'IMAGENES/5-PosteoIgMayo.webp', alt: 'Posteo Instagram Mayo Amarillo 5' },
@@ -92,6 +94,7 @@ const PROYECTOS = [
     role: 'Diseño UX/UI end-to-end: flujos, pantallas y prototipo interactivo',
     tools: 'Figma',
     galleryContain: true,
+    galleryLayout: 'screens',
     gallery: [
       { src: 'IMAGENES/totem-cafe-hq.png', thumb: 'IMAGENES/totem-cafe-thumb.jpg', alt: 'Totem de Café - Menú principal' },
       { src: 'IMAGENES/totem-recarga-hq.png', thumb: 'IMAGENES/totem-recarga-thumb.jpg', alt: 'Recarga completada Totem de Café' },
@@ -142,6 +145,7 @@ const PROYECTOS = [
     role: 'Fotografía de producto y exploración técnica',
     tools: 'Cámara, Lightroom, Photoshop',
     galleryContain: true,
+    galleryLayout: 'essay',
     gallery: [
       { src: 'IMAGENES/fotografia cerveza.jpg', thumb: 'IMAGENES/foto-cerveza-thumb.jpg', alt: 'Fotografía cerveza' },
       { src: 'IMAGENES/joyeriaCreacion.jpg', thumb: 'IMAGENES/foto-joyeria-thumb.jpg', alt: 'Joyeria Creación' },
@@ -183,6 +187,7 @@ const PROYECTOS = [
     role: 'Reel promocional: concepto, generación audiovisual y edición',
     tools: 'ChatGPT, Runway, Premiere',
     galleryContain: true,
+    galleryLayout: 'storyboard',
     gallery: [
       {
         type: 'drive',
@@ -235,6 +240,7 @@ const PROYECTOS = [
     role: 'Dirección de identidad: concepto, sistema visual y aplicaciones',
     tools: 'Figma',
     galleryContain: true,
+    galleryLayout: 'boutique',
     gallery: [
       { src: 'IMAGENES/noir-interior.jpg', thumb: 'IMAGENES/noir-interior-thumb.jpg', alt: 'Interior Noir Barbería & Estilo' },
       { src: 'IMAGENES/noir-herramientas.jpg', thumb: 'IMAGENES/noir-herramientas-thumb.jpg', alt: 'Herramientas y productos Noir Estudio' },
@@ -285,6 +291,7 @@ const PROYECTOS = [
     role: 'Campaña integral: concepto, piezas fijas, video y audio',
     tools: 'ChatGPT, Runway, Suno, ElevenLabs',
     galleryContain: true,
+    galleryLayout: 'campaign',
     gallery: [
       {
         type: 'drive',
