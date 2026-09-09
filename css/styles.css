@@ -2583,7 +2583,7 @@ body[data-proyecto-id="7"] .wine-process-label {
 body[data-proyecto-id="7"] .wine-stage {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.92fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.86fr) minmax(360px, 1.18fr) minmax(0, 0.86fr);
   grid-template-rows: auto auto;
   grid-template-areas:
     "b1 bottle b2"
@@ -2654,8 +2654,12 @@ body[data-proyecto-id="7"] .wine-block {
   z-index: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-self: start;
+  gap: 0;
   min-width: 0;
   width: 100%;
+  height: auto;
   padding: clamp(28px, 3vw, 56px);
   background: #fffef9;
   border: 0;
@@ -2672,18 +2676,16 @@ body[data-proyecto-id="7"] .wine-block {
   }
 
   body[data-proyecto-id="7"] .wine-block--2 .wine-block-head,
-  body[data-proyecto-id="7"] .wine-block--4 .wine-block-head,
-  body[data-proyecto-id="7"] .wine-block--2 h3,
-  body[data-proyecto-id="7"] .wine-block--4 h3 {
-    justify-content: flex-end;
+  body[data-proyecto-id="7"] .wine-block--4 .wine-block-head {
+    text-align: right;
   }
 }
 
 body[data-proyecto-id="7"] .wine-bottle img {
   display: block;
   width: auto;
-  max-width: min(500px, 34vw);
-  height: clamp(580px, 72vh, 700px);
+  max-width: 100%;
+  height: clamp(620px, 74vh, 740px);
   object-fit: contain;
   object-position: center;
   mix-blend-mode: lighten;
@@ -2702,45 +2704,39 @@ body[data-proyecto-id="7"] .wine-caption {
 }
 
 body[data-proyecto-id="7"] .wine-block-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  align-content: flex-start;
-  gap: 6px 12px;
+  display: flow-root;
   width: 100%;
-  min-height: 2.6em;
-  margin: 0 0 18px;
-  padding: 0 0 4px;
+  margin: 0;
+  padding: 0 0 16px;
   border: 0;
   background: transparent;
   color: inherit;
   text-align: left;
   flex-shrink: 0;
+  line-height: 1.25;
 }
 
 body[data-proyecto-id="7"] .wine-num {
-  display: block;
-  flex: 0 0 auto;
+  display: inline-block;
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(2rem, 2.6vw, 2.75rem);
+  font-size: clamp(1.85rem, 2.4vw, 2.5rem);
   font-weight: 500;
   line-height: 1.15;
   color: #c4a574;
+  margin-right: 0.28em;
+  vertical-align: middle;
 }
 
 body[data-proyecto-id="7"] .wine-block h3 {
+  display: inline-block;
   margin: 0;
-  display: flex;
-  align-items: baseline;
-  flex: 1 1 8rem;
-  min-width: 0;
-  gap: 0.4em;
   font-size: clamp(22px, 1.7vw, 30px);
   font-weight: 700;
   letter-spacing: 0.03em;
   line-height: 1.25;
   text-transform: uppercase;
   color: #1c1914;
+  vertical-align: middle;
 }
 
 body[data-proyecto-id="7"] .wine-sep {
@@ -2750,12 +2746,9 @@ body[data-proyecto-id="7"] .wine-sep {
 
 body[data-proyecto-id="7"] .wine-block p {
   margin: 0;
-  padding-top: 2px;
   font-size: clamp(1.125rem, 1.2vw, 1.3125rem);
   line-height: 1.55;
   color: #4b453c;
-  position: relative;
-  z-index: 1;
 }
 
 @media (hover: hover) and (min-width: 901px) {
@@ -3050,12 +3043,31 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   body[data-proyecto-id="7"] .wine-block--3 { border-radius: 48px 36px 70px 30px; }
   body[data-proyecto-id="7"] .wine-block--4 { border-radius: 62px 46px 32px 58px; }
 
+  body[data-proyecto-id="7"] .wine-block-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin: 0;
+    padding: 0 0 12px;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--2 .wine-block-head,
+  body[data-proyecto-id="7"] .wine-block--4 .wine-block-head {
+    text-align: left;
+  }
+
   body[data-proyecto-id="7"] .wine-num {
-    font-size: clamp(1.75rem, 4.2vw, 2.25rem);
+    display: block;
+    font-size: clamp(1.7rem, 4vw, 2rem);
     line-height: 1.15;
+    margin-right: 0;
+    margin-bottom: 2px;
   }
 
   body[data-proyecto-id="7"] .wine-block h3 {
+    display: block;
+    margin: 0;
     font-size: clamp(18px, 2.4vw, 24px);
     line-height: 1.25;
   }
@@ -3097,17 +3109,26 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   body[data-proyecto-id="7"] .wine-block--4 { border-radius: 40px 32px 28px 38px; }
 
   body[data-proyecto-id="7"] .wine-block-head {
-    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin: 0;
+    padding: 0 0 12px;
   }
 
   body[data-proyecto-id="7"] .wine-block h3 {
+    display: block;
+    margin: 0;
     font-size: clamp(1.125rem, 4.8vw, 1.35rem);
-    flex-basis: 100%;
   }
 
   body[data-proyecto-id="7"] .wine-num {
-    font-size: clamp(1.7rem, 7vw, 2.1rem);
+    display: block;
+    font-size: clamp(1.6rem, 6.4vw, 1.9rem);
     line-height: 1.15;
+    margin-right: 0;
+    margin-bottom: 2px;
   }
 
   body[data-proyecto-id="7"] .wine-block p {
