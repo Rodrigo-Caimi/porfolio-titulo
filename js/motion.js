@@ -44,10 +44,16 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    var hero = document.querySelector('section.hero');
-    if (hero) {
+    var root = document.documentElement;
+    if (root.hasAttribute('data-hero-enter')) {
       requestAnimationFrame(function () {
-        hero.classList.add('is-ready');
+        requestAnimationFrame(function () {
+          root.classList.add('is-in');
+          window.setTimeout(function () {
+            root.classList.add('hero-enter-done');
+            root.removeAttribute('data-hero-enter');
+          }, 1000);
+        });
       });
     }
 
