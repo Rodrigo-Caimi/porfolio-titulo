@@ -299,7 +299,7 @@ const PROYECTOS = [
     editorial: {
       intro: 'Una campaña de edición limitada pensada para que etiqueta, piezas gráficas y video compartan la misma atmósfera de invierno.',
       bottle: {
-        src: 'IMAGENES/Don pascual/don-pascual-botella-hero.png',
+        src: 'IMAGENES/Don pascual/don-pascual-botella-hero.png?v=20260908t',
         alt: 'Botella Don Pascual Chardonnay Edición Limitada 2026'
       },
       steps: [
