@@ -313,6 +313,10 @@
   function wineBlockHtml(item, n) {
     if (!item) return '';
     const num = (n < 10 ? '0' : '') + n;
+    const text = String(item.text || '').replace(
+      '—íntima y contemporánea—',
+      '<span class="wine-nowrap">—íntima y contemporánea—</span>'
+    );
 
     return (
       '<article class="wine-block wine-block--' + n + '">' +
@@ -320,7 +324,7 @@
           '<span class="wine-num">' + num + '</span>' +
           '<h3><span class="wine-sep" aria-hidden="true">•</span> ' + item.title + '</h3>' +
         '</header>' +
-        '<p>' + item.text + '</p>' +
+        '<p>' + text + '</p>' +
       '</article>'
     );
   }
@@ -335,14 +339,29 @@
       return actionLinkHtml(action, 'btn wine-btn' + (index === 0 ? ' wine-btn--solid' : ' wine-btn--ghost'));
     }).join('');
 
+    const videoHtml =
+      '<figure class="wine-mosaic-video">' +
+        '<figcaption class="wine-campaign-title">Campaña</figcaption>' +
+        '<div class="wine-video-embed">' +
+          '<iframe' +
+            ' src="https://player.vimeo.com/video/1225310189"' +
+            ' title="Campaña Don Pascual"' +
+            ' loading="lazy"' +
+            ' allow="fullscreen; picture-in-picture"' +
+            ' allowfullscreen' +
+            ' referrerpolicy="strict-origin-when-cross-origin">' +
+          '</iframe>' +
+        '</div>' +
+      '</figure>';
+
     const mosaic = gallery.map(function (item, index) {
-      return (
+      const photo =
         '<button type="button" class="wine-mosaic-item" data-wine-index="' + index + '">' +
           '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' +
             (index < 3 ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
             ' decoding="async">' +
-        '</button>'
-      );
+        '</button>';
+      return index === 3 ? photo + videoHtml : photo;
     }).join('');
 
     const lineMarks = [1, 2, 3, 4].map(function (n) {
@@ -803,7 +822,7 @@
         });
       }
 
-      if (cols.length >= 3) {
+      if (cols.length >= 3 && !mosaic.querySelector('.wine-mosaic-video')) {
         cols[0].forEach(function (node, i) {
           const far = cols[2][Math.min(i, cols[2].length - 1)];
           if (far) add(node, far);

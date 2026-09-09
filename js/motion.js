@@ -35,7 +35,7 @@
     watchList('.project-detail-title, .project-meta-section, .project-actions-section');
     watchList('.shot', 70);
     watchList('.golden-item', 80);
-    watchList('.wine-intro, .wine-stage, .wine-block, .wine-gallery-title, .wine-mosaic-item, .wine-close', 70);
+    watchList('.wine-intro, .wine-stage, .wine-block, .wine-gallery-title, .wine-mosaic-item, .wine-mosaic-video, .wine-close', 70);
     watchList('.ubicar-intro, .ubicar-step, .ubicar-gallery', 70);
     watchList('.noir-hero, .noir-board-item, .noir-step, .noir-close', 70);
     watchList('.other-project-card', 90);
