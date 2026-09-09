@@ -381,18 +381,28 @@
       '</div>';
   }
 
+  function ubicarImgAttrs(photo, eager) {
+    const wh = (photo.w && photo.h)
+      ? ' width="' + photo.w + '" height="' + photo.h + '"'
+      : '';
+    const load = eager
+      ? ' loading="eager" fetchpriority="high"'
+      : ' loading="lazy"';
+    return wh + load + ' decoding="async"';
+  }
+
   function renderTrailProcess(container, proyecto) {
     const trail = proyecto.trail || {};
     const steps = proyecto.process || [];
     const photos = trail.steps || [];
     const result = trail.result || [];
 
-    function stepHtml(item, n, photo) {
+    function stepHtml(item, n, photo, eager) {
       if (!item) return '';
       const num = (n < 10 ? '0' : '') + n;
       const image = photo && photo.src
         ? '<figure class="ubicar-shot">' +
-            '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '" loading="lazy" decoding="async">' +
+            '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '"' + ubicarImgAttrs(photo, eager) + '>' +
           '</figure>'
         : '';
 
@@ -410,11 +420,11 @@
       );
     }
 
-    const resultHtml = result.map(function (item) {
+    const galleryHtml = result.map(function (item, index) {
       return (
-        '<figure class="ubicar-result-item">' +
-          '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '" loading="lazy" decoding="async">' +
-        '</figure>'
+        '<button type="button" class="ubicar-gallery-item" data-ubicar-index="' + index + '" aria-label="Ampliar: ' + (item.alt || '') + '">' +
+          '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' + ubicarImgAttrs(item, false) + '>' +
+        '</button>'
       );
     }).join('');
 
@@ -428,7 +438,6 @@
             '<p class="ubicar-result-lead">Del diseño a una aplicación real.</p>' +
             '<p>' + steps[3].text + '</p>' +
           '</div>' +
-          '<div class="ubicar-result-grid">' + resultHtml + '</div>' +
         '</article>'
       : '';
 
@@ -454,14 +463,24 @@
             '</defs>' +
             '<path class="ubicar-line-path"></path>' +
           '</svg>' +
-          stepHtml(steps[0], 1, photos[0]) +
-          stepHtml(steps[1], 2, photos[1]) +
-          stepHtml(steps[2], 3, photos[2]) +
+          stepHtml(steps[0], 1, photos[0], true) +
+          stepHtml(steps[1], 2, photos[1], false) +
+          stepHtml(steps[2], 3, photos[2], false) +
           resultStep +
         '</div>' +
+        (galleryHtml
+          ? '<section class="ubicar-gallery" aria-label="Aplicación real en el local">' + galleryHtml + '</section>'
+          : '') +
+        '<dialog class="ubicar-lightbox" aria-label="Imagen ampliada">' +
+          '<button type="button" class="ubicar-lightbox-close" aria-label="Cerrar">×</button>' +
+          '<button type="button" class="ubicar-lightbox-prev" aria-label="Imagen anterior">‹</button>' +
+          '<img alt="">' +
+          '<button type="button" class="ubicar-lightbox-next" aria-label="Imagen siguiente">›</button>' +
+        '</dialog>' +
       '</div>';
 
     bindUbicarTrail(container.querySelector('.ubicar-trail'));
+    bindUbicarLightbox(container.querySelector('.ubicar-gallery'), container.querySelector('.ubicar-lightbox'), result);
   }
 
   function bindUbicarTrail(trail) {
@@ -509,12 +528,56 @@
       path.setAttribute('marker-end', 'url(#ubicar-arrow)');
     }
 
+    let resizeTimer = 0;
     const redraw = function () { window.requestAnimationFrame(draw); };
-    window.addEventListener('resize', redraw);
+    window.addEventListener('resize', function () {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(redraw, 120);
+    });
     trail.querySelectorAll('img').forEach(function (img) {
-      if (!img.complete) img.addEventListener('load', redraw);
+      if (!img.complete) img.addEventListener('load', redraw, { once: true });
     });
     redraw();
+  }
+
+  function bindUbicarLightbox(gallery, dialog, items) {
+    if (!gallery || !dialog || !items || !items.length) return;
+    const img = dialog.querySelector('img');
+    const closeBtn = dialog.querySelector('.ubicar-lightbox-close');
+    const prevBtn = dialog.querySelector('.ubicar-lightbox-prev');
+    const nextBtn = dialog.querySelector('.ubicar-lightbox-next');
+    let index = 0;
+
+    function show(i) {
+      index = (i + items.length) % items.length;
+      const item = items[index];
+      img.src = asset(item.src);
+      img.alt = item.alt || '';
+      if (item.w) img.width = item.w;
+      if (item.h) img.height = item.h;
+      if (typeof dialog.showModal === 'function' && !dialog.open) dialog.showModal();
+    }
+
+    gallery.addEventListener('click', function (event) {
+      const button = event.target.closest('[data-ubicar-index]');
+      if (!button) return;
+      show(Number(button.getAttribute('data-ubicar-index')) || 0);
+    });
+
+    closeBtn.addEventListener('click', function () { dialog.close(); });
+    prevBtn.addEventListener('click', function () { show(index - 1); });
+    nextBtn.addEventListener('click', function () { show(index + 1); });
+    dialog.addEventListener('click', function (event) {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('keydown', function (event) {
+      if (!dialog.open) return;
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
+    });
+    dialog.addEventListener('close', function () {
+      img.removeAttribute('src');
+    });
   }
 
   function bindWineArrows(stage) {

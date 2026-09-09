@@ -392,23 +392,29 @@ const PROYECTOS = [
       intro: 'Un sistema de comunicación para rastreo y seguridad: iconos, piezas de producto y vidriera con un mismo hilo naranja.',
       steps: [
         {
-          src: 'IMAGENES/Ubicar gps/Camaras Final.png',
-          alt: 'Pieza Ubicar GPS de cámaras de seguridad'
+          src: 'IMAGENES/Ubicar gps/Camaras Final.webp',
+          alt: 'Pieza Ubicar GPS de cámaras de seguridad',
+          w: 1341,
+          h: 2000
         },
         {
-          src: 'IMAGENES/Ubicar gps/Iconos Finales.png',
-          alt: 'Sistema de iconos Ubicar GPS'
+          src: 'IMAGENES/Ubicar gps/Iconos Finales.webp',
+          alt: 'Sistema de iconos Ubicar GPS',
+          w: 2000,
+          h: 1602
         },
         {
-          src: 'IMAGENES/Ubicar gps/Flotas Final.png',
-          alt: 'Pieza Ubicar GPS de rastreo satelital para flotas'
+          src: 'IMAGENES/Ubicar gps/Flotas Final.webp',
+          alt: 'Pieza Ubicar GPS de rastreo satelital para flotas',
+          w: 1341,
+          h: 2000
         }
       ],
       result: [
-        { src: 'IMAGENES/Ubicar gps/Ubicar Logo.png', alt: 'Logo Ubicar GPS aplicado en vidriera' },
-        { src: 'IMAGENES/Ubicar gps/Ubicar Icono.png', alt: 'Iconos de servicios en vidriera Ubicar GPS' },
-        { src: 'IMAGENES/Ubicar gps/Ubicar iconos 2.png', alt: 'Segunda tira de iconos en vidriera Ubicar GPS' },
-        { src: 'IMAGENES/Ubicar gps/Ubicar Camaras.png', alt: 'Vidriera de cámaras y flotas Ubicar GPS' }
+        { src: 'IMAGENES/Ubicar gps/Ubicar Logo.webp', alt: 'Logo Ubicar GPS aplicado en vidriera', w: 1050, h: 1400 },
+        { src: 'IMAGENES/Ubicar gps/Ubicar Icono.webp', alt: 'Iconos de servicios en vidriera Ubicar GPS', w: 1050, h: 1400 },
+        { src: 'IMAGENES/Ubicar gps/Ubicar iconos 2.webp', alt: 'Segunda tira de iconos en vidriera Ubicar GPS', w: 1050, h: 1400 },
+        { src: 'IMAGENES/Ubicar gps/Ubicar Camaras.webp', alt: 'Vidriera de cámaras y flotas Ubicar GPS', w: 1050, h: 1400 }
       ]
     },
     gallery: [],

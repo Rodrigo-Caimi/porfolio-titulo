@@ -36,7 +36,7 @@
     watchList('.shot', 70);
     watchList('.golden-item', 80);
     watchList('.wine-intro, .wine-stage, .wine-block, .wine-gallery-title, .wine-mosaic-item, .wine-close', 70);
-    watchList('.ubicar-intro, .ubicar-step, .ubicar-result-item', 70);
+    watchList('.ubicar-intro, .ubicar-step, .ubicar-gallery', 70);
     watchList('.other-project-card', 90);
     watchList('.about-page h1, .about-intro, .availability-card, .tools-horizontal');
   }
