@@ -2238,8 +2238,8 @@ body[data-proyecto-id="7"] .wine-editorial {
 }
 
 body[data-proyecto-id="7"] .wine-board {
-  min-height: min(94vh, 1040px);
-  padding: 8px 16px 48px;
+  min-height: min(100vh, 1180px);
+  padding: 8px 16px 8px;
   box-sizing: border-box;
   overflow: visible;
 }
@@ -2304,11 +2304,11 @@ body[data-proyecto-id="7"] .wine-lead {
 }
 
 body[data-proyecto-id="7"] .wine-process-label {
-  margin: 0;
+  margin: 12px 0 16px;
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.28em;
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #b08948;
 }
@@ -2316,16 +2316,17 @@ body[data-proyecto-id="7"] .wine-process-label {
 body[data-proyecto-id="7"] .wine-stage {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(300px, 1fr) minmax(320px, 1.1fr) minmax(300px, 1fr);
-  grid-template-rows: auto minmax(60px, 1fr) auto;
+  grid-template-columns: minmax(240px, 0.88fr) minmax(340px, 1.28fr) minmax(240px, 0.88fr);
+  grid-template-rows: auto minmax(140px, 1fr) auto;
   grid-template-areas:
     "b1 bottle b2"
     ". bottle ."
     "b3 bottle b4";
-  gap: 28px clamp(28px, 3vw, 64px);
+  gap: 80px clamp(80px, 7.5vw, 150px);
   align-items: stretch;
-  min-height: min(92vh, 1080px);
-  margin: 0 0 48px;
+  min-height: min(112vh, 1380px);
+  margin: 0 0 24px;
+  padding: 12px 28px 40px;
   overflow: visible;
 }
 
@@ -2365,8 +2366,8 @@ body[data-proyecto-id="7"] .wine-block {
   position: relative;
   z-index: 1;
   min-width: 0;
-  max-width: 540px;
-  padding: 18px 20px 20px;
+  max-width: 460px;
+  padding: 16px 18px 18px;
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.48);
   box-shadow: 0 8px 24px rgba(28, 25, 20, 0.06);
@@ -2423,7 +2424,7 @@ body[data-proyecto-id="7"] .wine-bottle img {
   width: auto;
   height: auto;
   max-width: min(100%, 680px);
-  max-height: min(90vh, 1000px);
+  max-height: min(94vh, 1100px);
   object-fit: contain;
   mix-blend-mode: lighten;
 }
@@ -2473,37 +2474,31 @@ body[data-proyecto-id="7"] .wine-block p {
   font-size: 17px;
   line-height: 1.7;
   color: #4b453c;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-  overflow: hidden;
 }
 
 body[data-proyecto-id="7"] .wine-thumb {
   margin: 0;
   background: none;
-  max-height: 200px;
-  overflow: hidden;
-  transition: max-height 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  max-height: none;
+  overflow: visible;
 }
 
 body[data-proyecto-id="7"] .wine-thumb img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
-  max-height: none;
+  max-height: min(32vh, 320px);
+  margin: 0 auto;
   object-fit: contain;
   object-position: center;
   border-radius: 0;
   background: transparent;
-}
-
-body[data-proyecto-id="7"] .wine-thumb--portrait {
-  max-height: 260px;
+  transition: max-height 0.38s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 body[data-proyecto-id="7"] .wine-thumb--portrait img {
-  object-position: center 32%;
+  max-height: min(40vh, 380px);
 }
 
 body[data-proyecto-id="7"] .wine-thumb--cutout img {
@@ -2516,28 +2511,21 @@ body[data-proyecto-id="7"] .wine-thumb--cutout img {
   html.js-motion body[data-proyecto-id="7"] .wine-block.reveal.is-in:hover,
   html.js-motion body[data-proyecto-id="7"] .wine-block.reveal.is-in:focus-within {
     z-index: 12;
-    transform: scale(1.24);
-    padding: 22px 24px 24px;
+    transform: scale(1.14);
+    padding: 20px 22px 22px;
     background: #f7f4ec;
     box-shadow: 0 28px 64px rgba(28, 25, 20, 0.22);
     transition-delay: 0s;
   }
 
-  body[data-proyecto-id="7"] .wine-block:hover p,
-  body[data-proyecto-id="7"] .wine-block:focus-within p {
-    -webkit-line-clamp: unset;
-    display: block;
-    overflow: visible;
+  body[data-proyecto-id="7"] .wine-block:hover .wine-thumb img,
+  body[data-proyecto-id="7"] .wine-block:focus-within .wine-thumb img {
+  max-height: min(44vh, 440px);
   }
 
-  body[data-proyecto-id="7"] .wine-block:hover .wine-thumb,
-  body[data-proyecto-id="7"] .wine-block:focus-within .wine-thumb {
-    max-height: 380px;
-  }
-
-  body[data-proyecto-id="7"] .wine-block:hover .wine-thumb--portrait,
-  body[data-proyecto-id="7"] .wine-block:focus-within .wine-thumb--portrait {
-    max-height: 520px;
+  body[data-proyecto-id="7"] .wine-block:hover .wine-thumb--portrait img,
+  body[data-proyecto-id="7"] .wine-block:focus-within .wine-thumb--portrait img {
+    max-height: min(56vh, 540px);
   }
 }
 
@@ -2556,17 +2544,18 @@ body[data-proyecto-id="7"] .wine-thumb--cutout img {
 }
 
 body[data-proyecto-id="7"] .wine-gallery {
-  margin: 96px 0 48px;
+  margin: 260px 0 48px;
 }
 
 body[data-proyecto-id="7"] .wine-gallery-title {
-  margin: 0 0 40px;
+  margin: 0 0 48px;
   text-align: center;
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(28px, 3.2vw, 42px);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: #1c1914;
+  font-size: clamp(28px, 3.6vw, 48px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b08948;
 }
 
 body[data-proyecto-id="7"] .wine-mosaic {

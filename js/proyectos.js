@@ -318,8 +318,10 @@ const PROYECTOS = [
           portrait: true
         },
         {
-          src: 'IMAGENES/Don pascual/don-pascual-copa.png',
-          alt: 'Servicio de Don Pascual Edición Limitada'
+          src: 'IMAGENES/Don pascual/Familia pascual sirviendo vino.png?v=20260909d',
+          alt: 'Servicio de Don Pascual Edición Limitada',
+          cutout: true,
+          portrait: true
         }
       ],
       gallery: [
