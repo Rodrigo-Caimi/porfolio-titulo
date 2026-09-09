@@ -147,7 +147,12 @@
   }
 
   function renderGallery(container, proyecto) {
-    if (!container || !proyecto.gallery.length) return;
+    if (!container) return;
+
+    if (proyecto.processLayout === 'editorial' || !proyecto.gallery.length) {
+      container.innerHTML = '';
+      return;
+    }
 
     const layout = proyecto.galleryLayout || 'spread';
     const shots = proyecto.gallery.map(renderShot);
@@ -210,10 +215,15 @@
   }
 
   function renderActions(container, proyecto) {
-    if (!container || !proyecto.actions || !proyecto.actions.length) {
-      if (container) container.innerHTML = '';
+    if (!container) return;
+
+    if (proyecto.processLayout === 'editorial' || !proyecto.actions || !proyecto.actions.length) {
+      container.innerHTML = '';
+      container.hidden = true;
       return;
     }
+
+    container.hidden = false;
 
     const rows = proyecto.actions.map(function (action) {
       if (action.href && String(action.href).indexOf('PEGAR_LINK') !== -1) return '';
@@ -263,8 +273,86 @@
       '</div>';
   }
 
+  function actionLinkHtml(action, className) {
+    if (!action || (action.href && String(action.href).indexOf('PEGAR_LINK') !== -1)) return '';
+
+    const href = action.external ? action.href : asset(action.href);
+    const attrs = action.external
+      ? ' target="_blank" rel="noopener"'
+      : (action.download
+        ? ' target="_blank" rel="noopener" download="' + (action.download || '') + '"'
+        : ' target="_blank" rel="noopener"');
+
+    return '<a href="' + href + '"' + attrs + ' class="' + className + '">' + action.label + '</a>';
+  }
+
+  function wineShotHtml(src, alt, extraClass, eager) {
+    if (!src) return '';
+    return (
+      '<figure class="wine-shot' + (extraClass ? ' ' + extraClass : '') + '">' +
+        '<img src="' + asset(src) + '" alt="' + (alt || '') + '"' +
+          (eager ? ' decoding="async" fetchpriority="high"' : ' loading="lazy" decoding="async"') +
+        '>' +
+      '</figure>'
+    );
+  }
+
+  function renderEditorialProcess(container, proyecto) {
+    const ed = proyecto.editorial || {};
+    const stepsData = ed.steps || [];
+
+    const steps = proyecto.process.map(function (item, index) {
+      const step = stepsData[index] || {};
+      const n = String(index + 1).padStart(2, '0');
+      const media =
+        '<div class="wine-media">' +
+          wineShotHtml(step.image, step.alt, '', false) +
+          wineShotHtml(step.extra, step.extraAlt, 'wine-shot--label', false) +
+        '</div>';
+      const tag = step.tag ? '<p class="wine-step-tag">' + step.tag + ' →</p>' : '';
+
+      return (
+        '<article class="wine-step wine-step--' + n + '">' +
+          '<div class="wine-copy">' +
+            '<span class="wine-num">' + n + '</span>' +
+            '<h3>' + item.title + '</h3>' +
+            '<p>' + item.text + '</p>' +
+            tag +
+          '</div>' +
+          media +
+        '</article>'
+      );
+    }).join('');
+
+    const actions = (proyecto.actions || []).map(function (action, index) {
+      return actionLinkHtml(action, 'btn wine-btn' + (index === 0 ? ' wine-btn--solid' : ' wine-btn--ghost'));
+    }).join('');
+
+    container.innerHTML =
+      '<div class="wine-editorial">' +
+        '<div class="wine-hero">' +
+          '<div class="wine-hero-copy">' +
+            '<p class="wine-kicker">' + (ed.kicker || 'Proceso') + '</p>' +
+            '<h2>' + proyecto.processTitle + '</h2>' +
+            (ed.intro ? '<p class="wine-intro">' + ed.intro + '</p>' : '') +
+          '</div>' +
+          wineShotHtml(ed.hero && ed.hero.src, ed.hero && ed.hero.alt, 'wine-shot--hero', true) +
+        '</div>' +
+        '<div class="wine-steps">' + steps + '</div>' +
+        '<div class="wine-close">' +
+          (ed.quote ? '<blockquote class="wine-quote">“' + ed.quote + '”</blockquote>' : '<div></div>') +
+          '<div class="wine-actions">' + actions + '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
   function renderProcess(container, proyecto) {
     if (!container) return;
+
+    if (proyecto.processLayout === 'editorial') {
+      renderEditorialProcess(container, proyecto);
+      return;
+    }
 
     const items = proyecto.process.map(function (item) {
       return (

@@ -2190,6 +2190,286 @@ body[data-proyecto-id="6"] .noir-case .project-action-btn:hover {
   }
 }
 
+/* Don Pascual: proceso editorial, fotos achicadas sin recorte ni letterbox */
+body[data-proyecto-id="7"] .work-detail-hero,
+body[data-proyecto-id="7"] .project-meta-section,
+body[data-proyecto-id="7"] .project-actions-section {
+  display: none;
+}
+
+body[data-proyecto-id="7"] .wine-case {
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 12px 0 64px;
+  background: #f5f2ea;
+  color: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-case .golden-section {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+body[data-proyecto-id="7"] .wine-editorial {
+  max-width: min(1180px, 94vw);
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px clamp(16px, 3vw, 40px) 0;
+  box-sizing: border-box;
+}
+
+body[data-proyecto-id="7"] .wine-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: 36px 48px;
+  align-items: center;
+  margin-bottom: 56px;
+}
+
+body[data-proyecto-id="7"] .wine-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 16px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #b08948;
+}
+
+body[data-proyecto-id="7"] .wine-kicker::after {
+  content: '';
+  width: 42px;
+  height: 1px;
+  background: #b08948;
+}
+
+body[data-proyecto-id="7"] .wine-hero h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(34px, 4.4vw, 54px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-align: left;
+  margin: 0 0 18px;
+  color: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-intro {
+  margin: 0;
+  max-width: 34em;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #4b453c;
+}
+
+body[data-proyecto-id="7"] .wine-shot {
+  margin: 0;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+body[data-proyecto-id="7"] .wine-shot img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(46vh, 420px);
+  object-fit: contain;
+  background: transparent;
+}
+
+body[data-proyecto-id="7"] .wine-shot--hero img,
+body[data-proyecto-id="7"] .wine-step--04 .wine-shot img {
+  width: 100%;
+  max-height: none;
+}
+
+body[data-proyecto-id="7"] .wine-steps {
+  display: grid;
+  gap: 52px;
+}
+
+body[data-proyecto-id="7"] .wine-step {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 28px 40px;
+  align-items: center;
+}
+
+body[data-proyecto-id="7"] .wine-step--03,
+body[data-proyecto-id="7"] .wine-step--04 {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+}
+
+body[data-proyecto-id="7"] .wine-step--03 .wine-copy,
+body[data-proyecto-id="7"] .wine-step--04 .wine-copy {
+  order: 2;
+}
+
+body[data-proyecto-id="7"] .wine-copy {
+  min-width: 0;
+}
+
+body[data-proyecto-id="7"] .wine-num {
+  display: block;
+  margin: 0 0 8px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(44px, 6vw, 76px);
+  font-weight: 500;
+  line-height: 0.85;
+  color: #c4a574;
+}
+
+body[data-proyecto-id="7"] .wine-copy h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-copy p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #4b453c;
+}
+
+body[data-proyecto-id="7"] .wine-step-tag {
+  margin: 16px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b08948;
+}
+
+body[data-proyecto-id="7"] .wine-media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-end;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+body[data-proyecto-id="7"] .wine-step--01 .wine-shot img,
+body[data-proyecto-id="7"] .wine-step--03 .wine-shot img {
+  max-height: min(42vh, 380px);
+}
+
+body[data-proyecto-id="7"] .wine-shot--label img {
+  max-height: min(28vh, 240px);
+}
+
+body[data-proyecto-id="7"] .wine-close {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 24px 40px;
+  align-items: end;
+  margin-top: 56px;
+}
+
+body[data-proyecto-id="7"] .wine-quote {
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+body[data-proyecto-id="7"] .wine-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 280px;
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+}
+
+body[data-proyecto-id="7"] .wine-btn--solid {
+  background: #1c1914;
+  color: #f5f2ea;
+  border-color: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-btn--solid:hover {
+  background: #2c2720;
+  border-color: #2c2720;
+  color: #f5f2ea;
+}
+
+body[data-proyecto-id="7"] .wine-btn--ghost {
+  background: transparent;
+  color: #1c1914;
+  border-color: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-btn--ghost:hover {
+  background: rgba(28, 25, 20, 0.06);
+  color: #1c1914;
+}
+
+@media (max-width: 860px) {
+  body[data-proyecto-id="7"] .wine-hero,
+  body[data-proyecto-id="7"] .wine-step,
+  body[data-proyecto-id="7"] .wine-step--03,
+  body[data-proyecto-id="7"] .wine-step--04,
+  body[data-proyecto-id="7"] .wine-close {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-proyecto-id="7"] .wine-step--03 .wine-copy,
+  body[data-proyecto-id="7"] .wine-step--04 .wine-copy {
+    order: 0;
+  }
+
+  body[data-proyecto-id="7"] .wine-hero {
+    margin-bottom: 36px;
+  }
+
+  body[data-proyecto-id="7"] .wine-steps {
+    gap: 36px;
+  }
+
+  body[data-proyecto-id="7"] .wine-shot img,
+  body[data-proyecto-id="7"] .wine-step--01 .wine-shot img,
+  body[data-proyecto-id="7"] .wine-step--03 .wine-shot img {
+    max-height: min(40vh, 320px);
+  }
+
+  body[data-proyecto-id="7"] .wine-actions,
+  body[data-proyecto-id="7"] .wine-btn {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  body[data-proyecto-id="7"] .wine-btn {
+    min-width: 0;
+  }
+}
+
 /* Don Pascual: campaña en bloque */
 .gallery--campaign {
   grid-template-columns: repeat(6, minmax(0, 1fr));
