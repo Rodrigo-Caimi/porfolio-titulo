@@ -845,7 +845,7 @@
 
       const nodes = [];
       for (let i = 0; i < items.length; i++) {
-        const box = localBox(items[i]);
+        const box = localBox(items[i].querySelector('img') || items[i]);
         if (box.w < 8 || box.h < 8) continue;
         box.i = i;
         nodes.push(box);

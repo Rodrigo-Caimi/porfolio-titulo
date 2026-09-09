@@ -2930,7 +2930,7 @@ body[data-proyecto-id="7"] .wine-mosaic-wrap {
 
 body[data-proyecto-id="7"] .wine-mosaic {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   column-count: 3;
   column-gap: clamp(20px, 2.4vw, 40px);
   margin: 0;
@@ -2942,7 +2942,7 @@ body[data-proyecto-id="7"] .wine-mosaic-lines {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
   overflow: visible;
 }
 
@@ -2971,20 +2971,20 @@ body[data-proyecto-id="7"] .wine-mosaic-lines circle {
 body[data-proyecto-id="7"] .wine-mosaic-item {
   display: block;
   position: relative;
-  z-index: 1;
-  width: 100%;
-  margin: 0 0 clamp(20px, 2.4vw, 40px);
+  z-index: auto;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto clamp(20px, 2.4vw, 40px);
   padding: 0;
   border: 0;
   border-radius: 22px;
-  background: #f5f2ea;
-  isolation: isolate;
+  background: transparent;
   appearance: none;
   -webkit-appearance: none;
   font: inherit;
   text-align: left;
   cursor: zoom-in;
-  overflow: hidden;
+  overflow: visible;
   break-inside: avoid;
   page-break-inside: avoid;
 }
@@ -2992,7 +2992,8 @@ body[data-proyecto-id="7"] .wine-mosaic-item {
 body[data-proyecto-id="7"] .wine-mosaic-item img {
   display: block;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  overflow: hidden;
   width: auto;
   max-width: 100%;
   height: auto;
