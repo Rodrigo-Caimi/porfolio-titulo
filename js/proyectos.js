@@ -309,7 +309,7 @@ const PROYECTOS = [
           caption: 'Tradición que inspira'
         },
         {
-          src: 'IMAGENES/Don pascual/Familia pascual sirviendo vino.png',
+          src: 'IMAGENES/Don pascual/don-pascual-copa.png?v=20260908w',
           alt: 'Servicio de Don Pascual Edición Limitada',
           caption: 'Ideas que brindan'
         },
@@ -325,13 +325,10 @@ const PROYECTOS = [
         }
       ],
       gallery: [
-        { src: 'IMAGENES/Don pascual/don-pascual-etiqueta.jpg', alt: 'Etiqueta con ilustración Don Pascual', shape: 'tall' },
-        { src: 'IMAGENES/Don pascual/don-pascual-botella.jpg', alt: 'Botella Don Pascual Chardonnay 2026', shape: 'tall' },
-        { src: 'IMAGENES/Don pascual/don-pascual-botella-fuego.jpg', alt: 'Botella Don Pascual junto al fuego', shape: 'tall' },
-        { src: 'IMAGENES/Don pascual/don-pascual-campana.jpg', alt: 'Mockup terminado de campaña Don Pascual', shape: 'wide' },
-        { src: 'IMAGENES/Don pascual/don-pascual-afiche.jpg', alt: 'Afiche Don Pascual Edición Limitada', shape: 'poster' },
-        { src: 'IMAGENES/Don pascual/Familia pascual sirviendo vino.png', alt: 'Familia Pascual sirviendo vino', shape: 'fill' },
-        { src: 'IMAGENES/Don pascual/cartel omnibus.png', alt: 'Campaña Don Pascual en vía pública', shape: 'wide' }
+        { src: 'IMAGENES/Don pascual/don-pascual-etiqueta.jpg', alt: 'Etiqueta con ilustración Don Pascual', shape: 'trio' },
+        { src: 'IMAGENES/Don pascual/don-pascual-afiche.jpg', alt: 'Afiche Don Pascual Edición Limitada', shape: 'trio' },
+        { src: 'IMAGENES/Don pascual/don-pascual-botella-fuego.jpg', alt: 'Botella Don Pascual junto al fuego', shape: 'trio' },
+        { src: 'IMAGENES/Don pascual/cartel omnibus2.png', alt: 'Campaña Don Pascual en ómnibus', shape: 'bus' }
       ]
     },
     gallery: [
