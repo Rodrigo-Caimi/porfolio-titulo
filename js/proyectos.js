@@ -233,6 +233,7 @@ const PROYECTOS = [
     cardImage: 'IMAGENES/Noir Estudio/noir-interior-card.jpg',
     cardAlt: 'Noir Estudio - Identidad de marca',
     role: 'Dirección de identidad: concepto, sistema visual y aplicaciones',
+    heroLead: 'Desarrollo de identidad visual y experiencia digital, desde el concepto de marca hasta sus aplicaciones y diseño UX/UI.',
     tools: 'Figma',
     hideMeta: true,
     processLayout: 'noir',

@@ -2008,7 +2008,50 @@ body[data-proyecto-id="6"] .noir-editorial section {
 
 body[data-proyecto-id="6"] .noir-editorial .noir-hero {
   display: grid;
+  grid-template-columns: minmax(440px, 0.56fr) minmax(0, 0.44fr);
+  min-height: min(86vh, 860px);
+  overflow: visible;
   padding: 0;
+}
+
+body[data-proyecto-id="6"] .noir-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: stretch;
+  gap: 0;
+  min-width: 0;
+  height: 100%;
+  min-height: min(86vh, 860px);
+  overflow: visible;
+  padding: clamp(28px, 4vw, 48px) clamp(36px, 5vw, 72px) clamp(40px, 6vw, 72px) clamp(40px, 5.5vw, 80px);
+}
+
+body[data-proyecto-id="6"] .noir-hero-text {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 42rem;
+  margin-inline: auto;
+  padding-top: clamp(56px, 11vh, 140px);
+  padding-bottom: clamp(16px, 3vh, 40px);
+  text-align: center;
+}
+
+body[data-proyecto-id="6"] .noir-hero-copy h1 {
+  max-width: 100%;
+  overflow: visible;
+  font-size: clamp(50px, 5.8vw, 82px);
+  line-height: 1.06;
+  white-space: nowrap;
+}
+
+body[data-proyecto-id="6"] .noir-hero-lead {
+  max-width: 36rem;
 }
 
 .noir-back {
@@ -2371,9 +2414,8 @@ body[data-proyecto-id="6"] .other-projects-section h2::after {
 }
 
 @media (max-width: 1024px) {
-  body[data-proyecto-id="6"] .noir-editorial .noir-hero,
-  .noir-hero {
-    grid-template-columns: minmax(240px, 0.4fr) minmax(0, 0.6fr);
+  body[data-proyecto-id="6"] .noir-editorial .noir-hero {
+    grid-template-columns: minmax(380px, 0.56fr) minmax(0, 0.44fr);
   }
 
   .noir-step--2,
@@ -2387,6 +2429,25 @@ body[data-proyecto-id="6"] .other-projects-section h2::after {
   .noir-hero {
     grid-template-columns: 1fr;
     min-height: 0;
+  }
+
+  body[data-proyecto-id="6"] .noir-hero-copy {
+    padding: 22px 22px 32px;
+    gap: 16px;
+    min-height: 0;
+    height: auto;
+  }
+
+  body[data-proyecto-id="6"] .noir-hero-text {
+    flex: 0 0 auto;
+    padding-top: 36px;
+    padding-bottom: 8px;
+    max-width: none;
+  }
+
+  body[data-proyecto-id="6"] .noir-hero-copy h1 {
+    font-size: clamp(40px, 8.4vw, 58px);
+    white-space: normal;
   }
 
   .noir-hero-copy {
@@ -2413,6 +2474,12 @@ body[data-proyecto-id="6"] .other-projects-section h2::after {
 }
 
 @media (max-width: 700px) {
+  body[data-proyecto-id="6"] .noir-hero-copy h1 {
+    font-size: clamp(34px, 9.6vw, 44px);
+    line-height: 1.1;
+    white-space: normal;
+  }
+
   .noir-hero-copy h1 {
     font-size: clamp(38px, 12vw, 52px);
   }
@@ -2583,16 +2650,16 @@ body[data-proyecto-id="7"] .wine-process-label {
 body[data-proyecto-id="7"] .wine-stage {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(360px, 1.18fr) minmax(0, 0.86fr);
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 340px) minmax(0, 1fr);
   grid-template-rows: auto auto;
   grid-template-areas:
     "b1 bottle b2"
     "b3 bottle b4";
-  column-gap: clamp(16px, 2vw, 36px);
-  row-gap: clamp(24px, 3vw, 52px);
-  align-items: start;
+  column-gap: clamp(8px, 1vw, 18px);
+  row-gap: clamp(18px, 2.2vw, 36px);
+  align-items: stretch;
   justify-content: space-between;
-  width: min(94vw, 1600px);
+  width: min(96vw, 1680px);
   max-width: none;
   margin-inline: auto;
   margin-bottom: 24px;
@@ -2606,7 +2673,7 @@ body[data-proyecto-id="7"] .wine-lines {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
   overflow: visible;
 }
 
@@ -2623,15 +2690,31 @@ body[data-proyecto-id="7"] .wine-lines circle {
   opacity: 0.78;
 }
 
-body[data-proyecto-id="7"] .wine-block--1 { grid-area: b1; border-radius: 86px 48px 94px 56px; }
-body[data-proyecto-id="7"] .wine-block--2 { grid-area: b2; border-radius: 50px 98px 58px 82px; }
-body[data-proyecto-id="7"] .wine-block--3 { grid-area: b3; border-radius: 72px 54px 108px 42px; }
-body[data-proyecto-id="7"] .wine-block--4 { grid-area: b4; border-radius: 96px 70px 46px 88px; }
+body[data-proyecto-id="7"] .wine-block--1 {
+  grid-area: b1;
+  border-radius: 64px 18px 78px 28px / 38px 72px 22px 58px;
+  background: #fffef8;
+}
+body[data-proyecto-id="7"] .wine-block--2 {
+  grid-area: b2;
+  border-radius: 22px 76px 30px 68px / 70px 32px 60px 18px;
+  background: #fbf7f0;
+}
+body[data-proyecto-id="7"] .wine-block--3 {
+  grid-area: b3;
+  border-radius: 80px 30px 18px 58px / 26px 64px 82px 34px;
+  background: #faf6ee;
+}
+body[data-proyecto-id="7"] .wine-block--4 {
+  grid-area: b4;
+  border-radius: 32px 58px 74px 16px / 66px 22px 36px 72px;
+  background: #fffdf6;
+}
 
 body[data-proyecto-id="7"] .wine-bottle {
   grid-area: bottle;
   position: relative;
-  z-index: 1;
+  z-index: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -2660,16 +2743,36 @@ body[data-proyecto-id="7"] .wine-block {
   min-width: 0;
   width: 100%;
   height: auto;
-  padding: clamp(28px, 3vw, 56px);
-  background: #fffef9;
+  box-sizing: border-box;
+  padding: clamp(24px, 2.2vw, 34px) clamp(40px, 4vw, 68px) clamp(26px, 2.4vw, 38px);
   border: 0;
-  box-shadow: none;
+  box-shadow: 0 8px 24px rgba(70, 50, 24, 0.045);
   overflow: visible;
   transform-origin: center center;
   transition: transform 0.3s ease;
 }
 
 @media (min-width: 901px) {
+  body[data-proyecto-id="7"] .wine-stage {
+    grid-template-rows: 1fr 1fr;
+    align-items: start;
+    min-height: clamp(760px, 88vh, 880px);
+  }
+
+  body[data-proyecto-id="7"] .wine-block {
+    align-self: start;
+    width: 100%;
+    min-height: 340px;
+    height: auto;
+  }
+
+  body[data-proyecto-id="7"] .wine-bottle {
+    align-self: stretch;
+    height: 0;
+    min-height: 100%;
+    overflow: visible;
+  }
+
   body[data-proyecto-id="7"] .wine-block--2,
   body[data-proyecto-id="7"] .wine-block--4 {
     text-align: right;
@@ -2677,6 +2780,12 @@ body[data-proyecto-id="7"] .wine-block {
 
   body[data-proyecto-id="7"] .wine-block--2 .wine-block-head,
   body[data-proyecto-id="7"] .wine-block--4 .wine-block-head {
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--2 h3,
+  body[data-proyecto-id="7"] .wine-block--4 h3 {
     text-align: right;
   }
 }
@@ -2684,8 +2793,8 @@ body[data-proyecto-id="7"] .wine-block {
 body[data-proyecto-id="7"] .wine-bottle img {
   display: block;
   width: auto;
-  max-width: 100%;
-  height: clamp(620px, 74vh, 740px);
+  max-width: 560px;
+  height: clamp(720px, 86vh, 840px);
   object-fit: contain;
   object-position: center;
   mix-blend-mode: lighten;
@@ -2704,39 +2813,48 @@ body[data-proyecto-id="7"] .wine-caption {
 }
 
 body[data-proyecto-id="7"] .wine-block-head {
-  display: flow-root;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  align-content: flex-start;
+  gap: 2px 10px;
   width: 100%;
   margin: 0;
-  padding: 0 0 16px;
+  padding: 0 0 18px;
   border: 0;
   background: transparent;
   color: inherit;
   text-align: left;
   flex-shrink: 0;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
   line-height: 1.25;
 }
 
 body[data-proyecto-id="7"] .wine-num {
-  display: inline-block;
+  display: block;
+  flex: 0 0 auto;
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(1.85rem, 2.4vw, 2.5rem);
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1.2;
   color: #c4a574;
-  margin-right: 0.28em;
-  vertical-align: middle;
+  transform: none;
 }
 
 body[data-proyecto-id="7"] .wine-block h3 {
-  display: inline-block;
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
   margin: 0;
   font-size: clamp(22px, 1.7vw, 30px);
   font-weight: 700;
   letter-spacing: 0.03em;
-  line-height: 1.25;
+  line-height: 1.3;
   text-transform: uppercase;
   color: #1c1914;
-  vertical-align: middle;
+  overflow: visible;
 }
 
 body[data-proyecto-id="7"] .wine-sep {
@@ -2746,9 +2864,13 @@ body[data-proyecto-id="7"] .wine-sep {
 
 body[data-proyecto-id="7"] .wine-block p {
   margin: 0;
+  padding: 0;
   font-size: clamp(1.125rem, 1.2vw, 1.3125rem);
-  line-height: 1.55;
+  line-height: 1.58;
   color: #4b453c;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
 }
 
 @media (hover: hover) and (min-width: 901px) {
@@ -2757,7 +2879,18 @@ body[data-proyecto-id="7"] .wine-block p {
   html.js-motion body[data-proyecto-id="7"] .wine-block.reveal.is-in:hover,
   html.js-motion body[data-proyecto-id="7"] .wine-block.reveal.is-in:focus-within {
     z-index: 2;
-    transform: translateY(-4px);
+    transform: translateY(-5px) scale(1.02);
+  }
+
+  body[data-proyecto-id="7"] .wine-block:hover .wine-block-head,
+  body[data-proyecto-id="7"] .wine-block:focus-within .wine-block-head,
+  body[data-proyecto-id="7"] .wine-block:hover h3,
+  body[data-proyecto-id="7"] .wine-block:focus-within h3,
+  body[data-proyecto-id="7"] .wine-block:hover .wine-num,
+  body[data-proyecto-id="7"] .wine-block:focus-within .wine-num {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
   }
 }
 
@@ -3018,8 +3151,15 @@ body[data-proyecto-id="7"] .wine-footerbrand {
     row-gap: 22px;
     width: min(94vw, 1600px);
     max-width: none;
+    min-height: 0;
+    align-items: stretch;
     justify-content: stretch;
     padding: 8px 0 8px;
+  }
+
+  body[data-proyecto-id="7"] .wine-bottle {
+    min-height: 0;
+    height: auto;
   }
 
   body[data-proyecto-id="7"] .wine-lines {
@@ -3028,52 +3168,65 @@ body[data-proyecto-id="7"] .wine-footerbrand {
 
   body[data-proyecto-id="7"] .wine-bottle img {
     width: auto;
-    max-width: min(360px, 48vw);
+    max-width: min(420px, 58vw);
     height: auto;
-    max-height: min(56vh, 520px);
+    max-height: min(68vh, 620px);
     object-fit: contain;
   }
 
   body[data-proyecto-id="7"] .wine-block {
-    padding: clamp(22px, 3vw, 36px);
+    height: auto;
+    min-height: 0;
+    align-self: stretch;
+    padding: clamp(22px, 3vw, 32px) clamp(24px, 3.4vw, 36px);
   }
 
-  body[data-proyecto-id="7"] .wine-block--1 { border-radius: 54px 32px 62px 38px; }
-  body[data-proyecto-id="7"] .wine-block--2 { border-radius: 34px 64px 40px 54px; }
-  body[data-proyecto-id="7"] .wine-block--3 { border-radius: 48px 36px 70px 30px; }
-  body[data-proyecto-id="7"] .wine-block--4 { border-radius: 62px 46px 32px 58px; }
+  body[data-proyecto-id="7"] .wine-block--1 { border-radius: 36px 18px 42px 22px / 24px 38px 18px 32px; }
+  body[data-proyecto-id="7"] .wine-block--2 { border-radius: 18px 40px 22px 36px / 38px 22px 32px 16px; }
+  body[data-proyecto-id="7"] .wine-block--3 { border-radius: 40px 22px 16px 34px / 20px 36px 42px 24px; }
+  body[data-proyecto-id="7"] .wine-block--4 { border-radius: 22px 34px 40px 16px / 36px 18px 24px 38px; }
 
   body[data-proyecto-id="7"] .wine-block-head {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 4px 8px;
     margin: 0;
     padding: 0 0 12px;
   }
 
   body[data-proyecto-id="7"] .wine-block--2 .wine-block-head,
   body[data-proyecto-id="7"] .wine-block--4 .wine-block-head {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--2 h3,
+  body[data-proyecto-id="7"] .wine-block--4 h3 {
     text-align: left;
   }
 
   body[data-proyecto-id="7"] .wine-num {
     display: block;
+    flex: 0 0 auto;
     font-size: clamp(1.7rem, 4vw, 2rem);
-    line-height: 1.15;
-    margin-right: 0;
-    margin-bottom: 2px;
+    line-height: 1.2;
+    margin: 0;
   }
 
   body[data-proyecto-id="7"] .wine-block h3 {
     display: block;
+    flex: 1 1 8rem;
+    min-width: 0;
     margin: 0;
     font-size: clamp(18px, 2.4vw, 24px);
-    line-height: 1.25;
+    line-height: 1.3;
   }
 
   body[data-proyecto-id="7"] .wine-block p {
-    font-size: clamp(1.05rem, 1.6vw, 1.15rem);
+    font-size: 16px;
   }
 }
 
@@ -3085,6 +3238,7 @@ body[data-proyecto-id="7"] .wine-footerbrand {
 
   body[data-proyecto-id="7"] .wine-stage {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
     grid-template-areas:
       "bottle"
       "b1"
@@ -3095,51 +3249,59 @@ body[data-proyecto-id="7"] .wine-footerbrand {
     row-gap: 18px;
     width: 100%;
     max-width: none;
+    align-items: stretch;
     padding: 4px clamp(16px, 4vw, 24px) 8px;
   }
 
   body[data-proyecto-id="7"] .wine-block {
     width: 100%;
-    padding: clamp(22px, 5vw, 28px);
+    height: auto;
+    min-height: 0;
+    padding: clamp(22px, 5vw, 28px) clamp(24px, 6vw, 32px);
   }
 
-  body[data-proyecto-id="7"] .wine-block--1 { border-radius: 36px 28px 40px 32px; }
-  body[data-proyecto-id="7"] .wine-block--2 { border-radius: 28px 40px 32px 36px; }
-  body[data-proyecto-id="7"] .wine-block--3 { border-radius: 34px 30px 42px 26px; }
-  body[data-proyecto-id="7"] .wine-block--4 { border-radius: 40px 32px 28px 38px; }
+  body[data-proyecto-id="7"] .wine-block--1 { border-radius: 24px 14px 28px 16px; }
+  body[data-proyecto-id="7"] .wine-block--2 { border-radius: 14px 26px 16px 24px; }
+  body[data-proyecto-id="7"] .wine-block--3 { border-radius: 26px 16px 14px 22px; }
+  body[data-proyecto-id="7"] .wine-block--4 { border-radius: 16px 22px 26px 14px; }
 
   body[data-proyecto-id="7"] .wine-block-head {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 4px 8px;
     margin: 0;
     padding: 0 0 12px;
   }
 
   body[data-proyecto-id="7"] .wine-block h3 {
     display: block;
+    flex: 1 1 8rem;
+    min-width: 0;
     margin: 0;
     font-size: clamp(1.125rem, 4.8vw, 1.35rem);
+    line-height: 1.3;
   }
 
   body[data-proyecto-id="7"] .wine-num {
     display: block;
+    flex: 0 0 auto;
     font-size: clamp(1.6rem, 6.4vw, 1.9rem);
-    line-height: 1.15;
-    margin-right: 0;
-    margin-bottom: 2px;
+    line-height: 1.2;
+    margin: 0;
   }
 
   body[data-proyecto-id="7"] .wine-block p {
-    font-size: clamp(1rem, 3.8vw, 1.125rem);
+    font-size: 16px;
   }
 
   body[data-proyecto-id="7"] .wine-bottle img {
     width: auto;
-    max-width: min(280px, 68vw);
+    max-width: min(320px, 78vw);
     height: auto;
-    max-height: min(58vh, 440px);
+    max-height: min(64vh, 520px);
     object-fit: contain;
   }
 
@@ -3760,9 +3922,9 @@ body[data-proyecto-id="8"] .ubicar-intro h1 {
 
 body[data-proyecto-id="8"] .ubicar-lead {
   margin: 0 0 28px;
-  max-width: 42rem;
-  font-size: 18px;
-  line-height: 1.7;
+  max-width: 46rem;
+  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+  line-height: 1.5;
   color: #cfcfcf;
 }
 
@@ -3973,36 +4135,44 @@ body[data-proyecto-id="8"] .ubicar-gallery {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(12px, 1.5vw, 24px);
-  align-items: stretch;
+  align-items: end;
+  justify-items: center;
 }
 
 body[data-proyecto-id="8"] .ubicar-gallery-item {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0;
   border: 0;
-  background: #181818;
+  background: transparent;
   border-radius: 18px;
   overflow: hidden;
   cursor: zoom-in;
-  aspect-ratio: 3 / 4;
+  appearance: none;
+  -webkit-appearance: none;
+  line-height: 0;
+  aspect-ratio: auto;
   min-height: 0;
   height: auto;
-  align-self: stretch;
+  align-self: end;
 }
 
 body[data-proyecto-id="8"] .ubicar-gallery-item img {
-  position: absolute;
-  inset: 0;
+  position: static;
+  inset: auto;
   display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  max-height: none;
-  object-fit: cover;
-  object-position: center 22%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(42vh, 380px);
+  object-fit: contain;
+  object-position: center;
+  margin: 0 auto;
 }
 
 body[data-proyecto-id="8"] .ubicar-lightbox {

@@ -716,6 +716,7 @@
     const closeActions = (proyecto.actions || []).map(function (action, index) {
       return actionLinkHtml(action, 'noir-cta' + (index === 0 ? ' noir-cta--solid' : ' noir-cta--ghost'));
     }).join('');
+    const heroLead = proyecto.heroLead || proyecto.heroText || proyecto.role;
 
     container.innerHTML =
       '<div class="noir-editorial">' +
@@ -730,7 +731,7 @@
             '<div class="noir-hero-text">' +
               (proyecto.category ? '<p class="noir-kicker">' + proyecto.category + '</p>' : '') +
               '<h1>' + (proyecto.pageTitle || proyecto.title) + '</h1>' +
-              (proyecto.role ? '<p class="noir-hero-lead">' + proyecto.role + '</p>' : '') +
+              (heroLead ? '<p class="noir-hero-lead">' + heroLead + '</p>' : '') +
               (proyecto.tools ? '<p class="noir-hero-tools"><span>Herramientas</span> ' + proyecto.tools + '</p>' : '') +
               (figma ? actionLinkHtml(figma, 'noir-cta noir-cta--solid') : '') +
             '</div>' +
