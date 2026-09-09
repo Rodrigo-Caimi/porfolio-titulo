@@ -299,23 +299,17 @@
     return '<a href="' + href + '"' + attrs + ' class="' + className + '">' + action.label + '</a>';
   }
 
-  function wineBlockHtml(item, n, photo) {
+  function wineBlockHtml(item, n) {
     if (!item) return '';
     const num = (n < 10 ? '0' : '') + n;
-    const image = photo && photo.src
-      ? '<figure class="wine-thumb">' +
-          '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '" loading="lazy" decoding="async">' +
-        '</figure>'
-      : '';
 
     return (
       '<article class="wine-block wine-block--' + n + '">' +
         '<header class="wine-block-head">' +
           '<span class="wine-num">' + num + '</span>' +
-          '<h3>' + item.title + '</h3>' +
+          '<h3><span class="wine-sep" aria-hidden="true">•</span> ' + item.title + '</h3>' +
         '</header>' +
         '<p>' + item.text + '</p>' +
-        image +
       '</article>'
     );
   }
@@ -323,19 +317,27 @@
   function renderEditorialProcess(container, proyecto) {
     const ed = proyecto.editorial || {};
     const steps = proyecto.process || [];
-    const photos = ed.steps || [];
+    const gallery = ed.gallery || [];
     const actions = (proyecto.actions || []).filter(function (action) {
       return !(action.external && /drive|video/i.test((action.label || '') + (action.href || '')));
     }).map(function (action, index) {
       return actionLinkHtml(action, 'btn wine-btn' + (index === 0 ? ' wine-btn--solid' : ' wine-btn--ghost'));
     }).join('');
 
-    const mosaic = (ed.gallery || []).map(function (item) {
+    const mosaic = gallery.map(function (item, index) {
       return (
-        '<figure class="wine-mosaic-item is-' + (item.shape || 'wide') + '">' +
-          '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '" loading="lazy" decoding="async">' +
-        '</figure>'
+        '<button type="button" class="wine-mosaic-item" data-wine-index="' + index + '">' +
+          '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' +
+            (index === 0 ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
+            ' decoding="async">' +
+        '</button>'
       );
+    }).join('');
+
+    const lineMarks = [1, 2, 3, 4].map(function (n) {
+      return '<path data-wine-line="' + n + '"></path>' +
+        '<circle data-wine-dot="' + n + 'a" r="3.5"></circle>' +
+        '<circle data-wine-dot="' + n + 'b" r="3.5"></circle>';
     }).join('');
 
     container.innerHTML =
@@ -355,30 +357,46 @@
           '<p class="wine-process-label">' + proyecto.processTitle + '</p>' +
         '</div>' +
         '<div class="wine-stage">' +
-          '<svg class="wine-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">' +
-            '<path d="M30 27 H38"></path>' +
-            '<path d="M70 27 H62"></path>' +
-            '<path d="M30 73 H38"></path>' +
-            '<path d="M70 73 H62"></path>' +
-          '</svg>' +
-          wineBlockHtml(steps[0], 1, photos[0]) +
+          '<svg class="wine-lines" aria-hidden="true">' + lineMarks + '</svg>' +
+          wineBlockHtml(steps[0], 1) +
           '<figure class="wine-bottle">' +
             '<img src="' + asset(ed.bottle && ed.bottle.src) + '" alt="' + ((ed.bottle && ed.bottle.alt) || '') + '" decoding="async" fetchpriority="high">' +
+            (ed.caption ? '<figcaption class="wine-caption">' + ed.caption + '</figcaption>' : '') +
           '</figure>' +
-          wineBlockHtml(steps[1], 2, photos[1]) +
-          wineBlockHtml(steps[2], 3, photos[2]) +
-          wineBlockHtml(steps[3], 4, photos[3]) +
+          wineBlockHtml(steps[1], 2) +
+          wineBlockHtml(steps[2], 3) +
+          wineBlockHtml(steps[3], 4) +
         '</div>' +
         '</div>' +
         '<div class="wine-gallery">' +
           '<h2 class="wine-gallery-title">Más fotos</h2>' +
           '<div class="wine-mosaic">' + mosaic + '</div>' +
         '</div>' +
+        '<dialog class="wine-lightbox" aria-label="Imagen ampliada">' +
+          '<button type="button" class="wine-lightbox-close" aria-label="Cerrar">×</button>' +
+          '<button type="button" class="wine-lightbox-prev" aria-label="Imagen anterior">‹</button>' +
+          '<img alt="">' +
+          '<button type="button" class="wine-lightbox-next" aria-label="Imagen siguiente">›</button>' +
+        '</dialog>' +
         '<div class="wine-close">' +
           '<div class="wine-actions">' + actions + '</div>' +
         '</div>' +
         '<p class="wine-footerbrand">Don Pascual · Uruguay</p>' +
       '</div>';
+
+    bindWineArrows(container.querySelector('.wine-stage'));
+    bindSimpleLightbox(
+      container.querySelector('.wine-mosaic'),
+      container.querySelector('.wine-lightbox'),
+      gallery,
+      {
+        item: '[data-wine-index]',
+        indexAttr: 'data-wine-index',
+        close: '.wine-lightbox-close',
+        prev: '.wine-lightbox-prev',
+        next: '.wine-lightbox-next'
+      }
+    );
   }
 
   function ubicarImgAttrs(photo, eager) {
@@ -540,12 +558,15 @@
     redraw();
   }
 
-  function bindUbicarLightbox(gallery, dialog, items) {
+  function bindSimpleLightbox(gallery, dialog, items, opts) {
     if (!gallery || !dialog || !items || !items.length) return;
+    opts = opts || {};
+    const itemSel = opts.item || '[data-ubicar-index]';
+    const indexAttr = opts.indexAttr || 'data-ubicar-index';
     const img = dialog.querySelector('img');
-    const closeBtn = dialog.querySelector('.ubicar-lightbox-close');
-    const prevBtn = dialog.querySelector('.ubicar-lightbox-prev');
-    const nextBtn = dialog.querySelector('.ubicar-lightbox-next');
+    const closeBtn = dialog.querySelector(opts.close || '.ubicar-lightbox-close');
+    const prevBtn = dialog.querySelector(opts.prev || '.ubicar-lightbox-prev');
+    const nextBtn = dialog.querySelector(opts.next || '.ubicar-lightbox-next');
     let index = 0;
 
     function show(i) {
@@ -559,14 +580,14 @@
     }
 
     gallery.addEventListener('click', function (event) {
-      const button = event.target.closest('[data-ubicar-index]');
-      if (!button) return;
-      show(Number(button.getAttribute('data-ubicar-index')) || 0);
+      const button = event.target.closest(itemSel);
+      if (!button || !gallery.contains(button)) return;
+      show(Number(button.getAttribute(indexAttr)) || 0);
     });
 
-    closeBtn.addEventListener('click', function () { dialog.close(); });
-    prevBtn.addEventListener('click', function () { show(index - 1); });
-    nextBtn.addEventListener('click', function () { show(index + 1); });
+    if (closeBtn) closeBtn.addEventListener('click', function () { dialog.close(); });
+    if (prevBtn) prevBtn.addEventListener('click', function () { show(index - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { show(index + 1); });
     dialog.addEventListener('click', function (event) {
       if (event.target === dialog) dialog.close();
     });
@@ -580,10 +601,14 @@
     });
   }
 
+  function bindUbicarLightbox(gallery, dialog, items) {
+    bindSimpleLightbox(gallery, dialog, items);
+  }
+
   function bindWineArrows(stage) {
     if (!stage) return;
     const svg = stage.querySelector('.wine-lines');
-    const bottle = stage.querySelector('.wine-bottle img') || stage.querySelector('.wine-bottle');
+    const bottle = stage.querySelector('.wine-bottle img');
     if (!svg || !bottle) return;
 
     function localPoint(el, relX, relY) {
@@ -595,55 +620,57 @@
       };
     }
 
-    function curve(from, to, pullX) {
-      const c1x = from.x + pullX;
-      const c1y = from.y;
-      const c2x = to.x - pullX * 0.25;
-      const c2y = to.y;
-      return 'M' + from.x.toFixed(1) + ' ' + from.y.toFixed(1) +
-        ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
-        ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
-        ', ' + to.x.toFixed(1) + ' ' + to.y.toFixed(1);
-    }
-
     function draw() {
-      if (window.matchMedia('(max-width: 920px)').matches) return;
+      if (window.matchMedia('(max-width: 900px)').matches) return;
       const sr = stage.getBoundingClientRect();
       if (!sr.width || !sr.height) return;
 
       svg.setAttribute('viewBox', '0 0 ' + sr.width + ' ' + sr.height);
-      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      svg.setAttribute('width', String(sr.width));
+      svg.setAttribute('height', String(sr.height));
 
-      const anchors = [
-        { n: 1, from: [1, 0.5], to: [0.12, 0.28], pull: 56 },
-        { n: 2, from: [0, 0.5], to: [0.88, 0.28], pull: -56 },
-        { n: 3, from: [1, 0.5], to: [0.12, 0.74], pull: 56 },
-        { n: 4, from: [0, 0.5], to: [0.88, 0.74], pull: -56 }
+      const specs = [
+        { n: 1, from: [1, 0.36], to: [0.08, 0.27], bulge: 74, lift: -26 },
+        { n: 2, from: [0, 0.40], to: [0.92, 0.24], bulge: -82, lift: 18 },
+        { n: 3, from: [1, 0.58], to: [0.10, 0.71], bulge: 58, lift: 30 },
+        { n: 4, from: [0, 0.52], to: [0.90, 0.73], bulge: -90, lift: -16 }
       ];
 
-      anchors.forEach(function (anchor) {
-        const block = stage.querySelector('.wine-block--' + anchor.n);
-        const path = svg.querySelector('[data-wine-line="' + anchor.n + '"]');
+      specs.forEach(function (spec) {
+        const block = stage.querySelector('.wine-block--' + spec.n);
+        const path = svg.querySelector('[data-wine-line="' + spec.n + '"]');
+        const dotA = svg.querySelector('[data-wine-dot="' + spec.n + 'a"]');
+        const dotB = svg.querySelector('[data-wine-dot="' + spec.n + 'b"]');
         if (!block || !path) return;
-        const origin = block.querySelector('.wine-thumb') || block;
-        const from = localPoint(origin, anchor.from[0], anchor.from[1]);
-        const to = localPoint(bottle, anchor.to[0], anchor.to[1]);
-        path.setAttribute('d', curve(from, to, anchor.pull));
-        path.setAttribute('marker-end', 'url(#wine-arrow)');
+        const from = localPoint(block, spec.from[0], spec.from[1]);
+        const to = localPoint(bottle, spec.to[0], spec.to[1]);
+        const c1x = from.x + spec.bulge;
+        const c1y = from.y + spec.lift;
+        const c2x = to.x - spec.bulge * 0.28;
+        const c2y = to.y - spec.lift * 0.4;
+        path.setAttribute('d',
+          'M' + from.x.toFixed(1) + ' ' + from.y.toFixed(1) +
+          ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
+          ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
+          ', ' + to.x.toFixed(1) + ' ' + to.y.toFixed(1)
+        );
+        if (dotA) {
+          dotA.setAttribute('cx', from.x.toFixed(1));
+          dotA.setAttribute('cy', from.y.toFixed(1));
+        }
+        if (dotB) {
+          dotB.setAttribute('cx', to.x.toFixed(1));
+          dotB.setAttribute('cy', to.y.toFixed(1));
+        }
       });
     }
 
     const redraw = function () { window.requestAnimationFrame(draw); };
-    if (bottle.tagName === 'IMG' && !bottle.complete) {
-      bottle.addEventListener('load', redraw);
-    }
-    window.addEventListener('resize', redraw);
-    stage.querySelectorAll('.wine-block').forEach(function (block) {
-      block.addEventListener('mouseenter', redraw);
-      block.addEventListener('mouseleave', function () {
-        window.setTimeout(redraw, 420);
-      });
-      block.addEventListener('transitionend', redraw);
+    if (!bottle.complete) bottle.addEventListener('load', redraw, { once: true });
+    let resizeTimer = 0;
+    window.addEventListener('resize', function () {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(redraw, 120);
     });
     redraw();
   }
