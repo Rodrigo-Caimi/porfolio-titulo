@@ -425,6 +425,7 @@
               '<span class="ubicar-num">04</span>' +
               '<h3>' + steps[3].title + '</h3>' +
             '</div>' +
+            '<p class="ubicar-result-lead">Del diseño a una aplicación real.</p>' +
             '<p>' + steps[3].text + '</p>' +
           '</div>' +
           '<div class="ubicar-result-grid">' + resultHtml + '</div>' +
@@ -470,6 +471,8 @@
     if (!svg || !path) return;
 
     function draw() {
+      if (window.matchMedia('(max-width: 900px)').matches) return;
+
       const nodes = trail.querySelectorAll('.ubicar-num');
       if (!nodes.length) return;
       const tr = trail.getBoundingClientRect();
@@ -488,13 +491,17 @@
         });
       });
 
+      const compact = window.matchMedia('(max-width: 1024px)').matches;
+      const bend = compact ? 0.22 : 0.32;
       let d = 'M' + pts[0].x.toFixed(1) + ' ' + pts[0].y.toFixed(1);
       for (let i = 1; i < pts.length; i++) {
         const prev = pts[i - 1];
         const curr = pts[i];
-        const midY = (prev.y + curr.y) / 2;
-        d += ' C' + prev.x.toFixed(1) + ' ' + midY.toFixed(1) +
-          ', ' + curr.x.toFixed(1) + ' ' + midY.toFixed(1) +
+        const dy = curr.y - prev.y;
+        const c1y = prev.y + dy * bend;
+        const c2y = curr.y - dy * bend;
+        d += ' C' + prev.x.toFixed(1) + ' ' + c1y.toFixed(1) +
+          ', ' + curr.x.toFixed(1) + ' ' + c2y.toFixed(1) +
           ', ' + curr.x.toFixed(1) + ' ' + curr.y.toFixed(1);
       }
 
