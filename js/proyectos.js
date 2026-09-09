@@ -184,12 +184,11 @@ const PROYECTOS = [
     cardAlt: 'Campaña Reel ORT',
     role: 'Reel promocional: concepto, generación audiovisual y edición',
     tools: 'ChatGPT, Runway, Premiere',
-    galleryLayout: 'storyboard',
+    galleryLayout: 'reel',
     gallery: [
       {
-        type: 'drive',
-        src: 'https://drive.google.com/file/d/1jJUfmDSgZgIW8X82zi6upIzRgT_ATak-/view?usp=sharing',
-        poster: 'IMAGENES/Campana reel ORT/ort-frame1.jpg',
+        type: 'vimeo',
+        src: 'https://player.vimeo.com/video/1225425471',
         alt: 'Reel final Campaña ORT'
       },
       { src: 'IMAGENES/Campana reel ORT/ort-frame1.jpg', alt: 'Frame 1 - Entrada ORT' },

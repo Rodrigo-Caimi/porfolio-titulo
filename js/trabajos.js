@@ -80,6 +80,32 @@
     return item && item.type === 'drive';
   }
 
+  function isVimeoItem(item) {
+    return item && (item.type === 'vimeo' || /player\.vimeo\.com|vimeo\.com\/\d+/.test(item.src || ''));
+  }
+
+  function vimeoEmbedUrl(src) {
+    if (!src) return '';
+    const player = String(src).match(/player\.vimeo\.com\/video\/(\d+)/);
+    if (player) return 'https://player.vimeo.com/video/' + player[1];
+    const page = String(src).match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if (page) return 'https://player.vimeo.com/video/' + page[1];
+    return src;
+  }
+
+  function vimeoEmbedHtml(item) {
+    const url = vimeoEmbedUrl(item && item.src);
+    return (
+      '<iframe class="shot-media vimeo-embed"' +
+        ' src="' + url + '"' +
+        ' title="' + ((item && item.alt) || 'Video') + '"' +
+        ' allow="fullscreen; picture-in-picture"' +
+        ' allowfullscreen' +
+        ' referrerpolicy="strict-origin-when-cross-origin">' +
+      '</iframe>'
+    );
+  }
+
   function driveFileId(link) {
     if (!link || link.indexOf('PEGAR_LINK') !== -1) return '';
     const match = String(link).match(/\/d\/([a-zA-Z0-9_-]+)/) || String(link).match(/[?&]id=([a-zA-Z0-9_-]+)/);
@@ -126,10 +152,12 @@
   function renderShot(item, index) {
     const eager = index === 0;
     const loading = eager ? 'eager' : 'lazy';
-    const isMedia = isVideoItem(item) || isDriveItem(item);
+    const isMedia = isVideoItem(item) || isDriveItem(item) || isVimeoItem(item);
     let media;
 
-    if (isDriveItem(item)) {
+    if (isVimeoItem(item)) {
+      media = vimeoEmbedHtml(item);
+    } else if (isDriveItem(item)) {
       const preview = drivePreviewUrl(item.src);
       const viewUrl = driveViewUrl(item.src);
       const poster = asset(item.poster || '');
@@ -147,7 +175,7 @@
         ' />';
     }
 
-    return '<figure class="shot' + (isMedia ? ' shot--video' : '') + '">' + media + '</figure>';
+    return '<figure class="shot' + (isMedia ? ' shot--video' : '') + (isVimeoItem(item) ? ' shot--vimeo' : '') + '">' + media + '</figure>';
   }
 
   function bindShotRatio(shot) {
@@ -183,7 +211,7 @@
     const shots = items.map(renderShot);
     var inner;
 
-    if (layout === 'poster') {
+    if (layout === 'poster' || layout === 'reel') {
       inner = shots[0] + '<div class="shot-stack">' + shots.slice(1).join('') + '</div>';
     } else if (layout === 'essay') {
       inner = shots[0] + '<div class="shot-stack">' + shots.slice(1, 3).join('') + '</div>' + shots.slice(3).join('');

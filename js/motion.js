@@ -33,6 +33,8 @@
     watchList('.work-container .card', 70);
     watchList('.step', 90);
     watchList('.project-detail-title, .project-meta-section, .project-actions-section');
+    watchList('body[data-proyecto-id="5"] .gallery--reel > .shot--video');
+    watchList('body[data-proyecto-id="5"] .gallery--reel .shot-stack .shot', 90);
     watchList('.shot', 70);
     watchList('.golden-item', 80);
     watchList('.wine-intro, .wine-stage, .wine-block, .wine-gallery-title, .wine-mosaic-item, .wine-mosaic-video, .wine-close', 70);
@@ -78,6 +80,18 @@
         processRetries += 1;
         if (processRoot.querySelector('.noir-editorial, .wine-editorial, .ubicar-intro, .mayo-editorial') || processRetries > 20) {
           window.clearInterval(processTimer);
+          bindReveals();
+        }
+      }, 50);
+    }
+
+    var galleryRoot = document.querySelector('[data-proyecto-gallery]');
+    if (galleryRoot && !galleryRoot.querySelector('.gallery')) {
+      var galleryRetries = 0;
+      var galleryTimer = window.setInterval(function () {
+        galleryRetries += 1;
+        if (galleryRoot.querySelector('.gallery') || galleryRetries > 20) {
+          window.clearInterval(galleryTimer);
           bindReveals();
         }
       }, 50);
