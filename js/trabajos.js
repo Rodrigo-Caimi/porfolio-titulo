@@ -286,13 +286,27 @@
     return '<a href="' + href + '"' + attrs + ' class="' + className + '">' + action.label + '</a>';
   }
 
-  function wineShotHtml(src, alt, extraClass, eager) {
+  function wineShotHtml(src, alt, extraClass, eager, caption) {
     if (!src) return '';
     return (
       '<figure class="wine-shot' + (extraClass ? ' ' + extraClass : '') + '">' +
         '<img src="' + asset(src) + '" alt="' + (alt || '') + '"' +
           (eager ? ' decoding="async" fetchpriority="high"' : ' loading="lazy" decoding="async"') +
         '>' +
+        (caption ? '<figcaption class="wine-caption">' + caption + '</figcaption>' : '') +
+      '</figure>'
+    );
+  }
+
+  function wineVideoHtml(video) {
+    if (!video || !video.src) return '';
+    const preview = drivePreviewUrl(video.src);
+    const viewUrl = driveViewUrl(video.src);
+    const poster = asset(video.poster || '');
+    return (
+      '<figure class="wine-shot wine-shot--video">' +
+        drivePosterHtml(preview, viewUrl, poster, video.alt, 'wine-video-media', false) +
+        (video.caption ? '<figcaption class="wine-caption">' + video.caption + '</figcaption>' : '') +
       '</figure>'
     );
   }
@@ -311,7 +325,9 @@
   function renderEditorialProcess(container, proyecto) {
     const ed = proyecto.editorial || {};
     const steps = proyecto.process || [];
-    const actions = (proyecto.actions || []).map(function (action, index) {
+    const actions = (proyecto.actions || []).filter(function (action) {
+      return !(action.external && /drive|video/i.test((action.label || '') + (action.href || '')));
+    }).map(function (action, index) {
       return actionLinkHtml(action, 'btn wine-btn' + (index === 0 ? ' wine-btn--solid' : ' wine-btn--ghost'));
     }).join('');
 
@@ -319,26 +335,36 @@
       '<div class="wine-editorial">' +
         '<div class="wine-hero">' +
           '<div class="wine-hero-copy">' +
+            '<p class="wine-kicker">' + proyecto.processTitle + '</p>' +
             '<h1>' + proyecto.title + '</h1>' +
-            '<h2>' + proyecto.processTitle + '</h2>' +
           '</div>' +
-          wineShotHtml(ed.hero && ed.hero.src, ed.hero && ed.hero.alt, 'wine-shot--hero', true) +
+          wineShotHtml(ed.hero && ed.hero.src, ed.hero && ed.hero.alt, 'wine-shot--hero', true, '') +
         '</div>' +
-        '<div class="wine-row wine-row--mid">' +
+        '<div class="wine-beat wine-beat--product">' +
           wineCopyHtml(steps[0], 1) +
-          wineShotHtml(ed.label && ed.label.src, ed.label && ed.label.alt, 'wine-shot--label', false) +
+          '<div class="wine-product">' +
+            wineShotHtml(ed.bottle && ed.bottle.src, ed.bottle && ed.bottle.alt, 'wine-shot--bottle', false, ed.bottle && ed.bottle.caption) +
+            wineShotHtml(ed.label && ed.label.src, ed.label && ed.label.alt, 'wine-shot--label', false, ed.label && ed.label.caption) +
+          '</div>' +
           wineCopyHtml(steps[1], 2) +
         '</div>' +
-        '<div class="wine-row wine-row--low">' +
-          wineShotHtml(ed.poster && ed.poster.src, ed.poster && ed.poster.alt, 'wine-shot--poster', false) +
+        '<div class="wine-beat wine-beat--poster">' +
+          wineShotHtml(ed.poster && ed.poster.src, ed.poster && ed.poster.alt, 'wine-shot--poster', false, ed.poster && ed.poster.caption) +
           wineCopyHtml(steps[2], 3) +
-          wineShotHtml(ed.bus && ed.bus.src, ed.bus && ed.bus.alt, 'wine-shot--bus', false) +
-          wineCopyHtml(steps[3], 4) +
         '</div>' +
-        '<div class="wine-close">' +
-          '<div class="wine-actions">' + actions + '</div>' +
+        '<div class="wine-beat wine-beat--bus">' +
+          wineCopyHtml(steps[3], 4) +
+          wineShotHtml(ed.bus && ed.bus.src, ed.bus && ed.bus.alt, 'wine-shot--bus', false, ed.bus && ed.bus.caption) +
+        '</div>' +
+        '<div class="wine-beat wine-beat--finale">' +
+          wineVideoHtml(ed.video) +
+          '<div class="wine-close">' +
+            '<div class="wine-actions">' + actions + '</div>' +
+          '</div>' +
         '</div>' +
       '</div>';
+
+    container.querySelectorAll('.wine-shot--video').forEach(bindDrivePoster);
   }
 
   function renderProcess(container, proyecto) {

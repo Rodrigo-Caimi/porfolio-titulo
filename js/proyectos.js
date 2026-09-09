@@ -300,17 +300,32 @@ const PROYECTOS = [
         src: 'IMAGENES/don-pascual-campana.jpg',
         alt: 'Mockup terminado campaña Don Pascual'
       },
+      bottle: {
+        src: 'IMAGENES/don-pascual-botella.jpg',
+        alt: 'Botella Don Pascual Chardonnay 2026',
+        caption: 'Producto'
+      },
       label: {
         src: 'IMAGENES/don-pascual-etiqueta.jpg',
-        alt: 'Etiqueta con ilustración Don Pascual'
+        alt: 'Etiqueta con ilustración Don Pascual',
+        caption: 'Etiqueta'
       },
       poster: {
         src: 'IMAGENES/don-pascual-afiche.jpg',
-        alt: 'Afiche Don Pascual Edición Limitada'
+        alt: 'Afiche Don Pascual Edición Limitada',
+        caption: 'Afiche'
       },
       bus: {
         src: 'IMAGENES/don-pascual-omnibus.jpg?v=20260807g',
-        alt: 'Mockup publicidad en ómnibus Don Pascual'
+        alt: 'Mockup publicidad en ómnibus Don Pascual',
+        caption: 'Vía pública'
+      },
+      video: {
+        type: 'drive',
+        src: 'https://drive.google.com/file/d/1WydlpYJ0gdyQRTn3j-sHAU-dG0CKaq5O/view?usp=sharing',
+        poster: 'IMAGENES/don-pascual-botella-fuego.jpg',
+        alt: 'Video campaña Don Pascual Edición Limitada Invierno 2026',
+        caption: 'Video de campaña'
       }
     },
     gallery: [
