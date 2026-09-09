@@ -2925,6 +2925,7 @@ body[data-proyecto-id="7"] .wine-gallery-title {
 
 body[data-proyecto-id="7"] .wine-mosaic-wrap {
   position: relative;
+  isolation: isolate;
 }
 
 body[data-proyecto-id="7"] .wine-mosaic {
@@ -2941,7 +2942,7 @@ body[data-proyecto-id="7"] .wine-mosaic-lines {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 0;
   overflow: visible;
 }
 
@@ -2976,7 +2977,8 @@ body[data-proyecto-id="7"] .wine-mosaic-item {
   padding: 0;
   border: 0;
   border-radius: 22px;
-  background: none;
+  background: #f5f2ea;
+  isolation: isolate;
   appearance: none;
   -webkit-appearance: none;
   font: inherit;
@@ -2989,6 +2991,8 @@ body[data-proyecto-id="7"] .wine-mosaic-item {
 
 body[data-proyecto-id="7"] .wine-mosaic-item img {
   display: block;
+  position: relative;
+  z-index: 1;
   width: auto;
   max-width: 100%;
   height: auto;
@@ -2997,6 +3001,7 @@ body[data-proyecto-id="7"] .wine-mosaic-item img {
   object-fit: contain;
   object-position: center;
   border-radius: 22px;
+  background: #f5f2ea;
 }
 
 body[data-proyecto-id="7"] .wine-close {
