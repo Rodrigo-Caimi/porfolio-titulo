@@ -372,7 +372,10 @@
           wineBlockHtml(steps[3], 4, photos[3]) +
         '</div>' +
         '</div>' +
-        '<div class="wine-mosaic">' + mosaic + '</div>' +
+        '<div class="wine-gallery">' +
+          '<h2 class="wine-gallery-title">Más fotos</h2>' +
+          '<div class="wine-mosaic">' + mosaic + '</div>' +
+        '</div>' +
         '<div class="wine-close">' +
           '<div class="wine-actions">' + actions + '</div>' +
         '</div>' +
