@@ -377,5 +377,65 @@ const PROYECTOS = [
       }
     ],
     related: [6, 5]
+  },
+  {
+    id: 8,
+    slug: 'ubicar-gps.html',
+    title: 'Ubicar GPS',
+    pageTitle: 'Ubicar GPS — Tecnología que te acompaña',
+    category: 'Identidad',
+    cardClass: 'card-third',
+    cardImage: 'IMAGENES/Ubicar gps/Ubicar Logo.png',
+    cardAlt: 'Vidriera Ubicar GPS',
+    role: 'Sistema visual de vidriera: iconos, piezas de producto y marca en local',
+    tools: 'Illustrator, Photoshop',
+    galleryContain: true,
+    hideMeta: true,
+    processLayout: 'trail',
+    trail: {
+      intro: 'Un sistema de comunicación para rastreo y seguridad: iconos, piezas de producto y vidriera con un mismo hilo naranja.',
+      steps: [
+        {
+          src: 'IMAGENES/Ubicar gps/Camaras Final.png',
+          alt: 'Pieza Ubicar GPS de cámaras de seguridad'
+        },
+        {
+          src: 'IMAGENES/Ubicar gps/Iconos Finales.png',
+          alt: 'Sistema de iconos Ubicar GPS'
+        },
+        {
+          src: 'IMAGENES/Ubicar gps/Flotas Final.png',
+          alt: 'Pieza Ubicar GPS de rastreo satelital para flotas'
+        }
+      ],
+      result: [
+        { src: 'IMAGENES/Ubicar gps/Ubicar Logo.png', alt: 'Logo Ubicar GPS aplicado en vidriera' },
+        { src: 'IMAGENES/Ubicar gps/Ubicar Icono.png', alt: 'Iconos de servicios en vidriera Ubicar GPS' },
+        { src: 'IMAGENES/Ubicar gps/Ubicar iconos 2.png', alt: 'Segunda tira de iconos en vidriera Ubicar GPS' },
+        { src: 'IMAGENES/Ubicar gps/Ubicar Camaras.png', alt: 'Vidriera de cámaras y flotas Ubicar GPS' }
+      ]
+    },
+    gallery: [],
+    processTitle: 'Cómo se pensó este proyecto',
+    process: [
+      {
+        title: 'Problema',
+        text: 'Ubicar GPS tenía que explicar servicios técnicos —cámaras, rastreo, alertas— en vidriera y piezas de marca, sin saturar ni parecer un catálogo de fichas sueltas.'
+      },
+      {
+        title: 'Mi rol',
+        text: 'Organicé la oferta en un sistema visual simple: iconografía, jerarquía tipográfica y piezas de producto que se leen de un vistazo, con el naranja como hilo conductor.'
+      },
+      {
+        title: 'Decisión clave',
+        text: 'Traduje beneficios técnicos a mensajes visuales. Cada línea (cámaras, flotas, iconos de servicio) tiene su pieza, pero todas hablan con la misma gramática.'
+      },
+      {
+        title: 'Resultado',
+        text: 'Un sistema coherente aplicado en el local: logo, iconos y vidrieras que conectan producto, servicio y marca en un mismo recorrido.'
+      }
+    ],
+    actions: [],
+    related: [7, 6]
   }
 ];

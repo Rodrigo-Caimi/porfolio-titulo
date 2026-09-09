@@ -22,10 +22,14 @@
     return PROYECTOS.find(function (p) { return p.id === id; });
   }
 
+  function isCustomCase(proyecto) {
+    return proyecto && (proyecto.processLayout === 'editorial' || proyecto.processLayout === 'trail');
+  }
+
   function renderWorkGrid(container) {
     if (!container) return;
 
-    const layoutOrder = [6, 7, 3, 5, 1, 2, 4];
+    const layoutOrder = [8, 6, 7, 3, 5, 1, 2, 4];
     const ordered = layoutOrder
       .map(function (id) { return getProyecto(id); })
       .filter(Boolean);
@@ -158,7 +162,7 @@
   function renderGallery(container, proyecto) {
     if (!container) return;
 
-    if (proyecto.processLayout === 'editorial' || !proyecto.gallery.length) {
+    if (isCustomCase(proyecto) || !proyecto.gallery.length) {
       container.innerHTML = '';
       return;
     }
@@ -226,7 +230,7 @@
   function renderActions(container, proyecto) {
     if (!container) return;
 
-    if (proyecto.processLayout === 'editorial' || !proyecto.actions || !proyecto.actions.length) {
+    if (isCustomCase(proyecto) || !proyecto.actions || !proyecto.actions.length) {
       container.innerHTML = '';
       container.hidden = true;
       return;
@@ -407,6 +411,135 @@
     bindWineArrows(container.querySelector('.wine-stage'));
   }
 
+  function renderTrailProcess(container, proyecto) {
+    const trail = proyecto.trail || {};
+    const steps = proyecto.process || [];
+    const photos = trail.steps || [];
+    const result = trail.result || [];
+
+    function stepHtml(item, n, photo) {
+      if (!item) return '';
+      const num = (n < 10 ? '0' : '') + n;
+      const image = photo && photo.src
+        ? '<figure class="ubicar-shot">' +
+            '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '" loading="lazy" decoding="async">' +
+          '</figure>'
+        : '';
+
+      return (
+        '<article class="ubicar-step ubicar-step--' + n + '">' +
+          '<div class="ubicar-copy">' +
+            '<div class="ubicar-kicker">' +
+              '<span class="ubicar-num">' + num + '</span>' +
+              '<h3>' + item.title + '</h3>' +
+            '</div>' +
+            '<p>' + item.text + '</p>' +
+          '</div>' +
+          image +
+        '</article>'
+      );
+    }
+
+    const resultHtml = result.map(function (item) {
+      return (
+        '<figure class="ubicar-result-item">' +
+          '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '" loading="lazy" decoding="async">' +
+        '</figure>'
+      );
+    }).join('');
+
+    const resultStep = steps[3]
+      ? '<article class="ubicar-step ubicar-step--4 ubicar-step--result">' +
+          '<div class="ubicar-copy">' +
+            '<div class="ubicar-kicker">' +
+              '<span class="ubicar-num">04</span>' +
+              '<h3>' + steps[3].title + '</h3>' +
+            '</div>' +
+            '<p>' + steps[3].text + '</p>' +
+          '</div>' +
+          '<div class="ubicar-result-grid">' + resultHtml + '</div>' +
+        '</article>'
+      : '';
+
+    container.innerHTML =
+      '<div class="ubicar-page">' +
+        '<div class="ubicar-intro">' +
+          '<a class="ubicar-back" href="' + homeHref() + '">' +
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+              '<path d="M15 18l-6-6 6-6"></path>' +
+            '</svg>' +
+            '<span>Volver al inicio</span>' +
+          '</a>' +
+          '<h1>' + (proyecto.pageTitle || proyecto.title) + '</h1>' +
+          (trail.intro ? '<p class="ubicar-lead">' + trail.intro + '</p>' : '') +
+          '<p class="ubicar-process-label">Cómo se pensó este <em>proyecto</em></p>' +
+        '</div>' +
+        '<div class="ubicar-trail">' +
+          '<svg class="ubicar-line" aria-hidden="true">' +
+            '<defs>' +
+              '<marker id="ubicar-arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">' +
+                '<path d="M0 0 L12 6 L0 12 Z" fill="#ff5a00"></path>' +
+              '</marker>' +
+            '</defs>' +
+            '<path class="ubicar-line-path"></path>' +
+          '</svg>' +
+          stepHtml(steps[0], 1, photos[0]) +
+          stepHtml(steps[1], 2, photos[1]) +
+          stepHtml(steps[2], 3, photos[2]) +
+          resultStep +
+        '</div>' +
+      '</div>';
+
+    bindUbicarTrail(container.querySelector('.ubicar-trail'));
+  }
+
+  function bindUbicarTrail(trail) {
+    if (!trail) return;
+    const svg = trail.querySelector('.ubicar-line');
+    const path = trail.querySelector('.ubicar-line-path');
+    if (!svg || !path) return;
+
+    function draw() {
+      const nodes = trail.querySelectorAll('.ubicar-num');
+      if (!nodes.length) return;
+      const tr = trail.getBoundingClientRect();
+      if (!tr.width || !tr.height) return;
+
+      svg.setAttribute('viewBox', '0 0 ' + tr.width + ' ' + tr.height);
+      svg.setAttribute('width', String(tr.width));
+      svg.setAttribute('height', String(tr.height));
+
+      const pts = [];
+      nodes.forEach(function (node) {
+        const r = node.getBoundingClientRect();
+        pts.push({
+          x: r.left - tr.left + r.width / 2,
+          y: r.top - tr.top + r.height / 2
+        });
+      });
+
+      let d = 'M' + pts[0].x.toFixed(1) + ' ' + pts[0].y.toFixed(1);
+      for (let i = 1; i < pts.length; i++) {
+        const prev = pts[i - 1];
+        const curr = pts[i];
+        const midY = (prev.y + curr.y) / 2;
+        d += ' C' + prev.x.toFixed(1) + ' ' + midY.toFixed(1) +
+          ', ' + curr.x.toFixed(1) + ' ' + midY.toFixed(1) +
+          ', ' + curr.x.toFixed(1) + ' ' + curr.y.toFixed(1);
+      }
+
+      path.setAttribute('d', d);
+      path.setAttribute('marker-end', 'url(#ubicar-arrow)');
+    }
+
+    const redraw = function () { window.requestAnimationFrame(draw); };
+    window.addEventListener('resize', redraw);
+    trail.querySelectorAll('img').forEach(function (img) {
+      if (!img.complete) img.addEventListener('load', redraw);
+    });
+    redraw();
+  }
+
   function bindWineArrows(stage) {
     if (!stage) return;
     const svg = stage.querySelector('.wine-lines');
@@ -483,6 +616,11 @@
       return;
     }
 
+    if (proyecto.processLayout === 'trail') {
+      renderTrailProcess(container, proyecto);
+      return;
+    }
+
     const items = proyecto.process.map(function (item) {
       return (
         '<div class="golden-item">' +
@@ -526,7 +664,7 @@
 
   function renderProjectTitle(container, proyecto) {
     if (!container || !proyecto) return;
-    if (proyecto.processLayout === 'editorial') {
+    if (isCustomCase(proyecto)) {
       container.innerHTML = '';
       return;
     }

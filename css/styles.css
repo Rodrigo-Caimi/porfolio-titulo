@@ -818,7 +818,7 @@ a.card:active {
 .card:nth-child(4) { animation-delay: 0.26s; }
 .card:nth-child(5) { animation-delay: 0.33s; }
 .card:nth-child(6) { animation-delay: 0.40s; }
-.card:nth-child(7) { animation-delay: 0.47s; }
+.card:nth-child(8) { animation-delay: 0.54s; }
 
 @keyframes cardIn {
   from {
@@ -3433,6 +3433,273 @@ html.js-motion .hero.is-ready .hero-image {
     transform: none;
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* Ubicar GPS: recorrido con flecha naranja */
+body[data-proyecto-id="8"] .project-detail-title,
+body[data-proyecto-id="8"] .work-detail-hero,
+body[data-proyecto-id="8"] .project-meta-section,
+body[data-proyecto-id="8"] .project-actions-section,
+body[data-proyecto-id="8"] .project-back-bar {
+  display: none;
+}
+
+body[data-proyecto-id="8"] {
+  background: #ececec;
+}
+
+body[data-proyecto-id="8"] main {
+  background:
+    linear-gradient(180deg, #2a2a2a 0%, #141414 18%, #1b1b1b 58%, #3a3a3a 78%, #ececec 92%);
+}
+
+body[data-proyecto-id="8"] .ubicar-case {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body[data-proyecto-id="8"] .ubicar-case .golden-section {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body[data-proyecto-id="8"] .ubicar-page {
+  color: #f4f4f4;
+}
+
+body[data-proyecto-id="8"] .ubicar-intro {
+  position: relative;
+  max-width: min(1100px, 92vw);
+  margin: 0 auto;
+  padding: 28px 20px 36px;
+  text-align: left;
+}
+
+body[data-proyecto-id="8"] .ubicar-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 28px;
+  color: #f4f4f4;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+body[data-proyecto-id="8"] .ubicar-back:hover {
+  color: #ff5a00;
+}
+
+body[data-proyecto-id="8"] .ubicar-intro h1 {
+  margin: 0 0 16px;
+  font-size: clamp(32px, 5vw, 58px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  color: #fff;
+}
+
+body[data-proyecto-id="8"] .ubicar-lead {
+  margin: 0 0 28px;
+  max-width: 40rem;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #cfcfcf;
+}
+
+body[data-proyecto-id="8"] .ubicar-process-label {
+  margin: 0;
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+body[data-proyecto-id="8"] .ubicar-process-label em {
+  font-style: normal;
+  color: #ff5a00;
+}
+
+body[data-proyecto-id="8"] .ubicar-trail {
+  position: relative;
+  max-width: min(1280px, 94vw);
+  margin: 0 auto;
+  padding: 24px 20px 96px;
+}
+
+body[data-proyecto-id="8"] .ubicar-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+}
+
+body[data-proyecto-id="8"] .ubicar-line-path {
+  fill: none;
+  stroke: #ff5a00;
+  stroke-width: 2.4;
+  stroke-dasharray: 10 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.95;
+}
+
+body[data-proyecto-id="8"] .ubicar-step {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(28px, 4vw, 72px);
+  align-items: center;
+  margin: 0 0 88px;
+}
+
+body[data-proyecto-id="8"] .ubicar-step--2,
+body[data-proyecto-id="8"] .ubicar-step--4 {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+}
+
+body[data-proyecto-id="8"] .ubicar-step--2 .ubicar-copy,
+body[data-proyecto-id="8"] .ubicar-step--4 .ubicar-copy {
+  order: 2;
+}
+
+body[data-proyecto-id="8"] .ubicar-step--2 .ubicar-shot,
+body[data-proyecto-id="8"] .ubicar-step--4 .ubicar-result-grid {
+  order: 1;
+}
+
+body[data-proyecto-id="8"] .ubicar-kicker {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 16px;
+}
+
+body[data-proyecto-id="8"] .ubicar-num {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #ff5a00;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 0 0 8px rgba(20, 20, 20, 0.92);
+}
+
+body[data-proyecto-id="8"] .ubicar-step h3 {
+  margin: 0;
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+body[data-proyecto-id="8"] .ubicar-copy p {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #d2d2d2;
+}
+
+body[data-proyecto-id="8"] .ubicar-shot,
+body[data-proyecto-id="8"] .ubicar-result-item {
+  margin: 0;
+  background: #111;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+body[data-proyecto-id="8"] .ubicar-shot img,
+body[data-proyecto-id="8"] .ubicar-result-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) {
+  body[data-proyecto-id="8"] .ubicar-shot:hover img,
+  body[data-proyecto-id="8"] .ubicar-result-item:hover img {
+    transform: scale(1.04);
+  }
+}
+
+body[data-proyecto-id="8"] .ubicar-step--result {
+  margin-bottom: 0;
+  padding: 36px 28px 40px;
+  border-radius: 28px;
+  background: #e8e8e8;
+}
+
+body[data-proyecto-id="8"] .ubicar-step--result .ubicar-num {
+  box-shadow: 0 0 0 8px #e8e8e8;
+}
+
+body[data-proyecto-id="8"] .ubicar-step--result .ubicar-copy p {
+  color: #3a3a3a;
+}
+
+body[data-proyecto-id="8"] .ubicar-step--result h3 {
+  color: #111;
+}
+
+body[data-proyecto-id="8"] .ubicar-result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+body[data-proyecto-id="8"] .ubicar-result-item {
+  background: #f3f3f3;
+}
+
+body[data-proyecto-id="8"] .other-projects-section {
+  background: #ececec;
+}
+
+@media (max-width: 920px) {
+  body[data-proyecto-id="8"] .ubicar-line {
+    display: none;
+  }
+
+  body[data-proyecto-id="8"] .ubicar-step,
+  body[data-proyecto-id="8"] .ubicar-step--2,
+  body[data-proyecto-id="8"] .ubicar-step--4 {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 56px;
+  }
+
+  body[data-proyecto-id="8"] .ubicar-step--2 .ubicar-copy,
+  body[data-proyecto-id="8"] .ubicar-step--4 .ubicar-copy,
+  body[data-proyecto-id="8"] .ubicar-step--2 .ubicar-shot,
+  body[data-proyecto-id="8"] .ubicar-step--4 .ubicar-result-grid {
+    order: 0;
+  }
+
+  body[data-proyecto-id="8"] .ubicar-step--result {
+    padding: 24px 16px 28px;
+  }
+
+  body[data-proyecto-id="8"] .ubicar-result-grid {
+    grid-template-columns: 1fr;
   }
 }
 
