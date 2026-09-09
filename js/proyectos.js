@@ -303,10 +303,8 @@ const PROYECTOS = [
         { src: 'IMAGENES/Don pascual/Plano 6-Copas chocando.png', alt: 'Copas de Don Pascual brindando junto al fuego' },
         { src: 'IMAGENES/Don pascual/don-pascual-botella-fuego.jpg', alt: 'Botella Don Pascual junto al fuego' },
         { src: 'IMAGENES/Don pascual/Plano 5-Miradas complices.png', alt: 'Miradas cómplices junto al fuego con Don Pascual' },
-        { src: 'IMAGENES/Don pascual/don-pascual-botella.jpg', alt: 'Botella Don Pascual Chardonnay 2026' },
         { src: 'IMAGENES/Don pascual/cartel omnibus2.png', alt: 'Campaña Don Pascual en ómnibus' },
         { src: 'IMAGENES/Don pascual/Familia pascual sirviendo vino.png', alt: 'Familia sirviendo Don Pascual' },
-        { src: 'IMAGENES/Don pascual/don-pascual-omnibus.jpg?v=20260807g', alt: 'Mockup publicidad en ómnibus Don Pascual' },
         { src: 'IMAGENES/Don pascual/Plano 7-Tomando Vino.png', alt: 'Escena de campaña Don Pascual tomando vino' }
       ]
     },
