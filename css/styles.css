@@ -3883,7 +3883,7 @@ body[data-proyecto-id="8"] main {
 body[data-proyecto-id="8"] .ubicar-case {
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0 0 48px;
 }
 
 body[data-proyecto-id="8"] .ubicar-case .golden-section {
@@ -4258,7 +4258,8 @@ body[data-proyecto-id="8"] .ubicar-lightbox-prev { left: -56px; }
 body[data-proyecto-id="8"] .ubicar-lightbox-next { right: -56px; }
 
 body[data-proyecto-id="8"] .other-projects-section {
-  background: linear-gradient(180deg, #242424 0%, #ececec 88px, #ececec 100%);
+  background: linear-gradient(180deg, #242424 0%, #ececec 140px, #ececec 100%);
+  padding-top: 140px;
 }
 
 @media (max-width: 1024px) {
