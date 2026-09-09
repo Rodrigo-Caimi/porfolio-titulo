@@ -389,19 +389,19 @@ const PROYECTOS = [
     process: [
       {
         title: 'Problema',
-        text: 'Ubicar GPS tenía que explicar servicios técnicos —cámaras, rastreo, alertas— en vidriera y piezas de marca, sin saturar ni parecer un catálogo de fichas sueltas.'
+        text: 'UbicarGPS necesitaba comunicar distintos servicios —rastreo de flotas, cámaras de seguridad y soluciones asociadas— en una misma vidriera, de forma clara y visible desde la calle, sin saturar la información.'
       },
       {
         title: 'Mi rol',
-        text: 'Organicé la oferta en un sistema visual simple: iconografía, jerarquía tipográfica y piezas de producto que se leen de un vistazo, con el naranja como hilo conductor.'
+        text: 'Organicé la información en un sistema visual simple, combinando iconografía, jerarquía tipográfica e imágenes de producto para lograr una lectura rápida, con el naranja como hilo conductor entre todas las piezas.'
       },
       {
         title: 'Decisión clave',
-        text: 'Traduje beneficios técnicos a mensajes visuales. Cada línea (cámaras, flotas, iconos de servicio) tiene su pieza, pero todas hablan con la misma gramática.'
+        text: 'Traduje información técnica a mensajes visuales simples. Cada servicio tiene su propia pieza, pero todos comparten la misma lógica de color, iconografía y jerarquía.'
       },
       {
         title: 'Resultado',
-        text: 'Un sistema coherente aplicado en el local: logo, iconos y vidrieras que conectan producto, servicio y marca en un mismo recorrido.'
+        text: 'Un sistema gráfico coherente llevado a una aplicación real: cinco piezas de vidriera que integran productos, servicios, iconografía e identidad de marca en un mismo recorrido visual.'
       }
     ],
     actions: [],
