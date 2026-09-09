@@ -298,8 +298,11 @@
   function wineBlockHtml(item, n, photo) {
     if (!item) return '';
     const num = (n < 10 ? '0' : '') + n;
+    const thumbClass = ['wine-thumb'];
+    if (photo && photo.portrait) thumbClass.push('wine-thumb--portrait');
+    if (photo && photo.cutout) thumbClass.push('wine-thumb--cutout');
     const image = photo && photo.src
-      ? '<figure class="wine-thumb">' +
+      ? '<figure class="' + thumbClass.join(' ') + '">' +
           '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '" loading="lazy" decoding="async">' +
         '</figure>'
       : '';
@@ -311,8 +314,10 @@
           '<h3>' + item.title + '</h3>' +
           '<span class="wine-chevron" aria-hidden="true"></span>' +
         '</button>' +
-        '<p>' + item.text + '</p>' +
-        image +
+        '<div class="wine-block-body">' +
+          '<p>' + item.text + '</p>' +
+          image +
+        '</div>' +
       '</article>'
     );
   }
@@ -460,6 +465,13 @@
       bottle.addEventListener('load', redraw);
     }
     window.addEventListener('resize', redraw);
+    stage.querySelectorAll('.wine-block').forEach(function (block) {
+      block.addEventListener('mouseenter', redraw);
+      block.addEventListener('mouseleave', function () {
+        window.setTimeout(redraw, 420);
+      });
+      block.addEventListener('transitionend', redraw);
+    });
     redraw();
   }
 
