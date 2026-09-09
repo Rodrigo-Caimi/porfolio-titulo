@@ -305,23 +305,19 @@ const PROYECTOS = [
       steps: [
         {
           src: 'IMAGENES/Don pascual/don-pascual-campana.jpg',
-          alt: 'Mockup de campaña Don Pascual junto al fuego',
-          caption: 'Tradición que inspira'
+          alt: 'Mockup de campaña Don Pascual junto al fuego'
         },
         {
-          src: 'IMAGENES/Don pascual/don-pascual-copa.png?v=20260908w',
-          alt: 'Servicio de Don Pascual Edición Limitada',
-          caption: 'Ideas que brindan'
+          src: 'IMAGENES/Don pascual/Familia pascual sirviendo vino.png',
+          alt: 'Familia Pascual sirviendo vino'
         },
         {
           src: 'IMAGENES/Don pascual/don-pascual-etiqueta.jpg',
-          alt: 'Etiqueta ilustrada Don Pascual',
-          caption: 'Detalles que cuentan'
+          alt: 'Etiqueta ilustrada Don Pascual'
         },
         {
           src: 'IMAGENES/Don pascual/cartel omnibus.png',
-          alt: 'Publicidad Don Pascual en ómnibus',
-          caption: 'Más que un vino, una historia'
+          alt: 'Publicidad Don Pascual en ómnibus'
         }
       ],
       gallery: [

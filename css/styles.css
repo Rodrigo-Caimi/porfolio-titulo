@@ -2315,16 +2315,16 @@ body[data-proyecto-id="7"] .wine-process-label {
 body[data-proyecto-id="7"] .wine-stage {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(220px, 0.82fr) minmax(420px, 1.35fr) minmax(220px, 0.82fr);
+  grid-template-columns: minmax(280px, 1fr) minmax(340px, 1.15fr) minmax(280px, 1fr);
   grid-template-rows: auto minmax(60px, 1fr) auto;
   grid-template-areas:
     "b1 bottle b2"
     ". bottle ."
     "b3 bottle b4";
-  gap: 16px clamp(28px, 3.5vw, 64px);
+  gap: 24px clamp(32px, 3.5vw, 72px);
   align-items: stretch;
   min-height: min(88vh, 1000px);
-  margin: 0 0 72px;
+  margin: 0 0 48px;
 }
 
 body[data-proyecto-id="7"] .wine-lines {
@@ -2363,7 +2363,7 @@ body[data-proyecto-id="7"] .wine-block {
   position: relative;
   z-index: 1;
   min-width: 0;
-  max-width: 420px;
+  max-width: 540px;
 }
 
 body[data-proyecto-id="7"] .wine-block--1,
@@ -2412,15 +2412,15 @@ body[data-proyecto-id="7"] .wine-block-head {
 
 body[data-proyecto-id="7"] .wine-num {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(28px, 3vw, 42px);
+  font-size: clamp(42px, 4.6vw, 62px);
   font-weight: 500;
-  line-height: 1;
+  line-height: 0.9;
   color: #c4a574;
 }
 
 body[data-proyecto-id="7"] .wine-block h3 {
   margin: 0;
-  font-size: 22px;
+  font-size: clamp(24px, 2.2vw, 30px);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #1c1914;
@@ -2437,56 +2437,33 @@ body[data-proyecto-id="7"] .wine-chevron {
 }
 
 body[data-proyecto-id="7"] .wine-block p {
-  margin: 12px 0 16px;
-  font-size: 15px;
-  line-height: 1.7;
+  margin: 14px 0 18px;
+  font-size: 17px;
+  line-height: 1.75;
   color: #4b453c;
 }
 
 body[data-proyecto-id="7"] .wine-thumb {
   margin: 0;
+  background: none;
 }
 
 body[data-proyecto-id="7"] .wine-thumb img {
   display: block;
   width: 100%;
-  height: 132px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
-}
-
-body[data-proyecto-id="7"] .wine-block--2 {
-  max-width: 520px;
-}
-
-body[data-proyecto-id="7"] .wine-block--2 .wine-thumb img {
-  height: 240px;
+  height: auto;
+  max-height: 210px;
   object-fit: contain;
   object-position: center;
-  background: #f5f2ea;
-  mix-blend-mode: multiply;
-}
-
-body[data-proyecto-id="7"] .wine-block--3 .wine-thumb img {
-  object-fit: contain;
-  background: #efe8d8;
-}
-
-body[data-proyecto-id="7"] .wine-thumb figcaption {
-  margin: 8px 0 0;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #b08948;
+  border-radius: 0;
+  background: transparent;
 }
 
 body[data-proyecto-id="7"] .wine-mosaic {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 14px;
-  margin: 0 0 48px;
+  gap: 28px;
+  margin: 96px 0 48px;
 }
 
 body[data-proyecto-id="7"] .wine-mosaic-item {
@@ -2628,17 +2605,18 @@ body[data-proyecto-id="7"] .wine-footerbrand {
     max-height: 70vh;
   }
 
-  body[data-proyecto-id="7"] .wine-block p,
-  body[data-proyecto-id="7"] .wine-thumb figcaption {
-    display: none;
-  }
-
-  body[data-proyecto-id="7"] .wine-block.is-open p {
+  body[data-proyecto-id="7"] .wine-block p {
     display: block;
+    font-size: 16px;
   }
 
   body[data-proyecto-id="7"] .wine-block-head {
     cursor: pointer;
+  }
+
+  body[data-proyecto-id="7"] .wine-mosaic {
+    gap: 22px;
+    margin-top: 64px;
   }
 
   body[data-proyecto-id="7"] .wine-mosaic-item.is-trio,
@@ -2697,13 +2675,17 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   }
 
   body[data-proyecto-id="7"] .wine-block h3 {
-    font-size: 18px;
+    font-size: 22px;
+  }
+
+  body[data-proyecto-id="7"] .wine-num {
+    font-size: 40px;
   }
 
   body[data-proyecto-id="7"] .wine-block p {
     grid-area: text;
-    margin: 0;
-    font-size: 14px;
+    margin: 8px 0 12px;
+    font-size: 15px;
   }
 
   body[data-proyecto-id="7"] .wine-thumb {
@@ -2719,12 +2701,13 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   }
 
   body[data-proyecto-id="7"] .wine-thumb img {
-    height: 72px;
-    border-radius: 8px;
+    height: auto;
+    max-height: 160px;
+    border-radius: 0;
   }
 
   body[data-proyecto-id="7"] .wine-block--2 .wine-thumb img {
-    height: 200px;
+    max-height: 200px;
   }
 
   body[data-proyecto-id="7"] .wine-mosaic-item.is-trio,

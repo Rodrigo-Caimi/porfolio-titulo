@@ -301,7 +301,6 @@
     const image = photo && photo.src
       ? '<figure class="wine-thumb">' +
           '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '" loading="lazy" decoding="async">' +
-          (photo.caption ? '<figcaption>' + photo.caption + '</figcaption>' : '') +
         '</figure>'
       : '';
 
