@@ -2056,13 +2056,28 @@ textarea {
   gap: 14px;
 }
 
-/* Noir: interior + detalle + cierre ancho */
+/* Noir: grilla compacta, mismo tamaño, sin letterbox */
 .gallery--boutique {
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
-.gallery--boutique > .shot:last-child {
-  grid-column: 1 / -1;
+.gallery--boutique .shot {
+  height: min(34vh, 340px);
+  border-radius: 14px;
+}
+
+.gallery--boutique .shot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.gallery--boutique .shot:nth-child(3) img {
+  object-position: 35% 30%;
 }
 
 /* Don Pascual: campaña en bloque */
@@ -2126,7 +2141,6 @@ textarea {
   .gallery--spread,
   .gallery--poster,
   .gallery--essay,
-  .gallery--boutique,
   .gallery--campaign {
     grid-template-columns: 1fr;
   }
@@ -2136,10 +2150,13 @@ textarea {
   .gallery--spread .shot,
   .gallery--poster .shot,
   .gallery--essay .shot,
-  .gallery--boutique .shot,
   .gallery--campaign .shot {
     grid-column: auto;
     grid-row: auto;
+  }
+
+  .gallery--boutique .shot {
+    height: min(28vh, 220px);
   }
 }
 

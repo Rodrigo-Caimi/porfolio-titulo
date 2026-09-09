@@ -244,8 +244,8 @@ const PROYECTOS = [
     gallery: [
       { src: 'IMAGENES/noir-interior.jpg', thumb: 'IMAGENES/noir-interior-thumb.jpg', alt: 'Interior Noir Barbería & Estilo' },
       { src: 'IMAGENES/noir-herramientas.jpg', thumb: 'IMAGENES/noir-herramientas-thumb.jpg', alt: 'Herramientas y productos Noir Estudio' },
-      { src: 'IMAGENES/noir-productos.jpg', thumb: 'IMAGENES/noir-productos-thumb.jpg', alt: 'Línea de coloración Noir Estudio' },
-      { src: 'IMAGENES/noir-experiencia.jpg', thumb: 'IMAGENES/noir-experiencia-thumb.jpg', alt: 'Experiencia Noir Estudio' }
+      { src: 'IMAGENES/noir-experiencia.jpg', thumb: 'IMAGENES/noir-experiencia-thumb.jpg', alt: 'Experiencia Noir Estudio' },
+      { src: 'IMAGENES/noir-productos.jpg', thumb: 'IMAGENES/noir-productos-thumb.jpg', alt: 'Línea de coloración Noir Estudio' }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [

@@ -155,7 +155,7 @@
 
     if (layout === 'poster') {
       inner = shots[0] + '<div class="shot-stack">' + shots.slice(1).join('') + '</div>';
-    } else if (layout === 'essay' || layout === 'boutique') {
+    } else if (layout === 'essay') {
       inner = shots[0] + '<div class="shot-stack">' + shots.slice(1, 3).join('') + '</div>' + shots.slice(3).join('');
     } else {
       inner = shots.join('');
