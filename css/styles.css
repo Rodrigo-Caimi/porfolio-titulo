@@ -2080,31 +2080,47 @@ textarea {
   object-position: 35% 30%;
 }
 
-/* Noir: proceso con la misma estructura de tarjetas/botones, sin meta de fondo */
+/* Noir: bloque de marca (negro/oro), mismas tarjetas y botones, sin textos de fondo */
 body[data-proyecto-id="6"] .project-meta-section {
   display: none;
 }
 
-body[data-proyecto-id="6"] .golden-section,
-body[data-proyecto-id="6"] .project-actions-section {
+body[data-proyecto-id="6"] .noir-case {
+  --noir-gold: #c8a96a;
+  width: 100%;
+  margin: 40px 0 0;
+  padding: 64px 0 56px;
+  background: #111111;
+  color: #f3eee4;
+}
+
+body[data-proyecto-id="6"] .noir-case .golden-section,
+body[data-proyecto-id="6"] .noir-case .project-actions-section {
   max-width: min(1360px, 96vw);
   width: 100%;
+  margin: 0 auto;
   padding-left: clamp(16px, 3vw, 40px);
   padding-right: clamp(16px, 3vw, 40px);
+  background: transparent;
+  align-items: stretch;
+  justify-content: flex-start;
 }
 
-body[data-proyecto-id="6"] .golden-section {
-  padding-top: 28px;
+body[data-proyecto-id="6"] .noir-case .golden-section {
+  padding-top: 0;
+  padding-bottom: 8px;
 }
 
-body[data-proyecto-id="6"] .golden-section h2 {
+body[data-proyecto-id="6"] .noir-case .golden-section h2 {
   position: relative;
   display: block;
+  width: 100%;
+  margin-bottom: 32px;
   padding-bottom: 16px;
-  margin-bottom: 28px;
+  color: #f3eee4;
 }
 
-body[data-proyecto-id="6"] .golden-section h2::after {
+body[data-proyecto-id="6"] .noir-case .golden-section h2::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -2112,39 +2128,64 @@ body[data-proyecto-id="6"] .golden-section h2::after {
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background: var(--brand);
+  background: var(--noir-gold);
   border-radius: 2px;
 }
 
-body[data-proyecto-id="6"] .golden-vertical {
+body[data-proyecto-id="6"] .noir-case .golden-vertical {
   gap: 12px;
+  width: 100%;
 }
 
-body[data-proyecto-id="6"] .golden-vertical .golden-item {
+body[data-proyecto-id="6"] .noir-case .golden-vertical .golden-item {
   width: 100%;
   border-radius: 14px;
   padding: 22px 28px;
-  background: #fff;
-  border: 1px solid var(--line);
+  background: #1a1a1a;
+  border: 1px solid rgba(200, 169, 106, 0.28);
 }
 
-body[data-proyecto-id="6"] .golden-vertical .golden-item h3 {
+body[data-proyecto-id="6"] .noir-case .golden-vertical .golden-item h3 {
   font-size: 22px;
   margin-bottom: 10px;
+  color: var(--noir-gold);
 }
 
-body[data-proyecto-id="6"] .golden-vertical .golden-item p {
+body[data-proyecto-id="6"] .noir-case .golden-vertical .golden-item p {
   font-size: 18px;
   line-height: 1.7;
   max-width: none;
+  color: rgba(243, 238, 228, 0.86);
 }
 
-body[data-proyecto-id="6"] .project-actions-section {
-  padding-top: 18px;
+body[data-proyecto-id="6"] .noir-case .project-actions-section {
+  padding-top: 28px;
+  padding-bottom: 0;
+}
+
+body[data-proyecto-id="6"] .noir-case .project-action-prompt,
+body[data-proyecto-id="6"] .noir-case .project-action-arrow {
+  color: rgba(243, 238, 228, 0.88);
+}
+
+body[data-proyecto-id="6"] .noir-case .project-action-btn {
+  background: var(--noir-gold);
+  color: #111111;
+  border-color: var(--noir-gold);
+}
+
+body[data-proyecto-id="6"] .noir-case .project-action-btn:hover {
+  background: #d4b87a;
+  border-color: #d4b87a;
+  color: #111111;
 }
 
 @media (max-width: 920px) {
-  body[data-proyecto-id="6"] .golden-vertical .golden-item {
+  body[data-proyecto-id="6"] .noir-case {
+    padding: 48px 0 40px;
+  }
+
+  body[data-proyecto-id="6"] .noir-case .golden-vertical .golden-item {
     padding: 18px 20px;
   }
 }
