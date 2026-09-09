@@ -339,16 +339,20 @@
       return (
         '<button type="button" class="wine-mosaic-item" data-wine-index="' + index + '">' +
           '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' +
-            (index === 0 ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
+            (index < 3 ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
             ' decoding="async">' +
         '</button>'
       );
     }).join('');
 
     const lineMarks = [1, 2, 3, 4].map(function (n) {
-      return '<path data-wine-line="' + n + '"></path>' +
+      return '<g data-wine-trail="' + n + '">' +
+        '<path data-wine-echo="' + n + 'a"></path>' +
+        '<path data-wine-echo="' + n + 'b"></path>' +
+        '<path data-wine-line="' + n + '"></path>' +
         '<circle data-wine-dot="' + n + 'a" r="3.5"></circle>' +
-        '<circle data-wine-dot="' + n + 'b" r="3.5"></circle>';
+        '<circle data-wine-dot="' + n + 'b" r="3.5"></circle>' +
+      '</g>';
     }).join('');
 
     container.innerHTML =
@@ -381,7 +385,10 @@
         '</div>' +
         '<div class="wine-gallery">' +
           '<h2 class="wine-gallery-title">Más fotos</h2>' +
-          '<div class="wine-mosaic">' + mosaic + '</div>' +
+          '<div class="wine-mosaic-wrap">' +
+            '<svg class="wine-mosaic-lines" aria-hidden="true"></svg>' +
+            '<div class="wine-mosaic">' + mosaic + '</div>' +
+          '</div>' +
         '</div>' +
         '<dialog class="wine-lightbox" aria-label="Imagen ampliada">' +
           '<button type="button" class="wine-lightbox-close" aria-label="Cerrar">×</button>' +
@@ -396,6 +403,7 @@
       '</div>';
 
     bindWineArrows(container.querySelector('.wine-stage'));
+    bindWineMosaicLines(container.querySelector('.wine-mosaic-wrap'));
     bindSimpleLightbox(
       container.querySelector('.wine-mosaic'),
       container.querySelector('.wine-lightbox'),
@@ -637,30 +645,42 @@
       svg.setAttribute('height', String(sr.height));
 
       const specs = [
-        { n: 1, from: [1, 0.36], to: [0.08, 0.27], bulge: 74, lift: -26 },
-        { n: 2, from: [0, 0.40], to: [0.92, 0.24], bulge: -82, lift: 18 },
-        { n: 3, from: [1, 0.58], to: [0.10, 0.71], bulge: 58, lift: 30 },
-        { n: 4, from: [0, 0.52], to: [0.90, 0.73], bulge: -90, lift: -16 }
+        { n: 1, from: [1, 0.36], to: [0.08, 0.27], bulge: 96, lift: -42 },
+        { n: 2, from: [0, 0.40], to: [0.92, 0.24], bulge: -108, lift: 28 },
+        { n: 3, from: [1, 0.58], to: [0.10, 0.71], bulge: 78, lift: 48 },
+        { n: 4, from: [0, 0.52], to: [0.90, 0.73], bulge: -118, lift: -32 }
       ];
+
+      function trailD(from, to, bulge, lift, shift) {
+        const mx = (from.x + to.x) / 2 + bulge * 0.22 + shift;
+        const my = (from.y + to.y) / 2 + lift * 0.55;
+        const c1x = from.x + bulge + shift * 0.4;
+        const c1y = from.y + lift;
+        const c2x = mx - bulge * 0.18;
+        const c2y = my - lift * 0.35;
+        const c3x = to.x - bulge * 0.42 + shift * 0.25;
+        const c3y = to.y - lift * 0.55;
+        return 'M' + from.x.toFixed(1) + ' ' + from.y.toFixed(1) +
+          ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
+          ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
+          ', ' + mx.toFixed(1) + ' ' + my.toFixed(1) +
+          ' S' + c3x.toFixed(1) + ' ' + c3y.toFixed(1) +
+          ', ' + to.x.toFixed(1) + ' ' + to.y.toFixed(1);
+      }
 
       specs.forEach(function (spec) {
         const block = stage.querySelector('.wine-block--' + spec.n);
         const path = svg.querySelector('[data-wine-line="' + spec.n + '"]');
+        const echoA = svg.querySelector('[data-wine-echo="' + spec.n + 'a"]');
+        const echoB = svg.querySelector('[data-wine-echo="' + spec.n + 'b"]');
         const dotA = svg.querySelector('[data-wine-dot="' + spec.n + 'a"]');
         const dotB = svg.querySelector('[data-wine-dot="' + spec.n + 'b"]');
         if (!block || !path) return;
         const from = localPoint(block, spec.from[0], spec.from[1]);
         const to = localPoint(bottle, spec.to[0], spec.to[1]);
-        const c1x = from.x + spec.bulge;
-        const c1y = from.y + spec.lift;
-        const c2x = to.x - spec.bulge * 0.28;
-        const c2y = to.y - spec.lift * 0.4;
-        path.setAttribute('d',
-          'M' + from.x.toFixed(1) + ' ' + from.y.toFixed(1) +
-          ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
-          ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
-          ', ' + to.x.toFixed(1) + ' ' + to.y.toFixed(1)
-        );
+        path.setAttribute('d', trailD(from, to, spec.bulge, spec.lift, 0));
+        if (echoA) echoA.setAttribute('d', trailD(from, to, spec.bulge * 1.08, spec.lift * 0.92, 7));
+        if (echoB) echoB.setAttribute('d', trailD(from, to, spec.bulge * 0.9, spec.lift * 1.12, -6));
         if (dotA) {
           dotA.setAttribute('cx', from.x.toFixed(1));
           dotA.setAttribute('cy', from.y.toFixed(1));
@@ -679,6 +699,179 @@
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(redraw, 120);
     });
+    redraw();
+  }
+
+  function bindWineMosaicLines(wrap) {
+    if (!wrap) return;
+    const mosaic = wrap.querySelector('.wine-mosaic');
+    const svg = wrap.querySelector('.wine-mosaic-lines');
+    if (!mosaic || !svg) return;
+    const ns = 'http://www.w3.org/2000/svg';
+
+    function localBox(el) {
+      const wr = wrap.getBoundingClientRect();
+      const r = el.getBoundingClientRect();
+      return {
+        x: r.left - wr.left + r.width / 2,
+        y: r.top - wr.top + r.height / 2,
+        left: r.left - wr.left,
+        w: r.width,
+        h: r.height
+      };
+    }
+
+    function rim(a, b) {
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const hw = a.w / 2 + 5;
+      const hh = a.h / 2 + 5;
+      const scale = Math.min(hw / (Math.abs(dx) || 0.001), hh / (Math.abs(dy) || 0.001));
+      return {
+        x: a.x + dx * scale,
+        y: a.y + dy * scale
+      };
+    }
+
+    function organicPath(from, to, amp, shift) {
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const nx = -dy / len;
+      const ny = dx / len;
+      const sx = nx * shift;
+      const sy = ny * shift;
+      const a = { x: from.x + sx, y: from.y + sy };
+      const b = { x: to.x + sx, y: to.y + sy };
+      const mx = (a.x + b.x) / 2 + nx * amp * 0.18;
+      const my = (a.y + b.y) / 2 + ny * amp * 0.18;
+      const c1x = a.x + dx * 0.24 + nx * amp;
+      const c1y = a.y + dy * 0.22 + ny * amp;
+      const c2x = mx - nx * amp * 0.4;
+      const c2y = my - ny * amp * 0.4;
+      const c3x = a.x + dx * 0.78 - nx * amp * 0.85;
+      const c3y = a.y + dy * 0.76 - ny * amp * 0.85;
+      return 'M' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) +
+        ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
+        ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
+        ', ' + mx.toFixed(1) + ' ' + my.toFixed(1) +
+        ' S' + c3x.toFixed(1) + ' ' + c3y.toFixed(1) +
+        ', ' + b.x.toFixed(1) + ' ' + b.y.toFixed(1);
+    }
+
+    function mosaicEdges(nodes) {
+      const seen = {};
+      const edges = [];
+      function add(a, b) {
+        if (!a || !b || a.i === b.i) return;
+        const key = a.i < b.i ? a.i + '-' + b.i : b.i + '-' + a.i;
+        if (seen[key]) return;
+        seen[key] = true;
+        edges.push([a, b]);
+      }
+
+      nodes.forEach(function (node) {
+        const ranked = [];
+        for (let i = 0; i < nodes.length; i++) {
+          if (nodes[i].i === node.i) continue;
+          ranked.push({
+            o: nodes[i],
+            d: Math.hypot(node.x - nodes[i].x, node.y - nodes[i].y)
+          });
+        }
+        ranked.sort(function (a, b) { return a.d - b.d; });
+        if (ranked[0]) add(node, ranked[0].o);
+        if (ranked[1] && ranked[1].d < Math.max(280, ranked[0].d * 1.75)) add(node, ranked[1].o);
+      });
+
+      const sorted = nodes.slice().sort(function (a, b) {
+        return a.left - b.left || a.y - b.y;
+      });
+      const cols = [];
+      sorted.forEach(function (node) {
+        const last = cols[cols.length - 1];
+        if (!last || Math.abs(node.left - last[0].left) > 40) {
+          cols.push([node]);
+        } else {
+          last.push(node);
+        }
+      });
+      cols.forEach(function (col) {
+        col.sort(function (a, b) { return a.y - b.y; });
+        for (let i = 0; i < col.length - 1; i++) add(col[i], col[i + 1]);
+      });
+      return edges;
+    }
+
+    function el(name, attrs) {
+      const node = document.createElementNS(ns, name);
+      Object.keys(attrs).forEach(function (key) {
+        node.setAttribute(key, attrs[key]);
+      });
+      return node;
+    }
+
+    function draw() {
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      if (window.matchMedia('(max-width: 900px)').matches) return;
+      const wr = wrap.getBoundingClientRect();
+      if (!wr.width || !wr.height) return;
+
+      svg.setAttribute('viewBox', '0 0 ' + wr.width + ' ' + wr.height);
+      svg.setAttribute('width', String(wr.width));
+      svg.setAttribute('height', String(wr.height));
+
+      const items = mosaic.querySelectorAll('.wine-mosaic-item');
+      if (items.length < 2) return;
+
+      const nodes = [];
+      for (let i = 0; i < items.length; i++) {
+        const box = localBox(items[i]);
+        if (box.w < 8 || box.h < 8) continue;
+        box.i = i;
+        nodes.push(box);
+      }
+
+      const edges = mosaicEdges(nodes);
+      const frag = document.createDocumentFragment();
+
+      edges.forEach(function (pair, index) {
+        const from = rim(pair[0], pair[1]);
+        const to = rim(pair[1], pair[0]);
+        const len = Math.hypot(to.x - from.x, to.y - from.y);
+        if (len < 10) return;
+        const amp = (index % 2 === 0 ? 1 : -1) * Math.min(48, Math.max(16, len * 0.22));
+        frag.appendChild(el('path', { class: 'wine-trail-echo', d: organicPath(from, to, amp * 1.12, 5) }));
+        frag.appendChild(el('path', { class: 'wine-trail-echo', d: organicPath(from, to, amp * 0.88, -4.5) }));
+        frag.appendChild(el('path', { class: 'wine-trail-echo', d: organicPath(from, to, amp * 0.7, 8) }));
+        frag.appendChild(el('path', { class: 'wine-trail-main', d: organicPath(from, to, amp, 0) }));
+        frag.appendChild(el('circle', { cx: from.x.toFixed(1), cy: from.y.toFixed(1), r: '3.2' }));
+        frag.appendChild(el('circle', { cx: to.x.toFixed(1), cy: to.y.toFixed(1), r: '3.2' }));
+      });
+
+      svg.appendChild(frag);
+    }
+
+    const redraw = function () { window.requestAnimationFrame(draw); };
+    const images = mosaic.querySelectorAll('img');
+    for (let i = 0; i < images.length; i++) {
+      images[i].addEventListener('load', redraw);
+    }
+    let resizeTimer = 0;
+    window.addEventListener('resize', function () {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(redraw, 120);
+    });
+    if (typeof ResizeObserver === 'function') {
+      const ro = new ResizeObserver(function () {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(redraw, 80);
+      });
+      ro.observe(wrap);
+      ro.observe(mosaic);
+    }
+    window.setTimeout(redraw, 480);
+    window.setTimeout(redraw, 1100);
     redraw();
   }
 
