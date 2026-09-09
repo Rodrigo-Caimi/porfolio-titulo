@@ -23,7 +23,11 @@
   }
 
   function isCustomCase(proyecto) {
-    return proyecto && (proyecto.processLayout === 'editorial' || proyecto.processLayout === 'trail');
+    return proyecto && (
+      proyecto.processLayout === 'editorial' ||
+      proyecto.processLayout === 'trail' ||
+      proyecto.processLayout === 'noir'
+    );
   }
 
   function renderWorkGrid(container) {
@@ -678,6 +682,120 @@
     redraw();
   }
 
+  function noirPhotoHtml(photo, index, extraClass, eager) {
+    if (!photo || !photo.src) return '';
+    return (
+      '<button type="button" class="noir-photo' + (extraClass ? ' ' + extraClass : '') + '" data-noir-index="' + index + '">' +
+        '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '"' +
+          (eager ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
+          ' decoding="async">' +
+      '</button>'
+    );
+  }
+
+  function noirStepHtml(item, n) {
+    if (!item) return '';
+    const num = (n < 10 ? '0' : '') + n;
+    return (
+      '<article class="noir-step noir-step--' + n + '">' +
+        '<span class="noir-step-num">' + num + '</span>' +
+        '<div class="noir-step-copy">' +
+          '<h3>' + item.title + '</h3>' +
+          '<p>' + item.text + '</p>' +
+        '</div>' +
+      '</article>'
+    );
+  }
+
+  function renderNoirCase(container, proyecto) {
+    const photos = proyecto.gallery || [];
+    const steps = proyecto.process || [];
+    const figma = (proyecto.actions || []).filter(function (action) {
+      return action && action.external;
+    })[0];
+    const closeActions = (proyecto.actions || []).map(function (action, index) {
+      return actionLinkHtml(action, 'noir-cta' + (index === 0 ? ' noir-cta--solid' : ' noir-cta--ghost'));
+    }).join('');
+
+    container.innerHTML =
+      '<div class="noir-editorial">' +
+        '<section class="noir-hero">' +
+          '<div class="noir-hero-copy">' +
+            '<a class="noir-back" href="' + homeHref() + '">' +
+              '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+                '<path d="M15 18l-6-6 6-6"></path>' +
+              '</svg>' +
+              '<span>Volver al inicio</span>' +
+            '</a>' +
+            '<div class="noir-hero-text">' +
+              (proyecto.category ? '<p class="noir-kicker">' + proyecto.category + '</p>' : '') +
+              '<h1>' + (proyecto.pageTitle || proyecto.title) + '</h1>' +
+              (proyecto.role ? '<p class="noir-hero-lead">' + proyecto.role + '</p>' : '') +
+              (proyecto.tools ? '<p class="noir-hero-tools"><span>Herramientas</span> ' + proyecto.tools + '</p>' : '') +
+              (figma ? actionLinkHtml(figma, 'noir-cta noir-cta--solid') : '') +
+            '</div>' +
+          '</div>' +
+          '<figure class="noir-hero-visual">' +
+            noirPhotoHtml(photos[0], 0, 'noir-photo--hero', true) +
+          '</figure>' +
+        '</section>' +
+        '<section class="noir-board-section" aria-label="Piezas del proyecto">' +
+          '<div class="noir-wrap">' +
+            '<div class="noir-board">' +
+              '<figure class="noir-board-item noir-board-item--experience">' +
+                noirPhotoHtml(photos[2], 2, 'noir-photo--contain') +
+                (photos[2] && photos[2].alt ? '<figcaption>' + photos[2].alt + '</figcaption>' : '') +
+              '</figure>' +
+              '<figure class="noir-board-item noir-board-item--tools">' +
+                noirPhotoHtml(photos[1], 1, 'noir-photo--contain') +
+                (photos[1] && photos[1].alt ? '<figcaption>' + photos[1].alt + '</figcaption>' : '') +
+              '</figure>' +
+              '<figure class="noir-board-item noir-board-item--products">' +
+                noirPhotoHtml(photos[3], 3, 'noir-photo--contain') +
+                (photos[3] && photos[3].alt ? '<figcaption>' + photos[3].alt + '</figcaption>' : '') +
+              '</figure>' +
+            '</div>' +
+          '</div>' +
+        '</section>' +
+        '<section class="noir-process">' +
+          '<div class="noir-wrap">' +
+            '<h2>' + proyecto.processTitle + '</h2>' +
+            '<div class="noir-steps">' +
+              noirStepHtml(steps[0], 1) +
+              noirStepHtml(steps[1], 2) +
+              noirStepHtml(steps[2], 3) +
+              noirStepHtml(steps[3], 4) +
+            '</div>' +
+          '</div>' +
+        '</section>' +
+        '<section class="noir-close">' +
+          '<div class="noir-wrap">' +
+            '<p class="noir-close-brand">' + proyecto.title + '</p>' +
+            '<div class="noir-close-actions">' + closeActions + '</div>' +
+          '</div>' +
+        '</section>' +
+        '<dialog class="noir-lightbox" aria-label="Imagen ampliada">' +
+          '<button type="button" class="noir-lightbox-close" aria-label="Cerrar">×</button>' +
+          '<button type="button" class="noir-lightbox-prev" aria-label="Imagen anterior">‹</button>' +
+          '<img alt="">' +
+          '<button type="button" class="noir-lightbox-next" aria-label="Imagen siguiente">›</button>' +
+        '</dialog>' +
+      '</div>';
+
+    bindSimpleLightbox(
+      container.querySelector('.noir-editorial'),
+      container.querySelector('.noir-lightbox'),
+      photos,
+      {
+        item: '[data-noir-index]',
+        indexAttr: 'data-noir-index',
+        close: '.noir-lightbox-close',
+        prev: '.noir-lightbox-prev',
+        next: '.noir-lightbox-next'
+      }
+    );
+  }
+
   function renderProcess(container, proyecto) {
     if (!container) return;
 
@@ -688,6 +806,11 @@
 
     if (proyecto.processLayout === 'trail') {
       renderTrailProcess(container, proyecto);
+      return;
+    }
+
+    if (proyecto.processLayout === 'noir') {
+      renderNoirCase(container, proyecto);
       return;
     }
 
