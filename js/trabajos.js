@@ -13,6 +13,11 @@
     return base + slug;
   }
 
+  function homeHref() {
+    const base = document.documentElement.dataset.assetBase || './';
+    return base + 'index.html';
+  }
+
   function getProyecto(id) {
     return PROYECTOS.find(function (p) { return p.id === id; });
   }
@@ -335,7 +340,15 @@
       '<div class="wine-editorial">' +
         '<div class="wine-board">' +
         '<div class="wine-intro">' +
-          '<h1>' + (proyecto.pageTitle || proyecto.title) + '</h1>' +
+          '<div class="wine-intro-top">' +
+            '<a class="wine-back" href="' + homeHref() + '">' +
+              '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+                '<path d="M15 18l-6-6 6-6"></path>' +
+              '</svg>' +
+              '<span>Volver al inicio</span>' +
+            '</a>' +
+            '<h1>' + (proyecto.pageTitle || proyecto.title) + '</h1>' +
+          '</div>' +
           (ed.intro ? '<p class="wine-lead">' + ed.intro + '</p>' : '') +
           '<p class="wine-process-label">' + proyecto.processTitle + '</p>' +
         '</div>' +
