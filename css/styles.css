@@ -2459,6 +2459,14 @@ body[data-proyecto-id="7"] .wine-thumb img {
   background: transparent;
 }
 
+body[data-proyecto-id="7"] .wine-block--2 {
+  max-width: 580px;
+}
+
+body[data-proyecto-id="7"] .wine-block--2 .wine-thumb img {
+  max-height: 360px;
+}
+
 body[data-proyecto-id="7"] .wine-mosaic {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -2707,7 +2715,7 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   }
 
   body[data-proyecto-id="7"] .wine-block--2 .wine-thumb img {
-    max-height: 200px;
+    max-height: 280px;
   }
 
   body[data-proyecto-id="7"] .wine-mosaic-item.is-trio,
