@@ -2080,6 +2080,75 @@ textarea {
   object-position: 35% 30%;
 }
 
+/* Noir: proceso con la misma estructura de tarjetas/botones, sin meta de fondo */
+body[data-proyecto-id="6"] .project-meta-section {
+  display: none;
+}
+
+body[data-proyecto-id="6"] .golden-section,
+body[data-proyecto-id="6"] .project-actions-section {
+  max-width: min(1360px, 96vw);
+  width: 100%;
+  padding-left: clamp(16px, 3vw, 40px);
+  padding-right: clamp(16px, 3vw, 40px);
+}
+
+body[data-proyecto-id="6"] .golden-section {
+  padding-top: 28px;
+}
+
+body[data-proyecto-id="6"] .golden-section h2 {
+  position: relative;
+  display: block;
+  padding-bottom: 16px;
+  margin-bottom: 28px;
+}
+
+body[data-proyecto-id="6"] .golden-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--brand);
+  border-radius: 2px;
+}
+
+body[data-proyecto-id="6"] .golden-vertical {
+  gap: 12px;
+}
+
+body[data-proyecto-id="6"] .golden-vertical .golden-item {
+  width: 100%;
+  border-radius: 14px;
+  padding: 22px 28px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+body[data-proyecto-id="6"] .golden-vertical .golden-item h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+body[data-proyecto-id="6"] .golden-vertical .golden-item p {
+  font-size: 18px;
+  line-height: 1.7;
+  max-width: none;
+}
+
+body[data-proyecto-id="6"] .project-actions-section {
+  padding-top: 18px;
+}
+
+@media (max-width: 920px) {
+  body[data-proyecto-id="6"] .golden-vertical .golden-item {
+    padding: 18px 20px;
+  }
+}
+
 /* Don Pascual: campaña en bloque */
 .gallery--campaign {
   grid-template-columns: repeat(6, minmax(0, 1fr));

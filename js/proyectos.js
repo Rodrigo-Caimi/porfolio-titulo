@@ -241,6 +241,7 @@ const PROYECTOS = [
     tools: 'Figma',
     galleryContain: true,
     galleryLayout: 'boutique',
+    hideMeta: true,
     gallery: [
       { src: 'IMAGENES/noir-interior.jpg', thumb: 'IMAGENES/noir-interior-thumb.jpg', alt: 'Interior Noir Barbería & Estilo' },
       { src: 'IMAGENES/noir-herramientas.jpg', thumb: 'IMAGENES/noir-herramientas-thumb.jpg', alt: 'Herramientas y productos Noir Estudio' },

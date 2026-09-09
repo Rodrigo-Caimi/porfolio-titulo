@@ -248,7 +248,7 @@
   function renderMeta(container, proyecto) {
     if (!container) return;
 
-    if (!proyecto.category && !proyecto.role && !proyecto.tools) {
+    if (proyecto.hideMeta || (!proyecto.category && !proyecto.role && !proyecto.tools)) {
       container.innerHTML = '';
       container.hidden = true;
       return;
