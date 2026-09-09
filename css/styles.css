@@ -474,13 +474,6 @@ section.hero::after {
   letter-spacing: 0.01em;
 }
 
-.hero .sub {
-  color: var(--muted);
-  margin-bottom: 18px;
-  font-size: clamp(18px, 1.6vw, 24px);
-  line-height: 1.45;
-}
-
 .section-lead {
   max-width: 680px;
   margin: -8px auto 28px;
@@ -1038,10 +1031,6 @@ a.card:active {
   transform: translateX(0);
 }
 
-.img-contain {
-  object-fit: contain !important;
-}
-
 /* ============================================
    PROCESO
    ============================================ */
@@ -1347,81 +1336,6 @@ a.card:active {
   margin: 0 auto;
   padding: 0 var(--gutter);
   text-align: center;
-}
-
-.about-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.about-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 32px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
-}
-
-.about-card h3 {
-  font-size: 24px;
-  margin-bottom: 24px;
-  color: var(--brand);
-}
-
-.about-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  text-align: left;
-}
-
-.about-item svg {
-  flex-shrink: 0;
-  color: var(--brand);
-  margin-top: 4px;
-}
-
-.about-item p {
-  margin: 0;
-  line-height: 1.8;
-}
-
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.tool-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 16px;
-  border-radius: 12px;
-  transition: background .2s ease;
-}
-
-.tool-item:hover {
-  background: rgba(17, 17, 17, 0.05);
-}
-
-.tool-item svg {
-  opacity: 0.8;
-  transition: opacity .2s ease;
-}
-
-.tool-item:hover svg {
-  opacity: 1;
-}
-
-.tool-item span {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--muted);
 }
 
 /* ============================================
@@ -1791,10 +1705,6 @@ textarea {
     padding-inline: 4px;
   }
 
-  .about-content {
-    grid-template-columns: 1fr;
-  }
-
   .steps {
     max-width: 640px;
     gap: 14px;
@@ -1869,10 +1779,6 @@ textarea {
 
   .step p {
     font-size: 16px;
-  }
-
-  .tools-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -2846,36 +2752,6 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   }
 }
 
-/* Don Pascual: campaña en bloque */
-/* Don Pascual: campaña en bloque */
-.gallery--campaign {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
-.gallery--campaign .shot:nth-child(1) {
-  grid-column: 1 / span 4;
-}
-
-.gallery--campaign .shot:nth-child(2) {
-  grid-column: 5 / span 2;
-}
-
-.gallery--campaign .shot:nth-child(3) {
-  grid-column: 1 / -1;
-}
-
-.gallery--campaign .shot:nth-child(4) {
-  grid-column: 1 / span 2;
-}
-
-.gallery--campaign .shot:nth-child(5) {
-  grid-column: 3 / span 2;
-}
-
-.gallery--campaign .shot:nth-child(6) {
-  grid-column: 5 / span 2;
-}
-
 @media (max-width: 1100px) {
   .gallery--screens,
   .gallery--storyboard {
@@ -2884,20 +2760,16 @@ body[data-proyecto-id="7"] .wine-footerbrand {
 }
 
 @media (max-width: 920px) {
-  .gallery--spread,
-  .gallery--campaign {
+  .gallery--spread {
     grid-template-columns: 1fr 1fr;
   }
 
-  .gallery--spread .shot,
-  .gallery--campaign .shot {
+  .gallery--spread .shot {
     grid-column: auto;
     grid-row: auto;
   }
 
-  .gallery--spread .shot:first-child,
-  .gallery--campaign .shot:nth-child(1),
-  .gallery--campaign .shot:nth-child(3) {
+  .gallery--spread .shot:first-child {
     grid-column: 1 / -1;
   }
 }
@@ -2907,8 +2779,7 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   .gallery--storyboard,
   .gallery--spread,
   .gallery--poster,
-  .gallery--essay,
-  .gallery--campaign {
+  .gallery--essay {
     grid-template-columns: 1fr;
   }
 
@@ -2916,8 +2787,7 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   .gallery--storyboard .shot,
   .gallery--spread .shot,
   .gallery--poster .shot,
-  .gallery--essay .shot,
-  .gallery--campaign .shot {
+  .gallery--essay .shot {
     grid-column: auto;
     grid-row: auto;
   }
@@ -2927,7 +2797,6 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   }
 }
 
-.drive-fallback,
 .drive-poster {
   position: absolute;
   inset: 0;
@@ -2941,7 +2810,6 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   -webkit-tap-highlight-color: transparent;
 }
 
-.drive-fallback img,
 .drive-poster img {
   position: absolute;
   inset: 0;
@@ -2951,7 +2819,6 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   pointer-events: none;
 }
 
-.drive-fallback-label,
 .drive-poster-label {
   position: absolute;
   left: 50%;
@@ -3007,54 +2874,40 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   }
 }
 
-/* Campaña Reel ORT + Don Pascual: texto y proceso al mismo ancho del bloque de fotos */
+/* Campaña Reel ORT: texto y proceso al mismo ancho del bloque de fotos */
 body[data-proyecto-id="5"] .golden-section,
 body[data-proyecto-id="5"] .project-meta-section,
-body[data-proyecto-id="5"] .project-actions-section,
-body[data-proyecto-id="7"] .project-meta-section,
-body[data-proyecto-id="7"] .project-actions-section {
+body[data-proyecto-id="5"] .project-actions-section {
   max-width: min(1400px, 96vw);
   width: 100%;
   padding-left: clamp(16px, 3vw, 40px);
   padding-right: clamp(16px, 3vw, 40px);
 }
 
-body[data-proyecto-id="7"] .wine-case .golden-section {
-  max-width: none;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body[data-proyecto-id="5"] .golden-vertical,
-body[data-proyecto-id="7"] .golden-vertical {
+body[data-proyecto-id="5"] .golden-vertical {
   gap: 18px;
   width: 100%;
 }
 
-body[data-proyecto-id="5"] .golden-vertical .golden-item,
-body[data-proyecto-id="7"] .golden-vertical .golden-item {
+body[data-proyecto-id="5"] .golden-vertical .golden-item {
   width: 100%;
   border-radius: 16px;
   padding: 22px 36px;
 }
 
-body[data-proyecto-id="5"] .golden-vertical .golden-item h3,
-body[data-proyecto-id="7"] .golden-vertical .golden-item h3 {
+body[data-proyecto-id="5"] .golden-vertical .golden-item h3 {
   font-size: 22px;
   margin-bottom: 10px;
 }
 
-body[data-proyecto-id="5"] .golden-vertical .golden-item p,
-body[data-proyecto-id="7"] .golden-vertical .golden-item p {
+body[data-proyecto-id="5"] .golden-vertical .golden-item p {
   font-size: 18px;
   line-height: 1.7;
   max-width: none;
 }
 
 @media (max-width: 920px) {
-  body[data-proyecto-id="5"] .golden-vertical .golden-item,
-  body[data-proyecto-id="7"] .golden-vertical .golden-item {
+  body[data-proyecto-id="5"] .golden-vertical .golden-item {
     padding: 18px 20px;
   }
 }
@@ -3122,22 +2975,6 @@ footer {
 
 .footer-inner .spacer {
   flex: 1;
-}
-
-.footer-link {
-  color: var(--brand);
-  font-weight: 600;
-  border: 1px solid var(--brand);
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: #fff;
-  transition: background .15s ease, color .15s ease, border-color .15s ease;
-}
-
-.footer-link:hover {
-  background: rgba(17, 17, 17, 0.06);
-  color: var(--brand);
-  border-color: var(--brand);
 }
 
 /* ============================================

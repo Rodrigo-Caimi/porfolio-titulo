@@ -75,18 +75,24 @@
     return item && item.type === 'drive';
   }
 
-  function drivePreviewUrl(link) {
+  function driveFileId(link) {
     if (!link || link.indexOf('PEGAR_LINK') !== -1) return '';
     const match = String(link).match(/\/d\/([a-zA-Z0-9_-]+)/) || String(link).match(/[?&]id=([a-zA-Z0-9_-]+)/);
-    if (!match) return link.indexOf('drive.google.com') !== -1 ? link : '';
-    return 'https://drive.google.com/file/d/' + match[1] + '/preview';
+    return match ? match[1] : '';
+  }
+
+  function drivePreviewUrl(link) {
+    const id = driveFileId(link);
+    if (id) return 'https://drive.google.com/file/d/' + id + '/preview';
+    if (!link || link.indexOf('PEGAR_LINK') !== -1) return '';
+    return link.indexOf('drive.google.com') !== -1 ? link : '';
   }
 
   function driveViewUrl(link) {
+    const id = driveFileId(link);
+    if (id) return 'https://drive.google.com/file/d/' + id + '/view';
     if (!link || link.indexOf('PEGAR_LINK') !== -1) return '';
-    const match = String(link).match(/\/d\/([a-zA-Z0-9_-]+)/) || String(link).match(/[?&]id=([a-zA-Z0-9_-]+)/);
-    if (!match) return link;
-    return 'https://drive.google.com/file/d/' + match[1] + '/view';
+    return link;
   }
 
   // iOS/móvil: el embed de Drive deja play/controles trabados a mitad de pantalla
@@ -162,13 +168,14 @@
   function renderGallery(container, proyecto) {
     if (!container) return;
 
-    if (isCustomCase(proyecto) || !proyecto.gallery.length) {
+    const items = proyecto.gallery || [];
+    if (isCustomCase(proyecto) || !items.length) {
       container.innerHTML = '';
       return;
     }
 
     const layout = proyecto.galleryLayout || 'spread';
-    const shots = proyecto.gallery.map(renderShot);
+    const shots = items.map(renderShot);
     var inner;
 
     if (layout === 'poster') {
@@ -498,7 +505,7 @@
       '</div>';
 
     bindUbicarTrail(container.querySelector('.ubicar-trail'));
-    bindUbicarLightbox(container.querySelector('.ubicar-gallery'), container.querySelector('.ubicar-lightbox'), result);
+    bindSimpleLightbox(container.querySelector('.ubicar-gallery'), container.querySelector('.ubicar-lightbox'), result);
   }
 
   function bindUbicarTrail(trail) {
@@ -599,10 +606,6 @@
     dialog.addEventListener('close', function () {
       img.removeAttribute('src');
     });
-  }
-
-  function bindUbicarLightbox(gallery, dialog, items) {
-    bindSimpleLightbox(gallery, dialog, items);
   }
 
   function bindWineArrows(stage) {
