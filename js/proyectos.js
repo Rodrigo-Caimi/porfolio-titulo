@@ -411,10 +411,10 @@ const PROYECTOS = [
         }
       ],
       result: [
-        { src: 'IMAGENES/Ubicar gps/Ubicar Logo.webp', alt: 'Logo Ubicar GPS aplicado en vidriera', w: 1050, h: 1400 },
-        { src: 'IMAGENES/Ubicar gps/Ubicar Icono.webp', alt: 'Iconos de servicios en vidriera Ubicar GPS', w: 1050, h: 1400 },
-        { src: 'IMAGENES/Ubicar gps/Ubicar iconos 2.webp', alt: 'Segunda tira de iconos en vidriera Ubicar GPS', w: 1050, h: 1400 },
-        { src: 'IMAGENES/Ubicar gps/Ubicar Camaras.webp', alt: 'Vidriera de cámaras y flotas Ubicar GPS', w: 1050, h: 1400 }
+        { src: 'IMAGENES/Ubicar gps/flotas y camaras.webp', alt: 'Vidriera Ubicar GPS de flotas y cámaras', w: 1050, h: 1400 },
+        { src: 'IMAGENES/Ubicar gps/iconos1 vehiculos.webp', alt: 'Iconos Ubicar GPS para vehículos, mascotas y cámaras', w: 1120, h: 1400 },
+        { src: 'IMAGENES/Ubicar gps/iconos2 gps.webp', alt: 'Iconos Ubicar GPS para niños, SOS y cámaras espía', w: 1120, h: 1400 },
+        { src: 'IMAGENES/Ubicar gps/Ubicar Logo.webp', alt: 'Logo Ubicar GPS aplicado en vidriera', w: 1050, h: 1400 }
       ]
     },
     gallery: [],
