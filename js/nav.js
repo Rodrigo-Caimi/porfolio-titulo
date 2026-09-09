@@ -57,9 +57,12 @@
   var dragging = false;
   var moved = false;
   var startX = 0;
+  var startY = 0;
   var startReveal = 0;
   var activePointer = null;
   var lastToggleAt = 0;
+  var lastOrbitAt = 0;
+  var DRAG_THRESHOLD = 8;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function setReveal(value, animate) {
@@ -93,6 +96,15 @@
     animateTo(reveal < 0.5 ? 1 : 0);
   }
 
+  function toggleOrbit() {
+    root.classList.toggle('is-orbit-on');
+    lastOrbitAt = Date.now();
+  }
+
+  function markMoved(dx, dy) {
+    if (Math.hypot(dx, dy) > DRAG_THRESHOLD) moved = true;
+  }
+
   function onPointerDown(event) {
     if (activePointer !== null) return;
     if (typeof event.button === 'number' && event.button !== 0) return;
@@ -101,6 +113,7 @@
     dragging = true;
     moved = false;
     startX = event.clientX;
+    startY = event.clientY;
     startReveal = reveal;
     root.classList.add('is-dragging');
     root.classList.remove('is-animating');
@@ -117,11 +130,13 @@
     if (!rect.width) return;
 
     var dx = event.clientX - startX;
-    if (Math.abs(dx) > 6) moved = true;
+    var dy = event.clientY - startY;
+    markMoved(dx, dy);
+    if (!moved) return;
 
     // Arrastrar a la izquierda revela el dibujo
     setReveal(startReveal + (-dx / rect.width), false);
-    if (event.cancelable && moved) event.preventDefault();
+    if (event.cancelable) event.preventDefault();
   }
 
   function onPointerUp(event) {
@@ -137,7 +152,8 @@
     } catch (err) { /* ignore */ }
 
     if (!moved) {
-      toggle();
+      setReveal(startReveal, false);
+      toggleOrbit();
       return;
     }
 
@@ -159,6 +175,7 @@
       dragging = true;
       moved = false;
       startX = event.changedTouches[0].clientX;
+      startY = event.changedTouches[0].clientY;
       startReveal = reveal;
       root.classList.add('is-dragging');
     }, { passive: true });
@@ -167,9 +184,11 @@
       if (!dragging || !event.touches.length) return;
       var rect = root.getBoundingClientRect();
       var dx = event.touches[0].clientX - startX;
-      if (Math.abs(dx) > 6) moved = true;
+      var dy = event.touches[0].clientY - startY;
+      markMoved(dx, dy);
+      if (!moved) return;
       setReveal(startReveal + (-dx / rect.width), false);
-      if (event.cancelable && moved) event.preventDefault();
+      if (event.cancelable) event.preventDefault();
     }, { passive: false });
 
     root.addEventListener('touchend', function () {
@@ -177,8 +196,10 @@
       dragging = false;
       activePointer = null;
       root.classList.remove('is-dragging');
-      if (!moved) toggle();
-      else if (reveal >= 0.18) animateTo(1);
+      if (!moved) {
+        setReveal(startReveal, false);
+        toggleOrbit();
+      } else if (reveal >= 0.18) animateTo(1);
       else animateTo(0);
     });
 
@@ -188,31 +209,36 @@
       dragging = true;
       moved = false;
       startX = event.clientX;
+      startY = event.clientY;
       startReveal = reveal;
     });
     window.addEventListener('mousemove', function (event) {
       if (!dragging) return;
       var rect = root.getBoundingClientRect();
       var dx = event.clientX - startX;
-      if (Math.abs(dx) > 6) moved = true;
+      var dy = event.clientY - startY;
+      markMoved(dx, dy);
+      if (!moved) return;
       setReveal(startReveal + (-dx / rect.width), false);
     });
     window.addEventListener('mouseup', function () {
       if (!dragging) return;
       dragging = false;
       activePointer = null;
-      if (!moved) toggle();
-      else if (reveal >= 0.18) animateTo(1);
+      if (!moved) {
+        setReveal(startReveal, false);
+        toggleOrbit();
+      } else if (reveal >= 0.18) animateTo(1);
       else animateTo(0);
     });
   }
 
   // Tap de respaldo (algunos Android no completan bien el pointerup)
   root.addEventListener('click', function (event) {
-    if (Date.now() - lastToggleAt < 450) return;
+    if (Date.now() - lastOrbitAt < 450) return;
     if (moved) return;
     event.preventDefault();
-    toggle();
+    toggleOrbit();
   });
 
   root.addEventListener('keydown', function (event) {

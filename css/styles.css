@@ -412,6 +412,7 @@ section.hero {
   position: relative;
   z-index: 1;
   background: var(--bg);
+  overflow-x: clip;
 }
 
 /* Línea fina de separación (no caja/sombra) */
@@ -497,7 +498,7 @@ section.hero::after {
   aspect-ratio: 1 / 1;
   height: auto;
   border-radius: 50%;
-  overflow: hidden;
+  overflow: visible;
   justify-self: end;
   background: #E4E4E4;
   position: relative;
@@ -515,6 +516,8 @@ section.hero::after {
   width: 100%;
   height: 100%;
   transform-origin: 50% 50%;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .hero-image img {
@@ -652,6 +655,96 @@ section.hero::after {
   .hero-morph.is-animating .hero-morph-handle,
   .hero-morph-hint {
     transition: none;
+  }
+}
+
+.portrait-orbit {
+  position: absolute;
+  inset: -12%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.portrait-orbit-ring {
+  position: absolute;
+  inset: 0;
+}
+
+.portrait-orbit-item {
+  position: absolute;
+  inset: 0;
+  transform: rotate(var(--a));
+}
+
+.portrait-orbit-spin {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(calc(var(--a) * -1));
+}
+
+.portrait-orbit-label {
+  display: block;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.48s ease, transform 0.48s ease;
+}
+
+.portrait-interactive-wrapper.is-orbit-on .portrait-orbit-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.portrait-interactive-wrapper.is-orbit-on .portrait-orbit-ring {
+  animation: portraitOrbitSpin 36s linear infinite;
+}
+
+.portrait-interactive-wrapper.is-orbit-on .portrait-orbit-spin {
+  animation: portraitOrbitCounter 36s linear infinite;
+}
+
+@keyframes portraitOrbitSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes portraitOrbitCounter {
+  from { transform: translate(-50%, -50%) rotate(calc(var(--a) * -1)); }
+  to { transform: translate(-50%, -50%) rotate(calc(var(--a) * -1 - 360deg)); }
+}
+
+@media (max-width: 920px) {
+  .portrait-orbit {
+    inset: -9%;
+  }
+
+  .portrait-orbit-spin {
+    top: 5%;
+  }
+
+  .portrait-orbit-label {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    transform: translateY(5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait-orbit-label {
+    transition: opacity 0.2s ease;
+  }
+
+  .portrait-interactive-wrapper.is-orbit-on .portrait-orbit-ring,
+  .portrait-interactive-wrapper.is-orbit-on .portrait-orbit-spin {
+    animation: none;
   }
 }
 
