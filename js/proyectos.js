@@ -285,6 +285,7 @@ const PROYECTOS = [
     id: 7,
     slug: 'don-pascual.html',
     title: 'Don Pascual',
+    pageTitle: 'Don Pascual — Campaña Edición Limitada Invierno 2026',
     category: 'Campaña',
     cardClass: 'card-third',
     cardImage: 'IMAGENES/Don pascual/don-pascual-card.jpg',

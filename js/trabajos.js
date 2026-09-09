@@ -335,9 +335,9 @@
       '<div class="wine-editorial">' +
         '<div class="wine-board">' +
         '<div class="wine-intro">' +
-          '<p class="wine-brandline">Don Pascual</p>' +
-          '<h1>' + proyecto.processTitle + '</h1>' +
+          '<h1>' + (proyecto.pageTitle || proyecto.title) + '</h1>' +
           (ed.intro ? '<p class="wine-lead">' + ed.intro + '</p>' : '') +
+          '<p class="wine-process-label">' + proyecto.processTitle + '</p>' +
         '</div>' +
         '<div class="wine-stage">' +
           '<svg class="wine-lines" aria-hidden="true">' +
@@ -510,7 +510,7 @@
     const proyecto = getProyecto(proyectoId);
     if (!proyecto) return;
 
-    document.title = proyecto.title + ' — Rodrigo Caimi';
+    document.title = (proyecto.pageTitle || proyecto.title) + ' — Rodrigo Caimi';
 
     renderProjectTitle(document.querySelector('[data-proyecto-title]'), proyecto);
     renderGallery(document.querySelector('[data-proyecto-gallery]'), proyecto);
