@@ -333,17 +333,23 @@
 
     container.innerHTML =
       '<div class="wine-editorial">' +
+        '<div class="wine-board">' +
         '<div class="wine-intro">' +
           '<p class="wine-brandline">Don Pascual</p>' +
           '<h1>' + proyecto.processTitle + '</h1>' +
           (ed.intro ? '<p class="wine-lead">' + ed.intro + '</p>' : '') +
         '</div>' +
         '<div class="wine-stage">' +
-          '<svg class="wine-lines" viewBox="0 0 1000 720" preserveAspectRatio="none" aria-hidden="true">' +
-            '<path d="M220 110C340 150 430 260 500 360"></path>' +
-            '<path d="M780 110C660 150 570 260 500 360"></path>' +
-            '<path d="M220 610C340 560 430 460 500 360"></path>' +
-            '<path d="M780 610C660 560 570 460 500 360"></path>' +
+          '<svg class="wine-lines" aria-hidden="true">' +
+            '<defs>' +
+              '<marker id="wine-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">' +
+                '<path d="M0 0 L10 5 L0 10 Z" fill="#c4a574"></path>' +
+              '</marker>' +
+            '</defs>' +
+            '<path data-wine-line="1"></path>' +
+            '<path data-wine-line="2"></path>' +
+            '<path data-wine-line="3"></path>' +
+            '<path data-wine-line="4"></path>' +
           '</svg>' +
           wineBlockHtml(steps[0], 1, photos[0]) +
           '<figure class="wine-bottle">' +
@@ -352,6 +358,7 @@
           wineBlockHtml(steps[1], 2, photos[1]) +
           wineBlockHtml(steps[2], 3, photos[2]) +
           wineBlockHtml(steps[3], 4, photos[3]) +
+        '</div>' +
         '</div>' +
         '<div class="wine-mosaic">' + mosaic + '</div>' +
         '<div class="wine-close">' +
@@ -376,6 +383,69 @@
         }
       });
     });
+
+    bindWineArrows(container.querySelector('.wine-stage'));
+  }
+
+  function bindWineArrows(stage) {
+    if (!stage) return;
+    const svg = stage.querySelector('.wine-lines');
+    const bottle = stage.querySelector('.wine-bottle img') || stage.querySelector('.wine-bottle');
+    if (!svg || !bottle) return;
+
+    function localPoint(el, relX, relY) {
+      const sr = stage.getBoundingClientRect();
+      const r = el.getBoundingClientRect();
+      return {
+        x: r.left - sr.left + r.width * relX,
+        y: r.top - sr.top + r.height * relY
+      };
+    }
+
+    function curve(from, to, pullX) {
+      const c1x = from.x + pullX;
+      const c1y = from.y;
+      const c2x = to.x - pullX * 0.25;
+      const c2y = to.y;
+      return 'M' + from.x.toFixed(1) + ' ' + from.y.toFixed(1) +
+        ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
+        ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
+        ', ' + to.x.toFixed(1) + ' ' + to.y.toFixed(1);
+    }
+
+    function draw() {
+      if (window.matchMedia('(max-width: 920px)').matches) return;
+      const sr = stage.getBoundingClientRect();
+      if (!sr.width || !sr.height) return;
+
+      svg.setAttribute('viewBox', '0 0 ' + sr.width + ' ' + sr.height);
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+      const anchors = [
+        { n: 1, from: [1, 0.5], to: [0.12, 0.28], pull: 56 },
+        { n: 2, from: [0, 0.5], to: [0.88, 0.28], pull: -56 },
+        { n: 3, from: [1, 0.5], to: [0.12, 0.74], pull: 56 },
+        { n: 4, from: [0, 0.5], to: [0.88, 0.74], pull: -56 }
+      ];
+
+      anchors.forEach(function (anchor) {
+        const block = stage.querySelector('.wine-block--' + anchor.n);
+        const path = svg.querySelector('[data-wine-line="' + anchor.n + '"]');
+        if (!block || !path) return;
+        const origin = block.querySelector('.wine-thumb') || block;
+        const from = localPoint(origin, anchor.from[0], anchor.from[1]);
+        const to = localPoint(bottle, anchor.to[0], anchor.to[1]);
+        path.setAttribute('d', curve(from, to, anchor.pull));
+        path.setAttribute('marker-end', 'url(#wine-arrow)');
+      });
+    }
+
+    const redraw = function () { window.requestAnimationFrame(draw); };
+    if (bottle.tagName === 'IMG' && !bottle.complete) {
+      bottle.addEventListener('load', redraw);
+    }
+    window.addEventListener('resize', redraw);
+    redraw();
   }
 
   function renderProcess(container, proyecto) {
