@@ -26,7 +26,8 @@
     return proyecto && (
       proyecto.processLayout === 'editorial' ||
       proyecto.processLayout === 'trail' ||
-      proyecto.processLayout === 'noir'
+      proyecto.processLayout === 'noir' ||
+      proyecto.processLayout === 'mayo'
     );
   }
 
@@ -1026,6 +1027,167 @@
     );
   }
 
+  function mayoLooksSocial(item) {
+    return item && /posteo|instagram|\bigmayo|\big-/i.test(((item.alt || '') + ' ' + (item.src || '')).toLowerCase());
+  }
+
+  function mayoLooksPoster(item) {
+    return item && /afiche/i.test(((item.alt || '') + ' ' + (item.src || '')).toLowerCase());
+  }
+
+  function mayoTitleHtml(title) {
+    const parts = String(title || '').trim().split(/\s+/);
+    if (parts.length < 2) return title || '';
+    return (
+      '<span class="mayo-title-mayo">' + parts[0] + '</span>' +
+      '<span class="mayo-title-amarillo">' + parts.slice(1).join(' ') + '</span>'
+    );
+  }
+
+  function mayoHeadHtml(num, title) {
+    if (!title) return '';
+    const label = (num < 10 ? '0' : '') + num;
+    return (
+      '<header class="mayo-head">' +
+        '<span class="mayo-num">' + label + '</span>' +
+        '<h2>' + title + '</h2>' +
+        '<span class="mayo-rule" aria-hidden="true"></span>' +
+      '</header>'
+    );
+  }
+
+  function mayoPhotoHtml(item, index, extraClass, eager) {
+    if (!item || !item.src) return '';
+    return (
+      '<button type="button" class="mayo-photo' + (extraClass ? ' ' + extraClass : '') + '" data-mayo-index="' + index + '">' +
+        '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' +
+          (eager ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
+          ' decoding="async">' +
+      '</button>'
+    );
+  }
+
+  function renderMayoCase(container, proyecto) {
+    const photos = proyecto.gallery || [];
+    const steps = proyecto.process || [];
+    const posters = photos.filter(mayoLooksPoster);
+    const social = photos.filter(mayoLooksSocial);
+    const heroPhoto = posters[0] || photos[0];
+    const lightbox = [];
+
+    function take(item) {
+      if (!item || !item.src) return -1;
+      const existing = lightbox.findIndex(function (entry) { return entry.src === item.src; });
+      if (existing !== -1) return existing;
+      lightbox.push(item);
+      return lightbox.length - 1;
+    }
+
+    const heroIndex = take(heroPhoto);
+    const posterFigures = (posters.length ? posters : []).map(function (item) {
+      const caption = item.alt || '';
+      return (
+        '<figure class="mayo-poster">' +
+          mayoPhotoHtml(item, take(item), 'mayo-photo--contain', false) +
+          (caption ? '<figcaption>' + caption + '</figcaption>' : '') +
+        '</figure>'
+      );
+    }).join('');
+
+    const feedFigures = social.map(function (item) {
+      const caption = item.alt || '';
+      return (
+        '<figure class="mayo-feed-item">' +
+          mayoPhotoHtml(item, take(item), 'mayo-photo--contain', false) +
+          (caption ? '<figcaption>' + caption + '</figcaption>' : '') +
+        '</figure>'
+      );
+    }).join('');
+
+    const closeActions = (proyecto.actions || []).map(function (action, index) {
+      return actionLinkHtml(action, 'mayo-cta' + (index === 0 ? ' mayo-cta--solid' : ' mayo-cta--ghost'));
+    }).join('');
+
+    const closeSteps = steps.slice(2);
+    const closeCopy = closeSteps.map(function (item) {
+      return (
+        '<div class="mayo-close-copy">' +
+          (item.title ? '<h2>' + item.title + '</h2>' : '') +
+          '<p>' + item.text + '</p>' +
+        '</div>'
+      );
+    }).join('');
+
+    const heroLead = proyecto.role || '';
+
+    container.innerHTML =
+      '<div class="mayo-editorial">' +
+        '<section class="mayo-hero">' +
+          '<div class="mayo-hero-copy">' +
+            '<a class="mayo-back" href="' + homeHref() + '">' +
+              '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+                '<path d="M15 18l-6-6 6-6"></path>' +
+              '</svg>' +
+              '<span>Volver al inicio</span>' +
+            '</a>' +
+            (proyecto.category ? '<p class="mayo-kicker">' + proyecto.category + '</p>' : '') +
+            '<h1>' + mayoTitleHtml(proyecto.pageTitle || proyecto.title) + '</h1>' +
+            (heroLead ? '<p class="mayo-hero-lead">' + heroLead + '</p>' : '') +
+            (proyecto.tools ? '<p class="mayo-hero-tools"><span>Herramientas</span> ' + proyecto.tools + '</p>' : '') +
+          '</div>' +
+          '<figure class="mayo-hero-visual">' +
+            mayoPhotoHtml(heroPhoto, heroIndex, 'mayo-photo--hero', true) +
+          '</figure>' +
+        '</section>' +
+        ((steps[0] || steps[1])
+          ? '<section class="mayo-duo">' +
+              (steps[0]
+                ? '<article class="mayo-copy">' + mayoHeadHtml(1, steps[0].title) + '<p>' + steps[0].text + '</p></article>'
+                : '') +
+              (steps[1]
+                ? '<article class="mayo-copy">' + mayoHeadHtml(2, steps[1].title) + '<p>' + steps[1].text + '</p></article>'
+                : '') +
+            '</section>'
+          : '') +
+        (posterFigures
+          ? '<section class="mayo-posters" aria-label="Afiche">' +
+              mayoHeadHtml(3, 'Exploración del afiche') +
+              '<div class="mayo-poster-grid">' + posterFigures + '</div>' +
+            '</section>'
+          : '') +
+        (feedFigures
+          ? '<section class="mayo-feed" aria-label="Campaña en redes">' +
+              mayoHeadHtml(5, 'Campaña en redes') +
+              '<div class="mayo-feed-grid">' + feedFigures + '</div>' +
+            '</section>'
+          : '') +
+        '<section class="mayo-close">' +
+          '<p class="mayo-close-brand">' + proyecto.title + '</p>' +
+          (closeCopy || '') +
+          (closeActions ? '<div class="mayo-close-actions">' + closeActions + '</div>' : '') +
+        '</section>' +
+        '<dialog class="mayo-lightbox" aria-label="Imagen ampliada">' +
+          '<button type="button" class="mayo-lightbox-close" aria-label="Cerrar">×</button>' +
+          '<button type="button" class="mayo-lightbox-prev" aria-label="Imagen anterior">‹</button>' +
+          '<img alt="">' +
+          '<button type="button" class="mayo-lightbox-next" aria-label="Imagen siguiente">›</button>' +
+        '</dialog>' +
+      '</div>';
+
+    bindSimpleLightbox(
+      container.querySelector('.mayo-editorial'),
+      container.querySelector('.mayo-lightbox'),
+      lightbox,
+      {
+        item: '[data-mayo-index]',
+        indexAttr: 'data-mayo-index',
+        close: '.mayo-lightbox-close',
+        prev: '.mayo-lightbox-prev',
+        next: '.mayo-lightbox-next'
+      }
+    );
+  }
+
   function renderProcess(container, proyecto) {
     if (!container) return;
 
@@ -1041,6 +1203,11 @@
 
     if (proyecto.processLayout === 'noir') {
       renderNoirCase(container, proyecto);
+      return;
+    }
+
+    if (proyecto.processLayout === 'mayo') {
+      renderMayoCase(container, proyecto);
       return;
     }
 

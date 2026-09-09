@@ -38,6 +38,7 @@
     watchList('.wine-intro, .wine-stage, .wine-block, .wine-gallery-title, .wine-mosaic-item, .wine-mosaic-video, .wine-close', 70);
     watchList('.ubicar-intro, .ubicar-step, .ubicar-gallery', 70);
     watchList('.noir-hero, .noir-board-item, .noir-step, .noir-close', 70);
+    watchList('.mayo-hero, .mayo-copy, .mayo-posters, .mayo-feed, .mayo-close', 70);
     watchList('.other-project-card', 90);
     watchList('.about-page h1, .about-intro, .availability-card, .tools-horizontal');
   }
@@ -65,11 +66,11 @@
     }
 
     var processRoot = document.querySelector('[data-proyecto-process]');
-    if (processRoot && !processRoot.querySelector('.noir-editorial, .wine-editorial, .ubicar-intro')) {
+    if (processRoot && !processRoot.querySelector('.noir-editorial, .wine-editorial, .ubicar-intro, .mayo-editorial')) {
       var processRetries = 0;
       var processTimer = window.setInterval(function () {
         processRetries += 1;
-        if (processRoot.querySelector('.noir-editorial, .wine-editorial, .ubicar-intro') || processRetries > 20) {
+        if (processRoot.querySelector('.noir-editorial, .wine-editorial, .ubicar-intro, .mayo-editorial') || processRetries > 20) {
           window.clearInterval(processTimer);
           bindReveals();
         }

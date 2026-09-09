@@ -50,6 +50,8 @@ const PROYECTOS = [
     cardAlt: 'Mayo Amarillo - Campaña',
     role: 'Campaña de concientización: concepto, piezas gráficas y piezas digitales',
     tools: 'Photoshop, Illustrator',
+    hideMeta: true,
+    processLayout: 'mayo',
     galleryLayout: 'poster',
     gallery: [
       { src: 'IMAGENES/Mayo amarillo/Afiche-de-campana.webp', alt: 'Afiche de campaña Mayo Amarillo' },
