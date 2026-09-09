@@ -296,37 +296,42 @@ const PROYECTOS = [
     hideMeta: true,
     processLayout: 'editorial',
     editorial: {
-      hero: {
-        src: 'IMAGENES/Don pascual/don-pascual-campana.jpg',
-        alt: 'Mockup terminado campaña Don Pascual'
-      },
+      intro: 'Una campaña de edición limitada pensada para que etiqueta, piezas gráficas y video compartan la misma atmósfera de invierno.',
       bottle: {
-        src: 'IMAGENES/Don pascual/don-pascual-botella.jpg',
-        alt: 'Botella Don Pascual Chardonnay 2026',
-        caption: 'Producto'
+        src: 'IMAGENES/Don pascual/don-pascual-botella-hero.png',
+        alt: 'Botella Don Pascual Chardonnay Edición Limitada 2026'
       },
-      label: {
-        src: 'IMAGENES/Don pascual/don-pascual-etiqueta.jpg',
-        alt: 'Etiqueta con ilustración Don Pascual',
-        caption: 'Etiqueta'
-      },
-      poster: {
-        src: 'IMAGENES/Don pascual/don-pascual-afiche.jpg',
-        alt: 'Afiche Don Pascual Edición Limitada',
-        caption: 'Afiche'
-      },
-      bus: {
-        src: 'IMAGENES/Don pascual/don-pascual-omnibus.jpg?v=20260807g',
-        alt: 'Mockup publicidad en ómnibus Don Pascual',
-        caption: 'Vía pública'
-      },
-      video: {
-        type: 'drive',
-        src: 'https://drive.google.com/file/d/1WydlpYJ0gdyQRTn3j-sHAU-dG0CKaq5O/view?usp=sharing',
-        poster: 'IMAGENES/Don pascual/don-pascual-botella-fuego.jpg',
-        alt: 'Video campaña Don Pascual Edición Limitada Invierno 2026',
-        caption: 'Video de campaña'
-      }
+      steps: [
+        {
+          src: 'IMAGENES/Don pascual/don-pascual-campana.jpg',
+          alt: 'Mockup de campaña Don Pascual junto al fuego',
+          caption: 'Tradición que inspira'
+        },
+        {
+          src: 'IMAGENES/Don pascual/Familia pascual sirviendo vino.png',
+          alt: 'Servicio de Don Pascual Edición Limitada',
+          caption: 'Ideas que brindan'
+        },
+        {
+          src: 'IMAGENES/Don pascual/don-pascual-etiqueta.jpg',
+          alt: 'Etiqueta ilustrada Don Pascual',
+          caption: 'Detalles que cuentan'
+        },
+        {
+          src: 'IMAGENES/Don pascual/cartel omnibus.png',
+          alt: 'Publicidad Don Pascual en ómnibus',
+          caption: 'Más que un vino, una historia'
+        }
+      ],
+      gallery: [
+        { src: 'IMAGENES/Don pascual/don-pascual-etiqueta.jpg', alt: 'Etiqueta con ilustración Don Pascual', shape: 'tall' },
+        { src: 'IMAGENES/Don pascual/don-pascual-botella.jpg', alt: 'Botella Don Pascual Chardonnay 2026', shape: 'tall' },
+        { src: 'IMAGENES/Don pascual/don-pascual-botella-fuego.jpg', alt: 'Botella Don Pascual junto al fuego', shape: 'tall' },
+        { src: 'IMAGENES/Don pascual/don-pascual-campana.jpg', alt: 'Mockup terminado de campaña Don Pascual', shape: 'wide' },
+        { src: 'IMAGENES/Don pascual/don-pascual-afiche.jpg', alt: 'Afiche Don Pascual Edición Limitada', shape: 'poster' },
+        { src: 'IMAGENES/Don pascual/Familia pascual sirviendo vino.png', alt: 'Familia Pascual sirviendo vino', shape: 'fill' },
+        { src: 'IMAGENES/Don pascual/cartel omnibus.png', alt: 'Campaña Don Pascual en vía pública', shape: 'wide' }
+      ]
     },
     gallery: [
       {

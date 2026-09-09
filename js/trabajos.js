@@ -290,85 +290,92 @@
     return '<a href="' + href + '"' + attrs + ' class="' + className + '">' + action.label + '</a>';
   }
 
-  function wineShotHtml(src, alt, extraClass, eager, caption) {
-    if (!src) return '';
-    return (
-      '<figure class="wine-shot' + (extraClass ? ' ' + extraClass : '') + '">' +
-        '<img src="' + asset(src) + '" alt="' + (alt || '') + '"' +
-          (eager ? ' decoding="async" fetchpriority="high"' : ' loading="lazy" decoding="async"') +
-        '>' +
-        (caption ? '<figcaption class="wine-caption">' + caption + '</figcaption>' : '') +
-      '</figure>'
-    );
-  }
-
-  function wineVideoHtml(video) {
-    if (!video || !video.src) return '';
-    const preview = drivePreviewUrl(video.src);
-    const viewUrl = driveViewUrl(video.src);
-    const poster = asset(video.poster || '');
-    return (
-      '<figure class="wine-shot wine-shot--video">' +
-        drivePosterHtml(preview, viewUrl, poster, video.alt, 'wine-video-media', false) +
-        (video.caption ? '<figcaption class="wine-caption">' + video.caption + '</figcaption>' : '') +
-      '</figure>'
-    );
-  }
-
-  function wineCopyHtml(item, n) {
+  function wineBlockHtml(item, n, photo) {
     if (!item) return '';
+    const num = (n < 10 ? '0' : '') + n;
+    const image = photo && photo.src
+      ? '<figure class="wine-thumb">' +
+          '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '" loading="lazy" decoding="async">' +
+          (photo.caption ? '<figcaption>' + photo.caption + '</figcaption>' : '') +
+        '</figure>'
+      : '';
+
     return (
-      '<div class="wine-copy wine-copy--' + n + '">' +
-        '<span class="wine-num">' + n + '</span>' +
-        '<h3>' + item.title + '</h3>' +
+      '<article class="wine-block wine-block--' + n + '">' +
+        '<button type="button" class="wine-block-head" aria-expanded="false">' +
+          '<span class="wine-num">' + num + '</span>' +
+          '<h3>' + item.title + '</h3>' +
+          '<span class="wine-chevron" aria-hidden="true"></span>' +
+        '</button>' +
         '<p>' + item.text + '</p>' +
-      '</div>'
+        image +
+      '</article>'
     );
   }
 
   function renderEditorialProcess(container, proyecto) {
     const ed = proyecto.editorial || {};
     const steps = proyecto.process || [];
+    const photos = ed.steps || [];
     const actions = (proyecto.actions || []).filter(function (action) {
       return !(action.external && /drive|video/i.test((action.label || '') + (action.href || '')));
     }).map(function (action, index) {
       return actionLinkHtml(action, 'btn wine-btn' + (index === 0 ? ' wine-btn--solid' : ' wine-btn--ghost'));
     }).join('');
 
+    const mosaic = (ed.gallery || []).map(function (item) {
+      return (
+        '<figure class="wine-mosaic-item is-' + (item.shape || 'wide') + '">' +
+          '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '" loading="lazy" decoding="async">' +
+        '</figure>'
+      );
+    }).join('');
+
     container.innerHTML =
       '<div class="wine-editorial">' +
-        '<div class="wine-hero">' +
-          '<div class="wine-hero-copy">' +
-            '<p class="wine-kicker">' + proyecto.processTitle + '</p>' +
-            '<h1>' + proyecto.title + '</h1>' +
-          '</div>' +
-          wineShotHtml(ed.hero && ed.hero.src, ed.hero && ed.hero.alt, 'wine-shot--hero', true, '') +
+        '<header class="wine-intro">' +
+          '<p class="wine-brandline">Don Pascual</p>' +
+          '<h1>' + proyecto.processTitle + '</h1>' +
+          (ed.intro ? '<p class="wine-lead">' + ed.intro + '</p>' : '') +
+        '</header>' +
+        '<div class="wine-stage">' +
+          '<svg class="wine-lines" viewBox="0 0 1000 720" preserveAspectRatio="none" aria-hidden="true">' +
+            '<path d="M220 110C340 150 430 260 500 360"></path>' +
+            '<path d="M780 110C660 150 570 260 500 360"></path>' +
+            '<path d="M220 610C340 560 430 460 500 360"></path>' +
+            '<path d="M780 610C660 560 570 460 500 360"></path>' +
+          '</svg>' +
+          wineBlockHtml(steps[0], 1, photos[0]) +
+          '<figure class="wine-bottle">' +
+            '<img src="' + asset(ed.bottle && ed.bottle.src) + '" alt="' + ((ed.bottle && ed.bottle.alt) || '') + '" decoding="async" fetchpriority="high">' +
+          '</figure>' +
+          wineBlockHtml(steps[1], 2, photos[1]) +
+          wineBlockHtml(steps[2], 3, photos[2]) +
+          wineBlockHtml(steps[3], 4, photos[3]) +
         '</div>' +
-        '<div class="wine-beat wine-beat--product">' +
-          wineCopyHtml(steps[0], 1) +
-          '<div class="wine-product">' +
-            wineShotHtml(ed.bottle && ed.bottle.src, ed.bottle && ed.bottle.alt, 'wine-shot--bottle', false, ed.bottle && ed.bottle.caption) +
-            wineShotHtml(ed.label && ed.label.src, ed.label && ed.label.alt, 'wine-shot--label', false, ed.label && ed.label.caption) +
-          '</div>' +
-          wineCopyHtml(steps[1], 2) +
+        '<div class="wine-mosaic">' + mosaic + '</div>' +
+        '<div class="wine-close">' +
+          '<div class="wine-actions">' + actions + '</div>' +
         '</div>' +
-        '<div class="wine-beat wine-beat--poster">' +
-          wineShotHtml(ed.poster && ed.poster.src, ed.poster && ed.poster.alt, 'wine-shot--poster', false, ed.poster && ed.poster.caption) +
-          wineCopyHtml(steps[2], 3) +
-        '</div>' +
-        '<div class="wine-beat wine-beat--bus">' +
-          wineCopyHtml(steps[3], 4) +
-          wineShotHtml(ed.bus && ed.bus.src, ed.bus && ed.bus.alt, 'wine-shot--bus', false, ed.bus && ed.bus.caption) +
-        '</div>' +
-        '<div class="wine-beat wine-beat--finale">' +
-          wineVideoHtml(ed.video) +
-          '<div class="wine-close">' +
-            '<div class="wine-actions">' + actions + '</div>' +
-          '</div>' +
-        '</div>' +
+        '<p class="wine-footerbrand">Don Pascual · Uruguay</p>' +
       '</div>';
 
-    container.querySelectorAll('.wine-shot--video').forEach(bindDrivePoster);
+    container.querySelectorAll('.wine-block-head').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (window.matchMedia('(min-width: 921px)').matches) return;
+        const block = btn.closest('.wine-block');
+        const open = !block.classList.contains('is-open');
+        container.querySelectorAll('.wine-block').forEach(function (node) {
+          node.classList.remove('is-open');
+          const head = node.querySelector('.wine-block-head');
+          if (head) head.setAttribute('aria-expanded', 'false');
+        });
+        if (open) {
+          block.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
   }
 
   function renderProcess(container, proyecto) {
