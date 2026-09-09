@@ -5,17 +5,17 @@ const PROYECTOS = [
     title: 'Horizonte',
     category: 'Branding',
     cardClass: 'card-pair',
-    cardImage: 'IMAGENES/horizonte-imagen-principal.png',
+    cardImage: 'IMAGENES/Horizonte/horizonte-imagen-principal.png',
     cardAlt: 'Horizonte - Creación de marca',
     role: 'Identidad de marca: concepto, sistema visual y aplicaciones',
     tools: 'Illustrator, Photoshop',
     galleryContain: false,
     galleryLayout: 'spread',
     gallery: [
-      { src: 'IMAGENES/horizonte-calle.jpg', thumb: 'IMAGENES/horizonte-calle-thumb.jpg', alt: 'Horizonte en calle' },
-      { src: 'IMAGENES/horizonte-tarjeta.jpg', thumb: 'IMAGENES/horizonte-tarjeta-thumb.jpg', alt: 'Tarjeta de presentación Horizonte' },
-      { src: 'IMAGENES/horizonte-bolsa.jpg', thumb: 'IMAGENES/horizonte-bolsa-thumb.jpg', alt: 'Bolsa Horizonte' },
-      { src: 'IMAGENES/horizonte-pin.jpg', thumb: 'IMAGENES/horizonte-pin-thumb.jpg', alt: 'Pin de logo Horizonte' }
+      { src: 'IMAGENES/Horizonte/horizonte-calle.jpg', thumb: 'IMAGENES/Horizonte/horizonte-calle-thumb.jpg', alt: 'Horizonte en calle' },
+      { src: 'IMAGENES/Horizonte/horizonte-tarjeta.jpg', thumb: 'IMAGENES/Horizonte/horizonte-tarjeta-thumb.jpg', alt: 'Tarjeta de presentación Horizonte' },
+      { src: 'IMAGENES/Horizonte/horizonte-bolsa.jpg', thumb: 'IMAGENES/Horizonte/horizonte-bolsa-thumb.jpg', alt: 'Bolsa Horizonte' },
+      { src: 'IMAGENES/Horizonte/horizonte-pin.jpg', thumb: 'IMAGENES/Horizonte/horizonte-pin-thumb.jpg', alt: 'Pin de logo Horizonte' }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
@@ -47,17 +47,17 @@ const PROYECTOS = [
     title: 'Mayo Amarillo',
     category: 'Campaña',
     cardClass: 'card-pair',
-    cardImage: 'IMAGENES/mayo-amarillo-card.jpg',
+    cardImage: 'IMAGENES/Mayo amarillo/mayo-amarillo-card.jpg',
     cardAlt: 'Mayo Amarillo - Campaña',
     role: 'Campaña de concientización: concepto, piezas gráficas y piezas digitales',
     tools: 'Photoshop, Illustrator',
     galleryContain: true,
     galleryLayout: 'poster',
     gallery: [
-      { src: 'IMAGENES/Afiche-de-campana.webp', alt: 'Afiche de campaña Mayo Amarillo' },
-      { src: 'IMAGENES/5-PosteoIgMayo.webp', alt: 'Posteo Instagram Mayo Amarillo 5' },
-      { src: 'IMAGENES/4-PosteoIGMayoa.jpg', thumb: 'IMAGENES/4-PosteoIGMayoa-thumb.jpg', alt: 'Posteo Instagram Mayo Amarillo 4' },
-      { src: 'IMAGENES/1-PosteoIgMayoA.webp', alt: 'Posteo Instagram Mayo Amarillo EN VIVO' }
+      { src: 'IMAGENES/Mayo amarillo/Afiche-de-campana.webp', alt: 'Afiche de campaña Mayo Amarillo' },
+      { src: 'IMAGENES/Mayo amarillo/5-PosteoIgMayo.webp', alt: 'Posteo Instagram Mayo Amarillo 5' },
+      { src: 'IMAGENES/Mayo amarillo/4-PosteoIGMayoa.jpg', thumb: 'IMAGENES/Mayo amarillo/4-PosteoIGMayoa-thumb.jpg', alt: 'Posteo Instagram Mayo Amarillo 4' },
+      { src: 'IMAGENES/Mayo amarillo/1-PosteoIgMayoA.webp', alt: 'Posteo Instagram Mayo Amarillo EN VIVO' }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
@@ -89,17 +89,17 @@ const PROYECTOS = [
     title: 'Totem de Café',
     category: 'UX/UI',
     cardClass: 'card-third',
-    cardImage: 'IMAGENES/totem-cafe.jpg',
+    cardImage: 'IMAGENES/Totem Cafe/totem-cafe.jpg',
     cardAlt: 'Totem de Café - Interfaz digital',
     role: 'Diseño UX/UI end-to-end: flujos, pantallas y prototipo interactivo',
     tools: 'Figma',
     galleryContain: true,
     galleryLayout: 'screens',
     gallery: [
-      { src: 'IMAGENES/totem-cafe-hq.png', thumb: 'IMAGENES/totem-cafe-thumb.jpg', alt: 'Totem de Café - Menú principal' },
-      { src: 'IMAGENES/totem-recarga-hq.png', thumb: 'IMAGENES/totem-recarga-thumb.jpg', alt: 'Recarga completada Totem de Café' },
-      { src: 'IMAGENES/totem-pago-hq.png', thumb: 'IMAGENES/totem-pago-thumb.jpg', alt: 'Pago Totem de Café' },
-      { src: 'IMAGENES/totem-compra-hq.png', thumb: 'IMAGENES/totem-compra-thumb.jpg', alt: 'Gracias por su compra Totem de Café' }
+      { src: 'IMAGENES/Totem Cafe/totem-cafe-hq.png', thumb: 'IMAGENES/Totem Cafe/totem-cafe-thumb.jpg', alt: 'Totem de Café - Menú principal' },
+      { src: 'IMAGENES/Totem Cafe/totem-recarga-hq.png', thumb: 'IMAGENES/Totem Cafe/totem-recarga-thumb.jpg', alt: 'Recarga completada Totem de Café' },
+      { src: 'IMAGENES/Totem Cafe/totem-pago-hq.png', thumb: 'IMAGENES/Totem Cafe/totem-pago-thumb.jpg', alt: 'Pago Totem de Café' },
+      { src: 'IMAGENES/Totem Cafe/totem-compra-hq.png', thumb: 'IMAGENES/Totem Cafe/totem-compra-thumb.jpg', alt: 'Gracias por su compra Totem de Café' }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
@@ -140,17 +140,17 @@ const PROYECTOS = [
     title: 'Proyecto Fotográfico',
     category: 'Fotografía',
     cardClass: 'card-pair',
-    cardImage: 'IMAGENES/fotografia cerveza.jpg',
+    cardImage: 'IMAGENES/Proyecto fotografico/fotografia cerveza.jpg',
     cardAlt: 'Proyecto Fotográfico',
     role: 'Fotografía de producto y exploración técnica',
     tools: 'Cámara, Lightroom, Photoshop',
     galleryContain: true,
     galleryLayout: 'essay',
     gallery: [
-      { src: 'IMAGENES/fotografia cerveza.jpg', thumb: 'IMAGENES/foto-cerveza-thumb.jpg', alt: 'Fotografía cerveza' },
-      { src: 'IMAGENES/joyeriaCreacion.jpg', thumb: 'IMAGENES/foto-joyeria-thumb.jpg', alt: 'Joyeria Creación' },
-      { src: 'IMAGENES/foto-lo-que-no-vemos4.jpg', thumb: 'IMAGENES/lo-que-no-vemos4-thumb.jpg', alt: 'Lo que no vemos 4' },
-      { src: 'IMAGENES/foto-lo-que-no-vemos.jpg', thumb: 'IMAGENES/lo-que-no-vemos-thumb.jpg', alt: 'Lo que no vemos' }
+      { src: 'IMAGENES/Proyecto fotografico/fotografia cerveza.jpg', thumb: 'IMAGENES/Proyecto fotografico/foto-cerveza-thumb.jpg', alt: 'Fotografía cerveza' },
+      { src: 'IMAGENES/Proyecto fotografico/joyeriaCreacion.jpg', thumb: 'IMAGENES/Proyecto fotografico/foto-joyeria-thumb.jpg', alt: 'Joyeria Creación' },
+      { src: 'IMAGENES/Proyecto fotografico/foto-lo-que-no-vemos4.jpg', thumb: 'IMAGENES/Proyecto fotografico/lo-que-no-vemos4-thumb.jpg', alt: 'Lo que no vemos 4' },
+      { src: 'IMAGENES/Proyecto fotografico/foto-lo-que-no-vemos.jpg', thumb: 'IMAGENES/Proyecto fotografico/lo-que-no-vemos-thumb.jpg', alt: 'Lo que no vemos' }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
@@ -182,7 +182,7 @@ const PROYECTOS = [
     title: 'Campaña Reel ORT',
     category: 'Audiovisual',
     cardClass: 'card-pair',
-    cardImage: 'IMAGENES/ort-reel-card.jpg',
+    cardImage: 'IMAGENES/Campana reel ORT/ort-reel-card.jpg',
     cardAlt: 'Campaña Reel ORT',
     role: 'Reel promocional: concepto, generación audiovisual y edición',
     tools: 'ChatGPT, Runway, Premiere',
@@ -192,13 +192,13 @@ const PROYECTOS = [
       {
         type: 'drive',
         src: 'https://drive.google.com/file/d/1jJUfmDSgZgIW8X82zi6upIzRgT_ATak-/view?usp=sharing',
-        poster: 'IMAGENES/ort-frame1.jpg',
-        thumb: 'IMAGENES/ort-frame1-thumb.jpg',
+        poster: 'IMAGENES/Campana reel ORT/ort-frame1.jpg',
+        thumb: 'IMAGENES/Campana reel ORT/ort-frame1-thumb.jpg',
         alt: 'Reel final Campaña ORT'
       },
-      { src: 'IMAGENES/ort-frame1.jpg', thumb: 'IMAGENES/ort-frame1-thumb.jpg', alt: 'Frame 1 - Entrada ORT' },
-      { src: 'IMAGENES/ort-frame2.jpg', thumb: 'IMAGENES/ort-frame2-thumb.jpg', alt: 'Frame 2' },
-      { src: 'IMAGENES/ort-frame3.jpg', thumb: 'IMAGENES/ort-frame3-thumb.jpg', alt: 'Frame 3' }
+      { src: 'IMAGENES/Campana reel ORT/ort-frame1.jpg', thumb: 'IMAGENES/Campana reel ORT/ort-frame1-thumb.jpg', alt: 'Frame 1 - Entrada ORT' },
+      { src: 'IMAGENES/Campana reel ORT/ort-frame2.jpg', thumb: 'IMAGENES/Campana reel ORT/ort-frame2-thumb.jpg', alt: 'Frame 2' },
+      { src: 'IMAGENES/Campana reel ORT/ort-frame3.jpg', thumb: 'IMAGENES/Campana reel ORT/ort-frame3-thumb.jpg', alt: 'Frame 3' }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
@@ -235,7 +235,7 @@ const PROYECTOS = [
     title: 'Noir Estudio',
     category: 'Branding',
     cardClass: 'card-third',
-    cardImage: 'IMAGENES/noir-interior-card.jpg',
+    cardImage: 'IMAGENES/Noir Estudio/noir-interior-card.jpg',
     cardAlt: 'Noir Estudio - Identidad de marca',
     role: 'Dirección de identidad: concepto, sistema visual y aplicaciones',
     tools: 'Figma',
@@ -243,10 +243,10 @@ const PROYECTOS = [
     galleryLayout: 'boutique',
     hideMeta: true,
     gallery: [
-      { src: 'IMAGENES/noir-interior.jpg', thumb: 'IMAGENES/noir-interior-thumb.jpg', alt: 'Interior Noir Barbería & Estilo' },
-      { src: 'IMAGENES/noir-herramientas.jpg', thumb: 'IMAGENES/noir-herramientas-thumb.jpg', alt: 'Herramientas y productos Noir Estudio' },
-      { src: 'IMAGENES/noir-experiencia.jpg', thumb: 'IMAGENES/noir-experiencia-thumb.jpg', alt: 'Experiencia Noir Estudio' },
-      { src: 'IMAGENES/noir-productos.jpg', thumb: 'IMAGENES/noir-productos-thumb.jpg', alt: 'Línea de coloración Noir Estudio' }
+      { src: 'IMAGENES/Noir Estudio/noir-interior.jpg', thumb: 'IMAGENES/Noir Estudio/noir-interior-thumb.jpg', alt: 'Interior Noir Barbería & Estilo' },
+      { src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', thumb: 'IMAGENES/Noir Estudio/noir-herramientas-thumb.jpg', alt: 'Herramientas y productos Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-experiencia.jpg', thumb: 'IMAGENES/Noir Estudio/noir-experiencia-thumb.jpg', alt: 'Experiencia Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-productos.jpg', thumb: 'IMAGENES/Noir Estudio/noir-productos-thumb.jpg', alt: 'Línea de coloración Noir Estudio' }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
@@ -287,7 +287,7 @@ const PROYECTOS = [
     title: 'Don Pascual',
     category: 'Campaña',
     cardClass: 'card-third',
-    cardImage: 'IMAGENES/don-pascual-card.jpg',
+    cardImage: 'IMAGENES/Don pascual/don-pascual-card.jpg',
     cardAlt: 'Don Pascual - Edición Limitada Invierno 2026',
     role: 'Campaña integral: concepto, piezas fijas, video y audio',
     tools: 'ChatGPT, Runway, Suno, ElevenLabs',
@@ -297,33 +297,33 @@ const PROYECTOS = [
     processLayout: 'editorial',
     editorial: {
       hero: {
-        src: 'IMAGENES/don-pascual-campana.jpg',
+        src: 'IMAGENES/Don pascual/don-pascual-campana.jpg',
         alt: 'Mockup terminado campaña Don Pascual'
       },
       bottle: {
-        src: 'IMAGENES/don-pascual-botella.jpg',
+        src: 'IMAGENES/Don pascual/don-pascual-botella.jpg',
         alt: 'Botella Don Pascual Chardonnay 2026',
         caption: 'Producto'
       },
       label: {
-        src: 'IMAGENES/don-pascual-etiqueta.jpg',
+        src: 'IMAGENES/Don pascual/don-pascual-etiqueta.jpg',
         alt: 'Etiqueta con ilustración Don Pascual',
         caption: 'Etiqueta'
       },
       poster: {
-        src: 'IMAGENES/don-pascual-afiche.jpg',
+        src: 'IMAGENES/Don pascual/don-pascual-afiche.jpg',
         alt: 'Afiche Don Pascual Edición Limitada',
         caption: 'Afiche'
       },
       bus: {
-        src: 'IMAGENES/don-pascual-omnibus.jpg?v=20260807g',
+        src: 'IMAGENES/Don pascual/don-pascual-omnibus.jpg?v=20260807g',
         alt: 'Mockup publicidad en ómnibus Don Pascual',
         caption: 'Vía pública'
       },
       video: {
         type: 'drive',
         src: 'https://drive.google.com/file/d/1WydlpYJ0gdyQRTn3j-sHAU-dG0CKaq5O/view?usp=sharing',
-        poster: 'IMAGENES/don-pascual-botella-fuego.jpg',
+        poster: 'IMAGENES/Don pascual/don-pascual-botella-fuego.jpg',
         alt: 'Video campaña Don Pascual Edición Limitada Invierno 2026',
         caption: 'Video de campaña'
       }
@@ -332,15 +332,15 @@ const PROYECTOS = [
       {
         type: 'drive',
         src: 'https://drive.google.com/file/d/1WydlpYJ0gdyQRTn3j-sHAU-dG0CKaq5O/view?usp=sharing',
-        poster: 'IMAGENES/don-pascual-botella-fuego.jpg',
-        thumb: 'IMAGENES/don-pascual-botella-fuego-thumb.jpg',
+        poster: 'IMAGENES/Don pascual/don-pascual-botella-fuego.jpg',
+        thumb: 'IMAGENES/Don pascual/don-pascual-botella-fuego-thumb.jpg',
         alt: 'Video campaña Don Pascual Edición Limitada Invierno 2026'
       },
-      { src: 'IMAGENES/don-pascual-afiche.jpg', thumb: 'IMAGENES/don-pascual-afiche-thumb.jpg', alt: 'Afiche Don Pascual Edición Limitada' },
-      { src: 'IMAGENES/don-pascual-campana.jpg', thumb: 'IMAGENES/don-pascual-campana-thumb.jpg', alt: 'Mockup terminado campaña Don Pascual' },
-      { src: 'IMAGENES/don-pascual-botella.jpg', thumb: 'IMAGENES/don-pascual-botella-thumb.jpg', alt: 'Botella Don Pascual Chardonnay 2026' },
-      { src: 'IMAGENES/don-pascual-etiqueta.jpg', thumb: 'IMAGENES/don-pascual-etiqueta-thumb.jpg', alt: 'Etiqueta con ilustración Don Pascual' },
-      { src: 'IMAGENES/don-pascual-omnibus.jpg?v=20260807g', thumb: 'IMAGENES/don-pascual-omnibus-thumb.jpg?v=20260807g', alt: 'Mockup publicidad en ómnibus Don Pascual' }
+      { src: 'IMAGENES/Don pascual/don-pascual-afiche.jpg', thumb: 'IMAGENES/Don pascual/don-pascual-afiche-thumb.jpg', alt: 'Afiche Don Pascual Edición Limitada' },
+      { src: 'IMAGENES/Don pascual/don-pascual-campana.jpg', thumb: 'IMAGENES/Don pascual/don-pascual-campana-thumb.jpg', alt: 'Mockup terminado campaña Don Pascual' },
+      { src: 'IMAGENES/Don pascual/don-pascual-botella.jpg', thumb: 'IMAGENES/Don pascual/don-pascual-botella-thumb.jpg', alt: 'Botella Don Pascual Chardonnay 2026' },
+      { src: 'IMAGENES/Don pascual/don-pascual-etiqueta.jpg', thumb: 'IMAGENES/Don pascual/don-pascual-etiqueta-thumb.jpg', alt: 'Etiqueta con ilustración Don Pascual' },
+      { src: 'IMAGENES/Don pascual/don-pascual-omnibus.jpg?v=20260807g', thumb: 'IMAGENES/Don pascual/don-pascual-omnibus-thumb.jpg?v=20260807g', alt: 'Mockup publicidad en ómnibus Don Pascual' }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [

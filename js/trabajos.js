@@ -1,7 +1,11 @@
 (function () {
   function asset(path) {
     const base = document.documentElement.dataset.assetBase || './';
-    return base + path;
+    if (!path) return base;
+    const q = path.indexOf('?');
+    const file = q === -1 ? path : path.slice(0, q);
+    const query = q === -1 ? '' : path.slice(q);
+    return base + encodeURI(file) + query;
   }
 
   function proyectoHref(slug) {
