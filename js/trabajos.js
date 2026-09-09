@@ -356,10 +356,10 @@
         '</div>' +
         '<div class="wine-stage">' +
           '<svg class="wine-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">' +
-            '<path d="M31 24 H42"></path>' +
-            '<path d="M69 24 H58"></path>' +
-            '<path d="M31 76 H42"></path>' +
-            '<path d="M69 76 H58"></path>' +
+            '<path d="M33 26 H41"></path>' +
+            '<path d="M67 26 H59"></path>' +
+            '<path d="M33 74 H41"></path>' +
+            '<path d="M67 74 H59"></path>' +
           '</svg>' +
           wineBlockHtml(steps[0], 1, photos[0]) +
           '<figure class="wine-bottle">' +
