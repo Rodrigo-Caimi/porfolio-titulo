@@ -239,6 +239,22 @@ const PROYECTOS = [
     tools: 'Figma',
     hideMeta: true,
     processLayout: 'noir',
+    heroSlider: [
+      { src: 'IMAGENES/Noir Estudio/noir-interior.jpg', alt: 'Interior Noir Barbería & Estilo' },
+      { src: 'IMAGENES/Noir Estudio/Primeratransformacion.png', alt: 'Transformación Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/experiencia Noir.png', alt: 'Experiencia Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/Slider2.png', alt: 'Herramientas y productos Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/Slider3.png', alt: 'Piezas de marca Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Herramientas Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-productos.jpg', alt: 'Línea de coloración Noir Estudio' }
+    ],
+    serviceCards: [
+      { title: 'afeitado', src: 'IMAGENES/Noir Estudio/afeitado.jpg', alt: 'Afeitado Noir Estudio' },
+      { title: 'noir experiencia', src: 'IMAGENES/Noir Estudio/experiencia Noir.png', alt: 'Experiencia Noir Estudio' },
+      { title: 'noir productos', src: 'IMAGENES/Noir Estudio/noir-productos.jpg', alt: 'Productos Noir Estudio' },
+      { title: 'noir herramientas', src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Herramientas Noir Estudio' },
+      { title: 'noir acabado', src: 'IMAGENES/Noir Estudio/noir acabado.png', alt: 'Acabado Noir Estudio' }
+    ],
     gallery: [
       { src: 'IMAGENES/Noir Estudio/noir-interior.jpg', alt: 'Interior Noir Barbería & Estilo' },
       { src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Herramientas y productos Noir Estudio' },
@@ -249,19 +265,19 @@ const PROYECTOS = [
     process: [
       {
         title: 'Problema',
-        text: 'Noir Estudio necesitaba una identidad premium para barbería & estilo: verse exclusivo sin perder claridad en local, packaging y comunicación. El riesgo era caer en un look genérico “oscuro” sin sistema.'
+        text: 'Noir Estudio necesitaba construir una identidad premium para barbería & estilo y trasladarla a una experiencia digital coherente. El desafío era lograr una estética exclusiva sin caer en los códigos genéricos de las barberías oscuras y mantener claridad tanto en la marca como en la navegación del sitio.'
       },
       {
         title: 'Mi rol',
-        text: 'Definí el concepto de marca y construí el sistema visual en Figma: logo, aplicaciones, mockups de productos, ambientación del espacio y piezas de comunicación con una misma lógica tipográfica y cromática.'
+        text: 'Desarrollé la identidad visual y diseñé la experiencia web en Figma. Trabajé el sistema de marca, tipografías, paleta cromática, aplicaciones y mockups, junto con la estructura y diseño de la interfaz: servicios, transformaciones, experiencia Noir, ubicación y reserva.'
       },
       {
         title: 'Decisión clave',
-        text: 'Elegí una paleta de negros/carbón con acentos dorados y tipografía limpia, en vez de sobrecargar con texturas o efectos. La sobriedad sostiene la percepción premium y escala mejor a distintos soportes.'
+        text: 'Construí el sistema alrededor de una paleta de negros y carbón con acentos dorados y una composición limpia. En la web prioricé jerarquía, fotografías protagonistas y una navegación simple para que la estética premium no comprometiera la claridad ni la experiencia de uso.'
       },
       {
         title: 'Resultado',
-        text: 'Un universo de marca coherente entre interior, productos y piezas gráficas, listo para presentarse como caso de estudio y para iterar aplicaciones reales del local.'
+        text: 'Una identidad consistente que se extiende del espacio físico a la experiencia digital. El resultado integra marca, aplicaciones e interfaz dentro de un mismo universo visual, con una web pensada para presentar los servicios, generar confianza y facilitar el contacto con el estudio.'
       }
     ],
     actions: [
