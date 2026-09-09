@@ -2198,10 +2198,15 @@ body[data-proyecto-id="7"] .project-actions-section {
   display: none;
 }
 
+body[data-proyecto-id="7"] .project-back-bar {
+  padding-top: 28px;
+  padding-bottom: 12px;
+}
+
 body[data-proyecto-id="7"] .wine-case {
   width: 100%;
   margin: 0;
-  padding: 8px 0 48px;
+  padding: 36px 0 64px;
   background:
     radial-gradient(ellipse at 50% 42%, rgba(196, 165, 116, 0.12), transparent 42%),
     #f5f2ea;
@@ -2218,18 +2223,19 @@ body[data-proyecto-id="7"] .wine-case .golden-section {
 }
 
 body[data-proyecto-id="7"] .wine-editorial {
-  max-width: min(1280px, 94vw);
+  max-width: min(1480px, 96vw);
   width: 100%;
   margin: 0 auto;
-  padding: 12px 0 0;
+  padding: 28px 0 0;
   box-sizing: border-box;
 }
 
 body[data-proyecto-id="7"] .wine-intro {
+  position: relative;
   text-align: center;
-  max-width: 720px;
-  margin: 0 auto 28px;
-  padding: 0 16px;
+  max-width: 760px;
+  margin: 0 auto 40px;
+  padding: 8px 16px 0;
 }
 
 body[data-proyecto-id="7"] .wine-brandline {
@@ -2263,13 +2269,13 @@ body[data-proyecto-id="7"] .wine-lead {
 body[data-proyecto-id="7"] .wine-stage {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(210px, 0.78fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 1.05fr) minmax(0, 1fr);
   grid-template-areas:
     "b1 bottle b2"
     "b3 bottle b4";
-  gap: 28px clamp(20px, 3vw, 48px);
+  gap: 32px clamp(24px, 3vw, 56px);
   align-items: center;
-  margin: 8px 0 72px;
+  margin: 12px 0 80px;
 }
 
 body[data-proyecto-id="7"] .wine-lines {
@@ -2304,9 +2310,9 @@ body[data-proyecto-id="7"] .wine-bottle {
 
 body[data-proyecto-id="7"] .wine-bottle img {
   display: block;
-  width: min(100%, 360px);
+  width: min(100%, 560px);
   height: auto;
-  max-height: min(78vh, 720px);
+  max-height: min(92vh, 980px);
   object-fit: contain;
   filter: drop-shadow(0 22px 28px rgba(28, 25, 20, 0.18));
 }
@@ -2513,8 +2519,8 @@ body[data-proyecto-id="7"] .wine-footerbrand {
   }
 
   body[data-proyecto-id="7"] .wine-bottle img {
-    width: min(42vw, 240px);
-    max-height: 48vh;
+    width: min(58vw, 340px);
+    max-height: 62vh;
   }
 
   body[data-proyecto-id="7"] .wine-block p,

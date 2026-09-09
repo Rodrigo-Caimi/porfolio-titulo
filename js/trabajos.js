@@ -333,11 +333,11 @@
 
     container.innerHTML =
       '<div class="wine-editorial">' +
-        '<header class="wine-intro">' +
+        '<div class="wine-intro">' +
           '<p class="wine-brandline">Don Pascual</p>' +
           '<h1>' + proyecto.processTitle + '</h1>' +
           (ed.intro ? '<p class="wine-lead">' + ed.intro + '</p>' : '') +
-        '</header>' +
+        '</div>' +
         '<div class="wine-stage">' +
           '<svg class="wine-lines" viewBox="0 0 1000 720" preserveAspectRatio="none" aria-hidden="true">' +
             '<path d="M220 110C340 150 430 260 500 360"></path>' +
