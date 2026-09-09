@@ -4965,6 +4965,7 @@ body[data-proyecto-id="2"] .mayo-back:hover {
 }
 
 body[data-proyecto-id="2"] .mayo-kicker {
+  position: static;
   margin: 12px 0 0;
   font-size: 13px;
   font-weight: 700;
@@ -5057,10 +5058,19 @@ body[data-proyecto-id="2"] .mayo-head {
   align-items: baseline;
   gap: 14px;
   margin: 0 0 20px;
+  position: static;
+  top: auto;
+  left: auto;
+  width: auto;
+  z-index: auto;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 0;
 }
 
 body[data-proyecto-id="2"] .mayo-num {
   flex: 0 0 auto;
+  position: static;
   font-size: clamp(40px, 4.4vw, 64px);
   font-weight: 800;
   letter-spacing: -0.04em;
