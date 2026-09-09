@@ -296,35 +296,22 @@ const PROYECTOS = [
     hideMeta: true,
     processLayout: 'editorial',
     editorial: {
-      kicker: 'Proceso',
-      intro: 'Una campaña de edición limitada de invierno, con la misma atmósfera en etiqueta, piezas gráficas y video.',
-      quote: 'El invierno también se disfruta en buena compañía.',
       hero: {
         src: 'IMAGENES/don-pascual-campana.jpg',
         alt: 'Mockup terminado campaña Don Pascual'
       },
-      steps: [
-        {
-          image: 'IMAGENES/don-pascual-botella-fuego.jpg',
-          alt: 'Botella Don Pascual junto al fuego',
-          tag: 'El punto de partida'
-        },
-        {
-          image: 'IMAGENES/don-pascual-afiche.jpg',
-          alt: 'Afiche Don Pascual Edición Limitada',
-          tag: 'De la idea a la experiencia'
-        },
-        {
-          image: 'IMAGENES/don-pascual-botella.jpg',
-          extra: 'IMAGENES/don-pascual-etiqueta.jpg',
-          extraAlt: 'Etiqueta con ilustración Don Pascual',
-          alt: 'Botella Don Pascual Chardonnay 2026'
-        },
-        {
-          image: 'IMAGENES/don-pascual-omnibus.jpg?v=20260807g',
-          alt: 'Mockup publicidad en ómnibus Don Pascual'
-        }
-      ]
+      label: {
+        src: 'IMAGENES/don-pascual-etiqueta.jpg',
+        alt: 'Etiqueta con ilustración Don Pascual'
+      },
+      poster: {
+        src: 'IMAGENES/don-pascual-afiche.jpg',
+        alt: 'Afiche Don Pascual Edición Limitada'
+      },
+      bus: {
+        src: 'IMAGENES/don-pascual-omnibus.jpg?v=20260807g',
+        alt: 'Mockup publicidad en ómnibus Don Pascual'
+      }
     },
     gallery: [
       {

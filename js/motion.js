@@ -35,7 +35,7 @@
     watchList('.project-detail-title, .project-meta-section, .project-actions-section');
     watchList('.shot', 70);
     watchList('.golden-item', 80);
-    watchList('.wine-hero, .wine-step, .wine-close', 80);
+    watchList('.wine-hero, .wine-row, .wine-close', 80);
     watchList('.other-project-card', 90);
     watchList('.about-page h1, .about-intro, .availability-card, .tools-horizontal');
   }

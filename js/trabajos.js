@@ -297,33 +297,20 @@
     );
   }
 
+  function wineCopyHtml(item, n) {
+    if (!item) return '';
+    return (
+      '<div class="wine-copy wine-copy--' + n + '">' +
+        '<span class="wine-num">' + n + '</span>' +
+        '<h3>' + item.title + '</h3>' +
+        '<p>' + item.text + '</p>' +
+      '</div>'
+    );
+  }
+
   function renderEditorialProcess(container, proyecto) {
     const ed = proyecto.editorial || {};
-    const stepsData = ed.steps || [];
-
-    const steps = proyecto.process.map(function (item, index) {
-      const step = stepsData[index] || {};
-      const n = String(index + 1).padStart(2, '0');
-      const media =
-        '<div class="wine-media">' +
-          wineShotHtml(step.image, step.alt, '', false) +
-          wineShotHtml(step.extra, step.extraAlt, 'wine-shot--label', false) +
-        '</div>';
-      const tag = step.tag ? '<p class="wine-step-tag">' + step.tag + ' →</p>' : '';
-
-      return (
-        '<article class="wine-step wine-step--' + n + '">' +
-          '<div class="wine-copy">' +
-            '<span class="wine-num">' + n + '</span>' +
-            '<h3>' + item.title + '</h3>' +
-            '<p>' + item.text + '</p>' +
-            tag +
-          '</div>' +
-          media +
-        '</article>'
-      );
-    }).join('');
-
+    const steps = proyecto.process || [];
     const actions = (proyecto.actions || []).map(function (action, index) {
       return actionLinkHtml(action, 'btn wine-btn' + (index === 0 ? ' wine-btn--solid' : ' wine-btn--ghost'));
     }).join('');
@@ -332,15 +319,23 @@
       '<div class="wine-editorial">' +
         '<div class="wine-hero">' +
           '<div class="wine-hero-copy">' +
-            '<p class="wine-kicker">' + (ed.kicker || 'Proceso') + '</p>' +
+            '<h1>' + proyecto.title + '</h1>' +
             '<h2>' + proyecto.processTitle + '</h2>' +
-            (ed.intro ? '<p class="wine-intro">' + ed.intro + '</p>' : '') +
           '</div>' +
           wineShotHtml(ed.hero && ed.hero.src, ed.hero && ed.hero.alt, 'wine-shot--hero', true) +
         '</div>' +
-        '<div class="wine-steps">' + steps + '</div>' +
+        '<div class="wine-row wine-row--mid">' +
+          wineCopyHtml(steps[0], 1) +
+          wineShotHtml(ed.label && ed.label.src, ed.label && ed.label.alt, 'wine-shot--label', false) +
+          wineCopyHtml(steps[1], 2) +
+        '</div>' +
+        '<div class="wine-row wine-row--low">' +
+          wineShotHtml(ed.poster && ed.poster.src, ed.poster && ed.poster.alt, 'wine-shot--poster', false) +
+          wineCopyHtml(steps[2], 3) +
+          wineShotHtml(ed.bus && ed.bus.src, ed.bus && ed.bus.alt, 'wine-shot--bus', false) +
+          wineCopyHtml(steps[3], 4) +
+        '</div>' +
         '<div class="wine-close">' +
-          (ed.quote ? '<blockquote class="wine-quote">“' + ed.quote + '”</blockquote>' : '<div></div>') +
           '<div class="wine-actions">' + actions + '</div>' +
         '</div>' +
       '</div>';
@@ -397,6 +392,10 @@
 
   function renderProjectTitle(container, proyecto) {
     if (!container || !proyecto) return;
+    if (proyecto.processLayout === 'editorial') {
+      container.innerHTML = '';
+      return;
+    }
     container.innerHTML = '<h1>' + proyecto.title + '</h1>';
   }
 
