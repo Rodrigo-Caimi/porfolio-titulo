@@ -2350,10 +2350,10 @@ body[data-proyecto-id="7"] .wine-bottle img {
   display: block;
   width: auto;
   height: auto;
-  max-width: min(100%, 480px);
-  max-height: min(82vh, 900px);
+  max-width: min(100%, 680px);
+  max-height: min(90vh, 1000px);
   object-fit: contain;
-  mix-blend-mode: multiply;
+  mix-blend-mode: lighten;
 }
 
 body[data-proyecto-id="7"] .wine-block-head {
@@ -2569,8 +2569,8 @@ body[data-proyecto-id="7"] .wine-footerbrand {
 
   body[data-proyecto-id="7"] .wine-bottle img {
     width: auto;
-    max-width: min(72vw, 320px);
-    max-height: 72vh;
+    max-width: min(78vw, 380px);
+    max-height: 70vh;
   }
 
   body[data-proyecto-id="7"] .wine-block p,
