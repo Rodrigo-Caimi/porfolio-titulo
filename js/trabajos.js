@@ -302,26 +302,20 @@
   function wineBlockHtml(item, n, photo) {
     if (!item) return '';
     const num = (n < 10 ? '0' : '') + n;
-    const thumbClass = ['wine-thumb'];
-    if (photo && photo.portrait) thumbClass.push('wine-thumb--portrait');
-    if (photo && photo.cutout) thumbClass.push('wine-thumb--cutout');
     const image = photo && photo.src
-      ? '<figure class="' + thumbClass.join(' ') + '">' +
+      ? '<figure class="wine-thumb">' +
           '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '" loading="lazy" decoding="async">' +
         '</figure>'
       : '';
 
     return (
       '<article class="wine-block wine-block--' + n + '">' +
-        '<button type="button" class="wine-block-head" aria-expanded="false">' +
+        '<header class="wine-block-head">' +
           '<span class="wine-num">' + num + '</span>' +
           '<h3>' + item.title + '</h3>' +
-          '<span class="wine-chevron" aria-hidden="true"></span>' +
-        '</button>' +
-        '<div class="wine-block-body">' +
-          '<p>' + item.text + '</p>' +
-          image +
-        '</div>' +
+        '</header>' +
+        '<p>' + item.text + '</p>' +
+        image +
       '</article>'
     );
   }
@@ -361,16 +355,11 @@
           '<p class="wine-process-label">' + proyecto.processTitle + '</p>' +
         '</div>' +
         '<div class="wine-stage">' +
-          '<svg class="wine-lines" aria-hidden="true">' +
-            '<defs>' +
-              '<marker id="wine-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">' +
-                '<path d="M0 0 L10 5 L0 10 Z" fill="#c4a574"></path>' +
-              '</marker>' +
-            '</defs>' +
-            '<path data-wine-line="1"></path>' +
-            '<path data-wine-line="2"></path>' +
-            '<path data-wine-line="3"></path>' +
-            '<path data-wine-line="4"></path>' +
+          '<svg class="wine-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">' +
+            '<path d="M31 24 H42"></path>' +
+            '<path d="M69 24 H58"></path>' +
+            '<path d="M31 76 H42"></path>' +
+            '<path d="M69 76 H58"></path>' +
           '</svg>' +
           wineBlockHtml(steps[0], 1, photos[0]) +
           '<figure class="wine-bottle">' +
@@ -390,25 +379,6 @@
         '</div>' +
         '<p class="wine-footerbrand">Don Pascual · Uruguay</p>' +
       '</div>';
-
-    container.querySelectorAll('.wine-block-head').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        if (window.matchMedia('(min-width: 921px)').matches) return;
-        const block = btn.closest('.wine-block');
-        const open = !block.classList.contains('is-open');
-        container.querySelectorAll('.wine-block').forEach(function (node) {
-          node.classList.remove('is-open');
-          const head = node.querySelector('.wine-block-head');
-          if (head) head.setAttribute('aria-expanded', 'false');
-        });
-        if (open) {
-          block.classList.add('is-open');
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-
-    bindWineArrows(container.querySelector('.wine-stage'));
   }
 
   function renderTrailProcess(container, proyecto) {
