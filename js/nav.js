@@ -51,6 +51,7 @@
 
   var photo = root.querySelector('[data-hero-photo]');
   var handle = root.querySelector('[data-hero-handle]');
+  var photoWrap = root.querySelector('.portrait-reveal-wrapper') || root;
   if (!photo || !handle) return;
 
   var reveal = 0; // 0 = solo foto, 1 = solo dibujo
@@ -62,7 +63,7 @@
   var activePointer = null;
   var lastToggleAt = 0;
   var lastOrbitAt = 0;
-  var DRAG_THRESHOLD = 8;
+  var DRAG_THRESHOLD = 6;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function setReveal(value, animate) {
@@ -101,8 +102,14 @@
     lastOrbitAt = Date.now();
   }
 
-  function markMoved(dx, dy) {
-    if (Math.hypot(dx, dy) > DRAG_THRESHOLD) moved = true;
+  function dragWidth() {
+    var rect = photoWrap.getBoundingClientRect();
+    return rect.width || root.getBoundingClientRect().width;
+  }
+
+  function markMoved(dx) {
+    // Solo el eje horizontal decide tap vs drag; el clip-path se actualiza igual
+    if (Math.abs(dx) > DRAG_THRESHOLD) moved = true;
   }
 
   function onPointerDown(event) {
@@ -126,17 +133,15 @@
   function onPointerMove(event) {
     if (!dragging || event.pointerId !== activePointer) return;
 
-    var rect = root.getBoundingClientRect();
-    if (!rect.width) return;
+    var width = dragWidth();
+    if (!width) return;
 
     var dx = event.clientX - startX;
-    var dy = event.clientY - startY;
-    markMoved(dx, dy);
-    if (!moved) return;
+    markMoved(dx);
 
-    // Arrastrar a la izquierda revela el dibujo
-    setReveal(startReveal + (-dx / rect.width), false);
-    if (event.cancelable) event.preventDefault();
+    // El threshold solo distingue tap vs drag; el morph no espera a crossed
+    setReveal(startReveal + (-dx / width), false);
+    if (event.cancelable && moved) event.preventDefault();
   }
 
   function onPointerUp(event) {
@@ -182,13 +187,11 @@
 
     root.addEventListener('touchmove', function (event) {
       if (!dragging || !event.touches.length) return;
-      var rect = root.getBoundingClientRect();
+      var width = dragWidth();
       var dx = event.touches[0].clientX - startX;
-      var dy = event.touches[0].clientY - startY;
-      markMoved(dx, dy);
-      if (!moved) return;
-      setReveal(startReveal + (-dx / rect.width), false);
-      if (event.cancelable) event.preventDefault();
+      markMoved(dx);
+      setReveal(startReveal + (-dx / width), false);
+      if (event.cancelable && moved) event.preventDefault();
     }, { passive: false });
 
     root.addEventListener('touchend', function () {
@@ -214,12 +217,10 @@
     });
     window.addEventListener('mousemove', function (event) {
       if (!dragging) return;
-      var rect = root.getBoundingClientRect();
+      var width = dragWidth();
       var dx = event.clientX - startX;
-      var dy = event.clientY - startY;
-      markMoved(dx, dy);
-      if (!moved) return;
-      setReveal(startReveal + (-dx / rect.width), false);
+      markMoved(dx);
+      setReveal(startReveal + (-dx / width), false);
     });
     window.addEventListener('mouseup', function () {
       if (!dragging) return;

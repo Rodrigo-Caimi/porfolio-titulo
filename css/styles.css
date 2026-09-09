@@ -412,7 +412,7 @@ section.hero {
   position: relative;
   z-index: 1;
   background: var(--bg);
-  overflow-x: clip;
+  overflow: visible;
 }
 
 /* Línea fina de separación (no caja/sombra) */
@@ -441,6 +441,7 @@ section.hero::after {
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0 clamp(20px, 4vw, 48px);
+  overflow: visible;
 }
 
 .hero-copy {
@@ -493,31 +494,33 @@ section.hero::after {
 }
 
 .hero-image {
-  width: min(700px, 48vw);
-  max-width: 100%;
+  width: min(960px, 62vw);
+  max-width: none;
   aspect-ratio: 1 / 1;
   height: auto;
-  border-radius: 50%;
+  border-radius: 0;
   overflow: visible;
-  justify-self: end;
-  background: #E4E4E4;
+  justify-self: center;
+  background: transparent;
   position: relative;
   touch-action: none;
   -webkit-user-select: none;
   user-select: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 0 0 1px rgba(28, 28, 28, 0.08), 0 18px 40px rgba(28, 28, 28, 0.08);
+  box-shadow: none;
 }
 
 .portrait-reveal-wrapper {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: 13%;
+  width: auto;
+  height: auto;
   transform-origin: 50% 50%;
   border-radius: 50%;
   overflow: hidden;
+  background: #E4E4E4;
+  box-shadow: 0 0 0 1px rgba(28, 28, 28, 0.08), 0 18px 40px rgba(28, 28, 28, 0.08);
 }
 
 .hero-image img {
@@ -660,25 +663,36 @@ section.hero::after {
 
 .portrait-orbit {
   position: absolute;
-  inset: -12%;
+  inset: 0;
   z-index: 2;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.portrait-orbit-ring,
+.portrait-orbit-item,
+.portrait-orbit-arrows {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
   pointer-events: none;
 }
 
-.portrait-orbit-ring {
-  position: absolute;
-  inset: 0;
+.portrait-orbit-item {
+  transform: rotate(var(--a));
 }
 
-.portrait-orbit-item {
-  position: absolute;
-  inset: 0;
-  transform: rotate(var(--a));
+.portrait-orbit-arrows {
+  width: 100%;
+  height: 100%;
+  color: rgba(17, 17, 17, 0.34);
+  opacity: 0;
+  transition: opacity 0.48s ease;
 }
 
 .portrait-orbit-spin {
   position: absolute;
-  top: 8%;
+  top: 4%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(calc(var(--a) * -1));
 }
@@ -686,9 +700,9 @@ section.hero::after {
 .portrait-orbit-label {
   display: block;
   font-family: inherit;
-  font-size: 11px;
+  font-size: clamp(15px, 1.25vw, 19px);
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   line-height: 1;
   text-transform: uppercase;
   color: var(--muted);
@@ -699,7 +713,8 @@ section.hero::after {
   transition: opacity 0.48s ease, transform 0.48s ease;
 }
 
-.portrait-interactive-wrapper.is-orbit-on .portrait-orbit-label {
+.portrait-interactive-wrapper.is-orbit-on .portrait-orbit-label,
+.portrait-interactive-wrapper.is-orbit-on .portrait-orbit-arrows {
   opacity: 1;
   transform: translateY(0);
 }
@@ -722,8 +737,8 @@ section.hero::after {
 }
 
 @media (max-width: 920px) {
-  .portrait-orbit {
-    inset: -9%;
+  .portrait-reveal-wrapper {
+    inset: 16%;
   }
 
   .portrait-orbit-spin {
@@ -731,8 +746,8 @@ section.hero::after {
   }
 
   .portrait-orbit-label {
-    font-size: 9px;
-    letter-spacing: 0.08em;
+    font-size: clamp(13px, 3.4vw, 16px);
+    letter-spacing: 0.07em;
     transform: translateY(5px);
   }
 }
@@ -1579,7 +1594,7 @@ textarea {
   }
 
   .hero-image {
-    width: min(500px, 44vw);
+    width: min(780px, 64vw);
   }
 }
 
@@ -1739,7 +1754,7 @@ textarea {
 
   .hero-image {
     justify-self: center;
-    width: min(360px, calc(100% - (var(--gutter) * 2)));
+    width: min(420px, calc(100% - 16px));
   }
 
   section.hero {
@@ -4383,8 +4398,8 @@ html.js-motion[data-hero-enter] .hero .cta .btn {
 }
 
 html.js-motion[data-hero-enter] .hero-image {
-  -webkit-clip-path: circle(0% at 50% 50%);
-  clip-path: circle(0% at 50% 50%);
+  -webkit-clip-path: none;
+  clip-path: none;
 }
 
 html.js-motion[data-hero-enter] .portrait-reveal-wrapper {
@@ -4427,7 +4442,7 @@ html.js-motion[data-hero-enter].is-in .hero .cta .btn:nth-child(2) {
 }
 
 html.js-motion[data-hero-enter]:not(.hero-enter-done) .hero-image {
-  will-change: clip-path, opacity;
+  will-change: opacity;
 }
 
 html.js-motion[data-hero-enter]:not(.hero-enter-done) .portrait-reveal-wrapper {
@@ -4474,13 +4489,9 @@ html.js-motion[data-hero-enter] .hero .cta .btn { --hero-enter-y: 12px; }
 @keyframes heroEnterPortrait {
   from {
     opacity: 0;
-    -webkit-clip-path: circle(0% at 50% 50%);
-    clip-path: circle(0% at 50% 50%);
   }
   to {
     opacity: 1;
-    -webkit-clip-path: circle(78% at 50% 50%);
-    clip-path: circle(78% at 50% 50%);
   }
 }
 
