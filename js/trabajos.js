@@ -376,7 +376,6 @@
           wineBlockHtml(steps[0], 1) +
           '<figure class="wine-bottle">' +
             '<img src="' + asset(ed.bottle && ed.bottle.src) + '" alt="' + ((ed.bottle && ed.bottle.alt) || '') + '" decoding="async" fetchpriority="high">' +
-            (ed.caption ? '<figcaption class="wine-caption">' + ed.caption + '</figcaption>' : '') +
           '</figure>' +
           wineBlockHtml(steps[1], 2) +
           wineBlockHtml(steps[2], 3) +
@@ -624,7 +623,8 @@
     if (!stage) return;
     const svg = stage.querySelector('.wine-lines');
     const bottle = stage.querySelector('.wine-bottle img');
-    if (!svg || !bottle) return;
+    const bottleFig = stage.querySelector('.wine-bottle');
+    if (!svg || !bottle || !bottleFig) return;
 
     function localPoint(el, relX, relY) {
       const sr = stage.getBoundingClientRect();
@@ -645,28 +645,35 @@
       svg.setAttribute('height', String(sr.height));
 
       const specs = [
-        { n: 1, from: [1, 0.36], to: [0.08, 0.27], bulge: 96, lift: -42 },
-        { n: 2, from: [0, 0.40], to: [0.92, 0.24], bulge: -108, lift: 28 },
-        { n: 3, from: [1, 0.58], to: [0.10, 0.71], bulge: 78, lift: 48 },
-        { n: 4, from: [0, 0.52], to: [0.90, 0.73], bulge: -118, lift: -32 }
+        { n: 1, from: [1, 0.36], side: -1, y: 0.30 },
+        { n: 2, from: [0, 0.38], side: 1, y: 0.30 },
+        { n: 3, from: [1, 0.62], side: -1, y: 0.68 },
+        { n: 4, from: [0, 0.60], side: 1, y: 0.68 }
       ];
 
-      function trailD(from, to, bulge, lift, shift) {
-        const mx = (from.x + to.x) / 2 + bulge * 0.22 + shift;
-        const my = (from.y + to.y) / 2 + lift * 0.55;
-        const c1x = from.x + bulge + shift * 0.4;
-        const c1y = from.y + lift;
-        const c2x = mx - bulge * 0.18;
-        const c2y = my - lift * 0.35;
-        const c3x = to.x - bulge * 0.42 + shift * 0.25;
-        const c3y = to.y - lift * 0.55;
-        return 'M' + from.x.toFixed(1) + ' ' + from.y.toFixed(1) +
+      function trailD(from, to, side, shift) {
+        const dx = to.x - from.x;
+        const dy = to.y - from.y;
+        const len = Math.hypot(dx, dy) || 1;
+        const nx = -dy / len;
+        const ny = dx / len;
+        const amp = side * Math.min(160, Math.max(64, len * 0.38));
+        const a = { x: from.x + nx * shift, y: from.y + ny * shift };
+        const b = { x: to.x + nx * shift, y: to.y + ny * shift };
+        const c1x = a.x + dx * 0.26 + nx * amp;
+        const c1y = a.y + dy * 0.18 + ny * amp;
+        const c2x = a.x + dx * 0.74 - nx * amp;
+        const c2y = a.y + dy * 0.82 - ny * amp;
+        return 'M' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) +
           ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
           ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
-          ', ' + mx.toFixed(1) + ' ' + my.toFixed(1) +
-          ' S' + c3x.toFixed(1) + ' ' + c3y.toFixed(1) +
-          ', ' + to.x.toFixed(1) + ' ' + to.y.toFixed(1);
+          ', ' + b.x.toFixed(1) + ' ' + b.y.toFixed(1);
       }
+
+      const br = bottle.getBoundingClientRect();
+      const srBox = stage.getBoundingClientRect();
+      const glassHalf = br.width * 0.16;
+      const bottleMidX = br.left - srBox.left + br.width / 2;
 
       specs.forEach(function (spec) {
         const block = stage.querySelector('.wine-block--' + spec.n);
@@ -677,10 +684,16 @@
         const dotB = svg.querySelector('[data-wine-dot="' + spec.n + 'b"]');
         if (!block || !path) return;
         const from = localPoint(block, spec.from[0], spec.from[1]);
-        const to = localPoint(bottle, spec.to[0], spec.to[1]);
-        path.setAttribute('d', trailD(from, to, spec.bulge, spec.lift, 0));
-        if (echoA) echoA.setAttribute('d', trailD(from, to, spec.bulge * 1.08, spec.lift * 0.92, 7));
-        if (echoB) echoB.setAttribute('d', trailD(from, to, spec.bulge * 0.9, spec.lift * 1.12, -6));
+        const to = {
+          x: bottleMidX + spec.side * glassHalf,
+          y: br.top - srBox.top + br.height * spec.y
+        };
+        path.setAttribute('d', trailD(from, to, spec.side, 0));
+        if (echoA) echoA.setAttribute('d', trailD(from, to, spec.side, 8));
+        if (echoB) {
+          echoB.setAttribute('d', '');
+          echoB.style.display = 'none';
+        }
         if (dotA) {
           dotA.setAttribute('cx', from.x.toFixed(1));
           dotA.setAttribute('cy', from.y.toFixed(1));
@@ -724,8 +737,8 @@
     function rim(a, b) {
       const dx = b.x - a.x;
       const dy = b.y - a.y;
-      const hw = a.w / 2 + 5;
-      const hh = a.h / 2 + 5;
+      const hw = a.w / 2;
+      const hh = a.h / 2;
       const scale = Math.min(hw / (Math.abs(dx) || 0.001), hh / (Math.abs(dy) || 0.001));
       return {
         x: a.x + dx * scale,
@@ -739,23 +752,15 @@
       const len = Math.hypot(dx, dy) || 1;
       const nx = -dy / len;
       const ny = dx / len;
-      const sx = nx * shift;
-      const sy = ny * shift;
-      const a = { x: from.x + sx, y: from.y + sy };
-      const b = { x: to.x + sx, y: to.y + sy };
-      const mx = (a.x + b.x) / 2 + nx * amp * 0.18;
-      const my = (a.y + b.y) / 2 + ny * amp * 0.18;
-      const c1x = a.x + dx * 0.24 + nx * amp;
+      const a = { x: from.x + nx * shift, y: from.y + ny * shift };
+      const b = { x: to.x + nx * shift, y: to.y + ny * shift };
+      const c1x = a.x + dx * 0.28 + nx * amp;
       const c1y = a.y + dy * 0.22 + ny * amp;
-      const c2x = mx - nx * amp * 0.4;
-      const c2y = my - ny * amp * 0.4;
-      const c3x = a.x + dx * 0.78 - nx * amp * 0.85;
-      const c3y = a.y + dy * 0.76 - ny * amp * 0.85;
+      const c2x = a.x + dx * 0.72 - nx * amp;
+      const c2y = a.y + dy * 0.78 - ny * amp;
       return 'M' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) +
         ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
         ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
-        ', ' + mx.toFixed(1) + ' ' + my.toFixed(1) +
-        ' S' + c3x.toFixed(1) + ' ' + c3y.toFixed(1) +
         ', ' + b.x.toFixed(1) + ' ' + b.y.toFixed(1);
     }
 
@@ -764,25 +769,13 @@
       const edges = [];
       function add(a, b) {
         if (!a || !b || a.i === b.i) return;
+        const dist = Math.hypot(a.x - b.x, a.y - b.y);
+        if (dist < 160) return;
         const key = a.i < b.i ? a.i + '-' + b.i : b.i + '-' + a.i;
         if (seen[key]) return;
         seen[key] = true;
         edges.push([a, b]);
       }
-
-      nodes.forEach(function (node) {
-        const ranked = [];
-        for (let i = 0; i < nodes.length; i++) {
-          if (nodes[i].i === node.i) continue;
-          ranked.push({
-            o: nodes[i],
-            d: Math.hypot(node.x - nodes[i].x, node.y - nodes[i].y)
-          });
-        }
-        ranked.sort(function (a, b) { return a.d - b.d; });
-        if (ranked[0]) add(node, ranked[0].o);
-        if (ranked[1] && ranked[1].d < Math.max(280, ranked[0].d * 1.75)) add(node, ranked[1].o);
-      });
 
       const sorted = nodes.slice().sort(function (a, b) {
         return a.left - b.left || a.y - b.y;
@@ -790,7 +783,7 @@
       const cols = [];
       sorted.forEach(function (node) {
         const last = cols[cols.length - 1];
-        if (!last || Math.abs(node.left - last[0].left) > 40) {
+        if (!last || Math.abs(node.left - last[0].left) > 48) {
           cols.push([node]);
         } else {
           last.push(node);
@@ -798,8 +791,34 @@
       });
       cols.forEach(function (col) {
         col.sort(function (a, b) { return a.y - b.y; });
-        for (let i = 0; i < col.length - 1; i++) add(col[i], col[i + 1]);
       });
+
+      for (let c = 0; c < cols.length - 1; c++) {
+        cols[c].forEach(function (node) {
+          const nextCol = cols[c + 1].slice().sort(function (a, b) {
+            return Math.abs(a.y - node.y) - Math.abs(b.y - node.y);
+          });
+          if (nextCol[0]) add(node, nextCol[0]);
+          if (nextCol[1] && Math.abs(nextCol[1].y - node.y) < node.h * 1.35) add(node, nextCol[1]);
+        });
+      }
+
+      if (cols.length >= 3) {
+        cols[0].forEach(function (node, i) {
+          const far = cols[2][Math.min(i, cols[2].length - 1)];
+          if (far) add(node, far);
+        });
+      }
+
+      nodes.forEach(function (node) {
+        const ranked = nodes.filter(function (other) {
+          return other.i !== node.i && Math.abs(other.left - node.left) > 48;
+        }).map(function (other) {
+          return { o: other, d: Math.hypot(node.x - other.x, node.y - other.y) };
+        }).sort(function (a, b) { return a.d - b.d; });
+        if (ranked[0] && ranked[0].d >= 160) add(node, ranked[0].o);
+      });
+
       return edges;
     }
 
@@ -839,14 +858,12 @@
         const from = rim(pair[0], pair[1]);
         const to = rim(pair[1], pair[0]);
         const len = Math.hypot(to.x - from.x, to.y - from.y);
-        if (len < 10) return;
-        const amp = (index % 2 === 0 ? 1 : -1) * Math.min(48, Math.max(16, len * 0.22));
-        frag.appendChild(el('path', { class: 'wine-trail-echo', d: organicPath(from, to, amp * 1.12, 5) }));
-        frag.appendChild(el('path', { class: 'wine-trail-echo', d: organicPath(from, to, amp * 0.88, -4.5) }));
-        frag.appendChild(el('path', { class: 'wine-trail-echo', d: organicPath(from, to, amp * 0.7, 8) }));
+        if (len < 140) return;
+        const amp = (index % 2 === 0 ? 1 : -1) * Math.min(170, Math.max(52, len * 0.30));
+        frag.appendChild(el('path', { class: 'wine-trail-echo', d: organicPath(from, to, amp * 1.08, 6) }));
         frag.appendChild(el('path', { class: 'wine-trail-main', d: organicPath(from, to, amp, 0) }));
-        frag.appendChild(el('circle', { cx: from.x.toFixed(1), cy: from.y.toFixed(1), r: '3.2' }));
-        frag.appendChild(el('circle', { cx: to.x.toFixed(1), cy: to.y.toFixed(1), r: '3.2' }));
+        frag.appendChild(el('circle', { cx: from.x.toFixed(1), cy: from.y.toFixed(1), r: '3.4' }));
+        frag.appendChild(el('circle', { cx: to.x.toFixed(1), cy: to.y.toFixed(1), r: '3.4' }));
       });
 
       svg.appendChild(frag);

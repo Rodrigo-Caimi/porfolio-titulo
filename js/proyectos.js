@@ -295,7 +295,6 @@ const PROYECTOS = [
         src: 'IMAGENES/Don pascual/don pascualfinal.png?v=20260908u',
         alt: 'Botella Don Pascual Chardonnay Edición Limitada 2026'
       },
-      caption: 'Momentos que valen la pena.',
       gallery: [
         { src: 'IMAGENES/Don pascual/don-pascual-afiche.jpg', alt: 'Afiche Don Pascual Edición Limitada' },
         { src: 'IMAGENES/Don pascual/don-pascual-campana.jpg', alt: 'Mockup de campaña Don Pascual junto al fuego' },
