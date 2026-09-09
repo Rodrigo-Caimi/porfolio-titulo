@@ -2239,7 +2239,7 @@ body[data-proyecto-id="7"] .wine-editorial {
 
 body[data-proyecto-id="7"] .wine-board {
   min-height: 0;
-  padding: 8px 16px 8px;
+  padding: 8px 24px 8px;
   box-sizing: border-box;
   overflow: visible;
 }
@@ -2247,9 +2247,9 @@ body[data-proyecto-id="7"] .wine-board {
 body[data-proyecto-id="7"] .wine-intro {
   position: relative;
   text-align: center;
-  max-width: min(1760px, 99vw);
+  max-width: min(92vw, 1760px);
   margin: 0 auto 12px;
-  padding: 8px 20px 0;
+  padding: 8px 0 0;
 }
 
 body[data-proyecto-id="7"] .wine-intro-top {
@@ -2304,11 +2304,12 @@ body[data-proyecto-id="7"] .wine-lead {
 }
 
 body[data-proyecto-id="7"] .wine-process-label {
-  margin: 12px 0 16px;
+  margin: 12px 0 clamp(40px, 5vw, 70px);
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(26px, 3.2vw, 44px);
+  font-size: clamp(2.6rem, 3.5vw, 4.4rem);
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.04em;
+  line-height: 1;
   text-transform: uppercase;
   color: #b08948;
 }
@@ -2317,18 +2318,18 @@ body[data-proyecto-id="7"] .wine-stage {
   position: relative;
   display: grid;
   grid-template-columns:
-    minmax(min(340px, 24vw), 1fr)
-    minmax(260px, 340px)
-    minmax(min(340px, 24vw), 1fr);
+    minmax(min(360px, 28vw), 480px)
+    minmax(min(240px, 22vw), 360px)
+    minmax(min(360px, 28vw), 480px);
   grid-template-rows: auto auto;
   grid-template-areas:
     "b1 bottle b2"
     "b3 bottle b4";
-  column-gap: clamp(50px, 6vw, 110px);
-  row-gap: clamp(22px, 2.4vw, 36px);
+  column-gap: clamp(50px, 5vw, 100px);
+  row-gap: clamp(35px, 4vw, 60px);
   align-items: stretch;
-  justify-content: center;
-  width: min(88vw, 1400px);
+  justify-content: space-between;
+  width: min(92vw, 1760px);
   max-width: none;
   margin-inline: auto;
   margin-bottom: 24px;
@@ -2374,21 +2375,21 @@ body[data-proyecto-id="7"] .wine-bottle {
   background:
     radial-gradient(
       circle at center,
-      rgba(190, 145, 74, 0.10),
-      transparent 42%
+      rgba(190, 145, 74, 0.11),
+      transparent 58%
     );
 }
 
 body[data-proyecto-id="7"] .wine-block {
-  --wine-card-hover-scale: 1.018;
+  --wine-card-hover-scale: 1.015;
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   min-width: 0;
   width: 100%;
-  padding: 24px;
-  border-radius: 16px;
+  padding: 28px;
+  border-radius: 18px;
   background: #fbf8f1;
   border: 1px solid rgba(176, 137, 72, 0.16);
   box-shadow: 0 8px 22px rgba(70, 48, 23, 0.05);
@@ -2403,9 +2404,9 @@ body[data-proyecto-id="7"] .wine-block {
 body[data-proyecto-id="7"] .wine-bottle img {
   display: block;
   width: auto;
-  max-width: min(420px, 32vw);
-  height: clamp(520px, 68vh, 610px);
-  max-height: 610px;
+  max-width: min(440px, 28vw);
+  height: clamp(560px, 70vh, 650px);
+  max-height: 650px;
   object-fit: contain;
   mix-blend-mode: lighten;
 }
@@ -2413,9 +2414,9 @@ body[data-proyecto-id="7"] .wine-bottle img {
 body[data-proyecto-id="7"] .wine-block-head {
   display: flex;
   align-items: baseline;
-  gap: 10px;
+  gap: 14px;
   width: 100%;
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -2425,7 +2426,7 @@ body[data-proyecto-id="7"] .wine-block-head {
 
 body[data-proyecto-id="7"] .wine-num {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-size: clamp(2.2rem, 2.7vw, 3.2rem);
   font-weight: 500;
   line-height: 0.9;
   color: #c4a574;
@@ -2436,7 +2437,7 @@ body[data-proyecto-id="7"] .wine-num {
 
 body[data-proyecto-id="7"] .wine-block h3 {
   margin: 0;
-  font-size: clamp(18px, 1.6vw, 22px);
+  font-size: clamp(1.35rem, 1.6vw, 1.75rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #1c1914;
@@ -2444,20 +2445,20 @@ body[data-proyecto-id="7"] .wine-block h3 {
 }
 
 body[data-proyecto-id="7"] .wine-block p {
-  margin: 0 0 14px;
-  font-size: clamp(15px, 1.15vw, 16.5px);
-  line-height: 1.65;
+  margin: 0;
+  font-size: clamp(1rem, 1.1vw, 1.18rem);
+  line-height: 1.55;
   color: #4b453c;
   transform: none;
 }
 
 body[data-proyecto-id="7"] .wine-thumb {
   position: relative;
-  margin: auto 0 0;
+  margin-top: 20px;
   width: 100%;
-  aspect-ratio: 16 / 8.5;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 12px;
   background: #efe8d9;
   transform: none;
 }
@@ -2480,7 +2481,7 @@ body[data-proyecto-id="7"] .wine-thumb img {
   html.js-motion body[data-proyecto-id="7"] .wine-block.reveal.is-in:focus-within {
     z-index: 2;
     transform: translateY(-7px) scale(var(--wine-card-hover-scale));
-    box-shadow: 0 20px 45px rgba(90, 65, 30, 0.13);
+    box-shadow: 0 22px 48px rgba(90, 65, 30, 0.16);
     border-color: rgba(176, 137, 72, 0.28);
   }
 
@@ -2706,6 +2707,11 @@ body[data-proyecto-id="7"] .wine-footerbrand {
 }
 
 @media (max-width: 900px) {
+  body[data-proyecto-id="7"] .wine-process-label {
+    font-size: clamp(1.85rem, 4.2vw, 2.6rem);
+    margin-bottom: 32px;
+  }
+
   body[data-proyecto-id="7"] .wine-stage {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: auto;
@@ -2713,11 +2719,12 @@ body[data-proyecto-id="7"] .wine-footerbrand {
       "bottle bottle"
       "b1 b2"
       "b3 b4";
-    column-gap: 18px;
-    row-gap: 20px;
-    width: min(92vw, 860px);
+    column-gap: 20px;
+    row-gap: 22px;
+    width: 90vw;
     max-width: none;
-    padding: 8px 4px 8px;
+    justify-content: stretch;
+    padding: 8px 0 8px;
   }
 
   body[data-proyecto-id="7"] .wine-lines {
@@ -2726,13 +2733,22 @@ body[data-proyecto-id="7"] .wine-footerbrand {
 
   body[data-proyecto-id="7"] .wine-bottle img {
     width: auto;
-    max-width: min(280px, 46vw);
+    max-width: min(300px, 48vw);
     height: clamp(320px, 42vh, 420px);
     max-height: none;
+  }
+
+  body[data-proyecto-id="7"] .wine-block {
+    padding: 22px;
   }
 }
 
 @media (max-width: 600px) {
+  body[data-proyecto-id="7"] .wine-process-label {
+    font-size: clamp(1.7rem, 7.2vw, 2.1rem);
+    margin-bottom: 24px;
+  }
+
   body[data-proyecto-id="7"] .wine-stage {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
@@ -2750,19 +2766,19 @@ body[data-proyecto-id="7"] .wine-footerbrand {
 
   body[data-proyecto-id="7"] .wine-block {
     width: 100%;
-    padding: 16px;
+    padding: 18px;
   }
 
   body[data-proyecto-id="7"] .wine-block h3 {
-    font-size: clamp(17px, 4.6vw, 20px);
+    font-size: clamp(1.2rem, 5vw, 1.4rem);
   }
 
   body[data-proyecto-id="7"] .wine-num {
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    font-size: clamp(1.8rem, 7vw, 2.2rem);
   }
 
   body[data-proyecto-id="7"] .wine-block p {
-    font-size: 14px;
+    font-size: 1rem;
   }
 
   body[data-proyecto-id="7"] .wine-bottle img {
