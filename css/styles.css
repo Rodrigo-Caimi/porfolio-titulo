@@ -5606,7 +5606,7 @@ body[data-proyecto-id="2"] .mayo-hero h1 {
   flex-direction: column;
   gap: 0.02em;
   margin: 0;
-  font-size: clamp(52px, 7.2vw, 104px);
+  font-size: clamp(57.2px, 7.92vw, 114.4px);
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 0.92;
@@ -5631,14 +5631,15 @@ body[data-proyecto-id="2"] .mayo-hero-lead {
 
 body[data-proyecto-id="2"] .mayo-hero-tools {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 1.45;
   color: var(--mayo-muted);
 }
 
 body[data-proyecto-id="2"] .mayo-hero-tools span {
   display: block;
-  margin-bottom: 2px;
-  font-size: 11px;
+  margin-bottom: 4px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -5655,7 +5656,7 @@ body[data-proyecto-id="2"] .mayo-hero-visual {
 body[data-proyecto-id="2"] .mayo-photo--hero img {
   width: auto;
   max-width: 100%;
-  max-height: min(78vh, 820px);
+  max-height: min(81.9vh, 861px);
   object-fit: contain;
 }
 
@@ -5939,7 +5940,7 @@ body[data-proyecto-id="2"] .other-projects-section h2::after {
   }
 
   body[data-proyecto-id="2"] .mayo-hero h1 {
-    font-size: clamp(44px, 8vw, 72px);
+    font-size: clamp(48.4px, 8.8vw, 79.2px);
   }
 
   body[data-proyecto-id="2"] .mayo-duo {
@@ -5964,7 +5965,7 @@ body[data-proyecto-id="2"] .other-projects-section h2::after {
   }
 
   body[data-proyecto-id="2"] .mayo-hero h1 {
-    font-size: clamp(42px, 14vw, 64px);
+    font-size: clamp(46.2px, 15.4vw, 70.4px);
   }
 
   body[data-proyecto-id="2"] .mayo-duo,

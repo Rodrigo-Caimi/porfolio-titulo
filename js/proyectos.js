@@ -48,8 +48,8 @@ const PROYECTOS = [
     cardClass: 'card-pair',
     cardImage: 'IMAGENES/Mayo amarillo/mayo-amarillo-card.jpg',
     cardAlt: 'Mayo Amarillo - Campaña',
-    role: 'Campaña de concientización: concepto, piezas gráficas y piezas digitales',
-    tools: 'Photoshop, Illustrator',
+    role: 'Campaña de concientización vial · Dirección visual, sistema gráfico y adaptación audiovisual',
+    tools: 'Photoshop · Illustrator · Premiere Pro',
     hideMeta: true,
     processLayout: 'mayo',
     galleryLayout: 'poster',
@@ -57,17 +57,18 @@ const PROYECTOS = [
       { src: 'IMAGENES/Mayo amarillo/Afiche-de-campana.webp', alt: 'Afiche de campaña Mayo Amarillo' },
       { src: 'IMAGENES/Mayo amarillo/5-PosteoIgMayo.webp', alt: 'Posteo Instagram Mayo Amarillo 5' },
       { src: 'IMAGENES/Mayo amarillo/4-PosteoIGMayoa.jpg', alt: 'Posteo Instagram Mayo Amarillo 4' },
-      { src: 'IMAGENES/Mayo amarillo/1-PosteoIgMayoA.webp', alt: 'Posteo Instagram Mayo Amarillo EN VIVO' }
+      { src: 'IMAGENES/Mayo amarillo/1-PosteoIgMayoA.webp', alt: 'Posteo Instagram Mayo Amarillo EN VIVO' },
+      { src: 'IMAGENES/Mayo amarillo/reel-ig-Final.gif', alt: 'gif de la campaña' }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
       {
-        title: 'Cómo se pensó esta campaña',
-        text: 'Mayo Amarillo busca concientizar sobre la responsabilidad humana en el tránsito. La campaña impacta emocionalmente y genera reflexión sobre las consecuencias, usando la narrativa visual como herramienta de comunicación efectiva en espacios públicos y medios.'
+        title: 'CÓMO SE PENSÓ ESTA CAMPAÑA',
+        text: 'Mayo Amarillo parte del registro real de un accidente para generar conciencia sobre las consecuencias de una imprudencia al volante. La propuesta utiliza el lenguaje visual de un noticiero para transformar la escena en un mensaje directo, cercano y de fuerte impacto emocional.'
       },
       {
-        title: 'Desarrollo y producción',
-        text: 'El proceso involucró investigación sobre casos reales y desarrollo de conceptos visuales, transmitiendo urgencia y responsabilidad en piezas tradicionales y digitales. Se trabajó con selective color para resaltar elementos clave del mensaje central.'
+        title: 'DESARROLLO Y PRODUCCIÓN',
+        text: 'El desarrollo partió de una escena real y pasó por distintas exploraciones de composición y jerarquía hasta definir el sistema final. Se trabajó con color selectivo, fondo desenfocado y recursos propios del lenguaje televisivo para dirigir la atención y reforzar el mensaje central.'
       },
       {
         title: 'Resultado y alcance',

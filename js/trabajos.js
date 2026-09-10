@@ -1395,12 +1395,16 @@
     );
   }
 
+  function mayoLooksGif(item) {
+    return item && /\.gif$/i.test(item.src || '');
+  }
+
   function mayoLooksSocial(item) {
     return item && /posteo|instagram|\bigmayo|\big-/i.test(((item.alt || '') + ' ' + (item.src || '')).toLowerCase());
   }
 
   function mayoLooksPoster(item) {
-    return item && /afiche/i.test(((item.alt || '') + ' ' + (item.src || '')).toLowerCase());
+    return item && /afiche/i.test(((item.alt || '') + ' ' + (item.src || '')).toLowerCase()) && !mayoLooksGif(item);
   }
 
   function mayoTitleHtml(title) {
@@ -1439,7 +1443,9 @@
     const photos = proyecto.gallery || [];
     const steps = proyecto.process || [];
     const posters = photos.filter(mayoLooksPoster);
-    const social = photos.filter(mayoLooksSocial);
+    const social = photos.filter(function (item) {
+      return mayoLooksSocial(item) || mayoLooksGif(item);
+    });
     const heroPhoto = posters[0] || photos[0];
     const lightbox = [];
 
