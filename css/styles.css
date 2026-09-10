@@ -432,8 +432,8 @@ section.hero::after {
    ============================================ */
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-  column-gap: clamp(42px, 6vw, 80px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  column-gap: clamp(64px, 8.5vw, 128px);
   row-gap: clamp(36px, 5vw, 64px);
   align-items: center;
   justify-content: center;
@@ -448,6 +448,7 @@ section.hero::after {
 .hero-copy {
   justify-self: stretch;
   max-width: none;
+  padding-right: clamp(8px, 1.6vw, 28px);
 }
 
 .hero-copy h1,
@@ -492,12 +493,12 @@ section.hero::after {
   max-width: 38em;
   margin-bottom: 36px;
   line-height: 1.65;
-  padding-right: clamp(20px, 4vw, 56px);
+  padding-right: clamp(28px, 5.2vw, 72px);
 }
 
 .hero-image {
-  width: min(960px, 62vw);
-  max-width: none;
+  width: min(840px, 50vw);
+  max-width: 100%;
   min-width: 0;
   aspect-ratio: 1 / 1;
   height: auto;
@@ -695,7 +696,7 @@ section.hero::after {
 
 .portrait-orbit-spin {
   position: absolute;
-  top: 2.5%;
+  top: -3.5%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(calc(var(--a) * -1));
 }
@@ -1596,17 +1597,26 @@ textarea {
   }
 
   .hero {
-    column-gap: 36px;
+    column-gap: 88px;
     row-gap: 32px;
     max-width: min(1100px, 94vw);
   }
 
+  .hero-copy {
+    padding-right: 20px;
+  }
+
   .hero .desc {
-    padding-right: 28px;
+    padding-right: 40px;
   }
 
   .hero-image {
-    width: min(780px, 64vw);
+    width: min(520px, 40vw);
+    max-width: 84%;
+  }
+
+  .portrait-orbit-spin {
+    top: 0%;
   }
 }
 
@@ -1740,6 +1750,7 @@ textarea {
     width: 100%;
     max-width: 640px;
     padding-inline: var(--gutter);
+    padding-right: var(--gutter);
     box-sizing: border-box;
   }
 
