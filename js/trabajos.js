@@ -40,8 +40,11 @@
       .filter(Boolean);
 
     container.innerHTML = ordered.map(function (proyecto) {
+      const sizeAttr = (proyecto.cardWidth && proyecto.cardHeight)
+        ? ' width="' + proyecto.cardWidth + '" height="' + proyecto.cardHeight + '"'
+        : '';
       const thumb = proyecto.cardImage
-        ? '<img loading="lazy" decoding="async" alt="' + proyecto.cardAlt + '" src="' + asset(proyecto.cardImage) + '" />'
+        ? '<img loading="lazy" decoding="async" alt="' + proyecto.cardAlt + '" src="' + asset(proyecto.cardImage) + '"' + sizeAttr + ' />'
         : '';
       const categoryLabel = (proyecto.cardCategories && proyecto.cardCategories.length)
         ? proyecto.cardCategories.join(' · ')
@@ -65,14 +68,11 @@
       const mediaFit = proyecto.cardMediaFit === 'contain';
       const cardClasses = 'card ' + proyecto.cardClass + (mediaFit ? ' card-media-contain' : '');
       const fitAttr = mediaFit ? ' data-card-fit="contain"' : '';
-      const thumbStyle = (mediaFit && proyecto.cardMediaAspect)
-        ? ' style="--card-media-aspect:' + proyecto.cardMediaAspect + '"'
-        : '';
 
       if (proyecto.placeholder) {
         return (
           '<div class="' + cardClasses + '"' + fitAttr + ' aria-label="' + proyecto.title + '">' +
-            '<div class="thumb"' + thumbStyle + '>' + thumb + '</div>' +
+            '<div class="thumb">' + thumb + '</div>' +
             body +
           '</div>'
         );
@@ -80,7 +80,7 @@
 
       return (
         '<a class="' + cardClasses + '"' + fitAttr + ' href="' + proyectoHref(proyecto.slug) + '">' +
-          '<div class="thumb"' + thumbStyle + '>' + thumb + '</div>' +
+          '<div class="thumb">' + thumb + '</div>' +
           body +
         '</a>'
       );
@@ -114,6 +114,7 @@
       '<iframe class="shot-media vimeo-embed"' +
         ' src="' + url + '"' +
         ' title="' + ((item && item.alt) || 'Video') + '"' +
+        ' loading="lazy"' +
         ' allow="fullscreen; picture-in-picture"' +
         ' allowfullscreen' +
         ' referrerpolicy="strict-origin-when-cross-origin">' +
@@ -182,7 +183,7 @@
         media = '<img class="shot-media" src="' + poster + '" alt="' + (item.alt || '') + '" loading="' + loading + '" decoding="async" />';
       }
     } else if (isVideoItem(item)) {
-      media = '<video class="shot-media" controls playsinline poster="' + asset(item.poster || '') + '" src="' + asset(item.src) + '"></video>';
+      media = '<video class="shot-media" controls playsinline preload="none" poster="' + asset(item.poster || '') + '" src="' + asset(item.src) + '"></video>';
     } else {
       media =
         '<img class="shot-media" src="' + asset(item.src) + '" alt="' + (item.alt || '') + '" loading="' + loading + '" decoding="async"' +
@@ -230,6 +231,7 @@
       '<iframe class="reel-vimeo"' +
         ' src="' + url + sep + 'title=0&byline=0&portrait=0&dnt=1"' +
         ' title="' + ((item && item.alt) || 'Video') + '"' +
+        ' loading="lazy"' +
         ' allow="fullscreen; picture-in-picture"' +
         ' allowfullscreen' +
         ' referrerpolicy="strict-origin-when-cross-origin">' +
@@ -1823,7 +1825,7 @@
       return (
         '<a class="other-project-card" href="./' + related.slug + '">' +
           '<div class="other-project-image">' +
-            '<img loading="lazy" src="' + asset(related.cardImage) + '" alt="' + related.title + '">' +
+            '<img loading="lazy" decoding="async" src="' + asset(related.cardImage) + '" alt="' + related.title + '">' +
           '</div>' +
           '<div class="other-project-content">' +
             '<h3>' + related.title + '</h3>' +

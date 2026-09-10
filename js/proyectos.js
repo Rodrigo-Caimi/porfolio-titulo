@@ -51,7 +51,8 @@ const PROYECTOS = [
     cardDescription: 'Campaña de concientización vial con sistema gráfico y audiovisual.',
     cardClass: 'card-pair',
     cardMediaFit: 'contain',
-    cardMediaAspect: '5 / 7',
+    cardWidth: 1200,
+    cardHeight: 1680,
     cardImage: 'IMAGENES/Mayo amarillo/mayo-amarillo-card.jpg',
     cardAlt: 'Mayo Amarillo - Campaña',
     role: 'Campaña de concientización vial · Dirección visual, sistema gráfico y adaptación audiovisual',
@@ -194,7 +195,8 @@ const PROYECTOS = [
     cardDescription: 'Reel promocional desarrollado con generación visual, movimiento y edición.',
     cardClass: 'card-pair',
     cardMediaFit: 'contain',
-    cardMediaAspect: '24 / 43',
+    cardWidth: 1200,
+    cardHeight: 2150,
     cardImage: 'IMAGENES/Campana reel ORT/ort-reel-card.jpg',
     cardAlt: 'Campaña Reel ORT',
     role: 'Reel promocional: concepto, generación audiovisual y edición',
@@ -258,26 +260,26 @@ const PROYECTOS = [
     processLayout: 'noir',
     heroSlider: [
       { src: 'IMAGENES/Noir Estudio/noir-interior.jpg', alt: 'Interior Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/Slider2.png', alt: 'Slider 2 — Herramientas y productos Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/Slider3.png', alt: 'Slider 3 — Piezas de marca Noir Estudio' }
+      { src: 'IMAGENES/Noir Estudio/Slider2.webp', alt: 'Slider 2 — Herramientas y productos Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/Slider3.webp', alt: 'Slider 3 — Piezas de marca Noir Estudio' }
     ],
     serviceCards: [
       { title: 'Perfilado', text: 'Afeitado y definición de barba.', src: 'IMAGENES/Noir Estudio/afeitado.jpg', alt: 'Perfilado Noir Estudio' },
-      { title: 'Experiencia Noir', text: 'El ritual de atención en el estudio.', src: 'IMAGENES/Noir Estudio/experiencia-Noir.png', alt: 'Experiencia Noir Estudio' },
+      { title: 'Experiencia Noir', text: 'El ritual de atención en el estudio.', src: 'IMAGENES/Noir Estudio/experiencia-Noir.webp', alt: 'Experiencia Noir Estudio' },
       { title: 'Color y corrección', text: 'Coloración profesional y balance de tono.', src: 'IMAGENES/Noir Estudio/noir-productos.jpg', alt: 'Color y corrección Noir Estudio' },
       { title: 'Diseño de corte', text: 'Corte a medida según el estilo.', src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Diseño de corte Noir Estudio' },
-      { title: 'Acabado y estilo', text: 'El look final y el peinado.', src: 'IMAGENES/Noir Estudio/noir-acabado.png', alt: 'Acabado y estilo Noir Estudio' }
+      { title: 'Acabado y estilo', text: 'El look final y el peinado.', src: 'IMAGENES/Noir Estudio/noir-acabado.webp', alt: 'Acabado y estilo Noir Estudio' }
     ],
     servicesNote: 'Las tarjetas funcionan como unidades de información independientes: cada servicio se identifica rápidamente por imagen, nombre y descripción, ayudando al usuario a comparar opciones y entender la propuesta sin sobrecargar la interfaz.',
     gallery: [
-      { src: 'IMAGENES/Noir Estudio/cuadro-echo-bien.png', alt: 'Antes de la transformación Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/terminado1.png', alt: 'Corte terminado Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/cuadro-echo-bien.webp', alt: 'Antes de la transformación Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/terminado1.webp', alt: 'Corte terminado Noir Estudio' },
       { src: 'IMAGENES/Noir Estudio/noir-experiencia.jpg', alt: 'Experiencia en el sillón Noir Estudio' },
       { src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Herramientas Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/grid2.5.png', alt: 'Composición de herramientas Noir Estudio', wide: true },
-      { src: 'IMAGENES/Noir Estudio/grid3.png', alt: 'Pieza de campaña Noir Estudio', wide: true },
-      { src: 'IMAGENES/Noir Estudio/mapa-1.png', alt: 'Mapa de ubicación Noir Estudio', wide: true },
-      { src: 'IMAGENES/Noir Estudio/mapa-2.png', alt: 'Detalle de mapa Noir Estudio', wide: true }
+      { src: 'IMAGENES/Noir Estudio/grid2.5.webp', alt: 'Composición de herramientas Noir Estudio', wide: true },
+      { src: 'IMAGENES/Noir Estudio/grid3.webp', alt: 'Pieza de campaña Noir Estudio', wide: true },
+      { src: 'IMAGENES/Noir Estudio/mapa-1.webp', alt: 'Mapa de ubicación Noir Estudio', wide: true },
+      { src: 'IMAGENES/Noir Estudio/mapa-2.webp', alt: 'Detalle de mapa Noir Estudio', wide: true }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
@@ -335,7 +337,7 @@ const PROYECTOS = [
     editorial: {
       intro: 'Una campaña de edición limitada pensada para que etiqueta, piezas gráficas y video compartan la misma atmósfera de invierno.',
       bottle: {
-        src: 'IMAGENES/Don pascual/don pascualfinal.png?v=20260908u',
+        src: 'IMAGENES/Don pascual/don pascualfinal.webp',
         alt: 'Botella Don Pascual Chardonnay Edición Limitada 2026'
       },
       gallery: [
@@ -393,7 +395,7 @@ const PROYECTOS = [
     cardCategories: ['DISEÑO GRÁFICO', 'GRÁFICA APLICADA'],
     cardDescription: 'Sistema visual para vidrieras y comunicación de servicios.',
     cardClass: 'card-third',
-    cardImage: 'IMAGENES/Ubicar gps/Ubicar Logo.png',
+    cardImage: 'IMAGENES/Ubicar gps/Ubicar Logo.webp',
     cardAlt: 'Vidriera Ubicar GPS',
     role: 'Sistema visual de vidriera: iconos, piezas de producto y marca en local',
     tools: 'Illustrator, Photoshop',
