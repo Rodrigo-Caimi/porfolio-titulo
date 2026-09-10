@@ -1831,6 +1831,16 @@
       '<span class="mayo-gif-play" aria-hidden="true"><span class="mayo-gif-play-icon"></span></span>' +
       '<span class="mayo-gif-tag">GIF</span>';
 
+    const gifHtml = piece06
+      ? '<figure class="mayo-piece mayo-piece--06">' +
+          '<div class="mayo-gif-cluster">' +
+            mayoPhotoHtml(piece06, take(piece06), 'mayo-photo--gif', true, gifOverlay) +
+            '<p class="mayo-gif-aside">El mismo momento.<br>En movimiento.</p>' +
+          '</div>' +
+          '<figcaption>Pieza 06 — GIF</figcaption>' +
+        '</figure>'
+      : '';
+
     const campaignHtml = (
       '<div class="mayo-board-ribbon mayo-board-ribbon--tr" aria-hidden="true">' + ribbonMark + '</div>' +
       '<div class="mayo-board-ribbon mayo-board-ribbon--bl" aria-hidden="true">' + ribbonMark + '</div>' +
@@ -1846,6 +1856,7 @@
             '<p class="mayo-board-brand-name">Mayo Amarillo</p>' +
             '<p class="mayo-board-slogan">QUE NO SEA LA ULTIMA NOTICIA QUE TU FAMILIA RECIBA DE VOS.</p>' +
           '</div>' +
+          gifHtml +
         '</aside>' +
         '<div class="mayo-board-grid">' +
           mayoPieceHtml(piece01, take(piece01), '01', 'Pieza 01') +
@@ -1854,15 +1865,6 @@
           '<div class="mayo-board-bottom">' +
             mayoPieceHtml(piece04, take(piece04), '04', 'Pieza 04') +
             mayoPieceHtml(piece05, take(piece05), '05', 'Pieza 05') +
-            (piece06
-              ? '<figure class="mayo-piece mayo-piece--06">' +
-                  '<div class="mayo-gif-cluster">' +
-                    mayoPhotoHtml(piece06, take(piece06), 'mayo-photo--gif', true, gifOverlay) +
-                    '<p class="mayo-gif-aside">El mismo momento.<br>En movimiento.</p>' +
-                  '</div>' +
-                  '<figcaption>Pieza 06 — GIF</figcaption>' +
-                '</figure>'
-              : '') +
           '</div>' +
         '</div>' +
       '</div>'

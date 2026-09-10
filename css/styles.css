@@ -6578,14 +6578,14 @@ body[data-proyecto-id="2"] .mayo-board-head h2 {
 body[data-proyecto-id="2"] .mayo-board-copy > p {
   margin: 0;
   max-width: 28rem;
-  font-size: clamp(14px, 1.15vw, 16px);
-  line-height: 1.65;
+  font-size: clamp(17px, 1.45vw, 20px);
+  line-height: 1.6;
   color: var(--mayo-muted);
 }
 
 body[data-proyecto-id="2"] .mayo-board-line {
   margin-top: 22px !important;
-  font-size: 12px !important;
+  font-size: clamp(16px, 1.35vw, 18px) !important;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -6593,8 +6593,8 @@ body[data-proyecto-id="2"] .mayo-board-line {
 }
 
 body[data-proyecto-id="2"] .mayo-board-brand {
-  margin-top: auto;
-  padding-top: clamp(36px, 6vw, 72px);
+  margin-top: 28px;
+  padding-top: clamp(20px, 3vw, 36px);
 }
 
 body[data-proyecto-id="2"] .mayo-board-brand-name {
@@ -6649,7 +6649,7 @@ body[data-proyecto-id="2"] .mayo-piece--03 { grid-area: p03; }
 body[data-proyecto-id="2"] .mayo-board-bottom {
   grid-area: bot;
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.05fr) minmax(0, 1.2fr);
+  grid-template-columns: minmax(0, 0.963fr) minmax(0, 1.1235fr) minmax(0, 1.0635fr);
   gap: clamp(12px, 1.5vw, 20px);
   align-items: start;
 }
@@ -6712,6 +6712,17 @@ body[data-proyecto-id="2"] .mayo-piece--05 img {
 
 body[data-proyecto-id="2"] .mayo-piece--06 img {
   object-position: center 58%;
+}
+
+body[data-proyecto-id="2"] .mayo-board-copy .mayo-piece--06 {
+  margin-top: clamp(22px, 3vw, 36px);
+  width: 115%;
+  max-width: 22.5rem;
+}
+
+body[data-proyecto-id="2"] .mayo-board-copy .mayo-gif-cluster {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
 }
 
 body[data-proyecto-id="2"] .mayo-gif-cluster {
@@ -7007,6 +7018,15 @@ body[data-proyecto-id="2"] .other-projects-section h2::after {
 
   body[data-proyecto-id="2"] .mayo-gif-cluster {
     grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  body[data-proyecto-id="2"] .mayo-board-copy .mayo-piece--06 {
+    width: 100%;
+    max-width: none;
+  }
+
+  body[data-proyecto-id="2"] .mayo-board-copy .mayo-gif-cluster {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   body[data-proyecto-id="2"] .mayo-head {
