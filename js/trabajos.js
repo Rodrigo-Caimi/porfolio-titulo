@@ -1467,18 +1467,43 @@
     startAutoplay();
   }
 
+  function isNoirFigmaAction(action) {
+    return !!(action && action.external && /figma\.com/i.test(String(action.href || '')));
+  }
+
+  function noirFigmaBlockHtml(actions, variant) {
+    if (!actions || !actions.length) return '';
+    const links = actions.map(function (action, index) {
+      var cls = 'noir-cta';
+      if (variant === 'hero') {
+        cls += index === 0 ? ' noir-cta--solid' : ' noir-cta--outline';
+      } else {
+        cls += ' noir-cta--ghost';
+      }
+      return actionLinkHtml(action, cls);
+    }).join('');
+    return (
+      '<div class="noir-figma">' +
+        '<p class="noir-figma-title">Figma</p>' +
+        '<div class="noir-figma-links">' + links + '</div>' +
+      '</div>'
+    );
+  }
+
   function renderNoirCase(container, proyecto) {
     const photos = proyecto.gallery || [];
     const slides = (proyecto.heroSlider && proyecto.heroSlider.length) ? proyecto.heroSlider : photos;
     const cards = proyecto.serviceCards || [];
     const lightbox = slides.concat(cards, photos);
     const steps = proyecto.process || [];
-    const figma = (proyecto.actions || []).filter(function (action) {
-      return action && action.external;
-    })[0];
-    const closeActions = (proyecto.actions || []).map(function (action, index) {
+    const actions = proyecto.actions || [];
+    const figmaActions = actions.filter(isNoirFigmaAction);
+    const otherActions = actions.filter(function (action) {
+      return !isNoirFigmaAction(action);
+    });
+    const closeActions = otherActions.map(function (action, index) {
       return actionLinkHtml(action, 'noir-cta' + (index === 0 ? ' noir-cta--solid' : ' noir-cta--ghost'));
-    }).join('');
+    }).join('') + noirFigmaBlockHtml(figmaActions, 'close');
     const heroLead = proyecto.heroLead || proyecto.heroText || proyecto.role;
     const slideHtml = slides.map(function (photo, index) {
       return noirSlideHtml(photo, index, index === 0);
@@ -1528,7 +1553,7 @@
               '<h1>' + (proyecto.pageTitle || proyecto.title) + '</h1>' +
               (heroLead ? '<p class="noir-hero-lead">' + heroLead + '</p>' : '') +
               (proyecto.tools ? '<p class="noir-hero-tools"><span>Herramientas</span> ' + proyecto.tools + '</p>' : '') +
-              (figma ? actionLinkHtml(figma, 'noir-cta noir-cta--solid') : '') +
+              noirFigmaBlockHtml(figmaActions, 'hero') +
             '</div>' +
           '</div>' +
         '</section>' +

@@ -303,8 +303,13 @@ const PROYECTOS = [
         download: 'Noir-estudio-porfolio.pdf'
       },
       {
-        label: 'Ver diseño en Figma',
-        href: 'https://www.figma.com/design/NUjf3slMWEIzsOJaHKwF4n/Noir-Estudio?node-id=321-15&t=XFBXzoCxvzPb1thY-1',
+        label: 'Prototipo para PC',
+        href: 'https://www.figma.com/proto/NUjf3slMWEIzsOJaHKwF4n/Noir-Estudio?node-id=321-16&p=f&t=XUCHV8rGCX53Johv-1&scaling=min-zoom&content-scaling=fixed&page-id=321%3A15',
+        external: true
+      },
+      {
+        label: 'Prototipo para celu',
+        href: 'https://www.figma.com/proto/NUjf3slMWEIzsOJaHKwF4n/Noir-Estudio?node-id=801-1695&p=f&t=JDHiKh6b9bp6WhuM-1&scaling=min-zoom&content-scaling=fixed&page-id=686%3A299',
         external: true
       }
     ],

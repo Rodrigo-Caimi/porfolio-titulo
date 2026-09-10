@@ -2560,6 +2560,50 @@ body[data-proyecto-id="6"] .noir-hero-lead,
   color: var(--noir-gold);
 }
 
+body[data-proyecto-id="6"] .noir-cta--outline {
+  background: transparent;
+  color: var(--noir-ink);
+  border: 1px solid var(--noir-gold);
+}
+
+body[data-proyecto-id="6"] .noir-cta--outline:hover {
+  background: var(--noir-gold);
+  color: #111111;
+}
+
+body[data-proyecto-id="6"] .noir-figma {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+body[data-proyecto-id="6"] .noir-figma-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--noir-gold);
+}
+
+body[data-proyecto-id="6"] .noir-figma-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+body[data-proyecto-id="6"] .noir-close .noir-figma {
+  align-items: flex-start;
+  width: auto;
+}
+
+body[data-proyecto-id="6"] .noir-close .noir-figma-links {
+  justify-content: flex-start;
+}
+
 .noir-wrap {
   width: min(92vw, 1500px);
   margin-inline: auto;
@@ -3058,6 +3102,12 @@ body[data-proyecto-id="6"] .other-projects-section h2::after {
 
   .noir-close-actions,
   .noir-cta {
+    width: 100%;
+  }
+
+  body[data-proyecto-id="6"] .noir-figma,
+  body[data-proyecto-id="6"] .noir-figma-links,
+  body[data-proyecto-id="6"] .noir-close .noir-figma {
     width: 100%;
   }
 
