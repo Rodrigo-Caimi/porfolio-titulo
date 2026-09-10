@@ -1029,84 +1029,19 @@ a.card:active {
   filter: grayscale(0);
 }
 
-/* Mayo Amarillo + Campaña Reel ORT: photo is the card media, no letterbox/frame */
-.work-container .card[data-card-fit="contain"] {
-  align-self: start;
-  height: max-content;
-  min-height: 0;
-  overflow: hidden;
-  background: var(--card);
-}
-
-.work-container .card[data-card-fit="contain"] .thumb {
-  display: block;
-  flex: 0 0 auto;
-  width: 100%;
-  height: auto;
-  min-height: 0;
-  max-height: none;
-  aspect-ratio: auto;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  line-height: 0;
-  font-size: 0;
-  background: transparent;
-  overflow: hidden;
-  border-radius: 17px 17px 0 0;
-}
-
+/* Shared media box: cover fills the card equally. No letterbox, no per-image height. */
+.work-container .card[data-card-fit="contain"],
 .work-container .card.card-fill {
-  align-self: start;
-  height: max-content;
-  min-height: 0;
-}
-
-.work-container .card.card-fill .thumb {
-  display: block;
-  flex: 0 0 auto;
-  width: 100%;
+  align-self: stretch;
   height: auto;
-  min-height: 0;
-  aspect-ratio: auto;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  line-height: 0;
-  background: transparent;
-  overflow: hidden;
 }
 
+.work-container .card[data-card-fit="contain"] .thumb img,
 .work-container .card.card-fill .thumb img {
-  position: static;
-  inset: auto;
-  display: block;
   width: 100%;
-  height: auto;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
+  height: 100%;
   object-fit: cover;
   object-position: center;
-}
-
-.work-container .card[data-card-fit="contain"] .thumb img {
-  position: static;
-  inset: auto;
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  max-height: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  vertical-align: top;
-  line-height: 0;
-  aspect-ratio: auto;
-  object-fit: fill;
-  object-position: center top;
 }
 
 .card-body {
@@ -1801,9 +1736,10 @@ textarea {
 }
 
 @media (max-width: 1024px) and (min-width: 921px) {
-  .card-pair:not([data-card-fit="contain"]) .thumb {
-    flex: 1 1 auto;
-    aspect-ratio: auto;
+  .card-third .thumb,
+  .card-pair .thumb {
+    flex: 0 0 auto;
+    aspect-ratio: 16 / 9;
     min-height: 0;
   }
 }
@@ -1960,21 +1896,6 @@ textarea {
     min-height: 0;
   }
 
-  .work-container .card[data-card-fit="contain"] .thumb {
-    flex: 0 0 auto;
-    aspect-ratio: auto;
-    height: auto;
-    min-height: 0;
-    line-height: 0;
-  }
-
-  .work-container .card[data-card-fit="contain"] .thumb img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: fill;
-  }
-
   .card-third,
   .card-pair {
     grid-column: span 1;
@@ -2084,19 +2005,6 @@ textarea {
   .card-third .thumb,
   .card-pair .thumb {
     aspect-ratio: 16 / 9;
-  }
-
-  .work-container .card[data-card-fit="contain"] .thumb {
-    aspect-ratio: auto;
-    height: auto;
-    line-height: 0;
-  }
-
-  .work-container .card[data-card-fit="contain"] .thumb img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: fill;
   }
 
   .card-body {
