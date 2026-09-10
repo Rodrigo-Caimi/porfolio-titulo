@@ -1837,7 +1837,6 @@
             mayoPhotoHtml(piece06, take(piece06), 'mayo-photo--gif', true, gifOverlay) +
             '<p class="mayo-gif-aside">El mismo momento.<br>En movimiento.</p>' +
           '</div>' +
-          '<figcaption>Pieza 06 — GIF</figcaption>' +
         '</figure>'
       : '';
 
@@ -1859,12 +1858,12 @@
           gifHtml +
         '</aside>' +
         '<div class="mayo-board-grid">' +
-          mayoPieceHtml(piece01, take(piece01), '01', 'Pieza 01') +
-          mayoPieceHtml(piece02, take(piece02), '02', 'Pieza 02') +
-          mayoPieceHtml(piece03, take(piece03), '03', 'Pieza 03') +
+          mayoPieceHtml(piece01, take(piece01), '01') +
+          mayoPieceHtml(piece02, take(piece02), '02') +
+          mayoPieceHtml(piece03, take(piece03), '03') +
           '<div class="mayo-board-bottom">' +
-            mayoPieceHtml(piece04, take(piece04), '04', 'Pieza 04') +
-            mayoPieceHtml(piece05, take(piece05), '05', 'Pieza 05') +
+            mayoPieceHtml(piece04, take(piece04), '04') +
+            mayoPieceHtml(piece05, take(piece05), '05') +
           '</div>' +
         '</div>' +
       '</div>'

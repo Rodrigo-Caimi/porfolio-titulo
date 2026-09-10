@@ -6496,11 +6496,7 @@ body[data-proyecto-id="2"] .mayo-feed-item img {
 
 body[data-proyecto-id="2"] .mayo-poster figcaption,
 body[data-proyecto-id="2"] .mayo-piece figcaption {
-  margin-top: 10px;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: #8a8a8a;
+  display: none;
 }
 
 body[data-proyecto-id="2"] .mayo-editorial .mayo-feed {
@@ -6542,7 +6538,7 @@ body[data-proyecto-id="2"] .mayo-board {
   display: grid;
   grid-template-columns: minmax(220px, 0.26fr) minmax(0, 1fr);
   gap: clamp(28px, 4vw, 64px);
-  align-items: stretch;
+  align-items: start;
   width: min(94vw, var(--mayo-max));
   margin-inline: auto;
 }
@@ -6550,8 +6546,10 @@ body[data-proyecto-id="2"] .mayo-board {
 body[data-proyecto-id="2"] .mayo-board-copy {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-self: start;
   min-width: 0;
-  padding-top: 4px;
+  padding-top: 0;
 }
 
 body[data-proyecto-id="2"] .mayo-board-head {
@@ -6559,19 +6557,27 @@ body[data-proyecto-id="2"] .mayo-board-head {
   align-items: flex-start;
   gap: 12px;
   margin: 0 0 18px;
+  position: static;
+  top: auto;
+  transform: none;
 }
 
 body[data-proyecto-id="2"] .mayo-board-head .mayo-num {
   font-size: clamp(52px, 5.6vw, 84px);
+  line-height: 1;
 }
 
 body[data-proyecto-id="2"] .mayo-board-head h2 {
-  margin: 10px 0 0;
+  margin: 0;
+  position: static;
+  top: auto;
+  transform: none;
   font-size: clamp(22px, 2.1vw, 32px);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 0.95;
   text-transform: uppercase;
+  text-align: left;
   color: var(--mayo-ink);
 }
 
@@ -6620,13 +6626,14 @@ body[data-proyecto-id="2"] .mayo-board-slogan {
 body[data-proyecto-id="2"] .mayo-board-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 1.16fr);
-  grid-template-rows: minmax(140px, 1fr) minmax(140px, 1fr) auto;
+  grid-template-rows: auto auto auto;
   grid-template-areas:
     "p01 p02"
     "p01 p03"
     "bot bot";
   gap: clamp(12px, 1.5vw, 20px);
   min-width: 0;
+  align-self: start;
 }
 
 body[data-proyecto-id="2"] .mayo-piece {
@@ -6716,8 +6723,8 @@ body[data-proyecto-id="2"] .mayo-piece--06 img {
 
 body[data-proyecto-id="2"] .mayo-board-copy .mayo-piece--06 {
   margin-top: clamp(22px, 3vw, 36px);
-  width: 115%;
-  max-width: 22.5rem;
+  width: 144%;
+  max-width: 28.2rem;
 }
 
 body[data-proyecto-id="2"] .mayo-board-copy .mayo-gif-cluster {
