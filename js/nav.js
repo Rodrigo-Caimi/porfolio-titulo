@@ -93,13 +93,28 @@
     }, 600);
   }
 
-  function toggle() {
-    animateTo(reveal < 0.5 ? 1 : 0);
+  function setOrbit(on) {
+    root.classList.toggle('is-orbit-on', !!on);
+    lastOrbitAt = Date.now();
   }
 
-  function toggleOrbit() {
-    root.classList.toggle('is-orbit-on');
-    lastOrbitAt = Date.now();
+  function ensureOrbit() {
+    if (!root.classList.contains('is-orbit-on')) setOrbit(true);
+  }
+
+  function isActivated() {
+    return root.classList.contains('is-orbit-on') || reveal >= 0.5;
+  }
+
+  // Click/tap mueve las dos capas juntas: foto↔dibujo y disciplinas on/off.
+  function toggleBoth() {
+    if (isActivated()) {
+      setOrbit(false);
+      animateTo(0);
+    } else {
+      setOrbit(true);
+      animateTo(1);
+    }
   }
 
   function dragWidth() {
@@ -109,7 +124,20 @@
 
   function markMoved(dx) {
     // Solo el eje horizontal decide tap vs drag; el clip-path se actualiza igual
-    if (Math.abs(dx) > DRAG_THRESHOLD) moved = true;
+    if (Math.abs(dx) > DRAG_THRESHOLD) {
+      if (!moved) ensureOrbit();
+      moved = true;
+    }
+  }
+
+  function endGesture() {
+    if (!moved) {
+      toggleBoth();
+      return;
+    }
+
+    if (reveal >= 0.18) animateTo(1);
+    else animateTo(0);
   }
 
   function onPointerDown(event) {
@@ -156,14 +184,7 @@
       root.releasePointerCapture(event.pointerId);
     } catch (err) { /* ignore */ }
 
-    if (!moved) {
-      setReveal(startReveal, false);
-      toggleOrbit();
-      return;
-    }
-
-    if (reveal >= 0.18) animateTo(1);
-    else animateTo(0);
+    endGesture();
   }
 
   // Pointer Events cubre mouse + touch + stylus (mejor en celular)
@@ -199,11 +220,7 @@
       dragging = false;
       activePointer = null;
       root.classList.remove('is-dragging');
-      if (!moved) {
-        setReveal(startReveal, false);
-        toggleOrbit();
-      } else if (reveal >= 0.18) animateTo(1);
-      else animateTo(0);
+      endGesture();
     });
 
     root.addEventListener('mousedown', function (event) {
@@ -226,11 +243,7 @@
       if (!dragging) return;
       dragging = false;
       activePointer = null;
-      if (!moved) {
-        setReveal(startReveal, false);
-        toggleOrbit();
-      } else if (reveal >= 0.18) animateTo(1);
-      else animateTo(0);
+      endGesture();
     });
   }
 
@@ -239,15 +252,16 @@
     if (Date.now() - lastOrbitAt < 450) return;
     if (moved) return;
     event.preventDefault();
-    toggleOrbit();
+    toggleBoth();
   });
 
   root.addEventListener('keydown', function (event) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      toggle();
+      toggleBoth();
     } else if (event.key === 'ArrowLeft') {
       event.preventDefault();
+      ensureOrbit();
       animateTo(1);
     } else if (event.key === 'ArrowRight') {
       event.preventDefault();
