@@ -1261,22 +1261,150 @@
   function bindNoirServices(viewport) {
     if (!viewport) return;
     const section = viewport.closest('.noir-services');
+    const track = viewport.querySelector('.noir-services-track');
+    const cards = viewport.querySelectorAll('.noir-service-card');
     const prev = section && section.querySelector('.noir-services-prev');
     const next = section && section.querySelector('.noir-services-next');
+    const dotsRoot = section && section.querySelector('[data-noir-service-dots]');
+    if (!track || !cards.length) return;
 
-    function step() {
-      const card = viewport.querySelector('.noir-service-card');
-      const track = viewport.querySelector('.noir-services-track');
-      const gap = track ? parseFloat(window.getComputedStyle(track).gap) || 20 : 20;
-      return card ? card.getBoundingClientRect().width + gap : 280;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const singleMq = window.matchMedia('(max-width: 900px)');
+    let index = 0;
+    let autoplayId = 0;
+    let userPaused = false;
+
+    if (dotsRoot) {
+      dotsRoot.innerHTML = Array.prototype.map.call(cards, function (_, i) {
+        return (
+          '<button type="button" class="noir-services-dot' + (i === 0 ? ' is-active' : '') + '"' +
+            ' data-noir-service="' + i + '"' +
+            ' aria-label="Ver servicio ' + (i + 1) + '"></button>'
+        );
+      }).join('');
+    }
+    const dots = dotsRoot ? dotsRoot.querySelectorAll('[data-noir-service]') : [];
+
+    function isSingle() {
+      return singleMq.matches;
     }
 
+    function step() {
+      const card = cards[0];
+      const styles = window.getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+      return card ? card.getBoundingClientRect().width + gap : viewport.clientWidth || 280;
+    }
+
+    function maxIndex() {
+      if (isSingle()) return cards.length - 1;
+      const s = step() || 1;
+      return Math.max(0, Math.round(Math.max(0, track.scrollWidth - viewport.clientWidth) / s));
+    }
+
+    function updateUi() {
+      Array.prototype.forEach.call(dots, function (dot, i) {
+        const active = i === index;
+        dot.classList.toggle('is-active', active);
+        if (active) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+      Array.prototype.forEach.call(cards, function (card, i) {
+        if (isSingle()) card.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+        else card.removeAttribute('aria-hidden');
+      });
+    }
+
+    function goTo(nextIndex, instant) {
+      if (isSingle()) {
+        const total = cards.length;
+        index = ((nextIndex % total) + total) % total;
+      } else {
+        index = Math.max(0, Math.min(maxIndex(), nextIndex));
+      }
+      const behavior = instant || reduceMotion.matches ? 'auto' : 'smooth';
+      viewport.scrollTo({ left: step() * index, behavior: behavior });
+      updateUi();
+    }
+
+    function syncFromScroll() {
+      const s = step() || 1;
+      const nextIndex = Math.round(viewport.scrollLeft / s);
+      if (nextIndex === index) return;
+      index = Math.max(0, Math.min(cards.length - 1, nextIndex));
+      updateUi();
+    }
+
+    function stopAutoplay() {
+      window.clearInterval(autoplayId);
+      autoplayId = 0;
+    }
+
+    function pauseAutoplay() {
+      userPaused = true;
+      stopAutoplay();
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      if (userPaused || reduceMotion.matches || !isSingle() || cards.length < 2) return;
+      autoplayId = window.setInterval(function () {
+        goTo(index + 1);
+      }, 5600);
+    }
+
+    viewport.addEventListener('scroll', syncFromScroll, { passive: true });
+
     if (prev) prev.addEventListener('click', function () {
-      viewport.scrollBy({ left: -step(), behavior: 'smooth' });
+      pauseAutoplay();
+      goTo(index - 1);
     });
     if (next) next.addEventListener('click', function () {
-      viewport.scrollBy({ left: step(), behavior: 'smooth' });
+      pauseAutoplay();
+      goTo(index + 1);
     });
+    Array.prototype.forEach.call(dots, function (dot, i) {
+      dot.addEventListener('click', function () {
+        pauseAutoplay();
+        goTo(i);
+      });
+    });
+
+    viewport.addEventListener('pointerdown', pauseAutoplay);
+    section.addEventListener('focusin', pauseAutoplay);
+
+    viewport.setAttribute('tabindex', '0');
+    viewport.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        pauseAutoplay();
+        goTo(index - 1);
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        pauseAutoplay();
+        goTo(index + 1);
+      }
+    });
+
+    function onModeChange() {
+      goTo(index, true);
+      startAutoplay();
+    }
+
+    if (singleMq.addEventListener) singleMq.addEventListener('change', onModeChange);
+    else singleMq.addListener(onModeChange);
+
+    let resizeTimer = 0;
+    window.addEventListener('resize', function () {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(function () {
+        goTo(index, true);
+      }, 120);
+    });
+
+    updateUi();
+    startAutoplay();
   }
 
   function renderNoirCase(container, proyecto) {
@@ -1346,12 +1474,13 @@
         (cardHtml
           ? '<section class="noir-services" aria-label="Servicios">' +
               '<div class="noir-services-row">' +
-                '<button type="button" class="noir-services-arrow noir-services-prev" aria-label="Ver anteriores">‹</button>' +
+                '<button type="button" class="noir-services-arrow noir-services-prev" aria-label="Ver servicio anterior">‹</button>' +
                 '<div class="noir-services-viewport" data-noir-services>' +
                   '<div class="noir-services-track">' + cardHtml + '</div>' +
                 '</div>' +
-                '<button type="button" class="noir-services-arrow noir-services-next" aria-label="Ver siguientes">›</button>' +
+                '<button type="button" class="noir-services-arrow noir-services-next" aria-label="Ver servicio siguiente">›</button>' +
               '</div>' +
+              '<div class="noir-services-dots" data-noir-service-dots></div>' +
               (proyecto.servicesNote ? '<p class="noir-services-note">' + proyecto.servicesNote + '</p>' : '') +
             '</section>'
           : '') +
