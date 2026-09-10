@@ -861,24 +861,49 @@
     redraw();
   }
 
+  function wrapLightboxGlyph(btn, modifier) {
+    if (!btn || btn.querySelector('.lightbox-glyph')) return;
+    const glyph = document.createElement('span');
+    glyph.className = 'lightbox-glyph lightbox-glyph--' + modifier;
+    glyph.setAttribute('aria-hidden', 'true');
+    while (btn.firstChild) glyph.appendChild(btn.firstChild);
+    btn.appendChild(glyph);
+  }
+
   function bindSimpleLightbox(gallery, dialog, items, opts) {
     if (!gallery || !dialog || !items || !items.length) return;
     opts = opts || {};
     const itemSel = opts.item || '[data-ubicar-index]';
     const indexAttr = opts.indexAttr || 'data-ubicar-index';
-    const img = dialog.querySelector('img');
+
+    let stage = dialog.querySelector('.lightbox-stage');
+    if (!stage) {
+      stage = document.createElement('div');
+      stage.className = 'lightbox-stage';
+      while (dialog.firstChild) stage.appendChild(dialog.firstChild);
+      dialog.appendChild(stage);
+    }
+
+    const img = stage.querySelector('img');
     const closeBtn = dialog.querySelector(opts.close || '.ubicar-lightbox-close');
     const prevBtn = dialog.querySelector(opts.prev || '.ubicar-lightbox-prev');
     const nextBtn = dialog.querySelector(opts.next || '.ubicar-lightbox-next');
     let index = 0;
+    let swipeX = 0;
+
+    wrapLightboxGlyph(closeBtn, 'close');
+    wrapLightboxGlyph(prevBtn, 'prev');
+    wrapLightboxGlyph(nextBtn, 'next');
 
     function show(i) {
       index = (i + items.length) % items.length;
       const item = items[index];
       img.src = asset(item.src);
       img.alt = item.alt || '';
-      if (item.w) img.width = item.w;
-      if (item.h) img.height = item.h;
+      img.removeAttribute('width');
+      img.removeAttribute('height');
+      if (item.w && item.h) img.style.aspectRatio = item.w + ' / ' + item.h;
+      else img.style.removeProperty('aspect-ratio');
       if (typeof dialog.showModal === 'function' && !dialog.open) dialog.showModal();
     }
 
@@ -899,6 +924,17 @@
       if (event.key === 'ArrowLeft') show(index - 1);
       if (event.key === 'ArrowRight') show(index + 1);
     });
+    dialog.addEventListener('touchstart', function (event) {
+      if (!event.changedTouches || !event.changedTouches.length) return;
+      swipeX = event.changedTouches[0].clientX;
+    }, { passive: true });
+    dialog.addEventListener('touchend', function (event) {
+      if (!dialog.open || !event.changedTouches || !event.changedTouches.length) return;
+      const dx = event.changedTouches[0].clientX - swipeX;
+      if (Math.abs(dx) < 56) return;
+      if (dx > 0) show(index - 1);
+      else show(index + 1);
+    }, { passive: true });
     dialog.addEventListener('close', function () {
       img.removeAttribute('src');
     });

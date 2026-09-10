@@ -6284,3 +6284,108 @@ html.js-motion body[data-proyecto-id="2"] .mayo-close.reveal.is-in {
     transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Shared gallery lightbox: photo centered in the viewport, glyphs optically centered */
+.noir-lightbox[open],
+body[data-proyecto-id="7"] .wine-lightbox[open],
+body[data-proyecto-id="8"] .ubicar-lightbox[open],
+body[data-proyecto-id="2"] .mayo-lightbox[open] {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  overscroll-behavior: contain;
+}
+
+.lightbox-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  max-width: min(96vw, 1280px);
+  max-height: min(92vh, 100dvh);
+  justify-self: center;
+  align-self: center;
+}
+
+.noir-lightbox img,
+body[data-proyecto-id="7"] .wine-lightbox img,
+body[data-proyecto-id="8"] .ubicar-lightbox img,
+body[data-proyecto-id="2"] .mayo-lightbox img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(92vw, 1200px);
+  max-height: min(86vh, calc(100dvh - 32px));
+  object-fit: contain;
+  margin: 0;
+  justify-self: center;
+  align-self: center;
+}
+
+.noir-lightbox-close,
+.noir-lightbox-prev,
+.noir-lightbox-next,
+body[data-proyecto-id="7"] .wine-lightbox-close,
+body[data-proyecto-id="7"] .wine-lightbox-prev,
+body[data-proyecto-id="7"] .wine-lightbox-next,
+body[data-proyecto-id="8"] .ubicar-lightbox-close,
+body[data-proyecto-id="8"] .ubicar-lightbox-prev,
+body[data-proyecto-id="8"] .ubicar-lightbox-next,
+body[data-proyecto-id="2"] .mayo-lightbox-close,
+body[data-proyecto-id="2"] .mayo-lightbox-prev,
+body[data-proyecto-id="2"] .mayo-lightbox-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  font-weight: 400;
+  z-index: 2;
+  text-box: trim-both cap alphabetic;
+}
+
+.lightbox-glyph {
+  display: block;
+  line-height: 1;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.lightbox-glyph--prev {
+  transform: translate(-0.06em, -0.08em);
+}
+
+.lightbox-glyph--next {
+  transform: translate(0.06em, -0.08em);
+}
+
+.lightbox-glyph--close {
+  transform: translateY(-0.07em);
+}
+
+@media (max-width: 900px) {
+  .lightbox-stage {
+    max-width: min(100vw, 100%);
+    max-height: min(100dvh, 100%);
+  }
+
+  .noir-lightbox img,
+  body[data-proyecto-id="7"] .wine-lightbox img,
+  body[data-proyecto-id="8"] .ubicar-lightbox img,
+  body[data-proyecto-id="2"] .mayo-lightbox img {
+    max-width: min(94vw, calc(100vw - 16px));
+    max-height: min(82dvh, calc(100dvh - 48px));
+  }
+}
+
