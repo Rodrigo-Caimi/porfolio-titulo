@@ -34,7 +34,7 @@
   function renderWorkGrid(container) {
     if (!container) return;
 
-    const layoutOrder = [8, 6, 7, 2, 5, 1, 3, 4];
+    const layoutOrder = [8, 6, 7, 2, 5, 4, 1, 3];
     const ordered = layoutOrder
       .map(function (id) { return getProyecto(id); })
       .filter(Boolean);
@@ -1802,9 +1802,8 @@
     const piece05 = mayoFindPhoto(photos, '2-posteoig.jpg');
     const piece06 = gifs[0] || mayoFindPhoto(photos, 'reel-ig-final.gif');
     const ribbonMark =
-      '<svg viewBox="0 0 64 88" fill="none" aria-hidden="true">' +
-        '<path fill="#f0c400" d="M32 2C21 20 11 36 11 52c0 11 7 19 17 22L8 84l6 2 18-16 18 16 6-2-20-10c10-3 17-11 17-22C53 36 43 20 32 2z"/>' +
-      '</svg>';
+      '<img src="' + asset('IMAGENES/Mayo amarillo/moño mayo.png?v=20260910s07') +
+        '" alt="" width="280" height="396" decoding="async">';
     const gifOverlay =
       '<span class="mayo-gif-play" aria-hidden="true"><span class="mayo-gif-play-icon"></span></span>' +
       '<span class="mayo-gif-tag">GIF</span>';
@@ -1839,10 +1838,8 @@
           mayoPieceHtml(piece01, take(piece01), '01') +
           mayoPieceHtml(piece02, take(piece02), '02') +
           mayoPieceHtml(piece03, take(piece03), '03') +
-          '<div class="mayo-board-bottom">' +
-            mayoPieceHtml(piece04, take(piece04), '04') +
-            mayoPieceHtml(piece05, take(piece05), '05') +
-          '</div>' +
+          mayoPieceHtml(piece04, take(piece04), '04') +
+          mayoPieceHtml(piece05, take(piece05), '05') +
         '</div>' +
       '</div>'
     );

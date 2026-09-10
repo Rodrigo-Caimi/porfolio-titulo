@@ -1056,6 +1056,41 @@ a.card:active {
   border-radius: 17px 17px 0 0;
 }
 
+.work-container .card.card-fill {
+  align-self: start;
+  height: max-content;
+  min-height: 0;
+}
+
+.work-container .card.card-fill .thumb {
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: auto;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  line-height: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.work-container .card.card-fill .thumb img {
+  position: static;
+  inset: auto;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
 .work-container .card[data-card-fit="contain"] .thumb img {
   position: static;
   inset: auto;
@@ -2350,7 +2385,7 @@ body[data-proyecto-id="4"] .photo-hero-copy {
   justify-content: center;
   gap: 18px;
   min-height: min(82vh, 820px);
-  width: min(92vw, 1320px);
+  width: min(94vw, 1600px);
   margin: 0 auto;
   padding: 72px 0 64px;
   box-sizing: border-box;
@@ -2419,7 +2454,7 @@ body[data-proyecto-id="4"] .photo-essay {
   display: grid;
   grid-template-columns: minmax(200px, 0.52fr) minmax(0, 1.7fr);
   gap: clamp(24px, 4vw, 56px);
-  width: min(92vw, 1320px);
+  width: min(94vw, 1600px);
   margin: 0 auto;
   padding: 72px 0 28px;
   align-items: start;
@@ -2505,7 +2540,7 @@ body[data-proyecto-id="4"] .photo-shot--contain img {
 }
 
 body[data-proyecto-id="4"] .photo-process {
-  width: min(92vw, 1320px);
+  width: min(94vw, 1600px);
   margin: 0 auto;
   padding: 48px 0 36px;
   box-sizing: border-box;
@@ -2566,7 +2601,7 @@ body[data-proyecto-id="4"] .other-projects-section {
 }
 
 body[data-proyecto-id="4"] .other-projects-section h2 {
-  width: min(92vw, 1320px);
+  width: min(94vw, 1600px);
   margin: 0 auto 28px;
   text-align: left;
   font-size: clamp(28px, 3.4vw, 42px);
@@ -2578,7 +2613,7 @@ body[data-proyecto-id="4"] .other-projects-section h2::after {
 }
 
 body[data-proyecto-id="4"] .other-projects-grid {
-  width: min(92vw, 1320px);
+  width: min(94vw, 1600px);
   max-width: none;
   margin: 0 auto;
   padding: 0;
@@ -6498,7 +6533,7 @@ body[data-proyecto-id="2"] .mayo-editorial .mayo-feed {
   max-width: none;
   margin: 0;
   padding: clamp(36px, 6vw, 80px) 0 clamp(72px, 9vw, 120px);
-  overflow: hidden;
+  overflow: visible;
   background: #fff;
 }
 
@@ -6509,19 +6544,21 @@ body[data-proyecto-id="2"] .mayo-board-ribbon {
   line-height: 0;
 }
 
-body[data-proyecto-id="2"] .mayo-board-ribbon svg {
+body[data-proyecto-id="2"] .mayo-board-ribbon img {
   display: block;
-  width: min(28vw, 280px);
+  width: min(18vw, 168px);
   height: auto;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 body[data-proyecto-id="2"] .mayo-board-ribbon--tr {
-  top: -4%;
-  right: 2%;
+  top: 1.5%;
+  right: 1.5%;
 }
 
 body[data-proyecto-id="2"] .mayo-board-ribbon--bl {
-  bottom: -8%;
+  bottom: 2%;
   left: 1%;
 }
 
@@ -6534,6 +6571,7 @@ body[data-proyecto-id="2"] .mayo-board {
   align-items: start;
   width: min(94vw, var(--mayo-max));
   margin-inline: auto;
+  overflow: visible;
 }
 
 body[data-proyecto-id="2"] .mayo-board-copy {
@@ -6542,7 +6580,9 @@ body[data-proyecto-id="2"] .mayo-board-copy {
   justify-content: flex-start;
   align-self: start;
   min-width: 0;
+  max-width: 100%;
   padding-top: 0;
+  overflow: hidden;
 }
 
 body[data-proyecto-id="2"] .mayo-board-head {
@@ -6623,15 +6663,18 @@ body[data-proyecto-id="2"] .mayo-board-grid {
   grid-template-areas:
     "p01 p02"
     "p01 p03"
-    "bot bot";
+    "p04 p05";
   gap: clamp(12px, 1.5vw, 20px);
   min-width: 0;
   align-self: start;
+  isolation: isolate;
+  overflow: hidden;
 }
 
 body[data-proyecto-id="2"] .mayo-piece {
   margin: 0;
   min-width: 0;
+  overflow: hidden;
 }
 
 body[data-proyecto-id="2"] .mayo-piece--01,
@@ -6645,14 +6688,8 @@ body[data-proyecto-id="2"] .mayo-piece--03 {
 body[data-proyecto-id="2"] .mayo-piece--01 { grid-area: p01; }
 body[data-proyecto-id="2"] .mayo-piece--02 { grid-area: p02; }
 body[data-proyecto-id="2"] .mayo-piece--03 { grid-area: p03; }
-
-body[data-proyecto-id="2"] .mayo-board-bottom {
-  grid-area: bot;
-  display: grid;
-  grid-template-columns: minmax(0, 0.963fr) minmax(0, 1.1235fr) minmax(0, 1.0635fr);
-  gap: clamp(12px, 1.5vw, 20px);
-  align-items: start;
-}
+body[data-proyecto-id="2"] .mayo-piece--04 { grid-area: p04; }
+body[data-proyecto-id="2"] .mayo-piece--05 { grid-area: p05; }
 
 body[data-proyecto-id="2"] .mayo-piece .mayo-photo {
   position: relative;
@@ -6716,8 +6753,8 @@ body[data-proyecto-id="2"] .mayo-piece--06 img {
 
 body[data-proyecto-id="2"] .mayo-board-copy .mayo-piece--06 {
   margin-top: clamp(22px, 3vw, 36px);
-  width: 144%;
-  max-width: 28.2rem;
+  width: 100%;
+  max-width: 100%;
 }
 
 body[data-proyecto-id="2"] .mayo-board-copy .mayo-gif-cluster {
@@ -6976,11 +7013,8 @@ body[data-proyecto-id="2"] .other-projects-section h2::after {
       "p01"
       "p02"
       "p03"
-      "bot";
-  }
-
-  body[data-proyecto-id="2"] .mayo-board-bottom {
-    grid-template-columns: 1fr;
+      "p04"
+      "p05";
   }
 
   body[data-proyecto-id="2"] .mayo-piece--01,
@@ -6997,9 +7031,9 @@ body[data-proyecto-id="2"] .other-projects-section h2::after {
     min-height: 0;
   }
 
-  body[data-proyecto-id="2"] .mayo-board-ribbon svg {
-    width: min(34vw, 160px);
-    opacity: 0.42;
+  body[data-proyecto-id="2"] .mayo-board-ribbon img {
+    width: min(28vw, 120px);
+    opacity: 0.55;
   }
 
   body[data-proyecto-id="2"] .mayo-board-brand {
@@ -7007,13 +7041,13 @@ body[data-proyecto-id="2"] .other-projects-section h2::after {
   }
 
   body[data-proyecto-id="2"] .mayo-board-ribbon--tr {
-    top: -2%;
-    right: -8%;
+    top: 0;
+    right: 2%;
   }
 
   body[data-proyecto-id="2"] .mayo-board-ribbon--bl {
-    bottom: -4%;
-    left: -10%;
+    bottom: 0;
+    left: 2%;
   }
 
   body[data-proyecto-id="2"] .mayo-gif-cluster {
@@ -7022,7 +7056,7 @@ body[data-proyecto-id="2"] .other-projects-section h2::after {
 
   body[data-proyecto-id="2"] .mayo-board-copy .mayo-piece--06 {
     width: 100%;
-    max-width: none;
+    max-width: 100%;
   }
 
   body[data-proyecto-id="2"] .mayo-board-copy .mayo-gif-cluster {

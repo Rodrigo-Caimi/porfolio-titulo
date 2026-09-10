@@ -157,7 +157,7 @@ const PROYECTOS = [
     category: 'Fotografía',
     cardCategories: ['FOTOGRAFÍA'],
     cardDescription: 'Serie fotográfica centrada en dirección visual y composición.',
-    cardClass: 'card-pair',
+    cardClass: 'card-pair card-fill',
     cardWidth: 800,
     cardHeight: 1201,
     cardImage: 'IMAGENES/Proyecto fotografico/fotografia-cerveza-card.webp',
