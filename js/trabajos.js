@@ -384,10 +384,16 @@
       '</figure>';
 
     const mosaic = gallery.map(function (item, index) {
+      const wh = (item.w && item.h)
+        ? ' width="' + item.w + '" height="' + item.h + '"'
+        : '';
+      const load = index === 0
+        ? ' loading="eager" fetchpriority="high"'
+        : ' loading="lazy"';
       const photo =
         '<button type="button" class="wine-mosaic-item" data-wine-index="' + index + '">' +
           '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' +
-            (index < 3 ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
+            wh + load +
             ' decoding="async">' +
         '</button>';
       return index === 3 ? photo + videoHtml : photo;

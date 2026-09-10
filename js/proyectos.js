@@ -313,15 +313,15 @@ const PROYECTOS = [
         alt: 'Botella Don Pascual Chardonnay Edición Limitada 2026'
       },
       gallery: [
-        { src: 'IMAGENES/Don pascual/don-pascual-afiche.jpg', alt: 'Afiche Don Pascual Edición Limitada' },
-        { src: 'IMAGENES/Don pascual/don-pascual-campana.jpg', alt: 'Mockup de campaña Don Pascual junto al fuego' },
-        { src: 'IMAGENES/Don pascual/don-pascual-etiqueta.jpg', alt: 'Etiqueta con ilustración Don Pascual' },
-        { src: 'IMAGENES/Don pascual/Plano 6-Copas chocando.png', alt: 'Copas de Don Pascual brindando junto al fuego' },
-        { src: 'IMAGENES/Don pascual/Plano 5-Miradas complices.png', alt: 'Miradas cómplices junto al fuego con Don Pascual' },
-        { src: 'IMAGENES/Don pascual/cartel omnibus2.png', alt: 'Campaña Don Pascual en ómnibus' },
-        { src: 'IMAGENES/Don pascual/Familia pascual sirviendo vino.png', alt: 'Familia sirviendo Don Pascual' },
-        { src: 'IMAGENES/Don pascual/Plano 7-Tomando Vino.png', alt: 'Escena de campaña Don Pascual tomando vino' },
-        { src: 'IMAGENES/Don pascual/don-pascual-botella-fuego.jpg', alt: 'Botella Don Pascual junto al fuego' }
+        { src: 'IMAGENES/Don pascual/don-pascual-afiche.webp', alt: 'Afiche Don Pascual Edición Limitada', w: 1130, h: 1600 },
+        { src: 'IMAGENES/Don pascual/don-pascual-campana.webp', alt: 'Mockup de campaña Don Pascual junto al fuego', w: 1600, h: 640 },
+        { src: 'IMAGENES/Don pascual/don-pascual-etiqueta.webp', alt: 'Etiqueta con ilustración Don Pascual', w: 683, h: 1024 },
+        { src: 'IMAGENES/Don pascual/Plano 6-Copas chocando.webp', alt: 'Copas de Don Pascual brindando junto al fuego', w: 900, h: 1600 },
+        { src: 'IMAGENES/Don pascual/Plano 5-Miradas complices.webp', alt: 'Miradas cómplices junto al fuego con Don Pascual', w: 900, h: 1600 },
+        { src: 'IMAGENES/Don pascual/cartel omnibus2.webp', alt: 'Campaña Don Pascual en ómnibus', w: 1338, h: 491 },
+        { src: 'IMAGENES/Don pascual/Familia pascual sirviendo vino.webp', alt: 'Familia sirviendo Don Pascual', w: 1055, h: 1491 },
+        { src: 'IMAGENES/Don pascual/Plano 7-Tomando Vino.webp', alt: 'Escena de campaña Don Pascual tomando vino', w: 900, h: 1600 },
+        { src: 'IMAGENES/Don pascual/don-pascual-botella-fuego.webp', alt: 'Botella Don Pascual junto al fuego', w: 900, h: 1600 }
       ]
     },
     gallery: [],
