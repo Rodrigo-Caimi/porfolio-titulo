@@ -1836,7 +1836,8 @@
 
     container.innerHTML =
       '<h2>Otros proyectos</h2>' +
-      '<div class="other-projects-grid">' + cards + '</div>';
+      '<div class="other-projects-grid">' + cards + '</div>' +
+      '<p class="other-projects-home"><a href="' + homeHref() + '#trabajos">Ver todos los trabajos</a></p>';
   }
 
   function renderProjectTitle(container, proyecto) {
