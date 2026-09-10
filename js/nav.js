@@ -64,6 +64,7 @@
   var lastToggleAt = 0;
   var lastOrbitAt = 0;
   var DRAG_THRESHOLD = 6;
+  var MORPH_MS = 780;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function setReveal(value, animate) {
@@ -90,7 +91,7 @@
     if (reduceMotion) return;
     window.setTimeout(function () {
       root.classList.remove('is-animating');
-    }, 600);
+    }, MORPH_MS + 40);
   }
 
   function setOrbit(on) {
