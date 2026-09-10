@@ -28,6 +28,7 @@ html {
   color-scheme: light;
   background-color: var(--bg);
   -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y;
 }
 
 html,
@@ -526,10 +527,11 @@ section.hero::after {
   justify-self: center;
   background: transparent;
   position: relative;
-  touch-action: none;
+  touch-action: pan-y;
+  pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
-  cursor: pointer;
+  cursor: default;
   -webkit-tap-highlight-color: transparent;
   box-shadow: none;
 }
@@ -544,6 +546,9 @@ section.hero::after {
   overflow: hidden;
   background: #E4E4E4;
   box-shadow: 0 0 0 1px rgba(28, 28, 28, 0.08), 0 18px 40px rgba(28, 28, 28, 0.08);
+  pointer-events: auto;
+  touch-action: pan-y;
+  cursor: pointer;
 }
 
 .hero-image img {
