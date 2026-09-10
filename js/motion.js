@@ -35,6 +35,7 @@
     watchList('.project-detail-title, .project-meta-section, .project-actions-section');
     watchList('body[data-proyecto-id="5"] .reel-hero-copy, body[data-proyecto-id="5"] .reel-phone');
     watchList('body[data-proyecto-id="5"] .reel-step, body[data-proyecto-id="5"] .reel-result, body[data-proyecto-id="5"] .reel-gallery-item', 90);
+    watchList('body[data-proyecto-id="4"] .photo-hero-copy, body[data-proyecto-id="4"] .photo-essay-copy', 80);
     watchList('.shot', 70);
     watchList('.golden-item', 80);
     watchList('.wine-intro, .wine-stage, .wine-block, .wine-gallery-title, .wine-mosaic-item, .wine-mosaic-video, .wine-close', 70);
@@ -74,11 +75,11 @@
     }
 
     var processRoot = document.querySelector('[data-proyecto-process]');
-    if (processRoot && !processRoot.querySelector('.noir-editorial, .wine-editorial, .ubicar-intro, .mayo-editorial, .reel-process')) {
+    if (processRoot && !processRoot.querySelector('.noir-editorial, .wine-editorial, .ubicar-intro, .mayo-editorial, .reel-process, .photo-process')) {
       var processRetries = 0;
       var processTimer = window.setInterval(function () {
         processRetries += 1;
-        if (processRoot.querySelector('.noir-editorial, .wine-editorial, .ubicar-intro, .mayo-editorial, .reel-process') || processRetries > 20) {
+        if (processRoot.querySelector('.noir-editorial, .wine-editorial, .ubicar-intro, .mayo-editorial, .reel-process, .photo-process') || processRetries > 20) {
           window.clearInterval(processTimer);
           bindReveals();
         }
@@ -86,11 +87,11 @@
     }
 
     var galleryRoot = document.querySelector('[data-proyecto-gallery]');
-    if (galleryRoot && !galleryRoot.querySelector('.gallery, .reel-hero')) {
+    if (galleryRoot && !galleryRoot.querySelector('.gallery, .reel-hero, .photo-case')) {
       var galleryRetries = 0;
       var galleryTimer = window.setInterval(function () {
         galleryRetries += 1;
-        if (galleryRoot.querySelector('.gallery, .reel-hero') || galleryRetries > 20) {
+        if (galleryRoot.querySelector('.gallery, .reel-hero, .photo-case') || galleryRetries > 20) {
           window.clearInterval(galleryTimer);
           bindReveals();
         }

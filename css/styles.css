@@ -2279,6 +2279,384 @@ textarea {
   grid-column: 1 / -1;
 }
 
+/* Proyecto Fotográfico: hero cinematográfico + galería editorial */
+body[data-proyecto-id="4"] .project-back-bar,
+body[data-proyecto-id="4"] .project-detail-title,
+body[data-proyecto-id="4"] .project-meta-section,
+body[data-proyecto-id="4"] .project-actions-section {
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+body[data-proyecto-id="4"] .work-detail-hero,
+body[data-proyecto-id="4"] .golden-section,
+body[data-proyecto-id="4"] .other-projects-section {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+  align-self: stretch;
+}
+
+body[data-proyecto-id="4"] .work-detail-hero [data-proyecto-gallery] {
+  width: 100%;
+}
+
+body[data-proyecto-id="4"] .photo-case {
+  width: 100%;
+}
+
+body[data-proyecto-id="4"] .photo-hero {
+  position: relative;
+  width: 100%;
+  min-height: min(82vh, 820px);
+  color: #fff;
+  overflow: hidden;
+  background: #111;
+}
+
+body[data-proyecto-id="4"] .photo-hero-media {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+body[data-proyecto-id="4"] .photo-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 42%;
+  display: block;
+}
+
+body[data-proyecto-id="4"] .photo-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.42) 38%, rgba(0, 0, 0, 0.12) 68%, rgba(0, 0, 0, 0.04) 100%);
+  pointer-events: none;
+}
+
+body[data-proyecto-id="4"] .photo-hero-copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 18px;
+  min-height: min(82vh, 820px);
+  width: min(92vw, 1320px);
+  margin: 0 auto;
+  padding: 72px 0 64px;
+  box-sizing: border-box;
+}
+
+body[data-proyecto-id="4"] .photo-kicker {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+body[data-proyecto-id="4"] .photo-hero h1 {
+  margin: 0;
+  max-width: 11ch;
+  font-size: clamp(42px, 6.4vw, 78px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: #fff;
+}
+
+body[data-proyecto-id="4"] .photo-hero-lead {
+  margin: 0;
+  max-width: 36ch;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+body[data-proyecto-id="4"] .photo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  border: 1px solid #fff;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+body[data-proyecto-id="4"] .photo-cta:hover {
+  background: transparent;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+body[data-proyecto-id="4"] .photo-cta svg {
+  display: block;
+}
+
+html.js-motion body[data-proyecto-id="4"] .photo-shot.reveal,
+html.js-motion body[data-proyecto-id="4"] .photo-step.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+body[data-proyecto-id="4"] .photo-essay {
+  display: grid;
+  grid-template-columns: minmax(200px, 0.52fr) minmax(0, 1.7fr);
+  gap: clamp(24px, 4vw, 56px);
+  width: min(92vw, 1320px);
+  margin: 0 auto;
+  padding: 72px 0 28px;
+  align-items: start;
+  box-sizing: border-box;
+}
+
+body[data-proyecto-id="4"] .photo-essay-copy {
+  padding-top: 8px;
+}
+
+body[data-proyecto-id="4"] .photo-essay-role {
+  margin: 0 0 28px;
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+body[data-proyecto-id="4"] .photo-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body[data-proyecto-id="4"] .photo-tools li {
+  position: relative;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+body[data-proyecto-id="4"] .photo-essay-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 14px;
+  align-items: stretch;
+  min-height: min(72vh, 760px);
+}
+
+body[data-proyecto-id="4"] .photo-essay-stack {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+
+body[data-proyecto-id="4"] .photo-shot {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #111;
+  min-height: 0;
+}
+
+body[data-proyecto-id="4"] .photo-shot img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+body[data-proyecto-id="4"] .photo-shot--lead img {
+  object-position: 50% 42%;
+}
+
+body[data-proyecto-id="4"] .photo-shot--wide img {
+  object-position: 50% 50%;
+}
+
+body[data-proyecto-id="4"] .photo-shot--contain {
+  background: #0f0f0f;
+}
+
+body[data-proyecto-id="4"] .photo-shot--contain img {
+  object-fit: contain;
+  object-position: center;
+}
+
+body[data-proyecto-id="4"] .photo-process {
+  width: min(92vw, 1320px);
+  margin: 0 auto;
+  padding: 48px 0 36px;
+  box-sizing: border-box;
+}
+
+body[data-proyecto-id="4"] .golden-section h2,
+body[data-proyecto-id="4"] .photo-process h2 {
+  margin: 0 0 36px;
+  font-size: clamp(28px, 3.4vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-align: left;
+}
+
+body[data-proyecto-id="4"] .golden-section h2::after {
+  display: none;
+}
+
+body[data-proyecto-id="4"] .photo-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 40px;
+}
+
+body[data-proyecto-id="4"] .photo-step {
+  min-width: 0;
+  padding-top: 8px;
+}
+
+body[data-proyecto-id="4"] .photo-step-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--fg);
+}
+
+body[data-proyecto-id="4"] .photo-step h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+body[data-proyecto-id="4"] .photo-step p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+body[data-proyecto-id="4"] .other-projects-section {
+  padding: 28px 0 48px;
+}
+
+body[data-proyecto-id="4"] .other-projects-section h2 {
+  width: min(92vw, 1320px);
+  margin: 0 auto 28px;
+  text-align: left;
+  font-size: clamp(28px, 3.4vw, 42px);
+}
+
+body[data-proyecto-id="4"] .other-projects-section h2::after {
+  left: 0;
+  transform: none;
+}
+
+body[data-proyecto-id="4"] .other-projects-grid {
+  width: min(92vw, 1320px);
+  max-width: none;
+  margin: 0 auto;
+  padding: 0;
+}
+
+@media (max-width: 1020px) {
+  body[data-proyecto-id="4"] .photo-essay {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 48px;
+  }
+
+  body[data-proyecto-id="4"] .photo-essay-role {
+    margin-bottom: 16px;
+  }
+
+  body[data-proyecto-id="4"] .photo-essay-grid {
+    min-height: 560px;
+  }
+
+  body[data-proyecto-id="4"] .photo-process-grid {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-proyecto-id="4"] .photo-hero,
+  body[data-proyecto-id="4"] .photo-hero-copy {
+    min-height: calc(100dvh - var(--header-h));
+  }
+
+  body[data-proyecto-id="4"] .photo-hero::after {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.55) 48%, rgba(0, 0, 0, 0.82) 100%);
+  }
+
+  body[data-proyecto-id="4"] .photo-hero-copy {
+    justify-content: flex-end;
+    width: auto;
+    margin: 0 20px;
+    padding: 36px 0 28px;
+  }
+
+  body[data-proyecto-id="4"] .photo-hero h1 {
+    max-width: none;
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  body[data-proyecto-id="4"] .photo-hero-lead {
+    max-width: none;
+  }
+
+  body[data-proyecto-id="4"] .photo-cta {
+    max-width: 100%;
+  }
+
+  body[data-proyecto-id="4"] .photo-essay-grid,
+  body[data-proyecto-id="4"] .photo-essay-stack,
+  body[data-proyecto-id="4"] .photo-process-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    min-height: 0;
+  }
+
+  body[data-proyecto-id="4"] .photo-shot--lead {
+    aspect-ratio: 3 / 4;
+    min-height: 420px;
+  }
+
+  body[data-proyecto-id="4"] .photo-shot--wide {
+    aspect-ratio: 16 / 10;
+    min-height: 210px;
+  }
+
+  body[data-proyecto-id="4"] .photo-process {
+    padding-top: 20px;
+  }
+}
+
 /* Noir Estudio: caso editorial premium */
 body[data-proyecto-id="6"] .project-detail-title,
 body[data-proyecto-id="6"] .work-detail-hero,

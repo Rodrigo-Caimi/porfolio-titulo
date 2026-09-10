@@ -373,6 +373,127 @@
       '</div>';
   }
 
+  function photoSrcKey(item) {
+    return String((item && item.src) || '').toLowerCase().replace(/\\/g, '/');
+  }
+
+  function photoFind(photos, needle) {
+    const key = String(needle || '').toLowerCase();
+    return (photos || []).find(function (item) {
+      return photoSrcKey(item).indexOf(key) !== -1;
+    }) || null;
+  }
+
+  function photoFigureHtml(item, extraClass, eager) {
+    if (!item || !item.src) return '';
+    const src = photoSrcKey(item);
+    const isHero = extraClass && extraClass.indexOf('photo-hero-media') !== -1;
+    const contain = !isHero && (src.indexOf('joyeria') !== -1 || src.indexOf('joyería') !== -1);
+    const classes = (isHero ? '' : 'photo-shot ') + (extraClass || '') + (contain ? ' photo-shot--contain' : '');
+    return (
+      '<figure class="' + classes.trim() + '">' +
+        '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' +
+          (eager ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
+          ' decoding="async">' +
+      '</figure>'
+    );
+  }
+
+  function photoCtaHtml(action) {
+    if (!action || (action.href && String(action.href).indexOf('PEGAR_LINK') !== -1)) return '';
+    const href = action.external ? action.href : asset(action.href);
+    const attrs = action.external
+      ? ' target="_blank" rel="noopener"'
+      : (action.download
+        ? ' target="_blank" rel="noopener" download="' + (action.download || '') + '"'
+        : ' target="_blank" rel="noopener"');
+    return (
+      '<a href="' + href + '"' + attrs + ' class="photo-cta">' +
+        '<span>' + action.label + '</span>' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+          '<path d="M5 12h14M13 6l6 6-6 6"/>' +
+        '</svg>' +
+      '</a>'
+    );
+  }
+
+  function photoProcessIcon(title) {
+    const key = String(title || '').toLowerCase();
+    if (key.indexOf('objetivo') !== -1) {
+      return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>';
+    }
+    if (/t[eé]cnic/.test(key)) {
+      return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h4l2-2h4l2 2h4v11H4z"/><circle cx="12" cy="13.5" r="3.4"/></svg>';
+    }
+    return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.4"/><path d="M3.8 16.2 8.2 12l3.2 3.1 2.4-2.3 6.2 5.2"/></svg>';
+  }
+
+  function renderPhotoHero(container, proyecto) {
+    const photos = proyecto.gallery || [];
+    const hero = photoFind(photos, 'foto-lo-que-no-vemos.jpg') || photoFind(photos, 'lo-que-no-vemos.jpg') || photos[0];
+    const lead = photoFind(photos, 'cerveza') || photos[1] || photos[0];
+    const rest = photos.filter(function (item) {
+      return item && item !== hero && item !== lead;
+    });
+    const action = (proyecto.actions || []).filter(function (item) {
+      return item && item.href && String(item.href).indexOf('PEGAR_LINK') === -1;
+    })[0];
+    const intro = proyecto.cardDescription || '';
+    const tools = String(proyecto.tools || '').split(',').map(function (tool) {
+      return tool.trim();
+    }).filter(Boolean);
+
+    container.innerHTML =
+      '<div class="photo-case">' +
+        '<section class="photo-hero">' +
+          photoFigureHtml(hero, 'photo-hero-media', true) +
+          '<div class="photo-hero-copy">' +
+            (proyecto.category ? '<p class="photo-kicker">' + proyecto.category + '</p>' : '') +
+            '<h1>' + proyecto.title + '</h1>' +
+            (intro ? '<p class="photo-hero-lead">' + intro + '</p>' : '') +
+            photoCtaHtml(action) +
+          '</div>' +
+        '</section>' +
+        '<section class="photo-essay">' +
+          '<div class="photo-essay-copy">' +
+            (proyecto.role ? '<p class="photo-essay-role">' + proyecto.role + '</p>' : '') +
+            (tools.length
+              ? '<ul class="photo-tools">' + tools.map(function (tool) {
+                  return '<li>' + tool + '</li>';
+                }).join('') + '</ul>'
+              : '') +
+          '</div>' +
+          '<div class="photo-essay-grid">' +
+            photoFigureHtml(lead, 'photo-shot--lead', false) +
+            '<div class="photo-essay-stack">' +
+              rest.map(function (item) {
+                return photoFigureHtml(item, 'photo-shot--wide', false);
+              }).join('') +
+            '</div>' +
+          '</div>' +
+        '</section>' +
+      '</div>';
+  }
+
+  function renderPhotoProcess(container, proyecto) {
+    const steps = proyecto.process || [];
+    const items = steps.map(function (item) {
+      return (
+        '<article class="photo-step">' +
+          '<span class="photo-step-icon">' + photoProcessIcon(item.title) + '</span>' +
+          '<h3>' + item.title + '</h3>' +
+          '<p>' + item.text + '</p>' +
+        '</article>'
+      );
+    }).join('');
+
+    container.innerHTML =
+      '<div class="photo-process">' +
+        (proyecto.processTitle ? '<h2>' + proyecto.processTitle + '</h2>' : '') +
+        '<div class="photo-process-grid">' + items + '</div>' +
+      '</div>';
+  }
+
   function renderGallery(container, proyecto) {
     if (!container) return;
 
@@ -385,6 +506,10 @@
     const layout = proyecto.galleryLayout || 'spread';
     if (layout === 'reel') {
       renderReelHero(container, proyecto);
+      return;
+    }
+    if (layout === 'photo') {
+      renderPhotoHero(container, proyecto);
       return;
     }
 
@@ -450,7 +575,7 @@
   function renderActions(container, proyecto) {
     if (!container) return;
 
-    if (isCustomCase(proyecto) || !proyecto.actions || !proyecto.actions.length) {
+    if (isCustomCase(proyecto) || proyecto.galleryLayout === 'photo' || !proyecto.actions || !proyecto.actions.length) {
       container.innerHTML = '';
       container.hidden = true;
       return;
@@ -1852,6 +1977,11 @@
       return;
     }
 
+    if (proyecto.galleryLayout === 'photo') {
+      renderPhotoProcess(container, proyecto);
+      return;
+    }
+
     const items = proyecto.process.map(function (item) {
       return (
         '<div class="golden-item">' +
@@ -1896,7 +2026,7 @@
 
   function renderProjectTitle(container, proyecto) {
     if (!container || !proyecto) return;
-    if (isCustomCase(proyecto) || proyecto.galleryLayout === 'reel') {
+    if (isCustomCase(proyecto) || proyecto.galleryLayout === 'reel' || proyecto.galleryLayout === 'photo') {
       container.innerHTML = '';
       return;
     }

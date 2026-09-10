@@ -164,12 +164,13 @@ const PROYECTOS = [
     cardAlt: 'Proyecto Fotográfico',
     role: 'Fotografía de producto y exploración técnica',
     tools: 'Cámara, Lightroom, Photoshop',
-    galleryLayout: 'essay',
+    hideMeta: true,
+    galleryLayout: 'photo',
     gallery: [
+      { src: 'IMAGENES/Proyecto fotografico/foto-lo-que-no-vemos.jpg', alt: 'Lo que no vemos' },
       { src: 'IMAGENES/Proyecto fotografico/fotografia cerveza.jpg', alt: 'Fotografía cerveza' },
       { src: 'IMAGENES/Proyecto fotografico/joyeriaCreacion.jpg', alt: 'Joyeria Creación' },
-      { src: 'IMAGENES/Proyecto fotografico/foto-lo-que-no-vemos4.jpg', alt: 'Lo que no vemos 4' },
-      { src: 'IMAGENES/Proyecto fotografico/foto-lo-que-no-vemos.jpg', alt: 'Lo que no vemos' }
+      { src: 'IMAGENES/Proyecto fotografico/foto-lo-que-no-vemos4.jpg', alt: 'Lo que no vemos 4' }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
