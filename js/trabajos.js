@@ -973,7 +973,10 @@
     return (
       '<article class="noir-service-card">' +
         noirPhotoHtml(card, index, 'noir-photo--card') +
-        '<h3>' + card.title + '</h3>' +
+        '<div class="noir-service-copy">' +
+          '<h3>' + card.title + '</h3>' +
+          (card.text ? '<p>' + card.text + '</p>' : '') +
+        '</div>' +
       '</article>'
     );
   }
@@ -1178,6 +1181,7 @@
                 '</div>' +
                 '<button type="button" class="noir-services-arrow noir-services-next" aria-label="Ver siguientes">›</button>' +
               '</div>' +
+              (proyecto.servicesNote ? '<p class="noir-services-note">' + proyecto.servicesNote + '</p>' : '') +
             '</section>'
           : '') +
         '<section class="noir-process">' +

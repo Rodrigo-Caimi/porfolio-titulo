@@ -2262,8 +2262,10 @@ body[data-proyecto-id="6"] .noir-hero-lead,
   margin: 0;
   min-width: 0;
   width: 100%;
-  height: min(72vh, 780px);
-  max-height: min(72vh, 780px);
+  min-height: min(86vh, 920px);
+  height: min(88vh, 980px);
+  max-height: min(90vh, 1040px);
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   background: #111;
   touch-action: pan-y;
@@ -2521,9 +2523,12 @@ body[data-proyecto-id="6"] .noir-hero-lead,
   object-fit: cover;
 }
 
+.noir-service-copy {
+  padding: 16px 16px 18px;
+}
+
 .noir-service-card h3 {
   margin: 0;
-  padding: 16px 16px 18px;
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(18px, 1.5vw, 22px);
   font-weight: 500;
@@ -2531,8 +2536,25 @@ body[data-proyecto-id="6"] .noir-hero-lead,
   color: var(--noir-cream);
 }
 
+.noir-service-copy p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(243, 238, 228, 0.78);
+}
+
 .noir-services-arrow {
   flex: 0 0 auto;
+}
+
+.noir-services-note {
+  width: min(92vw, 920px);
+  margin: clamp(40px, 6vw, 72px) auto 0;
+  padding: 0 clamp(20px, 4vw, 40px);
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.6;
+  text-align: center;
+  color: #4a4742;
 }
 
 .noir-gallery {
@@ -2544,18 +2566,23 @@ body[data-proyecto-id="6"] .noir-hero-lead,
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(16px, 2vw, 28px);
+  align-items: start;
 }
 
 .noir-gallery-item {
   margin: 0;
   min-width: 0;
-  background: #111;
+  background: transparent;
 }
 
-.noir-gallery-item img {
+.noir-gallery-item img,
+.noir-gallery-item .noir-photo img {
+  display: block;
   width: 100%;
   height: auto;
   object-fit: contain;
+  object-position: center;
+  background: transparent;
 }
 
 .noir-process {
@@ -2569,7 +2596,7 @@ body[data-proyecto-id="6"] .noir-process h2 {
   padding: 0;
   text-align: left;
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(38px, 5vw, 68px);
+  font-size: clamp(40px, 5.25vw, 71px);
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1.05;
@@ -2762,8 +2789,10 @@ body[data-proyecto-id="6"] .other-projects-section h2::after {
 
   .noir-hero-slider,
   .noir-hero-visual {
-    height: min(58vh, 520px);
-    max-height: min(58vh, 520px);
+    min-height: min(68vh, 640px);
+    height: min(72vh, 720px);
+    max-height: min(76vh, 760px);
+    aspect-ratio: 16 / 11;
   }
 
   .noir-photo--hero img {
@@ -2807,8 +2836,10 @@ body[data-proyecto-id="6"] .other-projects-section h2::after {
 
   .noir-hero-slider,
   .noir-hero-visual {
-    height: min(52vh, 420px);
-    max-height: min(52vh, 420px);
+    min-height: min(58vh, 500px);
+    height: min(64vh, 560px);
+    max-height: min(68vh, 600px);
+    aspect-ratio: 4 / 5;
   }
 
   .noir-hero-arrow,
@@ -2841,7 +2872,7 @@ body[data-proyecto-id="6"] .other-projects-section h2::after {
   }
 
   .noir-process h2 {
-    font-size: clamp(32px, 9vw, 42px);
+    font-size: clamp(34px, 9.5vw, 44px);
   }
 
   .noir-close-actions,

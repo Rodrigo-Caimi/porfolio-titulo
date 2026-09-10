@@ -239,26 +239,28 @@ const PROYECTOS = [
     hideMeta: true,
     processLayout: 'noir',
     heroSlider: [
-      { src: 'IMAGENES/Noir Estudio/noir-interior.jpg', alt: 'Interior Noir Barbería & Estilo' },
-      { src: 'IMAGENES/Noir Estudio/Primeratransformacion.png', alt: 'Transformación Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/experiencia Noir.png', alt: 'Experiencia Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/Slider2.png', alt: 'Herramientas y productos Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/Slider3.png', alt: 'Piezas de marca Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Herramientas Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/noir-productos.jpg', alt: 'Línea de coloración Noir Estudio' }
+      { src: 'IMAGENES/Noir Estudio/Primeratransformacion.png', alt: 'Slider 1 — Transformación Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/Slider2.png', alt: 'Slider 2 — Herramientas y productos Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/Slider3.png', alt: 'Slider 3 — Piezas de marca Noir Estudio' }
     ],
     serviceCards: [
-      { title: 'afeitado', src: 'IMAGENES/Noir Estudio/afeitado.jpg', alt: 'Afeitado Noir Estudio' },
-      { title: 'noir experiencia', src: 'IMAGENES/Noir Estudio/experiencia Noir.png', alt: 'Experiencia Noir Estudio' },
-      { title: 'noir productos', src: 'IMAGENES/Noir Estudio/noir-productos.jpg', alt: 'Productos Noir Estudio' },
-      { title: 'noir herramientas', src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Herramientas Noir Estudio' },
-      { title: 'noir acabado', src: 'IMAGENES/Noir Estudio/noir acabado.png', alt: 'Acabado Noir Estudio' }
+      { title: 'Perfilado', text: 'Afeitado y definición de barba.', src: 'IMAGENES/Noir Estudio/afeitado.jpg', alt: 'Perfilado Noir Estudio' },
+      { title: 'Experiencia Noir', text: 'El ritual de atención en el estudio.', src: 'IMAGENES/Noir Estudio/experiencia-Noir.png', alt: 'Experiencia Noir Estudio' },
+      { title: 'Color y corrección', text: 'Coloración profesional y balance de tono.', src: 'IMAGENES/Noir Estudio/noir-productos.jpg', alt: 'Color y corrección Noir Estudio' },
+      { title: 'Diseño de corte', text: 'Corte a medida según el estilo.', src: 'IMAGENES/Noir Estudio/terminado2.jpg', alt: 'Diseño de corte Noir Estudio' },
+      { title: 'Acabado y estilo', text: 'El look final y el peinado.', src: 'IMAGENES/Noir Estudio/noir-acabado.png', alt: 'Acabado y estilo Noir Estudio' }
     ],
+    servicesNote: 'Las tarjetas funcionan como unidades de información independientes: cada servicio se identifica rápidamente por imagen, nombre y descripción, ayudando al usuario a comparar opciones y entender la propuesta sin sobrecargar la interfaz.',
     gallery: [
       { src: 'IMAGENES/Noir Estudio/noir-interior.jpg', alt: 'Interior Noir Barbería & Estilo' },
-      { src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Herramientas y productos Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/noir-experiencia.jpg', alt: 'Experiencia Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/noir-productos.jpg', alt: 'Línea de coloración Noir Estudio' }
+      { src: 'IMAGENES/Noir Estudio/cuadro-echo-bien.png', alt: 'Antes de la transformación Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/terminado1.jpg', alt: 'Corte terminado Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-experiencia.jpg', alt: 'Experiencia en el sillón Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Herramientas Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/grid2.5.png', alt: 'Composición de herramientas Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/grid3.png', alt: 'Pieza de campaña Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/mapa-1.png', alt: 'Mapa de ubicación Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/mapa-2.png', alt: 'Detalle de mapa Noir Estudio' }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
