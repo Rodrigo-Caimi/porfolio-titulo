@@ -253,7 +253,7 @@ const PROYECTOS = [
     hideMeta: true,
     processLayout: 'noir',
     heroSlider: [
-      { src: 'IMAGENES/Noir Estudio/Primeratransformacion.png', alt: 'Slider 1 — Transformación Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-interior.jpg', alt: 'Interior Noir Estudio' },
       { src: 'IMAGENES/Noir Estudio/Slider2.png', alt: 'Slider 2 — Herramientas y productos Noir Estudio' },
       { src: 'IMAGENES/Noir Estudio/Slider3.png', alt: 'Slider 3 — Piezas de marca Noir Estudio' }
     ],
