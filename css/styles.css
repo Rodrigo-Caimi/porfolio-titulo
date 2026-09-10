@@ -1029,8 +1029,16 @@ a.card:active {
   filter: grayscale(0);
 }
 
-/* Mayo Amarillo + Campaña Reel ORT: media box follows the poster, no letterbox */
-.card[data-card-fit="contain"] .thumb {
+/* Mayo Amarillo + Campaña Reel ORT: photo is the card media, no letterbox/frame */
+.work-container .card[data-card-fit="contain"] {
+  align-self: start;
+  height: max-content;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--card);
+}
+
+.work-container .card[data-card-fit="contain"] .thumb {
   display: block;
   flex: 0 0 auto;
   width: 100%;
@@ -1038,19 +1046,32 @@ a.card:active {
   min-height: 0;
   max-height: none;
   aspect-ratio: auto;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  line-height: 0;
+  font-size: 0;
   background: transparent;
   overflow: hidden;
+  border-radius: 17px 17px 0 0;
 }
 
-.card[data-card-fit="contain"] .thumb img {
+.work-container .card[data-card-fit="contain"] .thumb img {
   position: static;
   inset: auto;
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
-  aspect-ratio: var(--card-media-aspect, auto);
-  object-fit: unset;
-  object-position: center;
+  max-width: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: top;
+  line-height: 0;
+  aspect-ratio: auto;
+  object-fit: fill;
+  object-position: center top;
 }
 
 .card-body {
@@ -1904,16 +1925,19 @@ textarea {
     min-height: 0;
   }
 
-  .card[data-card-fit="contain"] .thumb {
+  .work-container .card[data-card-fit="contain"] .thumb {
     flex: 0 0 auto;
     aspect-ratio: auto;
     height: auto;
     min-height: 0;
+    line-height: 0;
   }
 
-  .card[data-card-fit="contain"] .thumb img {
+  .work-container .card[data-card-fit="contain"] .thumb img {
+    display: block;
     width: 100%;
     height: auto;
+    object-fit: fill;
   }
 
   .card-third,
@@ -2027,14 +2051,17 @@ textarea {
     aspect-ratio: 16 / 9;
   }
 
-  .card[data-card-fit="contain"] .thumb {
+  .work-container .card[data-card-fit="contain"] .thumb {
     aspect-ratio: auto;
     height: auto;
+    line-height: 0;
   }
 
-  .card[data-card-fit="contain"] .thumb img {
+  .work-container .card[data-card-fit="contain"] .thumb img {
+    display: block;
     width: 100%;
     height: auto;
+    object-fit: fill;
   }
 
   .card-body {
