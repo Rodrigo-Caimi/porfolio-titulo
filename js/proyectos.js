@@ -239,9 +239,13 @@ const PROYECTOS = [
     hideMeta: true,
     processLayout: 'noir',
     heroSlider: [
-      { src: 'IMAGENES/Noir Estudio/Primeratransformacion.png', alt: 'Slider 1 — Transformación Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/Slider2.png', alt: 'Slider 2 — Herramientas y productos Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/Slider3.png', alt: 'Slider 3 — Piezas de marca Noir Estudio' }
+      { src: 'IMAGENES/Noir Estudio/noir-interior.jpg', alt: 'Interior Noir Barbería & Estilo' },
+      { src: 'IMAGENES/Noir Estudio/Primeratransformacion.png', alt: 'Transformación Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/experiencia Noir.png', alt: 'Experiencia Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/Slider2.png', alt: 'Herramientas y productos Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/Slider3.png', alt: 'Piezas de marca Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Herramientas Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-productos.jpg', alt: 'Línea de coloración Noir Estudio' }
     ],
     serviceCards: [
       { title: 'afeitado', src: 'IMAGENES/Noir Estudio/afeitado.jpg', alt: 'Afeitado Noir Estudio' },
