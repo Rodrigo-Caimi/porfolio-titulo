@@ -256,18 +256,6 @@
     });
   }
 
-  function reelHasVideoCta(proyecto) {
-    const items = proyecto.gallery || [];
-    const hasEmbed = items.some(function (item) {
-      return isVimeoItem(item) || isDriveItem(item) || isVideoItem(item);
-    });
-    const hasAction = (proyecto.actions || []).some(function (action) {
-      if (!action || (action.href && String(action.href).indexOf('PEGAR_LINK') !== -1)) return false;
-      return action.label && /reel|video|drive|vimeo/i.test(action.label);
-    });
-    return hasEmbed || hasAction;
-  }
-
   function reelMetaIcon(kind) {
     if (kind === 'role') {
       return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5.2 19c1.4-3.2 3.8-4.8 6.8-4.8s5.4 1.6 6.8 4.8"/></svg>';
@@ -292,12 +280,6 @@
     const items = proyecto.gallery || [];
     const videoItem = items.find(isVimeoItem) || items.find(isDriveItem) || items.find(isVideoItem);
     const intro = proyecto.heroLead || proyecto.role || '';
-    const cta = reelHasVideoCta(proyecto)
-      ? '<a class="reel-cta" href="#ort-reel">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72L19.5 12 8 5.14z"/></svg>' +
-          '<span>Ver reel</span>' +
-        '</a>'
-      : '';
     const phone = videoItem
       ? '<div class="reel-phone" id="ort-reel">' +
           '<div class="reel-phone-notch" aria-hidden="true"></div>' +
@@ -312,7 +294,6 @@
         '<div class="reel-hero-copy">' +
           '<h1>' + reelTitleHtml(proyecto.title) + '</h1>' +
           (intro ? '<p class="reel-hero-lead">' + intro + '</p>' : '') +
-          cta +
           '<div class="reel-hero-meta">' +
             reelMetaItem('category', 'Categoría', proyecto.category) +
             reelMetaItem('role', 'Rol', proyecto.role) +
@@ -347,11 +328,8 @@
         '</div>';
     } else if (frames.length) {
       galleryHtml =
-        '<div class="reel-gallery">' +
-          '<div class="reel-gallery-main">' + reelFrameHtml(frames[0]) + '</div>' +
-          '<div class="reel-gallery-pair">' +
-            frames.slice(1).map(reelFrameHtml).join('') +
-          '</div>' +
+        '<div class="reel-gallery reel-gallery--trio">' +
+          frames.map(reelFrameHtml).join('') +
         '</div>';
     }
 

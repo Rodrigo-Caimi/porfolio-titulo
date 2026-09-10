@@ -243,11 +243,6 @@ const PROYECTOS = [
         label: 'Documentación del proyecto',
         href: 'DOCUMENTOS/ORT-porfolio.pdf',
         download: 'ORT-porfolio.pdf'
-      },
-      {
-        label: 'Ver reel en Drive',
-        href: 'https://drive.google.com/file/d/1jJUfmDSgZgIW8X82zi6upIzRgT_ATak-/view?usp=sharing',
-        external: true
       }
     ],
     related: [1, 2]
