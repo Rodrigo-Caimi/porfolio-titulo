@@ -184,6 +184,7 @@ const PROYECTOS = [
     cardAlt: 'Campaña Reel ORT',
     role: 'Reel promocional: concepto, generación audiovisual y edición',
     tools: 'ChatGPT, Runway, Premiere',
+    hideMeta: true,
     galleryLayout: 'reel',
     gallery: [
       {

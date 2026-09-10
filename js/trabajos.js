@@ -198,6 +198,164 @@
     else media.addEventListener('load', apply);
   }
 
+  function reelTitleHtml(title) {
+    const text = String(title || '');
+    const space = text.indexOf(' ');
+    if (space === -1) return '<span class="reel-title-accent">' + text + '</span>';
+    return (
+      '<span class="reel-title-line">' + text.slice(0, space) + '</span>' +
+      '<span class="reel-title-accent">' + text.slice(space + 1) + '</span>'
+    );
+  }
+
+  function reelVimeoHtml(item) {
+    const url = vimeoEmbedUrl(item && item.src);
+    const sep = url.indexOf('?') === -1 ? '?' : '&';
+    return (
+      '<iframe class="reel-vimeo"' +
+        ' src="' + url + sep + 'title=0&byline=0&portrait=0&dnt=1"' +
+        ' title="' + ((item && item.alt) || 'Video') + '"' +
+        ' allow="fullscreen; picture-in-picture"' +
+        ' allowfullscreen' +
+        ' referrerpolicy="strict-origin-when-cross-origin">' +
+      '</iframe>'
+    );
+  }
+
+  function reelFrameHtml(item) {
+    if (!item || !item.src) return '';
+    return (
+      '<figure class="reel-gallery-item">' +
+        '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '" loading="lazy" decoding="async">' +
+      '</figure>'
+    );
+  }
+
+  function reelGalleryItems(proyecto) {
+    const items = proyecto.gallery || [];
+    const videoItem = items.find(isVimeoItem) || items.find(isDriveItem) || items.find(isVideoItem);
+    return items.filter(function (item) {
+      return item && item !== videoItem && !isVimeoItem(item) && !isDriveItem(item) && !isVideoItem(item);
+    });
+  }
+
+  function reelHasVideoCta(proyecto) {
+    const items = proyecto.gallery || [];
+    const hasEmbed = items.some(function (item) {
+      return isVimeoItem(item) || isDriveItem(item) || isVideoItem(item);
+    });
+    const hasAction = (proyecto.actions || []).some(function (action) {
+      if (!action || (action.href && String(action.href).indexOf('PEGAR_LINK') !== -1)) return false;
+      return action.label && /reel|video|drive|vimeo/i.test(action.label);
+    });
+    return hasEmbed || hasAction;
+  }
+
+  function reelMetaIcon(kind) {
+    if (kind === 'role') {
+      return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5.2 19c1.4-3.2 3.8-4.8 6.8-4.8s5.4 1.6 6.8 4.8"/></svg>';
+    }
+    if (kind === 'tools') {
+      return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 1 2.8 5.5L12 17.3 8.7 14l5.5-5.5a4 4 0 0 1 .5-2.2z"/><path d="M8.7 14l-2.4 2.4a2 2 0 0 0 2.8 2.8L11.5 17"/></svg>';
+    }
+    return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h6l2 2h8v9H4z"/><path d="M4 8V6h6l2 2"/></svg>';
+  }
+
+  function reelMetaItem(kind, label, value) {
+    if (!value) return '';
+    return (
+      '<div class="reel-meta-item">' +
+        '<span class="reel-meta-icon">' + reelMetaIcon(kind) + '</span>' +
+        '<p><span>' + label + '</span> ' + value + '</p>' +
+      '</div>'
+    );
+  }
+
+  function renderReelHero(container, proyecto) {
+    const items = proyecto.gallery || [];
+    const videoItem = items.find(isVimeoItem) || items.find(isDriveItem) || items.find(isVideoItem);
+    const intro = proyecto.heroLead || proyecto.role || '';
+    const cta = reelHasVideoCta(proyecto)
+      ? '<a class="reel-cta" href="#ort-reel">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72L19.5 12 8 5.14z"/></svg>' +
+          '<span>Ver reel</span>' +
+        '</a>'
+      : '';
+    const phone = videoItem
+      ? '<div class="reel-phone" id="ort-reel">' +
+          '<div class="reel-phone-notch" aria-hidden="true"></div>' +
+          '<div class="reel-phone-screen">' +
+            (isVimeoItem(videoItem) ? reelVimeoHtml(videoItem) : renderShot(videoItem, 0)) +
+          '</div>' +
+        '</div>'
+      : '';
+
+    container.innerHTML =
+      '<div class="reel-hero">' +
+        '<div class="reel-hero-copy">' +
+          '<h1>' + reelTitleHtml(proyecto.title) + '</h1>' +
+          (intro ? '<p class="reel-hero-lead">' + intro + '</p>' : '') +
+          cta +
+          '<div class="reel-hero-meta">' +
+            reelMetaItem('category', 'Categoría', proyecto.category) +
+            reelMetaItem('role', 'Rol', proyecto.role) +
+            reelMetaItem('tools', 'Herramientas', proyecto.tools) +
+          '</div>' +
+        '</div>' +
+        '<div class="reel-hero-visual">' + phone + '</div>' +
+      '</div>';
+  }
+
+  function renderReelProcess(container, proyecto) {
+    const steps = proyecto.process || [];
+    const frames = reelGalleryItems(proyecto);
+    const stepsHtml = steps.map(function (item, index) {
+      const num = (index < 9 ? '0' : '') + (index + 1);
+      return (
+        '<article class="reel-step">' +
+          '<span class="reel-step-num">' + num + '</span>' +
+          '<h3>' + item.title + '</h3>' +
+          '<p>' + item.text + '</p>' +
+        '</article>'
+      );
+    }).join('');
+
+    var galleryHtml = '';
+    if (frames.length === 1) {
+      galleryHtml = '<div class="reel-gallery">' + reelFrameHtml(frames[0]) + '</div>';
+    } else if (frames.length === 2) {
+      galleryHtml =
+        '<div class="reel-gallery reel-gallery--pair">' +
+          reelFrameHtml(frames[0]) + reelFrameHtml(frames[1]) +
+        '</div>';
+    } else if (frames.length) {
+      galleryHtml =
+        '<div class="reel-gallery">' +
+          '<div class="reel-gallery-main">' + reelFrameHtml(frames[0]) + '</div>' +
+          '<div class="reel-gallery-pair">' +
+            frames.slice(1).map(reelFrameHtml).join('') +
+          '</div>' +
+        '</div>';
+    }
+
+    const lastStep = steps[steps.length - 1] || {};
+    const resultText = lastStep.text || proyecto.role || '';
+
+    container.innerHTML =
+      '<div class="reel-process">' +
+        (proyecto.processTitle ? '<h2>' + proyecto.processTitle + '</h2>' : '') +
+        '<div class="reel-process-grid">' + stepsHtml + '</div>' +
+      '</div>' +
+      '<div class="reel-result">' +
+        '<div class="reel-result-copy">' +
+          '<p class="reel-result-kicker">Resultado</p>' +
+          '<h2>' + proyecto.title + '</h2>' +
+          (resultText ? '<p class="reel-result-text">' + resultText + '</p>' : '') +
+        '</div>' +
+        (galleryHtml || '') +
+      '</div>';
+  }
+
   function renderGallery(container, proyecto) {
     if (!container) return;
 
@@ -208,10 +366,15 @@
     }
 
     const layout = proyecto.galleryLayout || 'spread';
+    if (layout === 'reel') {
+      renderReelHero(container, proyecto);
+      return;
+    }
+
     const shots = items.map(renderShot);
     var inner;
 
-    if (layout === 'poster' || layout === 'reel') {
+    if (layout === 'poster') {
       inner = shots[0] + '<div class="shot-stack">' + shots.slice(1).join('') + '</div>';
     } else if (layout === 'essay') {
       inner = shots[0] + '<div class="shot-stack">' + shots.slice(1, 3).join('') + '</div>' + shots.slice(3).join('');
@@ -1416,6 +1579,11 @@
       return;
     }
 
+    if (proyecto.galleryLayout === 'reel') {
+      renderReelProcess(container, proyecto);
+      return;
+    }
+
     const items = proyecto.process.map(function (item) {
       return (
         '<div class="golden-item">' +
@@ -1459,7 +1627,7 @@
 
   function renderProjectTitle(container, proyecto) {
     if (!container || !proyecto) return;
-    if (isCustomCase(proyecto)) {
+    if (isCustomCase(proyecto) || proyecto.galleryLayout === 'reel') {
       container.innerHTML = '';
       return;
     }
