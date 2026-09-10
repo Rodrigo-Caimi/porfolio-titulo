@@ -43,15 +43,23 @@
       const thumb = proyecto.cardImage
         ? '<img loading="lazy" decoding="async" alt="' + proyecto.cardAlt + '" src="' + asset(proyecto.cardImage) + '" />'
         : '';
-      const category = proyecto.category
-        ? '<span class="card-category">' + proyecto.category + '</span>'
+      const categoryLabel = (proyecto.cardCategories && proyecto.cardCategories.length)
+        ? proyecto.cardCategories.join(' · ')
+        : (proyecto.category || '');
+      const category = categoryLabel
+        ? '<span class="card-category">' + categoryLabel + '</span>'
+        : '';
+      const description = proyecto.cardDescription
+        ? '<p class="card-description">' + proyecto.cardDescription + '</p>'
         : '';
       const body =
         '<div class="card-body">' +
           '<div class="card-text">' +
             category +
             '<span class="card-title">' + proyecto.title + '</span>' +
+            description +
           '</div>' +
+          '<span class="card-arrow" aria-hidden="true">↗</span>' +
         '</div>';
 
       if (proyecto.placeholder) {
