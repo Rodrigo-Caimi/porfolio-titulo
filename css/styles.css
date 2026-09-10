@@ -4837,6 +4837,39 @@ footer {
   flex: 1;
 }
 
+/* Pie de enlaces dentro de main (el footer vacío sigue oculto). */
+.site-endnav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 28px;
+  width: 100%;
+  margin: 0;
+  padding: 28px var(--gutter) 40px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+  background-color: var(--bg);
+}
+
+.site-endnav a {
+  color: var(--fg);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.other-projects-home {
+  text-align: center;
+  margin: 12px 0 0;
+  padding: 8px var(--gutter) 0;
+}
+
+.other-projects-home a {
+  color: var(--fg);
+  font-weight: 600;
+  border-bottom: 1px solid currentColor;
+}
+
 /* ============================================
    PÁGINA SOBRE MÍ
    ============================================ */
