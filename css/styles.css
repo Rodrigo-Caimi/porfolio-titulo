@@ -510,10 +510,11 @@ section.hero::after {
 .hero .desc {
   color: var(--fg);
   font-size: clamp(20px, 1.9vw, 28px);
-  max-width: 38em;
+  max-width: 36em;
   margin-bottom: 36px;
   line-height: 1.65;
-  padding-right: clamp(28px, 5.2vw, 72px);
+  padding-right: clamp(28px, 5.2vw, 64px);
+  text-wrap: pretty;
 }
 
 .hero-image {
@@ -1830,8 +1831,9 @@ textarea {
   .hero .desc {
     margin-left: auto;
     margin-right: auto;
-    max-width: 32em;
+    max-width: 30em;
     padding-inline: 0;
+    text-wrap: pretty;
   }
 
   .hero .cta {
