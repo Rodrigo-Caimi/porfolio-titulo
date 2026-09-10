@@ -6532,34 +6532,34 @@ body[data-proyecto-id="2"] .mayo-editorial .mayo-feed {
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: clamp(36px, 6vw, 80px) 0 clamp(72px, 9vw, 120px);
+  padding: 168px 0 140px;
   overflow: visible;
   background: #fff;
 }
 
 body[data-proyecto-id="2"] .mayo-board-ribbon {
   position: absolute;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
   line-height: 0;
 }
 
 body[data-proyecto-id="2"] .mayo-board-ribbon img {
   display: block;
-  width: min(18vw, 168px);
+  width: min(12vw, 112px);
   height: auto;
   object-fit: contain;
   pointer-events: none;
 }
 
 body[data-proyecto-id="2"] .mayo-board-ribbon--tr {
-  top: 1.5%;
-  right: 1.5%;
+  top: 32px;
+  right: max(16px, calc((100% - min(94vw, 1600px)) / 2 + 4px));
 }
 
 body[data-proyecto-id="2"] .mayo-board-ribbon--bl {
-  bottom: 2%;
-  left: 1%;
+  bottom: 28px;
+  left: max(16px, calc((100% - min(94vw, 1600px)) / 2 + 4px));
 }
 
 body[data-proyecto-id="2"] .mayo-board {
@@ -6708,21 +6708,21 @@ body[data-proyecto-id="2"] .mayo-piece .mayo-photo img {
   background: #111;
 }
 
-body[data-proyecto-id="2"] .mayo-piece--01 .mayo-photo,
-body[data-proyecto-id="2"] .mayo-piece--04 .mayo-photo {
-  height: 100%;
-  aspect-ratio: 3 / 4;
-}
-
 body[data-proyecto-id="2"] .mayo-piece--01 .mayo-photo {
   flex: 1 1 auto;
-  aspect-ratio: auto;
+  height: 100%;
   min-height: 100%;
+  aspect-ratio: auto;
+}
+
+body[data-proyecto-id="2"] .mayo-piece--04 .mayo-photo,
+body[data-proyecto-id="2"] .mayo-piece--05 .mayo-photo {
+  aspect-ratio: 3 / 4;
+  height: auto;
 }
 
 body[data-proyecto-id="2"] .mayo-piece--02 .mayo-photo,
-body[data-proyecto-id="2"] .mayo-piece--03 .mayo-photo,
-body[data-proyecto-id="2"] .mayo-piece--05 .mayo-photo {
+body[data-proyecto-id="2"] .mayo-piece--03 .mayo-photo {
   aspect-ratio: 16 / 9;
 }
 
@@ -7024,16 +7024,21 @@ body[data-proyecto-id="2"] .other-projects-section h2::after {
   }
 
   body[data-proyecto-id="2"] .mayo-piece--01 .mayo-photo,
-  body[data-proyecto-id="2"] .mayo-piece--04 .mayo-photo {
+  body[data-proyecto-id="2"] .mayo-piece--04 .mayo-photo,
+  body[data-proyecto-id="2"] .mayo-piece--05 .mayo-photo {
     flex: none;
     aspect-ratio: 3 / 4;
     height: auto;
     min-height: 0;
   }
 
+  body[data-proyecto-id="2"] .mayo-editorial .mayo-feed {
+    padding: 96px 0 88px;
+  }
+
   body[data-proyecto-id="2"] .mayo-board-ribbon img {
-    width: min(28vw, 120px);
-    opacity: 0.55;
+    width: min(22vw, 88px);
+    opacity: 0.7;
   }
 
   body[data-proyecto-id="2"] .mayo-board-brand {
