@@ -65,11 +65,14 @@
       const mediaFit = proyecto.cardMediaFit === 'contain';
       const cardClasses = 'card ' + proyecto.cardClass + (mediaFit ? ' card-media-contain' : '');
       const fitAttr = mediaFit ? ' data-card-fit="contain"' : '';
+      const thumbStyle = (mediaFit && proyecto.cardMediaAspect)
+        ? ' style="--card-media-aspect:' + proyecto.cardMediaAspect + '"'
+        : '';
 
       if (proyecto.placeholder) {
         return (
           '<div class="' + cardClasses + '"' + fitAttr + ' aria-label="' + proyecto.title + '">' +
-            '<div class="thumb">' + thumb + '</div>' +
+            '<div class="thumb"' + thumbStyle + '>' + thumb + '</div>' +
             body +
           '</div>'
         );
@@ -77,67 +80,11 @@
 
       return (
         '<a class="' + cardClasses + '"' + fitAttr + ' href="' + proyectoHref(proyecto.slug) + '">' +
-          '<div class="thumb">' + thumb + '</div>' +
+          '<div class="thumb"' + thumbStyle + '>' + thumb + '</div>' +
           body +
         '</a>'
       );
     }).join('');
-  }
-
-  function syncContainCardMedia(container) {
-    if (!container) return;
-
-    function referenceThumb() {
-      const link = container.querySelector('a.card[href*="don-pascual"]');
-      return link ? link.querySelector('.thumb') : null;
-    }
-
-    function apply() {
-      const reference = referenceThumb();
-      const targets = container.querySelectorAll('[data-card-fit="contain"] .thumb');
-      if (!reference || !targets.length) return;
-
-      if (window.matchMedia('(max-width: 920px)').matches) {
-        Array.prototype.forEach.call(targets, function (thumb) {
-          thumb.style.removeProperty('height');
-          thumb.style.removeProperty('min-height');
-          thumb.style.removeProperty('max-height');
-          thumb.style.removeProperty('flex');
-        });
-        return;
-      }
-
-      const h = Math.round(reference.getBoundingClientRect().height);
-      if (h < 80) return;
-      Array.prototype.forEach.call(targets, function (thumb) {
-        thumb.style.flex = '0 0 auto';
-        thumb.style.height = h + 'px';
-        thumb.style.minHeight = h + 'px';
-        thumb.style.maxHeight = h + 'px';
-      });
-    }
-
-    apply();
-
-    const refImg = referenceThumb() && referenceThumb().querySelector('img');
-    if (refImg && !refImg.complete) {
-      refImg.addEventListener('load', apply, { once: true });
-    }
-    window.addEventListener('load', apply);
-
-    let resizeTimer = 0;
-    window.addEventListener('resize', function () {
-      window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(apply, 100);
-    });
-
-    if (typeof ResizeObserver === 'function') {
-      const reference = referenceThumb();
-      if (reference) {
-        const ro = new ResizeObserver(function () { apply(); });
-        ro.observe(reference);
-      }
-    }
   }
 
   function isVideoItem(item) {
@@ -1917,7 +1864,6 @@
     const grid = document.querySelector('.work-container[data-render="grid"]');
     if (grid) {
       renderWorkGrid(grid);
-      syncContainCardMedia(grid);
     }
 
     const proyectoId = Number(document.body.dataset.proyectoId);

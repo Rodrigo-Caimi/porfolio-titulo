@@ -1029,27 +1029,28 @@ a.card:active {
   filter: grayscale(0);
 }
 
-/* Mayo Amarillo + Campaña Reel ORT: same media height as Don Pascual, image uncropped */
+/* Mayo Amarillo + Campaña Reel ORT: media box follows the poster, no letterbox */
 .card[data-card-fit="contain"] .thumb {
+  display: block;
   flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: none;
   aspect-ratio: auto;
-  position: relative;
+  background: transparent;
   overflow: hidden;
-  background: var(--card);
-  min-height: 202px;
 }
 
 .card[data-card-fit="contain"] .thumb img {
-  position: absolute;
-  inset: 0;
+  position: static;
+  inset: auto;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  height: auto;
+  display: block;
+  aspect-ratio: var(--card-media-aspect, auto);
+  object-fit: unset;
   object-position: center;
-}
-
-.card[data-card-fit="contain"]:hover .thumb img {
-  transform: none;
 }
 
 .card-body {
@@ -1905,8 +1906,14 @@ textarea {
 
   .card[data-card-fit="contain"] .thumb {
     flex: 0 0 auto;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: auto;
+    height: auto;
     min-height: 0;
+  }
+
+  .card[data-card-fit="contain"] .thumb img {
+    width: 100%;
+    height: auto;
   }
 
   .card-third,
@@ -2018,6 +2025,16 @@ textarea {
   .card-third .thumb,
   .card-pair .thumb {
     aspect-ratio: 16 / 9;
+  }
+
+  .card[data-card-fit="contain"] .thumb {
+    aspect-ratio: auto;
+    height: auto;
+  }
+
+  .card[data-card-fit="contain"] .thumb img {
+    width: 100%;
+    height: auto;
   }
 
   .card-body {
