@@ -58,10 +58,8 @@
   var dragging = false;
   var moved = false;
   var startX = 0;
-  var startY = 0;
   var startReveal = 0;
   var activePointer = null;
-  var lastToggleAt = 0;
   var lastOrbitAt = 0;
   var DRAG_THRESHOLD = 6;
   var MORPH_MS = 780;
@@ -87,7 +85,6 @@
 
   function animateTo(target) {
     setReveal(target, true);
-    lastToggleAt = Date.now();
     if (reduceMotion) return;
     window.setTimeout(function () {
       root.classList.remove('is-animating');
@@ -149,7 +146,6 @@
     dragging = true;
     moved = false;
     startX = event.clientX;
-    startY = event.clientY;
     startReveal = reveal;
     root.classList.add('is-dragging');
     root.classList.remove('is-animating');
@@ -202,7 +198,6 @@
       dragging = true;
       moved = false;
       startX = event.changedTouches[0].clientX;
-      startY = event.changedTouches[0].clientY;
       startReveal = reveal;
       root.classList.add('is-dragging');
     }, { passive: true });
@@ -230,7 +225,6 @@
       dragging = true;
       moved = false;
       startX = event.clientX;
-      startY = event.clientY;
       startReveal = reveal;
     });
     window.addEventListener('mousemove', function (event) {
