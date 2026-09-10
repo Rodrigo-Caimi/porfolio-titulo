@@ -1607,6 +1607,14 @@
     return item && /\.gif$/i.test(item.src || '');
   }
 
+  function mayoLooksRibbon(item) {
+    return item && /mayo-amarillo-2024|list[oó]n/i.test(((item.alt || '') + ' ' + (item.src || '')).toLowerCase());
+  }
+
+  function mayoLooksDuoPhoto(item) {
+    return item && /(?:^|[\\/])[23]-posteoig/i.test(item.src || '');
+  }
+
   function mayoLooksSocial(item) {
     return item && /posteo|instagram|\bigmayo|\big-/i.test(((item.alt || '') + ' ' + (item.src || '')).toLowerCase());
   }
@@ -1638,9 +1646,12 @@
 
   function mayoPhotoHtml(item, index, extraClass, eager) {
     if (!item || !item.src) return '';
+    const size = (item.width && item.height)
+      ? ' width="' + item.width + '" height="' + item.height + '"'
+      : '';
     return (
       '<button type="button" class="mayo-photo' + (extraClass ? ' ' + extraClass : '') + '" data-mayo-index="' + index + '">' +
-        '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' +
+        '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' + size +
           (eager ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
           ' decoding="async">' +
       '</button>'
@@ -1651,8 +1662,11 @@
     const photos = proyecto.gallery || [];
     const steps = proyecto.process || [];
     const posters = photos.filter(mayoLooksPoster);
+    const ribbons = photos.filter(mayoLooksRibbon);
+    const duoPhotos = photos.filter(mayoLooksDuoPhoto);
+    const gifs = photos.filter(mayoLooksGif);
     const social = photos.filter(function (item) {
-      return mayoLooksSocial(item) || mayoLooksGif(item);
+      return mayoLooksSocial(item) && !mayoLooksGif(item) && !mayoLooksDuoPhoto(item) && !mayoLooksRibbon(item);
     });
     const heroPhoto = posters[0] || photos[0];
     const lightbox = [];
@@ -1676,6 +1690,22 @@
       );
     }).join('');
 
+    const ribbonFigures = ribbons.map(function (item) {
+      return (
+        '<figure class="mayo-ribbon">' +
+          mayoPhotoHtml(item, take(item), 'mayo-photo--ribbon', false) +
+        '</figure>'
+      );
+    }).join('');
+
+    const duoFigures = duoPhotos.map(function (item) {
+      return (
+        '<figure class="mayo-photo-card">' +
+          mayoPhotoHtml(item, take(item), 'mayo-photo--contain', false) +
+        '</figure>'
+      );
+    }).join('');
+
     const feedFigures = social.map(function (item) {
       const caption = item.alt || '';
       return (
@@ -1685,6 +1715,23 @@
         '</figure>'
       );
     }).join('');
+
+    const gifFigures = gifs.map(function (item) {
+      const caption = item.alt || '';
+      return (
+        '<figure class="mayo-gif">' +
+          mayoPhotoHtml(item, take(item), 'mayo-photo--contain', false) +
+          (caption ? '<figcaption>' + caption + '</figcaption>' : '') +
+        '</figure>'
+      );
+    }).join('');
+
+    const campaignHtml = [
+      ribbonFigures ? '<div class="mayo-ribbon-wrap">' + ribbonFigures + '</div>' : '',
+      duoFigures ? '<div class="mayo-photos">' + duoFigures + '</div>' : '',
+      feedFigures ? '<div class="mayo-feed-grid">' + feedFigures + '</div>' : '',
+      gifFigures ? '<div class="mayo-gif-wrap">' + gifFigures + '</div>' : ''
+    ].join('');
 
     const closeActions = (proyecto.actions || []).map(function (action, index) {
       return actionLinkHtml(action, 'mayo-cta' + (index === 0 ? ' mayo-cta--solid' : ' mayo-cta--ghost'));
@@ -1737,10 +1784,10 @@
               '<div class="mayo-poster-grid">' + posterFigures + '</div>' +
             '</section>'
           : '') +
-        (feedFigures
+        (campaignHtml
           ? '<section class="mayo-feed" aria-label="Campaña en redes">' +
               mayoHeadHtml(5, 'Campaña en redes') +
-              '<div class="mayo-feed-grid">' + feedFigures + '</div>' +
+              '<div class="mayo-campaign">' + campaignHtml + '</div>' +
             '</section>'
           : '') +
         '<section class="mayo-close">' +

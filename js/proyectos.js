@@ -64,10 +64,13 @@ const PROYECTOS = [
     galleryLayout: 'poster',
     gallery: [
       { src: 'IMAGENES/Mayo amarillo/Afiche-de-campana.webp', alt: 'Afiche de campaña Mayo Amarillo' },
+      { src: 'IMAGENES/Mayo amarillo/Mayo-Amarillo-2024-1024x307.png.webp', alt: 'Listón de campaña Mayo Amarillo 2024', width: 1024, height: 307 },
+      { src: 'IMAGENES/Mayo amarillo/2-Posteoig.jpg', alt: 'Posteo Instagram Mayo Amarillo 2', width: 1080, height: 1320 },
+      { src: 'IMAGENES/Mayo amarillo/3-PosteoIG.jpg', alt: 'Posteo Instagram Mayo Amarillo 3', width: 1080, height: 1320 },
       { src: 'IMAGENES/Mayo amarillo/5-PosteoIgMayo.webp', alt: 'Posteo Instagram Mayo Amarillo 5' },
       { src: 'IMAGENES/Mayo amarillo/4-PosteoIGMayoa.jpg', alt: 'Posteo Instagram Mayo Amarillo 4' },
       { src: 'IMAGENES/Mayo amarillo/1-PosteoIgMayoA.webp', alt: 'Posteo Instagram Mayo Amarillo EN VIVO' },
-      { src: 'IMAGENES/Mayo amarillo/reel-ig-Final.gif', alt: 'gif de la campaña' }
+      { src: 'IMAGENES/Mayo amarillo/reel-ig-Final.gif', alt: 'gif de la campaña', width: 1080, height: 1920 }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
