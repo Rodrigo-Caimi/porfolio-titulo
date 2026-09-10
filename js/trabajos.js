@@ -1433,9 +1433,10 @@
       return noirServiceCardHtml(card, slides.length + index);
     }).join('');
     const galleryHtml = photos.map(function (photo, index) {
+      const wide = !!(photo && photo.wide);
       return (
-        '<figure class="noir-gallery-item">' +
-          noirPhotoHtml(photo, slides.length + cards.length + index, 'noir-photo--contain') +
+        '<figure class="noir-gallery-item' + (wide ? ' noir-gallery-item--wide' : ' noir-gallery-item--tall') + '">' +
+          noirPhotoHtml(photo, slides.length + cards.length + index, wide ? 'noir-photo--wide' : 'noir-photo--tall') +
         '</figure>'
       );
     }).join('');

@@ -2677,25 +2677,22 @@ html.js-motion body[data-proyecto-id="6"] .noir-service-card.reveal {
 }
 
 .noir-gallery-grid {
-  column-count: 2;
-  column-gap: clamp(10px, 1.15vw, 16px);
-  column-fill: balance;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(8px, 1vw, 14px);
+  align-items: stretch;
 }
 
 .noir-gallery-item {
-  display: inline-block;
-  width: 100%;
-  margin: 0 0 clamp(10px, 1.15vw, 16px);
-  break-inside: avoid;
-  page-break-inside: avoid;
-  -webkit-column-break-inside: avoid;
+  margin: 0;
   min-width: 0;
-  background: transparent;
+  background: #0f0f0f;
 }
 
 .noir-gallery-item .noir-photo {
   display: block;
   width: 100%;
+  height: 100%;
   line-height: 0;
 }
 
@@ -2703,10 +2700,20 @@ html.js-motion body[data-proyecto-id="6"] .noir-service-card.reveal {
 .noir-gallery-item .noir-photo img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   object-position: center;
   background: #0f0f0f;
+}
+
+.noir-gallery-item--tall img,
+.noir-gallery-item--tall .noir-photo img {
+  aspect-ratio: 4 / 5;
+}
+
+.noir-gallery-item--wide img,
+.noir-gallery-item--wide .noir-photo img {
+  aspect-ratio: 16 / 10;
 }
 
 .noir-process {
@@ -2966,12 +2973,8 @@ body[data-proyecto-id="6"] .other-projects-section h2::after {
   }
 
   .noir-gallery-grid {
-    column-count: 1;
-    column-gap: 0;
-  }
-
-  .noir-gallery-item {
-    margin-bottom: 12px;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .noir-steps {

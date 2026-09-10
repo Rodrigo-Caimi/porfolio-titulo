@@ -261,20 +261,19 @@ const PROYECTOS = [
       { title: 'Perfilado', text: 'Afeitado y definición de barba.', src: 'IMAGENES/Noir Estudio/afeitado.jpg', alt: 'Perfilado Noir Estudio' },
       { title: 'Experiencia Noir', text: 'El ritual de atención en el estudio.', src: 'IMAGENES/Noir Estudio/experiencia-Noir.png', alt: 'Experiencia Noir Estudio' },
       { title: 'Color y corrección', text: 'Coloración profesional y balance de tono.', src: 'IMAGENES/Noir Estudio/noir-productos.jpg', alt: 'Color y corrección Noir Estudio' },
-      { title: 'Diseño de corte', text: 'Corte a medida según el estilo.', src: 'IMAGENES/Noir Estudio/terminado2.jpg', alt: 'Diseño de corte Noir Estudio' },
+      { title: 'Diseño de corte', text: 'Corte a medida según el estilo.', src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Diseño de corte Noir Estudio' },
       { title: 'Acabado y estilo', text: 'El look final y el peinado.', src: 'IMAGENES/Noir Estudio/noir-acabado.png', alt: 'Acabado y estilo Noir Estudio' }
     ],
     servicesNote: 'Las tarjetas funcionan como unidades de información independientes: cada servicio se identifica rápidamente por imagen, nombre y descripción, ayudando al usuario a comparar opciones y entender la propuesta sin sobrecargar la interfaz.',
     gallery: [
-      { src: 'IMAGENES/Noir Estudio/noir-interior.jpg', alt: 'Interior Noir Barbería & Estilo' },
       { src: 'IMAGENES/Noir Estudio/cuadro-echo-bien.png', alt: 'Antes de la transformación Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/terminado1.jpg', alt: 'Corte terminado Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/terminado1.png', alt: 'Corte terminado Noir Estudio' },
       { src: 'IMAGENES/Noir Estudio/noir-experiencia.jpg', alt: 'Experiencia en el sillón Noir Estudio' },
       { src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Herramientas Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/grid2.5.png', alt: 'Composición de herramientas Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/grid3.png', alt: 'Pieza de campaña Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/mapa-1.png', alt: 'Mapa de ubicación Noir Estudio' },
-      { src: 'IMAGENES/Noir Estudio/mapa-2.png', alt: 'Detalle de mapa Noir Estudio' }
+      { src: 'IMAGENES/Noir Estudio/grid2.5.png', alt: 'Composición de herramientas Noir Estudio', wide: true },
+      { src: 'IMAGENES/Noir Estudio/grid3.png', alt: 'Pieza de campaña Noir Estudio', wide: true },
+      { src: 'IMAGENES/Noir Estudio/mapa-1.png', alt: 'Mapa de ubicación Noir Estudio', wide: true },
+      { src: 'IMAGENES/Noir Estudio/mapa-2.png', alt: 'Detalle de mapa Noir Estudio', wide: true }
     ],
     processTitle: 'Cómo se pensó este proyecto',
     process: [
