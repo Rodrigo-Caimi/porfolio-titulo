@@ -34,7 +34,7 @@
   function renderWorkGrid(container) {
     if (!container) return;
 
-    const layoutOrder = [8, 6, 7, 3, 5, 1, 2, 4];
+    const layoutOrder = [8, 6, 7, 2, 5, 1, 3, 4];
     const ordered = layoutOrder
       .map(function (id) { return getProyecto(id); })
       .filter(Boolean);
