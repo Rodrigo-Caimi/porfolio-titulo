@@ -1,4 +1,28 @@
 (function () {
+  function syncThemeColor() {
+    var body = document.body;
+    if (!body) return;
+    var color = window.getComputedStyle(body).backgroundColor;
+    if (!color || color === 'transparent' || color === 'rgba(0, 0, 0, 0)') {
+      color = window.getComputedStyle(document.documentElement).backgroundColor;
+    }
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute('name', 'theme-color');
+      document.head.appendChild(meta);
+    }
+    if (color) meta.setAttribute('content', color);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncThemeColor);
+  } else {
+    syncThemeColor();
+  }
+})();
+
+(function () {
   var header = document.querySelector('header');
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.site-nav');
