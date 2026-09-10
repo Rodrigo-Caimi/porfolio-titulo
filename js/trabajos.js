@@ -1607,18 +1607,6 @@
     return item && /\.gif$/i.test(item.src || '');
   }
 
-  function mayoLooksRibbon(item) {
-    return item && /mayo-amarillo-2024|list[oó]n/i.test(((item.alt || '') + ' ' + (item.src || '')).toLowerCase());
-  }
-
-  function mayoLooksDuoPhoto(item) {
-    return item && /(?:^|[\\/])[23]-posteoig/i.test(item.src || '');
-  }
-
-  function mayoLooksSocial(item) {
-    return item && /posteo|instagram|\bigmayo|\big-/i.test(((item.alt || '') + ' ' + (item.src || '')).toLowerCase());
-  }
-
   function mayoLooksPoster(item) {
     return item && /afiche/i.test(((item.alt || '') + ' ' + (item.src || '')).toLowerCase()) && !mayoLooksGif(item);
   }
@@ -1644,7 +1632,7 @@
     );
   }
 
-  function mayoPhotoHtml(item, index, extraClass, eager) {
+  function mayoPhotoHtml(item, index, extraClass, eager, innerExtra) {
     if (!item || !item.src) return '';
     const size = (item.width && item.height)
       ? ' width="' + item.width + '" height="' + item.height + '"'
@@ -1654,7 +1642,26 @@
         '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' + size +
           (eager ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
           ' decoding="async">' +
+        (innerExtra || '') +
       '</button>'
+    );
+  }
+
+  function mayoFindPhoto(photos, needle) {
+    const key = String(needle || '').toLowerCase();
+    return (photos || []).find(function (item) {
+      return item && String(item.src || '').toLowerCase().replace(/\\/g, '/').indexOf(key) !== -1;
+    }) || null;
+  }
+
+  function mayoPieceHtml(item, index, slot, caption, extras) {
+    extras = extras || {};
+    if (!item) return '';
+    return (
+      '<figure class="mayo-piece mayo-piece--' + slot + '">' +
+        mayoPhotoHtml(item, index, extras.photoClass || '', true, extras.inner || '') +
+        (caption ? '<figcaption>' + caption + '</figcaption>' : '') +
+      '</figure>'
     );
   }
 
@@ -1662,12 +1669,7 @@
     const photos = proyecto.gallery || [];
     const steps = proyecto.process || [];
     const posters = photos.filter(mayoLooksPoster);
-    const ribbons = photos.filter(mayoLooksRibbon);
-    const duoPhotos = photos.filter(mayoLooksDuoPhoto);
     const gifs = photos.filter(mayoLooksGif);
-    const social = photos.filter(function (item) {
-      return mayoLooksSocial(item) && !mayoLooksGif(item) && !mayoLooksDuoPhoto(item) && !mayoLooksRibbon(item);
-    });
     const heroPhoto = posters[0] || photos[0];
     const lightbox = [];
 
@@ -1690,48 +1692,56 @@
       );
     }).join('');
 
-    const ribbonFigures = ribbons.map(function (item) {
-      return (
-        '<figure class="mayo-ribbon">' +
-          mayoPhotoHtml(item, take(item), 'mayo-photo--ribbon', false) +
-        '</figure>'
-      );
-    }).join('');
+    const piece01 = mayoFindPhoto(photos, '5-posteoigmayo');
+    const piece02 = mayoFindPhoto(photos, '4-posteoigmayoa.jpg');
+    const piece03 = mayoFindPhoto(photos, '1-posteoigmayoa');
+    const piece04 = piece01;
+    const piece05 = mayoFindPhoto(photos, '2-posteoig.jpg');
+    const piece06 = gifs[0] || mayoFindPhoto(photos, 'reel-ig-final.gif');
+    const ribbonMark =
+      '<svg viewBox="0 0 64 88" fill="none" aria-hidden="true">' +
+        '<path fill="#f0c400" d="M32 2C21 20 11 36 11 52c0 11 7 19 17 22L8 84l6 2 18-16 18 16 6-2-20-10c10-3 17-11 17-22C53 36 43 20 32 2z"/>' +
+      '</svg>';
+    const gifOverlay =
+      '<span class="mayo-gif-play" aria-hidden="true"><span class="mayo-gif-play-icon"></span></span>' +
+      '<span class="mayo-gif-tag">GIF</span>';
 
-    const duoFigures = duoPhotos.map(function (item) {
-      return (
-        '<figure class="mayo-photo-card">' +
-          mayoPhotoHtml(item, take(item), 'mayo-photo--contain', false) +
-        '</figure>'
-      );
-    }).join('');
-
-    const feedFigures = social.map(function (item) {
-      const caption = item.alt || '';
-      return (
-        '<figure class="mayo-feed-item">' +
-          mayoPhotoHtml(item, take(item), 'mayo-photo--contain', false) +
-          (caption ? '<figcaption>' + caption + '</figcaption>' : '') +
-        '</figure>'
-      );
-    }).join('');
-
-    const gifFigures = gifs.map(function (item) {
-      const caption = item.alt || '';
-      return (
-        '<figure class="mayo-gif">' +
-          mayoPhotoHtml(item, take(item), 'mayo-photo--contain', false) +
-          (caption ? '<figcaption>' + caption + '</figcaption>' : '') +
-        '</figure>'
-      );
-    }).join('');
-
-    const campaignHtml = [
-      ribbonFigures ? '<div class="mayo-ribbon-wrap">' + ribbonFigures + '</div>' : '',
-      duoFigures ? '<div class="mayo-photos">' + duoFigures + '</div>' : '',
-      feedFigures ? '<div class="mayo-feed-grid">' + feedFigures + '</div>' : '',
-      gifFigures ? '<div class="mayo-gif-wrap">' + gifFigures + '</div>' : ''
-    ].join('');
+    const campaignHtml = (
+      '<div class="mayo-board-ribbon mayo-board-ribbon--tr" aria-hidden="true">' + ribbonMark + '</div>' +
+      '<div class="mayo-board-ribbon mayo-board-ribbon--bl" aria-hidden="true">' + ribbonMark + '</div>' +
+      '<div class="mayo-board">' +
+        '<aside class="mayo-board-copy">' +
+          '<header class="mayo-board-head">' +
+            '<span class="mayo-num">05</span>' +
+            '<h2>Campaña<br>en redes</h2>' +
+          '</header>' +
+          '<p>La campaña cobró vida en redes sociales con piezas de alto impacto, pensadas para generar conciencia, conversación y alcance masivo. A través de fotografías, videos y contenido en formato vertical, llevamos el mensaje a nuevas audiencias.</p>' +
+          '<p class="mayo-board-line">Mismas calles. Más conciencia.</p>' +
+          '<div class="mayo-board-brand">' +
+            '<p class="mayo-board-brand-name">Mayo Amarillo</p>' +
+            '<p class="mayo-board-slogan">QUE NO SEA LA ULTIMA NOTICIA QUE TU FAMILIA RECIBA DE VOS.</p>' +
+          '</div>' +
+        '</aside>' +
+        '<div class="mayo-board-grid">' +
+          mayoPieceHtml(piece01, take(piece01), '01', 'Pieza 01') +
+          mayoPieceHtml(piece02, take(piece02), '02', 'Pieza 02') +
+          mayoPieceHtml(piece03, take(piece03), '03', 'Pieza 03') +
+          '<div class="mayo-board-bottom">' +
+            mayoPieceHtml(piece04, take(piece04), '04', 'Pieza 04') +
+            mayoPieceHtml(piece05, take(piece05), '05', 'Pieza 05') +
+            (piece06
+              ? '<figure class="mayo-piece mayo-piece--06">' +
+                  '<div class="mayo-gif-cluster">' +
+                    mayoPhotoHtml(piece06, take(piece06), 'mayo-photo--gif', true, gifOverlay) +
+                    '<p class="mayo-gif-aside">El mismo momento.<br>En movimiento.</p>' +
+                  '</div>' +
+                  '<figcaption>Pieza 06 — GIF</figcaption>' +
+                '</figure>'
+              : '') +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
 
     const closeActions = (proyecto.actions || []).map(function (action, index) {
       return actionLinkHtml(action, 'mayo-cta' + (index === 0 ? ' mayo-cta--solid' : ' mayo-cta--ghost'));
@@ -1785,10 +1795,7 @@
             '</section>'
           : '') +
         (campaignHtml
-          ? '<section class="mayo-feed" aria-label="Campaña en redes">' +
-              mayoHeadHtml(5, 'Campaña en redes') +
-              '<div class="mayo-campaign">' + campaignHtml + '</div>' +
-            '</section>'
+          ? '<section class="mayo-feed" aria-label="Campaña en redes">' + campaignHtml + '</section>'
           : '') +
         '<section class="mayo-close">' +
           '<p class="mayo-close-brand">' + proyecto.title + '</p>' +
