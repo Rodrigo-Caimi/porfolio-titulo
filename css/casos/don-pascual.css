@@ -1,0 +1,981 @@
+/* css/casos/don-pascual.css — ficha id 7.
+   Fonts de esta ficha (siguen por <link> Google en el HTML): DM Sans, Playfair Display. */
+@layer casos {
+/* Don Pascual: grilla editorial según croquis */
+body[data-proyecto-id="7"] .project-detail-title,
+body[data-proyecto-id="7"] .work-detail-hero,
+body[data-proyecto-id="7"] .project-meta-section,
+body[data-proyecto-id="7"] .project-actions-section {
+  display: none;
+}
+
+body[data-proyecto-id="7"] .project-back-bar {
+  display: none;
+}
+
+body[data-proyecto-id="7"] main {
+  background: #f5f2ea;
+}
+
+body[data-proyecto-id="7"] {
+  background: #f5f2ea;
+}
+
+html:has(body[data-proyecto-id="7"]) {
+  background: #f5f2ea;
+}
+
+body[data-proyecto-id="7"] .wine-case {
+  width: 100%;
+  margin: 0;
+  padding: 4px 0 64px;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(196, 165, 116, 0.12), transparent 42%),
+    #f5f2ea;
+  color: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-case .golden-section {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+body[data-proyecto-id="7"] .wine-editorial {
+  max-width: none;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px 0 0;
+  box-sizing: border-box;
+}
+
+body[data-proyecto-id="7"] .wine-board {
+  min-height: 0;
+  padding: 8px 0 8px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+body[data-proyecto-id="7"] .wine-intro {
+  position: relative;
+  text-align: center;
+  width: min(94vw, 1600px);
+  max-width: none;
+  margin: 0 auto 12px;
+  padding: 8px 0 0;
+}
+
+body[data-proyecto-id="7"] .wine-intro-top {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(0, auto) minmax(160px, 1fr);
+  align-items: start;
+  gap: 12px 16px;
+  margin: 0 0 12px;
+}
+
+body[data-proyecto-id="7"] .wine-back {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.35em;
+  color: #1c1914;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+body[data-proyecto-id="7"] .wine-back svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+body[data-proyecto-id="7"] .wine-back:hover {
+  color: #8a6a36;
+}
+
+body[data-proyecto-id="7"] .wine-intro h1 {
+  grid-column: 2;
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 4.6vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  color: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-lead {
+  margin: 0 auto 18px;
+  max-width: 46rem;
+  font-size: clamp(1.2rem, 1.55vw, 1.5rem);
+  line-height: 1.75;
+  color: #5a5348;
+}
+
+body[data-proyecto-id="7"] .wine-process-label {
+  margin: 12px 0 clamp(28px, 3.6vw, 48px);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.1rem, 2.8vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #b08948;
+}
+
+body[data-proyecto-id="7"] .wine-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.22fr) minmax(320px, 520px) minmax(0, 1.22fr);
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "b1 bottle b2"
+    "b3 bottle b4";
+  column-gap: clamp(10px, 1.2vw, 22px);
+  row-gap: clamp(18px, 2.2vw, 36px);
+  align-items: stretch;
+  justify-content: space-between;
+  width: min(98vw, 1880px);
+  max-width: none;
+  margin-inline: auto;
+  margin-bottom: 24px;
+  padding: 8px 0 24px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+body[data-proyecto-id="7"] .wine-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+}
+
+body[data-proyecto-id="7"] .wine-lines path {
+  fill: none;
+  stroke: #c5b08a;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.78;
+}
+
+body[data-proyecto-id="7"] .wine-lines path[data-wine-echo] {
+  stroke-width: 0.65;
+  opacity: 0.28;
+}
+
+body[data-proyecto-id="7"] .wine-lines circle {
+  fill: #c5b08a;
+  opacity: 0.9;
+}
+
+body[data-proyecto-id="7"] .wine-block--1 {
+  grid-area: b1;
+  border-radius: 42% / 50%;
+  background: #fffef8;
+}
+body[data-proyecto-id="7"] .wine-block--2 {
+  grid-area: b2;
+  border-radius: 48% 48% 48% 10% / 42% 42% 50% 12%;
+  background: #fbf7f0;
+}
+body[data-proyecto-id="7"] .wine-block--3 {
+  grid-area: b3;
+  border-radius: 78% 22% 68% 32% / 28% 72% 28% 72%;
+  background: #faf6ee;
+}
+body[data-proyecto-id="7"] .wine-block--4 {
+  grid-area: b4;
+  border-radius: 12% 88% 18% 82% / 78% 12% 88% 18%;
+  background: #fffdf6;
+}
+
+body[data-proyecto-id="7"] .wine-bottle {
+  grid-area: bottle;
+  position: relative;
+  z-index: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  justify-self: stretch;
+  min-width: 0;
+  overflow: visible;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(190, 145, 74, 0.11),
+      transparent 58%
+    );
+}
+
+body[data-proyecto-id="7"] .wine-block {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: start;
+  gap: 0;
+  min-width: 0;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  padding: clamp(28px, 2.6vw, 42px) clamp(48px, 4.6vw, 78px) clamp(32px, 2.8vw, 46px);
+  border: 0;
+  box-shadow: 0 8px 24px rgba(70, 50, 24, 0.045);
+  overflow: visible;
+  transform-origin: center center;
+  transition: transform 0.3s ease;
+  text-align: left;
+}
+
+@media (min-width: 901px) {
+  body[data-proyecto-id="7"] .wine-stage {
+    grid-template-rows: 1fr 1fr;
+    align-items: start;
+    min-height: clamp(1180px, 128vh, 1420px);
+  }
+
+  body[data-proyecto-id="7"] .wine-block {
+    align-self: start;
+    width: 100%;
+    min-height: 340px;
+    height: auto;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--1,
+  body[data-proyecto-id="7"] .wine-block--2 {
+    justify-content: center;
+    min-height: 300px;
+    padding: clamp(26px, 2.2vw, 36px) clamp(28px, 2.8vw, 44px) clamp(28px, 2.4vw, 40px);
+    text-align: left;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--1 {
+    width: calc(100% + clamp(28px, 4.2vw, 80px));
+    max-width: none;
+    margin-left: calc(-1 * clamp(28px, 4.2vw, 80px));
+  }
+
+  body[data-proyecto-id="7"] .wine-block--2 {
+    width: calc(100% + clamp(28px, 4.2vw, 80px));
+    max-width: none;
+    margin-right: calc(-1 * clamp(28px, 4.2vw, 80px));
+  }
+
+  body[data-proyecto-id="7"] .wine-block--1 p,
+  body[data-proyecto-id="7"] .wine-block--2 p {
+    text-align: left;
+    max-width: none;
+    width: 100%;
+  }
+
+  body[data-proyecto-id="7"] .wine-bottle {
+    align-self: stretch;
+    height: 0;
+    min-height: 100%;
+    overflow: visible;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--4 {
+    text-align: right;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--2 .wine-block-head,
+  body[data-proyecto-id="7"] .wine-block--4 .wine-block-head {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--2 h3,
+  body[data-proyecto-id="7"] .wine-block--4 h3 {
+    text-align: left;
+  }
+}
+
+body[data-proyecto-id="7"] .wine-bottle img {
+  display: block;
+  width: auto;
+  max-width: min(900px, 60vw);
+  height: auto;
+  max-height: min(1540px, 145vh);
+  object-fit: contain;
+  object-position: center;
+  mix-blend-mode: lighten;
+}
+
+body[data-proyecto-id="7"] .wine-block-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  align-content: flex-start;
+  justify-content: flex-start;
+  gap: 2px 10px;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 18px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  flex-shrink: 0;
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+  line-height: 1.25;
+}
+
+body[data-proyecto-id="7"] .wine-num {
+  display: block;
+  flex: 0 0 auto;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.85rem, 2.4vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: #c4a574;
+  transform: none;
+}
+
+body[data-proyecto-id="7"] .wine-block h3 {
+  display: block;
+  flex: 0 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: clamp(22px, 1.7vw, 30px);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: #1c1914;
+  overflow: visible;
+}
+
+body[data-proyecto-id="7"] .wine-sep {
+  color: #c4a574;
+  font-weight: 500;
+}
+
+body[data-proyecto-id="7"] .wine-block p {
+  margin: 0;
+  padding: 0;
+  font-size: clamp(1.125rem, 1.2vw, 1.3125rem);
+  line-height: 1.58;
+  color: #4b453c;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+  text-align: left;
+  max-width: none;
+}
+
+body[data-proyecto-id="7"] .wine-nowrap {
+  white-space: nowrap;
+}
+
+@media (hover: hover) and (min-width: 901px) {
+  body[data-proyecto-id="7"] .wine-block:hover,
+  body[data-proyecto-id="7"] .wine-block:focus-within,
+  html.js-motion body[data-proyecto-id="7"] .wine-block.reveal.is-in:hover,
+  html.js-motion body[data-proyecto-id="7"] .wine-block.reveal.is-in:focus-within {
+    z-index: 4;
+    transform: translateY(-5px) scale(1.02);
+  }
+
+  body[data-proyecto-id="7"] .wine-block:hover .wine-block-head,
+  body[data-proyecto-id="7"] .wine-block:focus-within .wine-block-head,
+  body[data-proyecto-id="7"] .wine-block:hover h3,
+  body[data-proyecto-id="7"] .wine-block:focus-within h3,
+  body[data-proyecto-id="7"] .wine-block:hover .wine-num,
+  body[data-proyecto-id="7"] .wine-block:focus-within .wine-num {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-proyecto-id="7"] .wine-block {
+    transition: none;
+  }
+
+  body[data-proyecto-id="7"] .wine-block:hover,
+  body[data-proyecto-id="7"] .wine-block:focus-within,
+  html.js-motion body[data-proyecto-id="7"] .wine-block.reveal.is-in:hover,
+  html.js-motion body[data-proyecto-id="7"] .wine-block.reveal.is-in:focus-within {
+    transform: none;
+  }
+}
+
+body[data-proyecto-id="7"] .wine-gallery {
+  width: min(98vw, 1936px);
+  max-width: 1936px;
+  margin: 88px auto 48px;
+  padding-inline: clamp(16px, 3vw, 48px);
+  box-sizing: border-box;
+}
+
+body[data-proyecto-id="7"] .wine-gallery-title {
+  margin: 0 0 48px;
+  text-align: center;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 3.6vw, 48px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b08948;
+}
+
+body[data-proyecto-id="7"] .wine-mosaic-wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+body[data-proyecto-id="7"] .wine-mosaic {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  align-items: start;
+  column-gap: clamp(20px, 2.4vw, 40px);
+  row-gap: clamp(20px, 2.4vw, 40px);
+  margin: 0;
+}
+
+body[data-proyecto-id="7"] .wine-mosaic-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+body[data-proyecto-id="7"] .wine-mosaic-lines path {
+  fill: none;
+  stroke: #c5b08a;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+body[data-proyecto-id="7"] .wine-mosaic-lines path.wine-trail-main {
+  stroke-width: 1.15;
+  opacity: 0.82;
+}
+
+body[data-proyecto-id="7"] .wine-mosaic-lines path.wine-trail-echo {
+  stroke-width: 0.6;
+  opacity: 0.26;
+}
+
+body[data-proyecto-id="7"] .wine-mosaic-lines circle {
+  fill: #c5b08a;
+  opacity: 0.92;
+}
+
+body[data-proyecto-id="7"] .wine-mosaic-item {
+  display: block;
+  position: relative;
+  z-index: 3;
+  isolation: isolate;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  text-align: left;
+  cursor: zoom-in;
+  overflow: visible;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+body[data-proyecto-id="7"] .wine-mosaic-item img {
+  display: block;
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: min(53vh, 462px);
+  margin-inline: auto;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 22px;
+  background: #f5f2ea;
+}
+
+body[data-proyecto-id="7"] .wine-mosaic-video {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+  position: relative;
+  z-index: 4;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: center;
+  justify-self: center;
+  gap: 14px;
+  width: max-content;
+  max-width: min(150%, 100%);
+  margin: 0;
+  padding: 8px 10px 12px;
+  box-sizing: border-box;
+  background: #f5f2ea;
+  border-radius: 22px;
+}
+
+body[data-proyecto-id="7"] .wine-campaign-title {
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(22px, 2.6vw, 36px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #b08948;
+  text-align: center;
+}
+
+body[data-proyecto-id="7"] .wine-video-embed {
+  position: relative;
+  z-index: 4;
+  width: calc(min(53vh, 462px) * 1.5 * 9 / 16);
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+body[data-proyecto-id="7"] .wine-close {
+  display: flex;
+  justify-content: center;
+}
+
+body[data-proyecto-id="7"] .other-projects-section {
+  background: #f5f2ea;
+  padding-top: 12px;
+}
+
+body[data-proyecto-id="7"] .wine-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+body[data-proyecto-id="7"] .wine-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 280px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+}
+
+body[data-proyecto-id="7"] .wine-btn--solid {
+  background: #1c1914;
+  color: #f5f2ea;
+  border-color: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-btn--solid:hover {
+  background: #2c2720;
+  border-color: #2c2720;
+  color: #f5f2ea;
+}
+
+body[data-proyecto-id="7"] .wine-btn--ghost {
+  background: transparent;
+  color: #1c1914;
+  border-color: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-btn--ghost:hover {
+  background: rgba(28, 25, 20, 0.06);
+  color: #1c1914;
+}
+
+body[data-proyecto-id="7"] .wine-lightbox {
+  position: relative;
+  width: auto;
+  max-width: min(96vw, 1280px);
+  max-height: 92vh;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+body[data-proyecto-id="7"] .wine-lightbox::backdrop {
+  background: rgba(8, 8, 8, 0.9);
+}
+
+body[data-proyecto-id="7"] .wine-lightbox img {
+  display: block;
+  max-width: min(92vw, 1200px);
+  max-height: 84vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+body[data-proyecto-id="7"] .wine-lightbox-close,
+body[data-proyecto-id="7"] .wine-lightbox-prev,
+body[data-proyecto-id="7"] .wine-lightbox-next {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: rgba(20, 20, 20, 0.72);
+  color: #fff;
+  cursor: pointer;
+}
+
+body[data-proyecto-id="7"] .wine-lightbox-close {
+  top: -44px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 28px;
+  line-height: 1;
+}
+
+body[data-proyecto-id="7"] .wine-lightbox-prev,
+body[data-proyecto-id="7"] .wine-lightbox-next {
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 32px;
+  transform: translateY(-50%);
+}
+
+body[data-proyecto-id="7"] .wine-lightbox-prev { left: -56px; }
+body[data-proyecto-id="7"] .wine-lightbox-next { right: -56px; }
+
+body[data-proyecto-id="7"] .wine-footerbrand {
+  margin: 28px 0 0;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #b08948;
+}
+
+@media (max-width: 920px) {
+  body[data-proyecto-id="7"] .wine-board {
+    min-height: 0;
+    padding: 8px 0 28px;
+  }
+
+  body[data-proyecto-id="7"] .wine-intro-top {
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+  }
+
+  body[data-proyecto-id="7"] .wine-back {
+    justify-self: start;
+  }
+
+  body[data-proyecto-id="7"] .wine-intro h1 {
+    grid-column: 1;
+  }
+
+  body[data-proyecto-id="7"] .wine-gallery {
+    width: min(98vw, 1936px);
+    max-width: 1936px;
+    margin: 64px auto 40px;
+    padding-inline: clamp(16px, 3vw, 48px);
+  }
+
+  body[data-proyecto-id="7"] .wine-mosaic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body[data-proyecto-id="7"] .wine-mosaic-video {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    width: min(70%, 420px);
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  body[data-proyecto-id="7"] .wine-actions,
+  body[data-proyecto-id="7"] .wine-btn {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  body[data-proyecto-id="7"] .wine-btn {
+    min-width: 0;
+  }
+
+  body[data-proyecto-id="7"] .wine-lightbox-prev { left: 8px; }
+  body[data-proyecto-id="7"] .wine-lightbox-next { right: 8px; }
+  body[data-proyecto-id="7"] .wine-lightbox-close {
+    top: 8px;
+    right: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  body[data-proyecto-id="7"] .wine-intro h1 {
+    font-size: clamp(24px, 7vw, 34px);
+  }
+
+  body[data-proyecto-id="7"] .wine-mosaic {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-proyecto-id="7"] .wine-mosaic-video {
+    grid-column: auto;
+    grid-row: auto;
+    width: min(78%, 360px);
+    max-width: 360px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  body[data-proyecto-id="7"] .wine-process-label {
+    font-size: clamp(1.48rem, 3.4vw, 2.08rem);
+    margin-bottom: 28px;
+  }
+
+  body[data-proyecto-id="7"] .wine-stage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    grid-template-areas:
+      "bottle bottle"
+      "b1 b2"
+      "b3 b4";
+    column-gap: clamp(16px, 2.4vw, 28px);
+    row-gap: 22px;
+    width: min(94vw, 1600px);
+    max-width: none;
+    min-height: 0;
+    align-items: stretch;
+    justify-content: stretch;
+    padding: 8px 0 8px;
+  }
+
+  body[data-proyecto-id="7"] .wine-bottle {
+    min-height: 0;
+    height: auto;
+  }
+
+  body[data-proyecto-id="7"] .wine-lines,
+  body[data-proyecto-id="7"] .wine-mosaic-lines {
+    display: none;
+  }
+
+  body[data-proyecto-id="7"] .wine-bottle img {
+    width: auto;
+    max-width: min(720px, 88vw);
+    height: auto;
+    max-height: min(90vh, 1100px);
+    object-fit: contain;
+  }
+
+  body[data-proyecto-id="7"] .wine-block {
+    height: auto;
+    min-height: 0;
+    align-self: stretch;
+    padding: clamp(22px, 3vw, 32px) clamp(24px, 3.4vw, 36px);
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--1 { border-radius: 42% / 50%; }
+  body[data-proyecto-id="7"] .wine-block--2 { border-radius: 48% 48% 48% 10% / 42% 42% 50% 12%; }
+  body[data-proyecto-id="7"] .wine-block--3 { border-radius: 72% 24% 64% 30% / 30% 68% 30% 68%; }
+  body[data-proyecto-id="7"] .wine-block--4 { border-radius: 14% 80% 20% 74% / 72% 14% 80% 20%; }
+
+  body[data-proyecto-id="7"] .wine-block-head {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 4px 8px;
+    margin: 0;
+    padding: 0 0 12px;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--2 .wine-block-head,
+  body[data-proyecto-id="7"] .wine-block--4 .wine-block-head {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--2 h3,
+  body[data-proyecto-id="7"] .wine-block--4 h3 {
+    text-align: left;
+  }
+
+  body[data-proyecto-id="7"] .wine-num {
+    display: block;
+    flex: 0 0 auto;
+    font-size: clamp(1.7rem, 4vw, 2rem);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  body[data-proyecto-id="7"] .wine-block h3 {
+    display: block;
+    flex: 1 1 8rem;
+    min-width: 0;
+    margin: 0;
+    font-size: clamp(18px, 2.4vw, 24px);
+    line-height: 1.3;
+  }
+
+  body[data-proyecto-id="7"] .wine-block p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  body[data-proyecto-id="7"] .wine-process-label {
+    font-size: clamp(1.35rem, 5.8vw, 1.7rem);
+    margin-bottom: 20px;
+  }
+
+  body[data-proyecto-id="7"] .wine-stage {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+      "bottle"
+      "b1"
+      "b2"
+      "b3"
+      "b4";
+    column-gap: 0;
+    row-gap: 18px;
+    width: 100%;
+    max-width: none;
+    align-items: stretch;
+    padding: 4px clamp(16px, 4vw, 24px) 8px;
+  }
+
+  body[data-proyecto-id="7"] .wine-block {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: clamp(22px, 5vw, 28px) clamp(24px, 6vw, 32px);
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  body[data-proyecto-id="7"] .wine-block--1 { border-radius: 40% / 48%; }
+  body[data-proyecto-id="7"] .wine-block--2 { border-radius: 46% 46% 46% 12% / 42% 42% 50% 12%; }
+  body[data-proyecto-id="7"] .wine-block--3 { border-radius: 68% 26% 60% 32% / 32% 64% 32% 64%; }
+  body[data-proyecto-id="7"] .wine-block--4 { border-radius: 16% 74% 22% 68% / 66% 16% 74% 22%; }
+
+  body[data-proyecto-id="7"] .wine-block-head {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 4px 8px;
+    margin: 0;
+    padding: 0 0 12px;
+  }
+
+  body[data-proyecto-id="7"] .wine-block h3 {
+    display: block;
+    flex: 1 1 8rem;
+    min-width: 0;
+    margin: 0;
+    font-size: clamp(1.125rem, 4.8vw, 1.35rem);
+    line-height: 1.3;
+  }
+
+  body[data-proyecto-id="7"] .wine-num {
+    display: block;
+    flex: 0 0 auto;
+    font-size: clamp(1.6rem, 6.4vw, 1.9rem);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  body[data-proyecto-id="7"] .wine-block p {
+    font-size: 16px;
+  }
+
+  body[data-proyecto-id="7"] .wine-bottle img {
+    width: auto;
+    max-width: min(560px, 92vw);
+    height: auto;
+    max-height: min(86vh, 980px);
+    object-fit: contain;
+  }
+
+  body[data-proyecto-id="7"] .wine-mosaic {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  body[data-proyecto-id="7"] .wine-mosaic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body[data-proyecto-id="7"] .wine-mosaic-video {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    width: min(70%, 420px);
+    max-width: 420px;
+    margin-inline: auto;
+  }
+}
+
+html.js-motion body[data-proyecto-id="7"] .wine-block.reveal,
+html.js-motion body[data-proyecto-id="7"] .wine-block.reveal.is-in {
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.3s ease;
+}
+}
