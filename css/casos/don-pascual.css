@@ -2,6 +2,7 @@
    Fonts de esta ficha (siguen por <link> Google en el HTML): DM Sans, Playfair Display. */
 @layer casos {
 /* Don Pascual: grilla editorial según croquis */
+/* TODO: unificar hide/reset de shell de ficha custom (title/meta/actions/back) con otras fichas */
 body[data-proyecto-id="7"] .project-detail-title,
 body[data-proyecto-id="7"] .work-detail-hero,
 body[data-proyecto-id="7"] .project-meta-section,
@@ -587,8 +588,10 @@ body[data-proyecto-id="7"] .wine-close {
 }
 
 body[data-proyecto-id="7"] .other-projects-section {
+  /* TODO: unificar acento related (fondo/h2::after) con var de ficha compartida */
   background: #f5f2ea;
-  padding-top: 12px;
+  padding-top: 20px;
+  padding-bottom: 40px;
 }
 
 body[data-proyecto-id="7"] .wine-actions {
@@ -634,6 +637,7 @@ body[data-proyecto-id="7"] .wine-btn--ghost:hover {
 }
 
 body[data-proyecto-id="7"] .wine-lightbox {
+  /* TODO: unificar chrome lightbox con @layer lightbox en base.css (sizing/open se repiten en mayo/noir/wine/ubicar) */
   position: relative;
   width: auto;
   max-width: min(96vw, 1280px);
@@ -750,7 +754,7 @@ body[data-proyecto-id="7"] .wine-footerbrand {
     min-width: 0;
   }
 
-  body[data-proyecto-id="7"] .wine-lightbox-prev { left: 8px; }
+  body[data-proyecto-id="7"] .wine-lightbox-prev { left: 8px; /* TODO: unificar offsets mobile lightbox con base @layer lightbox */ }
   body[data-proyecto-id="7"] .wine-lightbox-next { right: 8px; }
   body[data-proyecto-id="7"] .wine-lightbox-close {
     top: 8px;

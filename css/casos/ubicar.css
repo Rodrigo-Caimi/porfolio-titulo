@@ -2,6 +2,7 @@
    Fonts de esta ficha (siguen por <link> Google en el HTML): DM Sans. */
 @layer casos {
 /* Ubicar GPS: recorrido con flecha naranja */
+/* TODO: unificar hide/reset de shell de ficha custom (title/meta/actions/back) con otras fichas */
 body[data-proyecto-id="8"] .project-detail-title,
 body[data-proyecto-id="8"] .work-detail-hero,
 body[data-proyecto-id="8"] .project-meta-section,
@@ -346,6 +347,7 @@ body[data-proyecto-id="8"] .ubicar-gallery-item img {
 }
 
 body[data-proyecto-id="8"] .ubicar-lightbox {
+  /* TODO: unificar chrome lightbox con @layer lightbox en base.css (sizing/open se repiten en mayo/noir/wine/ubicar) */
   position: relative;
   width: auto;
   max-width: min(96vw, 1280px);
@@ -407,6 +409,7 @@ body[data-proyecto-id="8"] .ubicar-lightbox-prev { left: -56px; }
 body[data-proyecto-id="8"] .ubicar-lightbox-next { right: -56px; }
 
 body[data-proyecto-id="8"] .other-projects-section {
+  /* TODO: unificar acento related (fondo/h2::after) con var de ficha compartida */
   background: linear-gradient(180deg, #141414 0%, #ececec 72px, #ececec 100%);
   padding-top: 96px;
 }
@@ -509,7 +512,7 @@ body[data-proyecto-id="8"] .other-projects-section {
     object-position: center 42%;
   }
 
-  body[data-proyecto-id="8"] .ubicar-lightbox-prev { left: 8px; }
+  body[data-proyecto-id="8"] .ubicar-lightbox-prev { left: 8px; /* TODO: unificar offsets mobile lightbox con base @layer lightbox */ }
   body[data-proyecto-id="8"] .ubicar-lightbox-next { right: 8px; }
   body[data-proyecto-id="8"] .ubicar-lightbox-close {
     top: 8px;

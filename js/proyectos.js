@@ -1,50 +1,5 @@
 const PROYECTOS = [
   {
-    id: 1,
-    slug: 'horizonte.html',
-    title: 'Horizonte',
-    category: 'Branding',
-    cardCategories: ['UX/UI'],
-    cardDescription: 'Proyecto de experiencia digital e interfaz.',
-    cardClass: 'card-third',
-    cardWidth: 800,
-    cardHeight: 1023,
-    cardImage: 'IMAGENES/Horizonte/horizonte-card.webp',
-    cardAlt: 'Horizonte - Creación de marca',
-    role: 'Identidad de marca: concepto, sistema visual y aplicaciones',
-    tools: 'Illustrator, Photoshop',
-    galleryLayout: 'spread',
-    gallery: [
-      { src: 'IMAGENES/Horizonte/horizonte-calle.jpg', alt: 'Horizonte en calle' },
-      { src: 'IMAGENES/Horizonte/horizonte-tarjeta.jpg', alt: 'Tarjeta de presentación Horizonte' },
-      { src: 'IMAGENES/Horizonte/horizonte-bolsa.jpg', alt: 'Bolsa Horizonte' },
-      { src: 'IMAGENES/Horizonte/horizonte-pin.jpg', alt: 'Pin de logo Horizonte' }
-    ],
-    processTitle: 'Cómo se pensó este proyecto',
-    process: [
-      {
-        title: 'Cómo se pensó este proyecto',
-        text: 'Horizonte surge de explorar un estudio de diseño que mira adelante. El concepto conecta "horizonte" con nuevas perspectivas. Se desarrolló una identidad que comunica innovación, claridad y amplitud, pensando en cómo el estudio se proyecta hacia el futuro del diseño gráfico.'
-      },
-      {
-        title: 'Desarrollo y exploración',
-        text: 'El proceso partió de la investigación sobre la marca Horizonte. Se exploraron múltiples direcciones visuales, definiendo tipografía y paleta. Se trabajó en soportes: señalética urbana, papelería, merchandising y piezas digitales, probando la flexibilidad del sistema en cada aplicación.'
-      },
-      {
-        title: 'Resultado conceptual',
-        text: 'Se logró un sistema de identidad completo y cohesivo. Funciona en múltiples contextos desde la calle hasta una tarjeta. Cada elemento refuerza la idea de una visión amplia y proyectada, manteniendo coherencia visual y comunicando valores de la marca constantemente.'
-      }
-    ],
-    actions: [
-      {
-        label: 'Manual de marca',
-        href: 'DOCUMENTOS/Manual-marca-Horizonte.pdf',
-        download: 'Manual-marca-Horizonte.pdf'
-      }
-    ],
-    related: [2, 3]
-  },
-  {
     id: 2,
     slug: 'mayo-amarillo.html',
     title: 'Mayo Amarillo',
@@ -93,61 +48,7 @@ const PROYECTOS = [
         download: 'Mayo-amarillo-porfolio.pdf'
       }
     ],
-    related: [1, 4]
-  },
-  {
-    id: 3,
-    slug: 'totem-de-cafe.html',
-    title: 'Totem de Café',
-    category: 'UX/UI',
-    cardCategories: ['UX/UI', 'INTERFAZ'],
-    cardDescription: 'Experiencia de autoservicio para elegir y personalizar café.',
-    cardClass: 'card-third',
-    cardWidth: 800,
-    cardHeight: 1023,
-    cardImage: 'IMAGENES/Totem Cafe/totem-cafe-card.webp',
-    cardAlt: 'Totem de Café - Interfaz digital',
-    role: 'Diseño UX/UI end-to-end: flujos, pantallas y prototipo interactivo',
-    tools: 'Figma',
-    galleryLayout: 'screens',
-    gallery: [
-      { src: 'IMAGENES/Totem Cafe/totem-cafe-hq.png', alt: 'Totem de Café - Menú principal' },
-      { src: 'IMAGENES/Totem Cafe/totem-recarga-hq.png', alt: 'Recarga completada Totem de Café' },
-      { src: 'IMAGENES/Totem Cafe/totem-pago-hq.png', alt: 'Pago Totem de Café' },
-      { src: 'IMAGENES/Totem Cafe/totem-compra-hq.png', alt: 'Gracias por su compra Totem de Café' }
-    ],
-    processTitle: 'Cómo se pensó este proyecto',
-    process: [
-      {
-        title: 'Problema',
-        text: 'En una cafetería, el pedido en mostrador genera filas, dudas sobre el menú y fricción al pagar. Hacía falta una interfaz de totem clara para elegir, confirmar y pagar sin depender de una explicación oral.'
-      },
-      {
-        title: 'Mi rol',
-        text: 'Diseñé la experiencia de punta a punta: flujos de usuario, arquitectura de pantallas, prototipo interactivo en Figma y criterios de usabilidad para menú, recarga y métodos de pago.'
-      },
-      {
-        title: 'Decisión clave',
-        text: 'Prioricé un recorrido lineal y predecible (menú → pedido → pago → confirmación) en lugar de un menú denso con muchas opciones a la vez. Menos carga cognitiva, más velocidad en el totem.'
-      },
-      {
-        title: 'Resultado',
-        text: 'Un prototipo navegable que demuestra un pedido completo en pocos pasos, con pantallas consistentes y un flujo listo para validar con usuarios reales o pasar a desarrollo.'
-      }
-    ],
-    actions: [
-      {
-        label: 'Documentación del proyecto',
-        href: 'DOCUMENTOS/Totem-porfolio.pdf',
-        download: 'Totem-porfolio.pdf'
-      },
-      {
-        label: 'Ver prototipo en Figma',
-        href: 'https://www.figma.com/proto/G9Ekaxi9RBCIMgIpGvHD1L/Totem-de-Caf%C3%A9?node-id=144-176&t=isyDNesqZTwTblLN-1&scaling=scale-down&content-scaling=fixed&page-id=74%3A556&starting-point-node-id=80%3A1112',
-        external: true
-      }
-    ],
-    related: [1, 4]
+    related: [5, 4]
   },
   {
     id: 4,
@@ -193,7 +94,7 @@ const PROYECTOS = [
         download: 'Proyecto-fotografico-porfolio.pdf'
       }
     ],
-    related: [1, 3]
+    related: [2, 5]
   },
   {
     id: 5,
@@ -243,7 +144,7 @@ const PROYECTOS = [
         download: 'ORT-porfolio.pdf'
       }
     ],
-    related: [1, 2]
+    related: [6, 2]
   },
   {
     id: 6,
@@ -322,7 +223,7 @@ const PROYECTOS = [
         external: true
       }
     ],
-    related: [3, 1]
+    related: [7, 8]
   },
   {
     id: 7,

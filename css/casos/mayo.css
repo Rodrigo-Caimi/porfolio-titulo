@@ -2,6 +2,7 @@
    Fonts de esta ficha (siguen por <link> Google en el HTML): DM Sans. */
 @layer casos {
 /* Mayo Amarillo: case study editorial */
+/* TODO: unificar hide/reset de shell de ficha custom (title/meta/actions/back) con otras fichas */
 body[data-proyecto-id="2"] {
   --mayo-yellow: #f0c400;
   --mayo-ink: #111111;
@@ -85,7 +86,6 @@ body[data-proyecto-id="2"] .mayo-back:hover {
 }
 
 body[data-proyecto-id="2"] .mayo-kicker {
-  position: static;
   margin: 12px 0 0;
   font-size: 13px;
   font-weight: 700;
@@ -179,19 +179,10 @@ body[data-proyecto-id="2"] .mayo-head {
   align-items: baseline;
   gap: 14px;
   margin: 0 0 20px;
-  position: static;
-  top: auto;
-  left: auto;
-  width: auto;
-  z-index: auto;
-  background: transparent;
-  backdrop-filter: none;
-  border-bottom: 0;
 }
 
 body[data-proyecto-id="2"] .mayo-num {
   flex: 0 0 auto;
-  position: static;
   font-size: clamp(40px, 4.4vw, 64px);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -329,9 +320,6 @@ body[data-proyecto-id="2"] .mayo-board-head {
   align-items: flex-start;
   gap: 12px;
   margin: 0 0 18px;
-  position: static;
-  top: auto;
-  transform: none;
 }
 
 body[data-proyecto-id="2"] .mayo-board-head .mayo-num {
@@ -341,9 +329,6 @@ body[data-proyecto-id="2"] .mayo-board-head .mayo-num {
 
 body[data-proyecto-id="2"] .mayo-board-head h2 {
   margin: 0;
-  position: static;
-  top: auto;
-  transform: none;
   font-size: clamp(22px, 2.1vw, 32px);
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -630,6 +615,7 @@ body[data-proyecto-id="2"] .mayo-cta--ghost:hover {
 }
 
 body[data-proyecto-id="2"] .mayo-lightbox {
+  /* TODO: unificar chrome lightbox con @layer lightbox en base.css (sizing/open se repiten en mayo/noir/wine/ubicar) */
   width: min(92vw, 1200px);
   max-width: 92vw;
   max-height: 90vh;
@@ -685,6 +671,7 @@ body[data-proyecto-id="2"] .mayo-lightbox-prev { left: -56px; }
 body[data-proyecto-id="2"] .mayo-lightbox-next { right: -56px; }
 
 body[data-proyecto-id="2"] .other-projects-section {
+  /* TODO: unificar acento related (fondo/h2::after) con var de ficha compartida */
   background: #fff;
   padding: 64px 0 72px;
 }
@@ -820,7 +807,7 @@ body[data-proyecto-id="2"] .other-projects-section h2::after {
     width: 100%;
   }
 
-  body[data-proyecto-id="2"] .mayo-lightbox-prev { left: 8px; }
+  body[data-proyecto-id="2"] .mayo-lightbox-prev { left: 8px; /* TODO: unificar offsets mobile lightbox con base @layer lightbox */ }
   body[data-proyecto-id="2"] .mayo-lightbox-next { right: 8px; }
   body[data-proyecto-id="2"] .mayo-lightbox-close {
     top: 8px;
