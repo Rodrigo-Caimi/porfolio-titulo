@@ -13,22 +13,8 @@
     return base + slug;
   }
 
-  function homeHref() {
-    const base = document.documentElement.dataset.assetBase || './';
-    return base + 'index.html';
-  }
-
   function getProyecto(id) {
     return PROYECTOS.find(function (p) { return p.id === id; });
-  }
-
-  function isCustomCase(proyecto) {
-    return proyecto && (
-      proyecto.processLayout === 'editorial' ||
-      proyecto.processLayout === 'trail' ||
-      proyecto.processLayout === 'noir' ||
-      proyecto.processLayout === 'mayo'
-    );
   }
 
   function renderWorkGrid(container) {
@@ -74,67 +60,6 @@
     }).join('');
   }
 
-  function renderGallery(container, proyecto) {
-    if (!container) return;
-
-    // Galerías de ficha: markup estático en cada HTML
-    container.innerHTML = '';
-  }
-
-  function renderActions(container, proyecto) {
-    if (!container) return;
-
-    if (!proyecto.actions || !proyecto.actions.length) {
-      container.innerHTML = '';
-      container.hidden = true;
-      return;
-    }
-
-    container.hidden = false;
-
-    const rows = proyecto.actions.map(function (action) {
-      if (!action || !action.href) return '';
-
-      const href = action.external ? action.href : asset(action.href);
-      const attrs = action.external
-        ? ' target="_blank" rel="noopener"'
-        : (action.download
-          ? ' target="_blank" rel="noopener" download="' + (action.download || '') + '"'
-          : ' target="_blank" rel="noopener"');
-
-      var prompt = action.external
-        ? (action.label && /reel|video/i.test(action.label)
-          ? 'Si querés visualizar el proyecto'
-          : 'Si querés visitar el proyecto')
-        : 'Si querés más información del proyecto';
-
-      return (
-        '<div class="project-action-row">' +
-          '<p class="project-action-prompt">' + prompt + '</p>' +
-          '<svg class="project-action-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-            '<path d="M5 12h14M12 5l7 7-7 7"/>' +
-          '</svg>' +
-          '<a href="' + href + '"' + attrs + ' class="btn btn-primary project-action-btn">' + action.label + '</a>' +
-        '</div>'
-      );
-    }).join('');
-
-    container.innerHTML = '<div class="project-actions-list">' + rows + '</div>';
-  }
-
-  function actionLinkHtml(action, className) {
-    if (!action || !action.href) return '';
-
-    const href = action.external ? action.href : asset(action.href);
-    const attrs = action.external
-      ? ' target="_blank" rel="noopener"'
-      : (action.download
-        ? ' target="_blank" rel="noopener" download="' + (action.download || '') + '"'
-        : ' target="_blank" rel="noopener"');
-
-    return '<a href="' + href + '"' + attrs + ' class="' + className + '">' + action.label + '</a>';
-  }
-
   function bindWineInteractions(root, proyecto) {
     if (!root) return;
     const gallery = (proyecto && proyecto.editorial && proyecto.editorial.gallery) || [];
@@ -154,35 +79,11 @@
     );
   }
 
-  function renderEditorialProcess(container, proyecto) {
-    if (!container) return;
-
-    // Markup estático en trabajos/don-pascual.html; JS solo curvas y lightbox
-    if (container.querySelector('.wine-editorial')) {
-      bindWineInteractions(container, proyecto);
-      return;
-    }
-
-    container.innerHTML = '';
-  }
-
   function bindUbicarInteractions(root, proyecto) {
     if (!root) return;
     const result = (proyecto && proyecto.trail && proyecto.trail.result) || [];
     bindUbicarTrail(root.querySelector('.ubicar-trail'));
     bindSimpleLightbox(root.querySelector('.ubicar-gallery'), root.querySelector('.ubicar-lightbox'), result);
-  }
-
-  function renderTrailProcess(container, proyecto) {
-    if (!container) return;
-
-    // Markup estático en trabajos/ubicar-gps.html; JS solo dibuja la línea y el lightbox
-    if (container.querySelector('.ubicar-page')) {
-      bindUbicarInteractions(container, proyecto);
-      return;
-    }
-
-    container.innerHTML = '';
   }
 
   function bindUbicarTrail(trail) {
@@ -492,18 +393,6 @@
     );
   }
 
-  function renderNoirCase(container, proyecto) {
-    if (!container) return;
-
-    // Markup estático en trabajos/noir-estudio.html; JS solo slider, servicios y lightbox
-    if (container.querySelector('.noir-editorial')) {
-      bindNoirInteractions(container, proyecto);
-      return;
-    }
-
-    container.innerHTML = '';
-  }
-
   function bindNoirSlider(root) {
     if (!root) return;
     const track = root.querySelector('.noir-hero-track');
@@ -797,73 +686,6 @@
     );
   }
 
-  function renderMayoCase(container, proyecto) {
-    if (!container) return;
-
-    // Markup estático en trabajos/mayo-amarillo.html; JS solo lightbox
-    if (container.querySelector('.mayo-editorial')) {
-      bindMayoInteractions(container, proyecto);
-      return;
-    }
-
-    container.innerHTML = '';
-  }
-
-  function renderProcess(container, proyecto) {
-    if (!container) return;
-
-    if (proyecto.processLayout === 'editorial') {
-      renderEditorialProcess(container, proyecto);
-      return;
-    }
-
-    if (proyecto.processLayout === 'trail') {
-      renderTrailProcess(container, proyecto);
-      return;
-    }
-
-    if (proyecto.processLayout === 'noir') {
-      renderNoirCase(container, proyecto);
-      return;
-    }
-
-    if (proyecto.processLayout === 'mayo') {
-      renderMayoCase(container, proyecto);
-      return;
-    }
-
-    // Foto (id 4) y ORT (id 5): markup estático en sus HTML
-    container.innerHTML = '';
-  }
-
-  function renderOtherProjects(container, currentId) {
-    if (!container) return;
-
-    const proyecto = getProyecto(currentId);
-    if (!proyecto) return;
-
-    const cards = proyecto.related.map(function (id) {
-      const related = getProyecto(id);
-      if (!related) return '';
-
-      return (
-        '<a class="other-project-card" href="./' + related.slug + '">' +
-          '<div class="other-project-image">' +
-            '<img loading="lazy" decoding="async" src="' + asset(related.cardImage) + '" alt="' + related.title + '">' +
-          '</div>' +
-          '<div class="other-project-content">' +
-            '<h3>' + related.title + '</h3>' +
-          '</div>' +
-        '</a>'
-      );
-    }).join('');
-
-    container.innerHTML =
-      '<h2>Otros proyectos</h2>' +
-      '<div class="other-projects-grid">' + cards + '</div>' +
-      '<p class="other-projects-home"><a href="' + homeHref() + '#trabajos">Ver todos los trabajos</a></p>';
-  }
-
   function notifyRendered() {
     document.dispatchEvent(new CustomEvent('portfolio:rendered'));
   }
@@ -879,7 +701,6 @@
       const root = document.querySelector('.ubicar-case') || document;
       if (root.querySelector('.ubicar-page')) {
         bindUbicarInteractions(root, proyecto);
-        renderOtherProjects(document.querySelector('[data-proyecto-related]'), proyectoId);
         notifyRendered();
         return;
       }
@@ -890,7 +711,6 @@
       const root = document.querySelector('.wine-case') || document;
       if (root.querySelector('.wine-editorial')) {
         bindWineInteractions(root, proyecto);
-        renderOtherProjects(document.querySelector('[data-proyecto-related]'), proyectoId);
         notifyRendered();
         return;
       }
@@ -901,7 +721,6 @@
       const root = document.querySelector('.noir-case') || document;
       if (root.querySelector('.noir-editorial')) {
         bindNoirInteractions(root, proyecto);
-        renderOtherProjects(document.querySelector('[data-proyecto-related]'), proyectoId);
         notifyRendered();
         return;
       }
@@ -912,16 +731,11 @@
       const root = document.querySelector('.mayo-case') || document;
       if (root.querySelector('.mayo-editorial')) {
         bindMayoInteractions(root, proyecto);
-        renderOtherProjects(document.querySelector('[data-proyecto-related]'), proyectoId);
         notifyRendered();
         return;
       }
     }
 
-    renderGallery(document.querySelector('[data-proyecto-gallery]'), proyecto);
-    renderProcess(document.querySelector('[data-proyecto-process]'), proyecto);
-    renderActions(document.querySelector('[data-proyecto-actions]'), proyecto);
-    renderOtherProjects(document.querySelector('[data-proyecto-related]'), proyectoId);
     notifyRendered();
   }
 
