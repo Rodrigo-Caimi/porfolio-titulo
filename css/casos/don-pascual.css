@@ -18,9 +18,7 @@ body[data-proyecto-id="7"] .don-case {
   width: 100%;
   margin: 0;
   padding: 4px 0 64px;
-  background:
-    radial-gradient(ellipse at 50% 42%, rgba(196, 165, 116, 0.12), transparent 42%),
-    #f5f2ea;
+  background: #f5f2ea;
   color: #1c1914;
 }
 
@@ -150,23 +148,37 @@ body[data-proyecto-id="7"] .don-lines {
   overflow: visible;
 }
 
-body[data-proyecto-id="7"] .don-lines path {
-  fill: none;
-  stroke: #c5b08a;
-  stroke-width: 1.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.78;
+body[data-proyecto-id="7"] .don-line {
+  position: absolute;
+  width: min(42%, 380px);
+  height: auto;
+  max-height: 42%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.92;
 }
 
-body[data-proyecto-id="7"] .don-lines path[data-don-echo] {
-  stroke-width: 0.65;
-  opacity: 0.28;
+body[data-proyecto-id="7"] .don-line--1 {
+  top: 8%;
+  left: 10%;
 }
 
-body[data-proyecto-id="7"] .don-lines circle {
-  fill: #c5b08a;
-  opacity: 0.9;
+body[data-proyecto-id="7"] .don-line--2 {
+  top: 8%;
+  right: 10%;
+  transform: scaleX(-1);
+}
+
+body[data-proyecto-id="7"] .don-line--3 {
+  top: 48%;
+  left: 10%;
+}
+
+body[data-proyecto-id="7"] .don-line--4 {
+  top: 48%;
+  right: 10%;
+  transform: scaleX(-1);
 }
 
 body[data-proyecto-id="7"] .don-block--1 {
@@ -203,12 +215,7 @@ body[data-proyecto-id="7"] .don-bottle {
   justify-self: stretch;
   min-width: 0;
   overflow: visible;
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(190, 145, 74, 0.11),
-      transparent 58%
-    );
+  background: transparent;
 }
 
 body[data-proyecto-id="7"] .don-block {

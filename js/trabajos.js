@@ -63,7 +63,6 @@
   function bindDonInteractions(root, proyecto) {
     if (!root) return;
     const gallery = (proyecto && proyecto.don && proyecto.don.gallery) || [];
-    bindDonArrows(root.querySelector('.don-stage'));
     bindSimpleLightbox(
       root.querySelector('.don-mosaic'),
       root.querySelector('.don-lightbox'),
@@ -219,79 +218,6 @@
     dialog.addEventListener('close', function () {
       img.removeAttribute('src');
     });
-  }
-
-  function bindDonArrows(stage) {
-    if (!stage) return;
-    const svg = stage.querySelector('.don-lines');
-    const bottle = stage.querySelector('.don-bottle img');
-    if (!svg || !bottle) return;
-
-    function curve(from, to, side) {
-      const mx = (from.x + to.x) / 2 + side * 72;
-      const my = (from.y + to.y) / 2;
-      return 'M' + from.x.toFixed(1) + ' ' + from.y.toFixed(1) +
-        ' Q' + mx.toFixed(1) + ' ' + my.toFixed(1) +
-        ' ' + to.x.toFixed(1) + ' ' + to.y.toFixed(1);
-    }
-
-    function point(el, rx, ry, root) {
-      const rr = root.getBoundingClientRect();
-      const r = el.getBoundingClientRect();
-      return {
-        x: r.left - rr.left + r.width * rx,
-        y: r.top - rr.top + r.height * ry
-      };
-    }
-
-    function draw() {
-      if (window.matchMedia('(max-width: 900px)').matches) return;
-      const sr = stage.getBoundingClientRect();
-      if (!sr.width || !sr.height) return;
-      svg.setAttribute('viewBox', '0 0 ' + sr.width + ' ' + sr.height);
-      svg.setAttribute('width', String(sr.width));
-      svg.setAttribute('height', String(sr.height));
-
-      const br = bottle.getBoundingClientRect();
-      const midX = br.left - sr.left + br.width / 2;
-      const glass = br.width * 0.16;
-      const specs = [
-        { n: 1, from: [1, 0.36], side: -1, y: 0.30 },
-        { n: 2, from: [0, 0.38], side: 1, y: 0.30 },
-        { n: 3, from: [1, 0.62], side: -1, y: 0.68 },
-        { n: 4, from: [0, 0.60], side: 1, y: 0.68 }
-      ];
-
-      specs.forEach(function (spec) {
-        const block = stage.querySelector('.don-block--' + spec.n);
-        const path = svg.querySelector('[data-don-line="' + spec.n + '"]');
-        const echo = svg.querySelector('[data-don-echo="' + spec.n + 'a"]');
-        const echoB = svg.querySelector('[data-don-echo="' + spec.n + 'b"]');
-        const dotA = svg.querySelector('[data-don-dot="' + spec.n + 'a"]');
-        const dotB = svg.querySelector('[data-don-dot="' + spec.n + 'b"]');
-        if (!block || !path) return;
-        const from = point(block, spec.from[0], spec.from[1], stage);
-        const to = {
-          x: midX + spec.side * glass,
-          y: br.top - sr.top + br.height * spec.y
-        };
-        const d = curve(from, to, spec.side);
-        path.setAttribute('d', d);
-        if (echo) echo.setAttribute('d', d);
-        if (echoB) echoB.style.display = 'none';
-        if (dotA) { dotA.setAttribute('cx', from.x.toFixed(1)); dotA.setAttribute('cy', from.y.toFixed(1)); }
-        if (dotB) { dotB.setAttribute('cx', to.x.toFixed(1)); dotB.setAttribute('cy', to.y.toFixed(1)); }
-      });
-    }
-
-    const redraw = function () { window.requestAnimationFrame(draw); };
-    if (!bottle.complete) bottle.addEventListener('load', redraw, { once: true });
-    let timer = 0;
-    window.addEventListener('resize', function () {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(redraw, 120);
-    });
-    redraw();
   }
 
   function bindNoirInteractions(root, proyecto) {
