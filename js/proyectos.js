@@ -59,39 +59,8 @@ const PROYECTOS = [
     cardWidth: 800,
     cardHeight: 1201,
     cardImage: 'IMAGENES/Proyecto fotografico/fotografia-cerveza-card.webp',
-    cardAlt: 'Proyecto Fotográfico',
-    role: 'Fotografía de producto y exploración técnica',
-    tools: 'Cámara, Lightroom, Photoshop',
-    galleryLayout: 'photo',
-    gallery: [
-      { src: 'IMAGENES/Proyecto fotografico/foto-lo-que-no-vemos.jpg', alt: 'Lo que no vemos' },
-      { src: 'IMAGENES/Proyecto fotografico/fotografia cerveza.jpg', alt: 'Fotografía cerveza' },
-      { src: 'IMAGENES/Proyecto fotografico/joyeriaCreacion.jpg', alt: 'Joyeria Creación' },
-      { src: 'IMAGENES/Proyecto fotografico/foto-lo-que-no-vemos4.jpg', alt: 'Lo que no vemos 4' }
-    ],
-    processTitle: 'Cómo se pensó este proyecto',
-    process: [
-      {
-        title: 'Objetivo',
-        text: 'Explorar diferentes técnicas fotográficas para capturar la esencia de productos y espacios, combinando creatividad técnica con narrativa visual para comunicar mensajes de marca de manera impactante.'
-      },
-      {
-        title: 'Técnicas aplicadas',
-        text: 'Implementé técnicas avanzadas como barrido para crear dinamismo y movimiento, junto con iluminación controlada y composición estratégica para destacar texturas, colores y detalles que potencian la identidad visual de cada producto.'
-      },
-      {
-        title: 'Resultado',
-        text: 'Una serie fotográfica que integra diferentes técnicas creativas aplicadas a la fotografía de producto y espacios, generando imágenes que se transforman en recursos visuales para campañas publicitarias, packaging y material promocional.'
-      }
-    ],
-    actions: [
-      {
-        label: 'Documentación del proyecto',
-        href: 'DOCUMENTOS/Proyecto-fotografico-porfolio.pdf',
-        download: 'Proyecto-fotografico-porfolio.pdf'
-      }
-    ],
-    related: [2, 5]
+    cardAlt: 'Proyecto Fotográfico'
+    // Ficha estática en trabajos/proyecto-fotografico.html (sin datos de detalle aquí)
   },
   {
     id: 5,
@@ -104,43 +73,8 @@ const PROYECTOS = [
     cardWidth: 800,
     cardHeight: 1433,
     cardImage: 'IMAGENES/Campana reel ORT/ort-reel-card.webp',
-    cardAlt: 'Campaña Reel ORT',
-    role: 'Reel promocional: concepto, generación audiovisual y edición',
-    tools: 'ChatGPT, Runway, Premiere',
-    galleryLayout: 'reel',
-    gallery: [
-      {
-        type: 'vimeo',
-        src: 'https://player.vimeo.com/video/1225425471',
-        alt: 'Reel final Campaña ORT'
-      },
-      { src: 'IMAGENES/Campana reel ORT/ort-frame1.jpg', alt: 'Frame 1 - Entrada ORT' },
-      { src: 'IMAGENES/Campana reel ORT/ort-frame2.jpg', alt: 'Frame 2' },
-      { src: 'IMAGENES/Campana reel ORT/ort-frame3.jpg', alt: 'Frame 3' }
-    ],
-    processTitle: 'Cómo se pensó este proyecto',
-    process: [
-      {
-        title: 'Concepto y personaje',
-        text: 'A partir del brief de ORT se definió la narrativa del reel y se creó un personaje con ChatGPT. Desde ahí se generaron las imágenes clave que guían la historia visual de la campaña.'
-      },
-      {
-        title: 'Video y voces con IA',
-        text: 'Las piezas fijas pasaron a movimiento en Runway, generando las secuencias de video. Las voces también se generaron con inteligencia artificial, alineadas al tono y al ritmo del relato.'
-      },
-      {
-        title: 'Edición y pieza final',
-        text: 'El material se editó en Premiere para unir imagen, video y voces generadas con IA. El resultado es un reel promocional que combina creación de personaje, generación audiovisual y postproducción.'
-      }
-    ],
-    actions: [
-      {
-        label: 'Documentación del proyecto',
-        href: 'DOCUMENTOS/ORT-porfolio.pdf',
-        download: 'ORT-porfolio.pdf'
-      }
-    ],
-    related: [6, 2]
+    cardAlt: 'Campaña Reel ORT'
+    // Ficha estática en trabajos/campana-reel-ort.html (sin datos de detalle aquí)
   },
   {
     id: 6,
