@@ -101,9 +101,9 @@ const PROYECTOS = [
     cardHeight: 1421,
     cardImage: 'IMAGENES/Don pascual/don-pascual-card.webp',
     cardAlt: 'Don Pascual - Edición Limitada Invierno 2026',
-    processLayout: 'editorial',
+    processLayout: 'don',
     // Lightbox: galería del mosaico (detalle en trabajos/don-pascual.html)
-    editorial: {
+    don: {
       gallery: [
         { src: 'IMAGENES/Don pascual/don-pascual-afiche.webp', alt: 'Afiche Don Pascual Edición Limitada', w: 1130, h: 1600 },
         { src: 'IMAGENES/Don pascual/don-pascual-campana.webp', alt: 'Mockup de campaña Don Pascual junto al fuego', w: 1600, h: 640 },

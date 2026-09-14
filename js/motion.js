@@ -36,7 +36,7 @@
     watchList('body[data-proyecto-id="5"] .reel-hero-copy, body[data-proyecto-id="5"] .reel-phone');
     watchList('body[data-proyecto-id="5"] .reel-step, body[data-proyecto-id="5"] .reel-result, body[data-proyecto-id="5"] .reel-gallery-item', 90);
     watchList('body[data-proyecto-id="4"] .photo-hero-copy, body[data-proyecto-id="4"] .photo-essay-copy', 80);
-    watchList('.wine-intro, .wine-stage, .wine-block, .wine-gallery-title, .wine-mosaic-item, .wine-mosaic-video, .wine-close', 70);
+    watchList('.don-intro, .don-stage, .don-block, .don-gallery-title, .don-mosaic-item, .don-mosaic-video, .don-close', 70);
     watchList('.ubicar-intro, .ubicar-step, .ubicar-gallery', 70);
     watchList('.noir-hero, .noir-service-card, .noir-step, .noir-gallery, .noir-close', 70);
     watchList('.mayo-hero, .mayo-copy, .mayo-posters, .mayo-feed, .mayo-close', 70);

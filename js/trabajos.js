@@ -60,21 +60,21 @@
     }).join('');
   }
 
-  function bindWineInteractions(root, proyecto) {
+  function bindDonInteractions(root, proyecto) {
     if (!root) return;
-    const gallery = (proyecto && proyecto.editorial && proyecto.editorial.gallery) || [];
-    bindWineArrows(root.querySelector('.wine-stage'));
-    bindWineMosaicLines(root.querySelector('.wine-mosaic-wrap'));
+    const gallery = (proyecto && proyecto.don && proyecto.don.gallery) || [];
+    bindDonArrows(root.querySelector('.don-stage'));
+    bindDonMosaicLines(root.querySelector('.don-mosaic-wrap'));
     bindSimpleLightbox(
-      root.querySelector('.wine-mosaic'),
-      root.querySelector('.wine-lightbox'),
+      root.querySelector('.don-mosaic'),
+      root.querySelector('.don-lightbox'),
       gallery,
       {
-        item: '[data-wine-index]',
-        indexAttr: 'data-wine-index',
-        close: '.wine-lightbox-close',
-        prev: '.wine-lightbox-prev',
-        next: '.wine-lightbox-next'
+        item: '[data-don-index]',
+        indexAttr: 'data-don-index',
+        close: '.don-lightbox-close',
+        prev: '.don-lightbox-prev',
+        next: '.don-lightbox-next'
       }
     );
   }
@@ -222,10 +222,10 @@
     });
   }
 
-  function bindWineArrows(stage) {
+  function bindDonArrows(stage) {
     if (!stage) return;
-    const svg = stage.querySelector('.wine-lines');
-    const bottle = stage.querySelector('.wine-bottle img');
+    const svg = stage.querySelector('.don-lines');
+    const bottle = stage.querySelector('.don-bottle img');
     if (!svg || !bottle) return;
 
     function curve(from, to, side) {
@@ -264,12 +264,12 @@
       ];
 
       specs.forEach(function (spec) {
-        const block = stage.querySelector('.wine-block--' + spec.n);
-        const path = svg.querySelector('[data-wine-line="' + spec.n + '"]');
-        const echo = svg.querySelector('[data-wine-echo="' + spec.n + 'a"]');
-        const echoB = svg.querySelector('[data-wine-echo="' + spec.n + 'b"]');
-        const dotA = svg.querySelector('[data-wine-dot="' + spec.n + 'a"]');
-        const dotB = svg.querySelector('[data-wine-dot="' + spec.n + 'b"]');
+        const block = stage.querySelector('.don-block--' + spec.n);
+        const path = svg.querySelector('[data-don-line="' + spec.n + '"]');
+        const echo = svg.querySelector('[data-don-echo="' + spec.n + 'a"]');
+        const echoB = svg.querySelector('[data-don-echo="' + spec.n + 'b"]');
+        const dotA = svg.querySelector('[data-don-dot="' + spec.n + 'a"]');
+        const dotB = svg.querySelector('[data-don-dot="' + spec.n + 'b"]');
         if (!block || !path) return;
         const from = point(block, spec.from[0], spec.from[1], stage);
         const to = {
@@ -295,10 +295,10 @@
     redraw();
   }
 
-  function bindWineMosaicLines(wrap) {
+  function bindDonMosaicLines(wrap) {
     if (!wrap) return;
-    const mosaic = wrap.querySelector('.wine-mosaic');
-    const svg = wrap.querySelector('.wine-mosaic-lines');
+    const mosaic = wrap.querySelector('.don-mosaic');
+    const svg = wrap.querySelector('.don-mosaic-lines');
     if (!mosaic || !svg) return;
     const ns = 'http://www.w3.org/2000/svg';
 
@@ -334,7 +334,7 @@
       svg.setAttribute('width', String(wr.width));
       svg.setAttribute('height', String(wr.height));
 
-      const items = mosaic.querySelectorAll('.wine-mosaic-item');
+      const items = mosaic.querySelectorAll('.don-mosaic-item');
       if (items.length < 2) return;
       const nodes = [];
       for (let i = 0; i < items.length; i++) {
@@ -348,8 +348,8 @@
         const len = Math.hypot(b.x - a.x, b.y - a.y);
         if (len < 140) continue;
         const amp = (i % 2 === 0 ? 1 : -1) * Math.min(120, len * 0.22);
-        frag.appendChild(el('path', { class: 'wine-trail-echo', d: curve(a, b, amp * 1.1) }));
-        frag.appendChild(el('path', { class: 'wine-trail-main', d: curve(a, b, amp) }));
+        frag.appendChild(el('path', { class: 'don-trail-echo', d: curve(a, b, amp * 1.1) }));
+        frag.appendChild(el('path', { class: 'don-trail-main', d: curve(a, b, amp) }));
         frag.appendChild(el('circle', { cx: a.x.toFixed(1), cy: a.y.toFixed(1), r: '3.4' }));
         frag.appendChild(el('circle', { cx: b.x.toFixed(1), cy: b.y.toFixed(1), r: '3.4' }));
       }
@@ -706,11 +706,11 @@
       }
     }
 
-    // Don Pascual (id 7): HTML estático; JS solo curvas wine + lightbox
-    if (proyecto.processLayout === 'editorial') {
-      const root = document.querySelector('.wine-case') || document;
-      if (root.querySelector('.wine-editorial')) {
-        bindWineInteractions(root, proyecto);
+    // Don Pascual (id 7): HTML estático; JS solo curvas Don Pascual + lightbox
+    if (proyecto.processLayout === 'don') {
+      const root = document.querySelector('.don-case') || document;
+      if (root.querySelector('.don-editorial')) {
+        bindDonInteractions(root, proyecto);
         notifyRendered();
         return;
       }

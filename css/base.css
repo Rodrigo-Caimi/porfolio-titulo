@@ -86,7 +86,7 @@ a, a:hover, a:focus, a:active {
    HEADER Y NAVEGACIÓN
    ============================================ */
 /* Solo el chrome del sitio (hijo directo de body).
-   Los <header> internos de fichas (mayo-head, wine-block-head, etc.) no heredan fixed. */
+   Los <header> internos de fichas (mayo-head, don-block-head, etc.) no heredan fixed. */
 body > header {
   position: fixed;
   top: 0;
@@ -2499,7 +2499,7 @@ html.js-motion[data-hero-enter] .hero .cta .btn { --hero-enter-y: 12px; }
 @layer lightbox {
 /* Chrome compartido del lightbox de galería. Cada caso solo aporta backdrop/color/detalles. */
 .noir-lightbox,
-body[data-proyecto-id="7"] .wine-lightbox,
+body[data-proyecto-id="7"] .don-lightbox,
 body[data-proyecto-id="8"] .ubicar-lightbox,
 body[data-proyecto-id="2"] .mayo-lightbox {
   position: relative;
@@ -2514,7 +2514,7 @@ body[data-proyecto-id="2"] .mayo-lightbox {
 }
 
 .noir-lightbox[open],
-body[data-proyecto-id="7"] .wine-lightbox[open],
+body[data-proyecto-id="7"] .don-lightbox[open],
 body[data-proyecto-id="8"] .ubicar-lightbox[open],
 body[data-proyecto-id="2"] .mayo-lightbox[open] {
   position: fixed;
@@ -2546,7 +2546,7 @@ body[data-proyecto-id="2"] .mayo-lightbox[open] {
 }
 
 .noir-lightbox img,
-body[data-proyecto-id="7"] .wine-lightbox img,
+body[data-proyecto-id="7"] .don-lightbox img,
 body[data-proyecto-id="8"] .ubicar-lightbox img,
 body[data-proyecto-id="2"] .mayo-lightbox img {
   display: block;
@@ -2563,9 +2563,9 @@ body[data-proyecto-id="2"] .mayo-lightbox img {
 .noir-lightbox-close,
 .noir-lightbox-prev,
 .noir-lightbox-next,
-body[data-proyecto-id="7"] .wine-lightbox-close,
-body[data-proyecto-id="7"] .wine-lightbox-prev,
-body[data-proyecto-id="7"] .wine-lightbox-next,
+body[data-proyecto-id="7"] .don-lightbox-close,
+body[data-proyecto-id="7"] .don-lightbox-prev,
+body[data-proyecto-id="7"] .don-lightbox-next,
 body[data-proyecto-id="8"] .ubicar-lightbox-close,
 body[data-proyecto-id="8"] .ubicar-lightbox-prev,
 body[data-proyecto-id="8"] .ubicar-lightbox-next,
@@ -2588,7 +2588,7 @@ body[data-proyecto-id="2"] .mayo-lightbox-next {
 }
 
 .noir-lightbox-close,
-body[data-proyecto-id="7"] .wine-lightbox-close,
+body[data-proyecto-id="7"] .don-lightbox-close,
 body[data-proyecto-id="8"] .ubicar-lightbox-close,
 body[data-proyecto-id="2"] .mayo-lightbox-close {
   top: -44px;
@@ -2602,8 +2602,8 @@ body[data-proyecto-id="2"] .mayo-lightbox-close {
 
 .noir-lightbox-prev,
 .noir-lightbox-next,
-body[data-proyecto-id="7"] .wine-lightbox-prev,
-body[data-proyecto-id="7"] .wine-lightbox-next,
+body[data-proyecto-id="7"] .don-lightbox-prev,
+body[data-proyecto-id="7"] .don-lightbox-next,
 body[data-proyecto-id="8"] .ubicar-lightbox-prev,
 body[data-proyecto-id="8"] .ubicar-lightbox-next,
 body[data-proyecto-id="2"] .mayo-lightbox-prev,
@@ -2617,14 +2617,14 @@ body[data-proyecto-id="2"] .mayo-lightbox-next {
 }
 
 .noir-lightbox-prev,
-body[data-proyecto-id="7"] .wine-lightbox-prev,
+body[data-proyecto-id="7"] .don-lightbox-prev,
 body[data-proyecto-id="8"] .ubicar-lightbox-prev,
 body[data-proyecto-id="2"] .mayo-lightbox-prev {
   left: -56px;
 }
 
 .noir-lightbox-next,
-body[data-proyecto-id="7"] .wine-lightbox-next,
+body[data-proyecto-id="7"] .don-lightbox-next,
 body[data-proyecto-id="8"] .ubicar-lightbox-next,
 body[data-proyecto-id="2"] .mayo-lightbox-next {
   right: -56px;
@@ -2656,7 +2656,7 @@ body[data-proyecto-id="2"] .mayo-lightbox-next {
   }
 
   .noir-lightbox img,
-  body[data-proyecto-id="7"] .wine-lightbox img,
+  body[data-proyecto-id="7"] .don-lightbox img,
   body[data-proyecto-id="8"] .ubicar-lightbox img,
   body[data-proyecto-id="2"] .mayo-lightbox img {
     max-width: min(94vw, calc(100vw - 16px));
@@ -2664,21 +2664,21 @@ body[data-proyecto-id="2"] .mayo-lightbox-next {
   }
 
   .noir-lightbox-prev,
-  body[data-proyecto-id="7"] .wine-lightbox-prev,
+  body[data-proyecto-id="7"] .don-lightbox-prev,
   body[data-proyecto-id="8"] .ubicar-lightbox-prev,
   body[data-proyecto-id="2"] .mayo-lightbox-prev {
     left: 8px;
   }
 
   .noir-lightbox-next,
-  body[data-proyecto-id="7"] .wine-lightbox-next,
+  body[data-proyecto-id="7"] .don-lightbox-next,
   body[data-proyecto-id="8"] .ubicar-lightbox-next,
   body[data-proyecto-id="2"] .mayo-lightbox-next {
     right: 8px;
   }
 
   .noir-lightbox-close,
-  body[data-proyecto-id="7"] .wine-lightbox-close,
+  body[data-proyecto-id="7"] .don-lightbox-close,
   body[data-proyecto-id="8"] .ubicar-lightbox-close,
   body[data-proyecto-id="2"] .mayo-lightbox-close {
     top: 8px;
