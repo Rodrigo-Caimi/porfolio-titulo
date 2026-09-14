@@ -518,53 +518,41 @@
     redraw();
   }
 
-  function noirPhotoHtml(photo, index, extraClass, eager) {
-    if (!photo || !photo.src) return '';
-    return (
-      '<button type="button" class="noir-photo' + (extraClass ? ' ' + extraClass : '') + '" data-noir-index="' + index + '">' +
-        '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '"' +
-          (eager ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
-          ' decoding="async">' +
-      '</button>'
+  function bindNoirInteractions(root, proyecto) {
+    if (!root) return;
+    const photos = (proyecto && proyecto.gallery) || [];
+    const slides = (proyecto && proyecto.heroSlider && proyecto.heroSlider.length)
+      ? proyecto.heroSlider
+      : photos;
+    const cards = (proyecto && proyecto.serviceCards) || [];
+    const lightbox = slides.concat(cards, photos);
+
+    bindNoirSlider(root.querySelector('[data-noir-slider]'));
+    bindNoirServices(root.querySelector('[data-noir-services]'));
+    bindSimpleLightbox(
+      root.querySelector('.noir-editorial') || root,
+      root.querySelector('.noir-lightbox'),
+      lightbox,
+      {
+        item: '[data-noir-index]',
+        indexAttr: 'data-noir-index',
+        close: '.noir-lightbox-close',
+        prev: '.noir-lightbox-prev',
+        next: '.noir-lightbox-next'
+      }
     );
   }
 
-  function noirSlideHtml(photo, index, eager) {
-    if (!photo || !photo.src) return '';
-    return (
-      '<figure class="noir-slide" data-noir-index="' + index + '">' +
-        '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '"' +
-          (eager ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"') +
-          ' decoding="async" draggable="false">' +
-      '</figure>'
-    );
-  }
+  function renderNoirCase(container, proyecto) {
+    if (!container) return;
 
-  function noirServiceCardHtml(card, index) {
-    if (!card || !card.src) return '';
-    return (
-      '<article class="noir-service-card">' +
-        noirPhotoHtml(card, index, 'noir-photo--card') +
-        '<div class="noir-service-copy">' +
-          '<h3>' + card.title + '</h3>' +
-          (card.text ? '<p>' + card.text + '</p>' : '') +
-        '</div>' +
-      '</article>'
-    );
-  }
+    // Markup estático en trabajos/noir-estudio.html; JS solo slider, servicios y lightbox
+    if (container.querySelector('.noir-editorial')) {
+      bindNoirInteractions(container, proyecto);
+      return;
+    }
 
-  function noirStepHtml(item, n) {
-    if (!item) return '';
-    const num = (n < 10 ? '0' : '') + n;
-    return (
-      '<article class="noir-step noir-step--' + n + '">' +
-        '<span class="noir-step-num">' + num + '</span>' +
-        '<div class="noir-step-copy">' +
-          '<h3>' + item.title + '</h3>' +
-          '<p>' + item.text + '</p>' +
-        '</div>' +
-      '</article>'
-    );
+    container.innerHTML = '';
   }
 
   function bindNoirSlider(root) {
@@ -806,157 +794,6 @@
 
     updateUi();
     startAutoplay();
-  }
-
-  function isNoirFigmaAction(action) {
-    return !!(action && action.external && /figma\.com/i.test(String(action.href || '')));
-  }
-
-  function noirFigmaBlockHtml(actions, variant) {
-    if (!actions || !actions.length) return '';
-    const links = actions.map(function (action, index) {
-      var cls = 'noir-cta';
-      if (variant === 'hero') {
-        cls += index === 0 ? ' noir-cta--solid' : ' noir-cta--outline';
-      } else {
-        cls += ' noir-cta--ghost';
-      }
-      return actionLinkHtml(action, cls);
-    }).join('');
-    return (
-      '<div class="noir-figma">' +
-        '<p class="noir-figma-title">Figma</p>' +
-        '<div class="noir-figma-links">' + links + '</div>' +
-      '</div>'
-    );
-  }
-
-  function renderNoirCase(container, proyecto) {
-    const photos = proyecto.gallery || [];
-    const slides = (proyecto.heroSlider && proyecto.heroSlider.length) ? proyecto.heroSlider : photos;
-    const cards = proyecto.serviceCards || [];
-    const lightbox = slides.concat(cards, photos);
-    const steps = proyecto.process || [];
-    const actions = proyecto.actions || [];
-    const figmaActions = actions.filter(isNoirFigmaAction);
-    const otherActions = actions.filter(function (action) {
-      return !isNoirFigmaAction(action);
-    });
-    const closeActions = otherActions.map(function (action, index) {
-      return actionLinkHtml(action, 'noir-cta' + (index === 0 ? ' noir-cta--solid' : ' noir-cta--ghost'));
-    }).join('') + noirFigmaBlockHtml(figmaActions, 'close');
-    const heroLead = proyecto.heroLead || proyecto.heroText || proyecto.role;
-    const slideHtml = slides.map(function (photo, index) {
-      return noirSlideHtml(photo, index, index === 0);
-    }).join('');
-    const dotsHtml = slides.map(function (photo, index) {
-      return (
-        '<button type="button" class="noir-hero-dot' + (index === 0 ? ' is-active' : '') + '" data-noir-slide="' + index + '"' +
-          ' aria-label="Ver imagen ' + (index + 1) + '"></button>'
-      );
-    }).join('');
-    const cardHtml = cards.map(function (card, index) {
-      return noirServiceCardHtml(card, slides.length + index);
-    }).join('');
-    const galleryHtml = photos.map(function (photo, index) {
-      const wide = !!(photo && photo.wide);
-      return (
-        '<figure class="noir-gallery-item' + (wide ? ' noir-gallery-item--wide' : ' noir-gallery-item--tall') + '">' +
-          noirPhotoHtml(photo, slides.length + cards.length + index, wide ? 'noir-photo--wide' : 'noir-photo--tall') +
-        '</figure>'
-      );
-    }).join('');
-
-    container.innerHTML =
-      '<div class="noir-editorial">' +
-        '<section class="noir-hero">' +
-          '<div class="noir-hero-slider" data-noir-slider>' +
-            '<div class="noir-hero-viewport">' +
-              '<div class="noir-hero-track">' +
-                slideHtml +
-              '</div>' +
-            '</div>' +
-            (slides.length > 1
-              ? '<button type="button" class="noir-hero-arrow noir-hero-prev" aria-label="Imagen anterior">‹</button>' +
-                '<button type="button" class="noir-hero-arrow noir-hero-next" aria-label="Imagen siguiente">›</button>' +
-                '<div class="noir-hero-dots">' + dotsHtml + '</div>'
-              : '') +
-          '</div>' +
-          '<div class="noir-hero-copy">' +
-            '<a class="noir-back" href="' + homeHref() + '">' +
-              '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-                '<path d="M15 18l-6-6 6-6"></path>' +
-              '</svg>' +
-              '<span>Volver al inicio</span>' +
-            '</a>' +
-            '<div class="noir-hero-text">' +
-              (proyecto.category ? '<p class="noir-kicker">' + proyecto.category + '</p>' : '') +
-              '<h1>' + (proyecto.pageTitle || proyecto.title) + '</h1>' +
-              (heroLead ? '<p class="noir-hero-lead">' + heroLead + '</p>' : '') +
-              (proyecto.tools ? '<p class="noir-hero-tools"><span>Herramientas</span> ' + proyecto.tools + '</p>' : '') +
-              noirFigmaBlockHtml(figmaActions, 'hero') +
-            '</div>' +
-          '</div>' +
-        '</section>' +
-        (cardHtml
-          ? '<section class="noir-services" aria-label="Servicios">' +
-              '<div class="noir-services-row">' +
-                '<button type="button" class="noir-services-arrow noir-services-prev" aria-label="Ver servicio anterior">‹</button>' +
-                '<div class="noir-services-viewport" data-noir-services>' +
-                  '<div class="noir-services-track">' + cardHtml + '</div>' +
-                '</div>' +
-                '<button type="button" class="noir-services-arrow noir-services-next" aria-label="Ver servicio siguiente">›</button>' +
-              '</div>' +
-              '<div class="noir-services-dots" data-noir-service-dots></div>' +
-              (proyecto.servicesNote ? '<p class="noir-services-note">' + proyecto.servicesNote + '</p>' : '') +
-            '</section>'
-          : '') +
-        '<section class="noir-process">' +
-          '<div class="noir-wrap">' +
-            '<h2>' + proyecto.processTitle + '</h2>' +
-            '<div class="noir-steps">' +
-              noirStepHtml(steps[0], 1) +
-              noirStepHtml(steps[1], 2) +
-              noirStepHtml(steps[2], 3) +
-              noirStepHtml(steps[3], 4) +
-            '</div>' +
-          '</div>' +
-        '</section>' +
-        (galleryHtml
-          ? '<section class="noir-gallery" aria-label="Galería del proyecto">' +
-              '<div class="noir-wrap">' +
-                '<div class="noir-gallery-grid">' + galleryHtml + '</div>' +
-              '</div>' +
-            '</section>'
-          : '') +
-        '<section class="noir-close">' +
-          '<div class="noir-wrap">' +
-            '<p class="noir-close-brand">' + proyecto.title + '</p>' +
-            '<div class="noir-close-actions">' + closeActions + '</div>' +
-          '</div>' +
-        '</section>' +
-        '<dialog class="noir-lightbox" aria-label="Imagen ampliada">' +
-          '<button type="button" class="noir-lightbox-close" aria-label="Cerrar">×</button>' +
-          '<button type="button" class="noir-lightbox-prev" aria-label="Imagen anterior">‹</button>' +
-          '<img alt="">' +
-          '<button type="button" class="noir-lightbox-next" aria-label="Imagen siguiente">›</button>' +
-        '</dialog>' +
-      '</div>';
-
-    bindNoirSlider(container.querySelector('[data-noir-slider]'));
-    bindNoirServices(container.querySelector('[data-noir-services]'));
-    bindSimpleLightbox(
-      container.querySelector('.noir-editorial'),
-      container.querySelector('.noir-lightbox'),
-      lightbox,
-      {
-        item: '[data-noir-index]',
-        indexAttr: 'data-noir-index',
-        close: '.noir-lightbox-close',
-        prev: '.noir-lightbox-prev',
-        next: '.noir-lightbox-next'
-      }
-    );
   }
 
   function mayoLooksGif(item) {
@@ -1259,6 +1096,17 @@
       const root = document.querySelector('.wine-case') || document;
       if (root.querySelector('.wine-editorial')) {
         bindWineInteractions(root, proyecto);
+        renderOtherProjects(document.querySelector('[data-proyecto-related]'), proyectoId);
+        notifyRendered();
+        return;
+      }
+    }
+
+    // Noir (id 6): HTML estático; JS solo slider, servicios y lightbox
+    if (proyecto.processLayout === 'noir') {
+      const root = document.querySelector('.noir-case') || document;
+      if (root.querySelector('.noir-editorial')) {
+        bindNoirInteractions(root, proyecto);
         renderOtherProjects(document.querySelector('[data-proyecto-related]'), proyectoId);
         notifyRendered();
         return;
