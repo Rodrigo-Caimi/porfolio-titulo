@@ -123,12 +123,6 @@ body[data-proyecto-id="4"] .photo-cta svg {
   display: block;
 }
 
-html.js-motion body[data-proyecto-id="4"] .photo-shot.reveal,
-html.js-motion body[data-proyecto-id="4"] .photo-step.reveal {
-  opacity: 1;
-  transform: none;
-}
-
 body[data-proyecto-id="4"] .photo-essay {
   display: grid;
   grid-template-columns: minmax(200px, 0.52fr) minmax(0, 1.7fr);
