@@ -186,125 +186,14 @@
     return '<a href="' + href + '"' + attrs + ' class="' + className + '">' + action.label + '</a>';
   }
 
-  function wineBlockHtml(item, n) {
-    if (!item) return '';
-    const num = (n < 10 ? '0' : '') + n;
-    const text = String(item.text || '').replace(
-      '—íntima y contemporánea—',
-      '<span class="wine-nowrap">—íntima y contemporánea—</span>'
-    );
-
-    return (
-      '<article class="wine-block wine-block--' + n + '">' +
-        '<header class="wine-block-head">' +
-          '<span class="wine-num">' + num + '</span>' +
-          '<h3><span class="wine-sep" aria-hidden="true">•</span> ' + item.title + '</h3>' +
-        '</header>' +
-        '<p>' + text + '</p>' +
-      '</article>'
-    );
-  }
-
-  function renderEditorialProcess(container, proyecto) {
-    const ed = proyecto.editorial || {};
-    const steps = proyecto.process || [];
-    const gallery = ed.gallery || [];
-    const actions = (proyecto.actions || []).map(function (action, index) {
-      return actionLinkHtml(action, 'btn wine-btn' + (index === 0 ? ' wine-btn--solid' : ' wine-btn--ghost'));
-    }).join('');
-
-    const videoHtml =
-      '<figure class="wine-mosaic-video">' +
-        '<figcaption class="wine-campaign-title">Campaña</figcaption>' +
-        '<div class="wine-video-embed">' +
-          '<iframe' +
-            ' src="https://player.vimeo.com/video/1225310189"' +
-            ' title="Campaña Don Pascual"' +
-            ' loading="lazy"' +
-            ' allow="fullscreen; picture-in-picture"' +
-            ' allowfullscreen' +
-            ' referrerpolicy="strict-origin-when-cross-origin">' +
-          '</iframe>' +
-        '</div>' +
-      '</figure>';
-
-    const mosaic = gallery.map(function (item, index) {
-      const wh = (item.w && item.h)
-        ? ' width="' + item.w + '" height="' + item.h + '"'
-        : '';
-      const load = index === 0
-        ? ' loading="eager" fetchpriority="high"'
-        : ' loading="lazy"';
-      const photo =
-        '<button type="button" class="wine-mosaic-item" data-wine-index="' + index + '">' +
-          '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' +
-            wh + load +
-            ' decoding="async">' +
-        '</button>';
-      return index === 3 ? photo + videoHtml : photo;
-    }).join('');
-
-    const lineMarks = [1, 2, 3, 4].map(function (n) {
-      return '<g data-wine-trail="' + n + '">' +
-        '<path data-wine-echo="' + n + 'a"></path>' +
-        '<path data-wine-echo="' + n + 'b"></path>' +
-        '<path data-wine-line="' + n + '"></path>' +
-        '<circle data-wine-dot="' + n + 'a" r="3.5"></circle>' +
-        '<circle data-wine-dot="' + n + 'b" r="3.5"></circle>' +
-      '</g>';
-    }).join('');
-
-    container.innerHTML =
-      '<div class="wine-editorial">' +
-        '<div class="wine-board">' +
-        '<div class="wine-intro">' +
-          '<div class="wine-intro-top">' +
-            '<a class="wine-back" href="' + homeHref() + '">' +
-              '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-                '<path d="M15 18l-6-6 6-6"></path>' +
-              '</svg>' +
-              '<span>Volver al inicio</span>' +
-            '</a>' +
-            '<h1>' + (proyecto.pageTitle || proyecto.title) + '</h1>' +
-          '</div>' +
-          (ed.intro ? '<p class="wine-lead">' + ed.intro + '</p>' : '') +
-          '<p class="wine-process-label">' + proyecto.processTitle + '</p>' +
-        '</div>' +
-        '<div class="wine-stage">' +
-          '<svg class="wine-lines" aria-hidden="true">' + lineMarks + '</svg>' +
-          wineBlockHtml(steps[0], 1) +
-          '<figure class="wine-bottle">' +
-            '<img src="' + asset(ed.bottle && ed.bottle.src) + '" alt="' + ((ed.bottle && ed.bottle.alt) || '') + '" decoding="async" fetchpriority="high">' +
-          '</figure>' +
-          wineBlockHtml(steps[1], 2) +
-          wineBlockHtml(steps[2], 3) +
-          wineBlockHtml(steps[3], 4) +
-        '</div>' +
-        '</div>' +
-        '<div class="wine-gallery">' +
-          '<h2 class="wine-gallery-title">Más fotos</h2>' +
-          '<div class="wine-mosaic-wrap">' +
-            '<svg class="wine-mosaic-lines" aria-hidden="true"></svg>' +
-            '<div class="wine-mosaic">' + mosaic + '</div>' +
-          '</div>' +
-        '</div>' +
-        '<dialog class="wine-lightbox" aria-label="Imagen ampliada">' +
-          '<button type="button" class="wine-lightbox-close" aria-label="Cerrar">×</button>' +
-          '<button type="button" class="wine-lightbox-prev" aria-label="Imagen anterior">‹</button>' +
-          '<img alt="">' +
-          '<button type="button" class="wine-lightbox-next" aria-label="Imagen siguiente">›</button>' +
-        '</dialog>' +
-        '<div class="wine-close">' +
-          '<div class="wine-actions">' + actions + '</div>' +
-        '</div>' +
-        '<p class="wine-footerbrand">Don Pascual · Uruguay</p>' +
-      '</div>';
-
-    bindWineArrows(container.querySelector('.wine-stage'));
-    bindWineMosaicLines(container.querySelector('.wine-mosaic-wrap'));
+  function bindWineInteractions(root, proyecto) {
+    if (!root) return;
+    const gallery = (proyecto && proyecto.editorial && proyecto.editorial.gallery) || [];
+    bindWineArrows(root.querySelector('.wine-stage'));
+    bindWineMosaicLines(root.querySelector('.wine-mosaic-wrap'));
     bindSimpleLightbox(
-      container.querySelector('.wine-mosaic'),
-      container.querySelector('.wine-lightbox'),
+      root.querySelector('.wine-mosaic'),
+      root.querySelector('.wine-lightbox'),
       gallery,
       {
         item: '[data-wine-index]',
@@ -314,6 +203,18 @@
         next: '.wine-lightbox-next'
       }
     );
+  }
+
+  function renderEditorialProcess(container, proyecto) {
+    if (!container) return;
+
+    // Markup estático en trabajos/don-pascual.html; JS solo curvas y lightbox
+    if (container.querySelector('.wine-editorial')) {
+      bindWineInteractions(container, proyecto);
+      return;
+    }
+
+    container.innerHTML = '';
   }
 
   function bindUbicarInteractions(root, proyecto) {
@@ -1347,6 +1248,17 @@
       const root = document.querySelector('.ubicar-case') || document;
       if (root.querySelector('.ubicar-page')) {
         bindUbicarInteractions(root, proyecto);
+        renderOtherProjects(document.querySelector('[data-proyecto-related]'), proyectoId);
+        notifyRendered();
+        return;
+      }
+    }
+
+    // Don Pascual (id 7): HTML estático; JS solo curvas wine + lightbox
+    if (proyecto.processLayout === 'editorial') {
+      const root = document.querySelector('.wine-case') || document;
+      if (root.querySelector('.wine-editorial')) {
+        bindWineInteractions(root, proyecto);
         renderOtherProjects(document.querySelector('[data-proyecto-related]'), proyectoId);
         notifyRendered();
         return;
