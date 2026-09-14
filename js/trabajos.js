@@ -119,143 +119,6 @@
     return '<figure class="shot' + (isMedia ? ' shot--video' : '') + (isVimeoItem(item) ? ' shot--vimeo' : '') + '">' + media + '</figure>';
   }
 
-  function reelTitleHtml(title) {
-    const text = String(title || '');
-    const space = text.indexOf(' ');
-    if (space === -1) return '<span class="reel-title-accent">' + text + '</span>';
-    return (
-      '<span class="reel-title-line">' + text.slice(0, space) + '</span>' +
-      '<span class="reel-title-accent">' + text.slice(space + 1) + '</span>'
-    );
-  }
-
-  function reelVimeoHtml(item) {
-    const url = vimeoEmbedUrl(item && item.src);
-    const sep = url.indexOf('?') === -1 ? '?' : '&';
-    return (
-      '<iframe class="reel-vimeo"' +
-        ' src="' + url + sep + 'title=0&byline=0&portrait=0&dnt=1"' +
-        ' title="' + ((item && item.alt) || 'Video') + '"' +
-        ' loading="lazy"' +
-        ' allow="fullscreen; picture-in-picture"' +
-        ' allowfullscreen' +
-        ' referrerpolicy="strict-origin-when-cross-origin">' +
-      '</iframe>'
-    );
-  }
-
-  function reelFrameHtml(item) {
-    if (!item || !item.src) return '';
-    return (
-      '<figure class="reel-gallery-item">' +
-        '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '" loading="lazy" decoding="async">' +
-      '</figure>'
-    );
-  }
-
-  function reelGalleryItems(proyecto) {
-    const items = proyecto.gallery || [];
-    const videoItem = items.find(isVimeoItem);
-    return items.filter(function (item) {
-      return item && item !== videoItem && !isVimeoItem(item);
-    });
-  }
-
-  function reelMetaIcon(kind) {
-    if (kind === 'role') {
-      return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5.2 19c1.4-3.2 3.8-4.8 6.8-4.8s5.4 1.6 6.8 4.8"/></svg>';
-    }
-    if (kind === 'tools') {
-      return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 1 2.8 5.5L12 17.3 8.7 14l5.5-5.5a4 4 0 0 1 .5-2.2z"/><path d="M8.7 14l-2.4 2.4a2 2 0 0 0 2.8 2.8L11.5 17"/></svg>';
-    }
-    return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h6l2 2h8v9H4z"/><path d="M4 8V6h6l2 2"/></svg>';
-  }
-
-  function reelMetaItem(kind, label, value) {
-    if (!value) return '';
-    return (
-      '<div class="reel-meta-item">' +
-        '<span class="reel-meta-icon">' + reelMetaIcon(kind) + '</span>' +
-        '<p><span>' + label + '</span> ' + value + '</p>' +
-      '</div>'
-    );
-  }
-
-  function renderReelHero(container, proyecto) {
-    const items = proyecto.gallery || [];
-    const videoItem = items.find(isVimeoItem);
-    const intro = proyecto.heroLead || proyecto.role || '';
-    const phone = videoItem
-      ? '<div class="reel-phone" id="ort-reel">' +
-          '<div class="reel-phone-notch" aria-hidden="true"></div>' +
-          '<div class="reel-phone-screen">' +
-            reelVimeoHtml(videoItem) +
-          '</div>' +
-        '</div>'
-      : '';
-
-    container.innerHTML =
-      '<div class="reel-hero">' +
-        '<div class="reel-hero-copy">' +
-          '<h1>' + reelTitleHtml(proyecto.title) + '</h1>' +
-          (intro ? '<p class="reel-hero-lead">' + intro + '</p>' : '') +
-          '<div class="reel-hero-meta">' +
-            reelMetaItem('category', 'Categoría', proyecto.category) +
-            reelMetaItem('role', 'Rol', proyecto.role) +
-            reelMetaItem('tools', 'Herramientas', proyecto.tools) +
-          '</div>' +
-        '</div>' +
-        '<div class="reel-hero-visual">' + phone + '</div>' +
-      '</div>';
-  }
-
-  function renderReelProcess(container, proyecto) {
-    const steps = proyecto.process || [];
-    const frames = reelGalleryItems(proyecto);
-    const stepsHtml = steps.map(function (item, index) {
-      const num = (index < 9 ? '0' : '') + (index + 1);
-      return (
-        '<article class="reel-step">' +
-          '<span class="reel-step-num">' + num + '</span>' +
-          '<h3>' + item.title + '</h3>' +
-          '<p>' + item.text + '</p>' +
-        '</article>'
-      );
-    }).join('');
-
-    var galleryHtml = '';
-    if (frames.length === 1) {
-      galleryHtml = '<div class="reel-gallery">' + reelFrameHtml(frames[0]) + '</div>';
-    } else if (frames.length === 2) {
-      galleryHtml =
-        '<div class="reel-gallery reel-gallery--pair">' +
-          reelFrameHtml(frames[0]) + reelFrameHtml(frames[1]) +
-        '</div>';
-    } else if (frames.length) {
-      galleryHtml =
-        '<div class="reel-gallery reel-gallery--trio">' +
-          frames.map(reelFrameHtml).join('') +
-        '</div>';
-    }
-
-    const lastStep = steps[steps.length - 1] || {};
-    const resultText = lastStep.text || proyecto.role || '';
-
-    container.innerHTML =
-      '<div class="reel-process">' +
-        (proyecto.processTitle ? '<h2>' + proyecto.processTitle + '</h2>' : '') +
-        '<div class="reel-process-grid">' + stepsHtml + '</div>' +
-      '</div>' +
-      '<div class="reel-result">' +
-        '<div class="reel-result-copy">' +
-          '<p class="reel-result-kicker">Resultado</p>' +
-          '<h2>' + proyecto.title + '</h2>' +
-          (resultText ? '<p class="reel-result-text">' + resultText + '</p>' : '') +
-        '</div>' +
-        (galleryHtml || '') +
-      '</div>';
-  }
-
   function renderGallery(container, proyecto) {
     if (!container) return;
 
@@ -265,13 +128,7 @@
       return;
     }
 
-    const layout = proyecto.galleryLayout;
-    if (layout === 'reel') {
-      renderReelHero(container, proyecto);
-      return;
-    }
-
-    // Foto (id 4): markup estático en trabajos/proyecto-fotografico.html
+    // Foto (id 4) y ORT (id 5): markup estático en sus HTML
     container.innerHTML = '';
   }
 
@@ -1526,12 +1383,7 @@
       return;
     }
 
-    if (proyecto.galleryLayout === 'reel') {
-      renderReelProcess(container, proyecto);
-      return;
-    }
-
-    // Foto (id 4): markup estático en trabajos/proyecto-fotografico.html
+    // Foto (id 4) y ORT (id 5): markup estático en sus HTML
     container.innerHTML = '';
   }
 

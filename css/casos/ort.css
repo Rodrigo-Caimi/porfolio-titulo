@@ -34,7 +34,7 @@ body[data-proyecto-id="5"] .work-detail-hero {
   padding: 20px 0 48px;
 }
 
-body[data-proyecto-id="5"] .work-detail-hero [data-proyecto-gallery],
+body[data-proyecto-id="5"] .work-detail-hero .reel-hero,
 body[data-proyecto-id="5"] .golden-section,
 body[data-proyecto-id="5"] .project-actions-section,
 body[data-proyecto-id="5"] .other-projects-section {
