@@ -2,18 +2,6 @@
    Fonts de esta ficha (siguen por <link> Google en el HTML): DM Sans, Playfair Display. */
 @layer casos {
 /* Don Pascual: grilla editorial según croquis */
-/* TODO: unificar hide/reset de shell de ficha custom (title/meta/actions/back) con otras fichas */
-body[data-proyecto-id="7"] .project-detail-title,
-body[data-proyecto-id="7"] .work-detail-hero,
-body[data-proyecto-id="7"] .project-meta-section,
-body[data-proyecto-id="7"] .project-actions-section {
-  display: none;
-}
-
-body[data-proyecto-id="7"] .project-back-bar {
-  display: none;
-}
-
 body[data-proyecto-id="7"] main {
   background: #f5f2ea;
 }
@@ -588,10 +576,7 @@ body[data-proyecto-id="7"] .wine-close {
 }
 
 body[data-proyecto-id="7"] .other-projects-section {
-  /* TODO: unificar acento related (fondo/h2::after) con var de ficha compartida */
   background: #f5f2ea;
-  padding-top: 20px;
-  padding-bottom: 40px;
 }
 
 body[data-proyecto-id="7"] .wine-actions {
@@ -636,66 +621,15 @@ body[data-proyecto-id="7"] .wine-btn--ghost:hover {
   color: #1c1914;
 }
 
-body[data-proyecto-id="7"] .wine-lightbox {
-  /* TODO: unificar chrome lightbox con @layer lightbox en base.css (sizing/open se repiten en mayo/noir/wine/ubicar) */
-  position: relative;
-  width: auto;
-  max-width: min(96vw, 1280px);
-  max-height: 92vh;
-  margin: auto;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  overflow: visible;
-}
-
 body[data-proyecto-id="7"] .wine-lightbox::backdrop {
   background: rgba(8, 8, 8, 0.9);
-}
-
-body[data-proyecto-id="7"] .wine-lightbox img {
-  display: block;
-  max-width: min(92vw, 1200px);
-  max-height: 84vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
 }
 
 body[data-proyecto-id="7"] .wine-lightbox-close,
 body[data-proyecto-id="7"] .wine-lightbox-prev,
 body[data-proyecto-id="7"] .wine-lightbox-next {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  border: 0;
   background: rgba(20, 20, 20, 0.72);
-  color: #fff;
-  cursor: pointer;
 }
-
-body[data-proyecto-id="7"] .wine-lightbox-close {
-  top: -44px;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 28px;
-  line-height: 1;
-}
-
-body[data-proyecto-id="7"] .wine-lightbox-prev,
-body[data-proyecto-id="7"] .wine-lightbox-next {
-  top: 50%;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  font-size: 32px;
-  transform: translateY(-50%);
-}
-
-body[data-proyecto-id="7"] .wine-lightbox-prev { left: -56px; }
-body[data-proyecto-id="7"] .wine-lightbox-next { right: -56px; }
 
 body[data-proyecto-id="7"] .wine-footerbrand {
   margin: 28px 0 0;
@@ -752,13 +686,6 @@ body[data-proyecto-id="7"] .wine-footerbrand {
 
   body[data-proyecto-id="7"] .wine-btn {
     min-width: 0;
-  }
-
-  body[data-proyecto-id="7"] .wine-lightbox-prev { left: 8px; /* TODO: unificar offsets mobile lightbox con base @layer lightbox */ }
-  body[data-proyecto-id="7"] .wine-lightbox-next { right: 8px; }
-  body[data-proyecto-id="7"] .wine-lightbox-close {
-    top: 8px;
-    right: 8px;
   }
 }
 

@@ -2,17 +2,9 @@
    Fonts de esta ficha (siguen por <link> Google en el HTML): DM Sans, Playfair Display. */
 @layer casos {
 /* Noir Estudio: caso editorial premium */
-/* TODO: unificar hide/reset de shell de ficha custom (title/meta/actions/back) con otras fichas */
-body[data-proyecto-id="6"] .project-detail-title,
-body[data-proyecto-id="6"] .work-detail-hero,
-body[data-proyecto-id="6"] .project-meta-section,
-body[data-proyecto-id="6"] .project-actions-section,
-body[data-proyecto-id="6"] .project-back-bar {
-  display: none;
-}
-
 body[data-proyecto-id="6"],
 body[data-proyecto-id="6"] main {
+  --related-accent: #c8a96a;
   background: #0f0f0f;
 }
 
@@ -664,75 +656,18 @@ body[data-proyecto-id="6"] .noir-process h2 {
   gap: 14px;
 }
 
-.noir-lightbox {
-  /* TODO: unificar chrome lightbox con @layer lightbox en base.css (sizing/open se repiten en mayo/noir/wine/ubicar) */
-  position: relative;
-  width: auto;
-  max-width: min(96vw, 1280px);
-  max-height: 92vh;
-  margin: auto;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  overflow: visible;
-}
-
 .noir-lightbox::backdrop {
   background: rgba(8, 8, 8, 0.92);
-}
-
-.noir-lightbox img {
-  display: block;
-  max-width: min(92vw, 1200px);
-  max-height: 84vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
 }
 
 .noir-lightbox-close,
 .noir-lightbox-prev,
 .noir-lightbox-next {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  border: 0;
   background: rgba(20, 20, 20, 0.72);
-  color: #fff;
-  cursor: pointer;
 }
-
-.noir-lightbox-close {
-  top: -44px;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 28px;
-  line-height: 1;
-}
-
-.noir-lightbox-prev,
-.noir-lightbox-next {
-  top: 50%;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  font-size: 32px;
-  transform: translateY(-50%);
-}
-
-.noir-lightbox-prev { left: -56px; }
-.noir-lightbox-next { right: -56px; }
 
 body[data-proyecto-id="6"] .other-projects-section {
-  /* TODO: unificar acento related (fondo/h2::after) con var de ficha compartida */
   background: var(--noir-cream, #f3eee4);
-  padding: 20px 0 40px;
-}
-
-body[data-proyecto-id="6"] .other-projects-section h2::after {
-  background: var(--noir-gold, #c8a96a);
 }
 
 @media (max-width: 1024px) {
@@ -862,13 +797,6 @@ body[data-proyecto-id="6"] .other-projects-section h2::after {
   body[data-proyecto-id="6"] .noir-figma-links,
   body[data-proyecto-id="6"] .noir-close .noir-figma {
     width: 100%;
-  }
-
-  .noir-lightbox-prev { left: 8px; /* TODO: unificar offsets mobile lightbox con base @layer lightbox */ }
-  .noir-lightbox-next { right: 8px; }
-  .noir-lightbox-close {
-    top: 8px;
-    right: 8px;
   }
 }
 }

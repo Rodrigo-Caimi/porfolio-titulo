@@ -2,7 +2,7 @@
    Fonts de esta ficha (siguen por <link> Google en el HTML): DM Sans, Playfair Display. */
 @layer casos {
 /* Campaña Reel ORT: case editorial universitario, acento bordó */
-/* TODO: unificar hide/reset de shell de ficha custom (title/meta) con otras fichas; ORT mantiene actions/back */
+/* ORT mantiene actions/back; el resto del shell lo trae el HTML de la ficha */
 body[data-proyecto-id="5"] {
   --reel-cream: #F7F3EE;
   --reel-burgundy: #7A1F35;
@@ -15,13 +15,6 @@ body[data-proyecto-id="5"] {
 
 body[data-proyecto-id="5"] main {
   background: #fff;
-}
-
-body[data-proyecto-id="5"] .project-detail-title:empty,
-body[data-proyecto-id="5"] .project-meta-section {
-  display: none;
-  margin: 0;
-  padding: 0;
 }
 
 body[data-proyecto-id="5"] .work-detail-hero,

@@ -13,9 +13,7 @@ const PROYECTOS = [
     cardAlt: 'Mayo Amarillo - Campaña',
     role: 'Campaña de concientización vial · Dirección visual, sistema gráfico y adaptación audiovisual',
     tools: 'Photoshop · Illustrator · Premiere Pro',
-    hideMeta: true,
     processLayout: 'mayo',
-    galleryLayout: 'poster',
     gallery: [
       { src: 'IMAGENES/Mayo amarillo/Afiche-de-campana.webp', alt: 'Afiche de campaña Mayo Amarillo' },
       { src: 'IMAGENES/Mayo amarillo/Mayo-Amarillo-2024-1024x307.png.webp', alt: 'Listón de campaña Mayo Amarillo 2024', width: 1024, height: 307 },
@@ -64,7 +62,6 @@ const PROYECTOS = [
     cardAlt: 'Proyecto Fotográfico',
     role: 'Fotografía de producto y exploración técnica',
     tools: 'Cámara, Lightroom, Photoshop',
-    hideMeta: true,
     galleryLayout: 'photo',
     gallery: [
       { src: 'IMAGENES/Proyecto fotografico/foto-lo-que-no-vemos.jpg', alt: 'Lo que no vemos' },
@@ -110,7 +107,6 @@ const PROYECTOS = [
     cardAlt: 'Campaña Reel ORT',
     role: 'Reel promocional: concepto, generación audiovisual y edición',
     tools: 'ChatGPT, Runway, Premiere',
-    hideMeta: true,
     galleryLayout: 'reel',
     gallery: [
       {
@@ -162,7 +158,6 @@ const PROYECTOS = [
     role: 'Dirección de identidad: concepto, sistema visual y aplicaciones',
     heroLead: 'Desarrollo de identidad visual y experiencia digital, desde el concepto de marca hasta sus aplicaciones y diseño UX/UI.',
     tools: 'Figma',
-    hideMeta: true,
     processLayout: 'noir',
     heroSlider: [
       { src: 'IMAGENES/Noir Estudio/noir-interior.jpg', alt: 'Interior Noir Estudio' },
@@ -240,7 +235,6 @@ const PROYECTOS = [
     cardAlt: 'Don Pascual - Edición Limitada Invierno 2026',
     role: 'Campaña integral: concepto, piezas fijas, video y audio',
     tools: 'ChatGPT, Runway, Suno, ElevenLabs',
-    hideMeta: true,
     processLayout: 'editorial',
     editorial: {
       intro: 'Una campaña de edición limitada pensada para que etiqueta, piezas gráficas y video compartan la misma atmósfera de invierno.',
@@ -285,11 +279,6 @@ const PROYECTOS = [
         label: 'Documentación del proyecto',
         href: 'DOCUMENTOS/DON-PASCUAL.pdf',
         download: 'DON-PASCUAL.pdf'
-      },
-      {
-        label: 'Ver video en Drive',
-        href: 'https://drive.google.com/file/d/1WydlpYJ0gdyQRTn3j-sHAU-dG0CKaq5O/view?usp=sharing',
-        external: true
       }
     ],
     related: [6, 5]
@@ -309,7 +298,6 @@ const PROYECTOS = [
     cardAlt: 'Vidriera Ubicar GPS',
     role: 'Sistema visual de vidriera: iconos, piezas de producto y marca en local',
     tools: 'Illustrator, Photoshop',
-    hideMeta: true,
     processLayout: 'trail',
     trail: {
       intro: 'Un sistema de comunicación para rastreo y seguridad: iconos, piezas de producto y vidriera con un mismo hilo naranja.',

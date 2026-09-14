@@ -32,12 +32,12 @@
     watchList('#trabajos h2, #proceso h2, #contacto h2, .section-lead, .contact-intro, #contact-form');
     watchList('.work-container .card', 70);
     watchList('.step', 90);
-    watchList('.project-detail-title, .project-meta-section, .project-actions-section');
+    watchList('.project-actions-section');
     watchList('body[data-proyecto-id="5"] .reel-hero-copy, body[data-proyecto-id="5"] .reel-phone');
     watchList('body[data-proyecto-id="5"] .reel-step, body[data-proyecto-id="5"] .reel-result, body[data-proyecto-id="5"] .reel-gallery-item', 90);
     watchList('body[data-proyecto-id="4"] .photo-hero-copy, body[data-proyecto-id="4"] .photo-essay-copy', 80);
+    // .shot sigue vivo en ORT (reel phone / frames)
     watchList('.shot', 70);
-    watchList('.golden-item', 80);
     watchList('.wine-intro, .wine-stage, .wine-block, .wine-gallery-title, .wine-mosaic-item, .wine-mosaic-video, .wine-close', 70);
     watchList('.ubicar-intro, .ubicar-step, .ubicar-gallery', 70);
     watchList('.noir-hero, .noir-service-card, .noir-step, .noir-gallery, .noir-close', 70);
@@ -45,6 +45,10 @@
     watchList('.other-project-card', 90);
     watchList('.about-page h1, .about-intro, .availability-card, .tools-horizontal');
   }
+
+  document.addEventListener('portfolio:rendered', function () {
+    window.requestAnimationFrame(bindReveals);
+  });
 
   document.addEventListener('DOMContentLoaded', function () {
     var root = document.documentElement;
@@ -61,42 +65,6 @@
     }
 
     bindReveals();
-
-    var grid = document.querySelector('.work-container[data-render="grid"]');
-    if (grid && !grid.children.length) {
-      var retries = 0;
-      var timer = window.setInterval(function () {
-        retries += 1;
-        if (grid.children.length || retries > 20) {
-          window.clearInterval(timer);
-          bindReveals();
-        }
-      }, 50);
-    }
-
-    var processRoot = document.querySelector('[data-proyecto-process]');
-    if (processRoot && !processRoot.querySelector('.noir-editorial, .wine-editorial, .ubicar-intro, .mayo-editorial, .reel-process, .photo-process')) {
-      var processRetries = 0;
-      var processTimer = window.setInterval(function () {
-        processRetries += 1;
-        if (processRoot.querySelector('.noir-editorial, .wine-editorial, .ubicar-intro, .mayo-editorial, .reel-process, .photo-process') || processRetries > 20) {
-          window.clearInterval(processTimer);
-          bindReveals();
-        }
-      }, 50);
-    }
-
-    var galleryRoot = document.querySelector('[data-proyecto-gallery]');
-    if (galleryRoot && !galleryRoot.querySelector('.gallery, .reel-hero, .photo-case')) {
-      var galleryRetries = 0;
-      var galleryTimer = window.setInterval(function () {
-        galleryRetries += 1;
-        if (galleryRoot.querySelector('.gallery, .reel-hero, .photo-case') || galleryRetries > 20) {
-          window.clearInterval(galleryTimer);
-          bindReveals();
-        }
-      }, 50);
-    }
   });
 })();
 

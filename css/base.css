@@ -53,7 +53,7 @@ body {
   width: 100%;
   max-width: 100%;
   height: 100%;
-  overflow: hidden; /* evita scroll del body (la franja blanca del footer) */
+  overflow: hidden; /* evita scroll del body / overscroll blanco */
   overflow-x: hidden;
   overscroll-behavior: none;
   overscroll-behavior-x: none;
@@ -1025,17 +1025,6 @@ a.card:active {
 }
 
 /* Shared media box: cover fills the card equally. No letterbox, no per-image height. */
-.work-container .card[data-card-fit="contain"] {
-  align-self: stretch;
-  height: auto;
-}
-
-.work-container .card[data-card-fit="contain"] .thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
 
 .card-body {
   padding: 16px 18px 18px;
@@ -2031,7 +2020,7 @@ textarea {
   align-self: stretch;
 }
 
-/* .shot / .drive-poster: vivos en ORT (reel) y path Drive */
+/* .shot: vivo en ORT (reel) y embeds Vimeo/video */
 .shot {
   position: relative;
   margin: 0;
@@ -2064,96 +2053,6 @@ textarea {
   object-fit: cover;
 }
 
-.shot iframe.drive-embed {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: #f3f3f3;
-}
-
-.shot.is-drive-playing {
-  overflow: hidden;
-}
-
-.drive-poster {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.drive-poster img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-
-.drive-poster-label {
-  position: absolute;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.72);
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.drive-poster::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 68px;
-  height: 68px;
-  margin: -34px 0 0 -34px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.drive-poster::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 0;
-  height: 0;
-  margin: -10px 0 0 -6px;
-  border-style: solid;
-  border-width: 12px 0 12px 20px;
-  border-color: transparent transparent transparent #fff;
-  z-index: 3;
-  pointer-events: none;
-}
-
-@media (max-width: 920px) {
-  .drive-poster-label {
-    bottom: 14px;
-    font-size: 13px;
-    padding: 9px 12px;
-  }
-}
-
 .golden-section {
   max-width: var(--container);
   width: 100%;
@@ -2176,27 +2075,8 @@ textarea {
 }
 
 /* ============================================
-   FOOTER
+   PIE DE ENLACES (dentro de main)
    ============================================ */
-/* El footer actual está vacío; si queda fuera de main genera una franja
-   blanca al overscroll. Lo ocultamos hasta que tenga contenido real. */
-footer {
-  display: none;
-}
-
-.footer-inner {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 16px var(--gutter);
-  display: flex;
-  align-items: center;
-}
-
-.footer-inner .spacer {
-  flex: 1;
-}
-
-/* Pie de enlaces dentro de main (el footer vacío sigue oculto). */
 .site-endnav {
   display: flex;
   flex-wrap: wrap;
@@ -2396,7 +2276,7 @@ footer {
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background: var(--brand);
+  background: var(--related-accent, var(--brand));
   border-radius: 2px;
 }
 
@@ -2655,8 +2535,22 @@ html.js-motion[data-hero-enter] .hero .cta .btn { --hero-enter-y: 12px; }
 }
 
 @layer lightbox {
-/* Shared gallery lightbox: photo centered in the viewport, glyphs optically centered.
-   TODO: absorber chrome repetido de mayo/noir/wine/ubicar (casos solo deberían aportar color/offsets) */
+/* Chrome compartido del lightbox de galería. Cada caso solo aporta backdrop/color/detalles. */
+.noir-lightbox,
+body[data-proyecto-id="7"] .wine-lightbox,
+body[data-proyecto-id="8"] .ubicar-lightbox,
+body[data-proyecto-id="2"] .mayo-lightbox {
+  position: relative;
+  width: auto;
+  max-width: min(96vw, 1280px);
+  max-height: 92vh;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+
 .noir-lightbox[open],
 body[data-proyecto-id="7"] .wine-lightbox[open],
 body[data-proyecto-id="8"] .ubicar-lightbox[open],
@@ -2716,15 +2610,62 @@ body[data-proyecto-id="8"] .ubicar-lightbox-next,
 body[data-proyecto-id="2"] .mayo-lightbox-close,
 body[data-proyecto-id="2"] .mayo-lightbox-prev,
 body[data-proyecto-id="2"] .mayo-lightbox-next {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   margin: 0;
+  border: 0;
   line-height: 0;
   font-weight: 400;
+  color: #fff;
+  cursor: pointer;
   z-index: 2;
   text-box: trim-both cap alphabetic;
+}
+
+.noir-lightbox-close,
+body[data-proyecto-id="7"] .wine-lightbox-close,
+body[data-proyecto-id="8"] .ubicar-lightbox-close,
+body[data-proyecto-id="2"] .mayo-lightbox-close {
+  top: -44px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.noir-lightbox-prev,
+.noir-lightbox-next,
+body[data-proyecto-id="7"] .wine-lightbox-prev,
+body[data-proyecto-id="7"] .wine-lightbox-next,
+body[data-proyecto-id="8"] .ubicar-lightbox-prev,
+body[data-proyecto-id="8"] .ubicar-lightbox-next,
+body[data-proyecto-id="2"] .mayo-lightbox-prev,
+body[data-proyecto-id="2"] .mayo-lightbox-next {
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 32px;
+  transform: translateY(-50%);
+}
+
+.noir-lightbox-prev,
+body[data-proyecto-id="7"] .wine-lightbox-prev,
+body[data-proyecto-id="8"] .ubicar-lightbox-prev,
+body[data-proyecto-id="2"] .mayo-lightbox-prev {
+  left: -56px;
+}
+
+.noir-lightbox-next,
+body[data-proyecto-id="7"] .wine-lightbox-next,
+body[data-proyecto-id="8"] .ubicar-lightbox-next,
+body[data-proyecto-id="2"] .mayo-lightbox-next {
+  right: -56px;
 }
 
 .lightbox-glyph {
@@ -2758,6 +2699,28 @@ body[data-proyecto-id="2"] .mayo-lightbox-next {
   body[data-proyecto-id="2"] .mayo-lightbox img {
     max-width: min(94vw, calc(100vw - 16px));
     max-height: min(82dvh, calc(100dvh - 48px));
+  }
+
+  .noir-lightbox-prev,
+  body[data-proyecto-id="7"] .wine-lightbox-prev,
+  body[data-proyecto-id="8"] .ubicar-lightbox-prev,
+  body[data-proyecto-id="2"] .mayo-lightbox-prev {
+    left: 8px;
+  }
+
+  .noir-lightbox-next,
+  body[data-proyecto-id="7"] .wine-lightbox-next,
+  body[data-proyecto-id="8"] .ubicar-lightbox-next,
+  body[data-proyecto-id="2"] .mayo-lightbox-next {
+    right: 8px;
+  }
+
+  .noir-lightbox-close,
+  body[data-proyecto-id="7"] .wine-lightbox-close,
+  body[data-proyecto-id="8"] .ubicar-lightbox-close,
+  body[data-proyecto-id="2"] .mayo-lightbox-close {
+    top: 8px;
+    right: 8px;
   }
 }
 

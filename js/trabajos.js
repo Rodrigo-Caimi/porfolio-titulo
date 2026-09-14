@@ -65,34 +65,13 @@
           '<span class="card-arrow" aria-hidden="true">↗</span>' +
         '</div>';
 
-      const mediaFit = proyecto.cardMediaFit === 'contain';
-      const cardClasses = 'card ' + proyecto.cardClass + (mediaFit ? ' card-media-contain' : '');
-      const fitAttr = mediaFit ? ' data-card-fit="contain"' : '';
-
-      if (proyecto.placeholder) {
-        return (
-          '<div class="' + cardClasses + '"' + fitAttr + ' aria-label="' + proyecto.title + '">' +
-            '<div class="thumb">' + thumb + '</div>' +
-            body +
-          '</div>'
-        );
-      }
-
       return (
-        '<a class="' + cardClasses + '"' + fitAttr + ' href="' + proyectoHref(proyecto.slug) + '">' +
+        '<a class="card ' + proyecto.cardClass + '" href="' + proyectoHref(proyecto.slug) + '">' +
           '<div class="thumb">' + thumb + '</div>' +
           body +
         '</a>'
       );
     }).join('');
-  }
-
-  function isVideoItem(item) {
-    return item && (item.type === 'video' || /\.(mp4|webm|ogg)$/i.test(item.src || ''));
-  }
-
-  function isDriveItem(item) {
-    return item && item.type === 'drive';
   }
 
   function isVimeoItem(item) {
@@ -122,68 +101,14 @@
     );
   }
 
-  function driveFileId(link) {
-    if (!link || link.indexOf('PEGAR_LINK') !== -1) return '';
-    const match = String(link).match(/\/d\/([a-zA-Z0-9_-]+)/) || String(link).match(/[?&]id=([a-zA-Z0-9_-]+)/);
-    return match ? match[1] : '';
-  }
-
-  function drivePreviewUrl(link) {
-    const id = driveFileId(link);
-    if (id) return 'https://drive.google.com/file/d/' + id + '/preview';
-    if (!link || link.indexOf('PEGAR_LINK') !== -1) return '';
-    return link.indexOf('drive.google.com') !== -1 ? link : '';
-  }
-
-  function driveViewUrl(link) {
-    const id = driveFileId(link);
-    if (id) return 'https://drive.google.com/file/d/' + id + '/view';
-    if (!link || link.indexOf('PEGAR_LINK') !== -1) return '';
-    return link;
-  }
-
-  // iOS/móvil: el embed de Drive deja play/controles trabados a mitad de pantalla
-  function shouldOpenDriveExternally() {
-    const ua = navigator.userAgent || '';
-    const isIOS = /iPad|iPhone|iPod/.test(ua) ||
-      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    const isMobileViewport = window.matchMedia('(max-width: 920px)').matches;
-    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
-    return isIOS || isMobileViewport || coarsePointer;
-  }
-
-  function drivePosterHtml(preview, viewUrl, poster, alt, mainClass, eager) {
-    const label = shouldOpenDriveExternally() ? 'Ver video en Drive' : 'Reproducir video';
-    const eagerAttrs = eager
-      ? ' decoding="async" fetchpriority="high"'
-      : ' decoding="async"';
-    return (
-      '<button type="button" class="drive-poster" data-drive-preview="' + (preview || '') + '" data-drive-view="' + (viewUrl || '') + '" data-drive-title="' + (alt || 'Video') + '" aria-label="' + label + '">' +
-        '<img id="main-media" class="' + (mainClass || '') + '" src="' + (poster || '') + '" alt="' + (alt || '') + '"' + eagerAttrs + ' />' +
-        '<span class="drive-poster-label">' + label + '</span>' +
-      '</button>'
-    );
-  }
-
   function renderShot(item, index) {
     const eager = index === 0;
     const loading = eager ? 'eager' : 'lazy';
-    const isMedia = isVideoItem(item) || isDriveItem(item) || isVimeoItem(item);
+    const isMedia = isVimeoItem(item);
     let media;
 
     if (isVimeoItem(item)) {
       media = vimeoEmbedHtml(item);
-    } else if (isDriveItem(item)) {
-      const preview = drivePreviewUrl(item.src);
-      const viewUrl = driveViewUrl(item.src);
-      const poster = asset(item.poster || '');
-      if (preview || viewUrl) {
-        media = drivePosterHtml(preview, viewUrl, poster, item.alt, 'shot-media', eager);
-      } else {
-        media = '<img class="shot-media" src="' + poster + '" alt="' + (item.alt || '') + '" loading="' + loading + '" decoding="async" />';
-      }
-    } else if (isVideoItem(item)) {
-      media = '<video class="shot-media" controls playsinline preload="none" poster="' + asset(item.poster || '') + '" src="' + asset(item.src) + '"></video>';
     } else {
       media =
         '<img class="shot-media" src="' + asset(item.src) + '" alt="' + (item.alt || '') + '" loading="' + loading + '" decoding="async"' +
@@ -192,26 +117,6 @@
     }
 
     return '<figure class="shot' + (isMedia ? ' shot--video' : '') + (isVimeoItem(item) ? ' shot--vimeo' : '') + '">' + media + '</figure>';
-  }
-
-  function bindShotRatio(shot) {
-    const media = shot.querySelector('img, video');
-    if (!media) return;
-
-    function apply() {
-      const w = media.naturalWidth || media.videoWidth;
-      const h = media.naturalHeight || media.videoHeight;
-      if (!w || !h) return;
-      shot.style.setProperty('--shot-ratio', w + ' / ' + h);
-    }
-
-    if (media.tagName === 'VIDEO') {
-      media.addEventListener('loadedmetadata', apply);
-      return;
-    }
-
-    if (media.complete && media.naturalWidth) apply();
-    else media.addEventListener('load', apply);
   }
 
   function reelTitleHtml(title) {
@@ -250,9 +155,9 @@
 
   function reelGalleryItems(proyecto) {
     const items = proyecto.gallery || [];
-    const videoItem = items.find(isVimeoItem) || items.find(isDriveItem) || items.find(isVideoItem);
+    const videoItem = items.find(isVimeoItem);
     return items.filter(function (item) {
-      return item && item !== videoItem && !isVimeoItem(item) && !isDriveItem(item) && !isVideoItem(item);
+      return item && item !== videoItem && !isVimeoItem(item);
     });
   }
 
@@ -278,13 +183,13 @@
 
   function renderReelHero(container, proyecto) {
     const items = proyecto.gallery || [];
-    const videoItem = items.find(isVimeoItem) || items.find(isDriveItem) || items.find(isVideoItem);
+    const videoItem = items.find(isVimeoItem);
     const intro = proyecto.heroLead || proyecto.role || '';
     const phone = videoItem
       ? '<div class="reel-phone" id="ort-reel">' +
           '<div class="reel-phone-notch" aria-hidden="true"></div>' +
           '<div class="reel-phone-screen">' +
-            (isVimeoItem(videoItem) ? reelVimeoHtml(videoItem) : renderShot(videoItem, 0)) +
+            reelVimeoHtml(videoItem) +
           '</div>' +
         '</div>'
       : '';
@@ -378,7 +283,7 @@
   }
 
   function photoCtaHtml(action) {
-    if (!action || (action.href && String(action.href).indexOf('PEGAR_LINK') !== -1)) return '';
+    if (!action || !action.href) return '';
     const href = action.external ? action.href : asset(action.href);
     const attrs = action.external
       ? ' target="_blank" rel="noopener"'
@@ -414,7 +319,7 @@
       return item && item !== hero && item !== lead;
     });
     const action = (proyecto.actions || []).filter(function (item) {
-      return item && item.href && String(item.href).indexOf('PEGAR_LINK') === -1;
+      return item && item.href;
     })[0];
     const intro = proyecto.cardDescription || '';
     const tools = String(proyecto.tools || '').split(',').map(function (tool) {
@@ -481,7 +386,7 @@
       return;
     }
 
-    const layout = proyecto.galleryLayout || 'spread';
+    const layout = proyecto.galleryLayout;
     if (layout === 'reel') {
       renderReelHero(container, proyecto);
       return;
@@ -491,69 +396,13 @@
       return;
     }
 
-    const shots = items.map(renderShot);
-    var inner;
-
-    if (layout === 'poster') {
-      inner = shots[0] + '<div class="shot-stack">' + shots.slice(1).join('') + '</div>';
-    } else if (layout === 'essay') {
-      inner = shots[0] + '<div class="shot-stack">' + shots.slice(1, 3).join('') + '</div>' + shots.slice(3).join('');
-    } else {
-      inner = shots.join('');
-    }
-
-    container.innerHTML =
-      '<div class="gallery gallery--' + layout + '" data-gallery>' + inner + '</div>';
-
-    container.querySelectorAll('.shot').forEach(function (shot) {
-      bindShotRatio(shot);
-      bindDrivePoster(shot);
-    });
-  }
-
-  function loadDriveEmbed(mainWrap, preview, title) {
-    if (!mainWrap || !preview) return;
-    mainWrap.classList.add('is-drive-playing');
-    mainWrap.innerHTML =
-      '<iframe id="main-media" class="drive-embed" src="' + preview + '" title="' + (title || 'Video') + '" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen webkitallowfullscreen playsinline></iframe>';
-  }
-
-  function openDriveExternal(viewUrl, preview) {
-    const url = viewUrl || (preview ? String(preview).replace('/preview', '/view') : '');
-    if (!url) return false;
-    window.open(url, '_blank', 'noopener');
-    return true;
-  }
-
-  function bindDrivePoster(mainWrap) {
-    if (!mainWrap) return;
-    const btn = mainWrap.querySelector('.drive-poster');
-    if (!btn || btn.dataset.bound === '1') return;
-    btn.dataset.bound = '1';
-    btn.addEventListener('click', function () {
-      const preview = btn.getAttribute('data-drive-preview') || '';
-      const viewUrl = btn.getAttribute('data-drive-view') || '';
-      const title = btn.getAttribute('data-drive-title') || 'Video';
-
-      // Evita el bug de iPhone: UI de Drive atrapada a mitad de pantalla
-      if (shouldOpenDriveExternally()) {
-        openDriveExternal(viewUrl, preview);
-        return;
-      }
-
-      if (preview) {
-        loadDriveEmbed(mainWrap, preview, title);
-        return;
-      }
-
-      openDriveExternal(viewUrl, preview);
-    });
+    container.innerHTML = '';
   }
 
   function renderActions(container, proyecto) {
     if (!container) return;
 
-    if (isCustomCase(proyecto) || proyecto.galleryLayout === 'photo' || !proyecto.actions || !proyecto.actions.length) {
+    if (!proyecto.actions || !proyecto.actions.length) {
       container.innerHTML = '';
       container.hidden = true;
       return;
@@ -562,7 +411,7 @@
     container.hidden = false;
 
     const rows = proyecto.actions.map(function (action) {
-      if (action.href && String(action.href).indexOf('PEGAR_LINK') !== -1) return '';
+      if (!action || !action.href) return '';
 
       const href = action.external ? action.href : asset(action.href);
       const attrs = action.external
@@ -572,7 +421,7 @@
           : ' target="_blank" rel="noopener"');
 
       var prompt = action.external
-        ? (action.label && /reel|video|drive/i.test(action.label)
+        ? (action.label && /reel|video/i.test(action.label)
           ? 'Si querés visualizar el proyecto'
           : 'Si querés visitar el proyecto')
         : 'Si querés más información del proyecto';
@@ -591,26 +440,8 @@
     container.innerHTML = '<div class="project-actions-list">' + rows + '</div>';
   }
 
-  function renderMeta(container, proyecto) {
-    if (!container) return;
-
-    if (proyecto.hideMeta || (!proyecto.category && !proyecto.role && !proyecto.tools)) {
-      container.innerHTML = '';
-      container.hidden = true;
-      return;
-    }
-
-    container.hidden = false;
-    container.innerHTML =
-      '<div class="project-meta">' +
-        (proyecto.category ? '<p><span>Categoría</span> ' + proyecto.category + '</p>' : '') +
-        (proyecto.role ? '<p><span>Rol</span> ' + proyecto.role + '</p>' : '') +
-        (proyecto.tools ? '<p><span>Herramientas</span> ' + proyecto.tools + '</p>' : '') +
-      '</div>';
-  }
-
   function actionLinkHtml(action, className) {
-    if (!action || (action.href && String(action.href).indexOf('PEGAR_LINK') !== -1)) return '';
+    if (!action || !action.href) return '';
 
     const href = action.external ? action.href : asset(action.href);
     const attrs = action.external
@@ -645,9 +476,7 @@
     const ed = proyecto.editorial || {};
     const steps = proyecto.process || [];
     const gallery = ed.gallery || [];
-    const actions = (proyecto.actions || []).filter(function (action) {
-      return !(action.external && /drive|video/i.test((action.label || '') + (action.href || '')));
-    }).map(function (action, index) {
+    const actions = (proyecto.actions || []).map(function (action, index) {
       return actionLinkHtml(action, 'btn wine-btn' + (index === 0 ? ' wine-btn--solid' : ' wine-btn--ghost'));
     }).join('');
 
@@ -996,15 +825,22 @@
     if (!stage) return;
     const svg = stage.querySelector('.wine-lines');
     const bottle = stage.querySelector('.wine-bottle img');
-    const bottleFig = stage.querySelector('.wine-bottle');
-    if (!svg || !bottle || !bottleFig) return;
+    if (!svg || !bottle) return;
 
-    function localPoint(el, relX, relY) {
-      const sr = stage.getBoundingClientRect();
+    function curve(from, to, side) {
+      const mx = (from.x + to.x) / 2 + side * 72;
+      const my = (from.y + to.y) / 2;
+      return 'M' + from.x.toFixed(1) + ' ' + from.y.toFixed(1) +
+        ' Q' + mx.toFixed(1) + ' ' + my.toFixed(1) +
+        ' ' + to.x.toFixed(1) + ' ' + to.y.toFixed(1);
+    }
+
+    function point(el, rx, ry, root) {
+      const rr = root.getBoundingClientRect();
       const r = el.getBoundingClientRect();
       return {
-        x: r.left - sr.left + r.width * relX,
-        y: r.top - sr.top + r.height * relY
+        x: r.left - rr.left + r.width * rx,
+        y: r.top - rr.top + r.height * ry
       };
     }
 
@@ -1012,11 +848,13 @@
       if (window.matchMedia('(max-width: 900px)').matches) return;
       const sr = stage.getBoundingClientRect();
       if (!sr.width || !sr.height) return;
-
       svg.setAttribute('viewBox', '0 0 ' + sr.width + ' ' + sr.height);
       svg.setAttribute('width', String(sr.width));
       svg.setAttribute('height', String(sr.height));
 
+      const br = bottle.getBoundingClientRect();
+      const midX = br.left - sr.left + br.width / 2;
+      const glass = br.width * 0.16;
       const specs = [
         { n: 1, from: [1, 0.36], side: -1, y: 0.30 },
         { n: 2, from: [0, 0.38], side: 1, y: 0.30 },
@@ -1024,66 +862,34 @@
         { n: 4, from: [0, 0.60], side: 1, y: 0.68 }
       ];
 
-      function trailD(from, to, side, shift) {
-        const dx = to.x - from.x;
-        const dy = to.y - from.y;
-        const len = Math.hypot(dx, dy) || 1;
-        const nx = -dy / len;
-        const ny = dx / len;
-        const amp = side * Math.min(160, Math.max(64, len * 0.38));
-        const a = { x: from.x + nx * shift, y: from.y + ny * shift };
-        const b = { x: to.x + nx * shift, y: to.y + ny * shift };
-        const c1x = a.x + dx * 0.26 + nx * amp;
-        const c1y = a.y + dy * 0.18 + ny * amp;
-        const c2x = a.x + dx * 0.74 - nx * amp;
-        const c2y = a.y + dy * 0.82 - ny * amp;
-        return 'M' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) +
-          ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
-          ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
-          ', ' + b.x.toFixed(1) + ' ' + b.y.toFixed(1);
-      }
-
-      const br = bottle.getBoundingClientRect();
-      const srBox = stage.getBoundingClientRect();
-      const glassHalf = br.width * 0.16;
-      const bottleMidX = br.left - srBox.left + br.width / 2;
-
       specs.forEach(function (spec) {
         const block = stage.querySelector('.wine-block--' + spec.n);
         const path = svg.querySelector('[data-wine-line="' + spec.n + '"]');
-        const echoA = svg.querySelector('[data-wine-echo="' + spec.n + 'a"]');
+        const echo = svg.querySelector('[data-wine-echo="' + spec.n + 'a"]');
         const echoB = svg.querySelector('[data-wine-echo="' + spec.n + 'b"]');
         const dotA = svg.querySelector('[data-wine-dot="' + spec.n + 'a"]');
         const dotB = svg.querySelector('[data-wine-dot="' + spec.n + 'b"]');
         if (!block || !path) return;
-        const from = localPoint(block, spec.from[0], spec.from[1]);
+        const from = point(block, spec.from[0], spec.from[1], stage);
         const to = {
-          x: bottleMidX + spec.side * glassHalf,
-          y: br.top - srBox.top + br.height * spec.y
+          x: midX + spec.side * glass,
+          y: br.top - sr.top + br.height * spec.y
         };
-        path.setAttribute('d', trailD(from, to, spec.side, 0));
-        if (echoA) echoA.setAttribute('d', trailD(from, to, spec.side, 8));
-        if (echoB) {
-          echoB.setAttribute('d', '');
-          echoB.style.display = 'none';
-        }
-        if (dotA) {
-          dotA.setAttribute('cx', from.x.toFixed(1));
-          dotA.setAttribute('cy', from.y.toFixed(1));
-        }
-        if (dotB) {
-          dotB.setAttribute('cx', to.x.toFixed(1));
-          dotB.setAttribute('cy', to.y.toFixed(1));
-        }
+        const d = curve(from, to, spec.side);
+        path.setAttribute('d', d);
+        if (echo) echo.setAttribute('d', d);
+        if (echoB) echoB.style.display = 'none';
+        if (dotA) { dotA.setAttribute('cx', from.x.toFixed(1)); dotA.setAttribute('cy', from.y.toFixed(1)); }
+        if (dotB) { dotB.setAttribute('cx', to.x.toFixed(1)); dotB.setAttribute('cy', to.y.toFixed(1)); }
       });
     }
 
     const redraw = function () { window.requestAnimationFrame(draw); };
     if (!bottle.complete) bottle.addEventListener('load', redraw, { once: true });
-    let resizeTimer = 0;
+    let timer = 0;
     window.addEventListener('resize', function () {
-      window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(redraw, 120);
+      window.clearTimeout(timer);
+      timer = window.setTimeout(redraw, 120);
     });
     redraw();
   }
@@ -1095,111 +901,26 @@
     if (!mosaic || !svg) return;
     const ns = 'http://www.w3.org/2000/svg';
 
-    function localBox(el) {
+    function curve(a, b, amp) {
+      const mx = (a.x + b.x) / 2 + amp;
+      const my = (a.y + b.y) / 2;
+      return 'M' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) +
+        ' Q' + mx.toFixed(1) + ' ' + my.toFixed(1) +
+        ' ' + b.x.toFixed(1) + ' ' + b.y.toFixed(1);
+    }
+
+    function center(el) {
       const wr = wrap.getBoundingClientRect();
       const r = el.getBoundingClientRect();
       return {
         x: r.left - wr.left + r.width / 2,
-        y: r.top - wr.top + r.height / 2,
-        left: r.left - wr.left,
-        w: r.width,
-        h: r.height
+        y: r.top - wr.top + r.height / 2
       };
-    }
-
-    function rim(a, b) {
-      const dx = b.x - a.x;
-      const dy = b.y - a.y;
-      const hw = a.w / 2;
-      const hh = a.h / 2;
-      const scale = Math.min(hw / (Math.abs(dx) || 0.001), hh / (Math.abs(dy) || 0.001));
-      return {
-        x: a.x + dx * scale,
-        y: a.y + dy * scale
-      };
-    }
-
-    function organicPath(from, to, amp, shift) {
-      const dx = to.x - from.x;
-      const dy = to.y - from.y;
-      const len = Math.hypot(dx, dy) || 1;
-      const nx = -dy / len;
-      const ny = dx / len;
-      const a = { x: from.x + nx * shift, y: from.y + ny * shift };
-      const b = { x: to.x + nx * shift, y: to.y + ny * shift };
-      const c1x = a.x + dx * 0.28 + nx * amp;
-      const c1y = a.y + dy * 0.22 + ny * amp;
-      const c2x = a.x + dx * 0.72 - nx * amp;
-      const c2y = a.y + dy * 0.78 - ny * amp;
-      return 'M' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) +
-        ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
-        ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
-        ', ' + b.x.toFixed(1) + ' ' + b.y.toFixed(1);
-    }
-
-    function mosaicEdges(nodes) {
-      const seen = {};
-      const edges = [];
-      function add(a, b) {
-        if (!a || !b || a.i === b.i) return;
-        const dist = Math.hypot(a.x - b.x, a.y - b.y);
-        if (dist < 160) return;
-        const key = a.i < b.i ? a.i + '-' + b.i : b.i + '-' + a.i;
-        if (seen[key]) return;
-        seen[key] = true;
-        edges.push([a, b]);
-      }
-
-      const sorted = nodes.slice().sort(function (a, b) {
-        return a.left - b.left || a.y - b.y;
-      });
-      const cols = [];
-      sorted.forEach(function (node) {
-        const last = cols[cols.length - 1];
-        if (!last || Math.abs(node.left - last[0].left) > 48) {
-          cols.push([node]);
-        } else {
-          last.push(node);
-        }
-      });
-      cols.forEach(function (col) {
-        col.sort(function (a, b) { return a.y - b.y; });
-      });
-
-      for (let c = 0; c < cols.length - 1; c++) {
-        cols[c].forEach(function (node) {
-          const nextCol = cols[c + 1].slice().sort(function (a, b) {
-            return Math.abs(a.y - node.y) - Math.abs(b.y - node.y);
-          });
-          if (nextCol[0]) add(node, nextCol[0]);
-          if (nextCol[1] && Math.abs(nextCol[1].y - node.y) < node.h * 1.35) add(node, nextCol[1]);
-        });
-      }
-
-      if (cols.length >= 3 && !mosaic.querySelector('.wine-mosaic-video')) {
-        cols[0].forEach(function (node, i) {
-          const far = cols[2][Math.min(i, cols[2].length - 1)];
-          if (far) add(node, far);
-        });
-      }
-
-      nodes.forEach(function (node) {
-        const ranked = nodes.filter(function (other) {
-          return other.i !== node.i && Math.abs(other.left - node.left) > 48;
-        }).map(function (other) {
-          return { o: other, d: Math.hypot(node.x - other.x, node.y - other.y) };
-        }).sort(function (a, b) { return a.d - b.d; });
-        if (ranked[0] && ranked[0].d >= 160) add(node, ranked[0].o);
-      });
-
-      return edges;
     }
 
     function el(name, attrs) {
       const node = document.createElementNS(ns, name);
-      Object.keys(attrs).forEach(function (key) {
-        node.setAttribute(key, attrs[key]);
-      });
+      Object.keys(attrs).forEach(function (key) { node.setAttribute(key, attrs[key]); });
       return node;
     }
 
@@ -1208,60 +929,41 @@
       if (window.matchMedia('(max-width: 900px)').matches) return;
       const wr = wrap.getBoundingClientRect();
       if (!wr.width || !wr.height) return;
-
       svg.setAttribute('viewBox', '0 0 ' + wr.width + ' ' + wr.height);
       svg.setAttribute('width', String(wr.width));
       svg.setAttribute('height', String(wr.height));
 
       const items = mosaic.querySelectorAll('.wine-mosaic-item');
       if (items.length < 2) return;
-
       const nodes = [];
       for (let i = 0; i < items.length; i++) {
-        const box = localBox(items[i].querySelector('img') || items[i]);
-        if (box.w < 8 || box.h < 8) continue;
-        box.i = i;
-        nodes.push(box);
+        nodes.push(center(items[i].querySelector('img') || items[i]));
       }
 
-      const edges = mosaicEdges(nodes);
       const frag = document.createDocumentFragment();
-
-      edges.forEach(function (pair, index) {
-        const from = rim(pair[0], pair[1]);
-        const to = rim(pair[1], pair[0]);
-        const len = Math.hypot(to.x - from.x, to.y - from.y);
-        if (len < 140) return;
-        const amp = (index % 2 === 0 ? 1 : -1) * Math.min(170, Math.max(52, len * 0.30));
-        frag.appendChild(el('path', { class: 'wine-trail-echo', d: organicPath(from, to, amp * 1.08, 6) }));
-        frag.appendChild(el('path', { class: 'wine-trail-main', d: organicPath(from, to, amp, 0) }));
-        frag.appendChild(el('circle', { cx: from.x.toFixed(1), cy: from.y.toFixed(1), r: '3.4' }));
-        frag.appendChild(el('circle', { cx: to.x.toFixed(1), cy: to.y.toFixed(1), r: '3.4' }));
-      });
-
+      for (let i = 0; i < nodes.length - 1; i++) {
+        const a = nodes[i];
+        const b = nodes[i + 1];
+        const len = Math.hypot(b.x - a.x, b.y - a.y);
+        if (len < 140) continue;
+        const amp = (i % 2 === 0 ? 1 : -1) * Math.min(120, len * 0.22);
+        frag.appendChild(el('path', { class: 'wine-trail-echo', d: curve(a, b, amp * 1.1) }));
+        frag.appendChild(el('path', { class: 'wine-trail-main', d: curve(a, b, amp) }));
+        frag.appendChild(el('circle', { cx: a.x.toFixed(1), cy: a.y.toFixed(1), r: '3.4' }));
+        frag.appendChild(el('circle', { cx: b.x.toFixed(1), cy: b.y.toFixed(1), r: '3.4' }));
+      }
       svg.appendChild(frag);
     }
 
     const redraw = function () { window.requestAnimationFrame(draw); };
-    const images = mosaic.querySelectorAll('img');
-    for (let i = 0; i < images.length; i++) {
-      images[i].addEventListener('load', redraw);
-    }
-    let resizeTimer = 0;
-    window.addEventListener('resize', function () {
-      window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(redraw, 120);
+    mosaic.querySelectorAll('img').forEach(function (img) {
+      img.addEventListener('load', redraw);
     });
-    if (typeof ResizeObserver === 'function') {
-      const ro = new ResizeObserver(function () {
-        window.clearTimeout(resizeTimer);
-        resizeTimer = window.setTimeout(redraw, 80);
-      });
-      ro.observe(wrap);
-      ro.observe(mosaic);
-    }
-    window.setTimeout(redraw, 480);
-    window.setTimeout(redraw, 1100);
+    let timer = 0;
+    window.addEventListener('resize', function () {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(redraw, 120);
+    });
     redraw();
   }
 
@@ -1958,18 +1660,7 @@
       return;
     }
 
-    const items = proyecto.process.map(function (item) {
-      return (
-        '<div class="golden-item">' +
-          '<h3>' + item.title + '</h3>' +
-          '<p>' + item.text + '</p>' +
-        '</div>'
-      );
-    }).join('');
-
-    container.innerHTML =
-      '<h2>' + proyecto.processTitle + '</h2>' +
-      '<div class="golden-vertical">' + items + '</div>';
+    container.innerHTML = '';
   }
 
   function renderOtherProjects(container, currentId) {
@@ -1980,7 +1671,7 @@
 
     const cards = proyecto.related.map(function (id) {
       const related = getProyecto(id);
-      if (!related || related.placeholder) return '';
+      if (!related) return '';
 
       return (
         '<a class="other-project-card" href="./' + related.slug + '">' +
@@ -2000,13 +1691,8 @@
       '<p class="other-projects-home"><a href="' + homeHref() + '#trabajos">Ver todos los trabajos</a></p>';
   }
 
-  function renderProjectTitle(container, proyecto) {
-    if (!container || !proyecto) return;
-    if (isCustomCase(proyecto) || proyecto.galleryLayout === 'reel' || proyecto.galleryLayout === 'photo') {
-      container.innerHTML = '';
-      return;
-    }
-    container.innerHTML = '<h1>' + proyecto.title + '</h1>';
+  function notifyRendered() {
+    document.dispatchEvent(new CustomEvent('portfolio:rendered'));
   }
 
   function renderProjectDetail(proyectoId) {
@@ -2015,18 +1701,18 @@
 
     document.title = (proyecto.pageTitle || proyecto.title) + ' — Rodrigo Caimi';
 
-    renderProjectTitle(document.querySelector('[data-proyecto-title]'), proyecto);
     renderGallery(document.querySelector('[data-proyecto-gallery]'), proyecto);
-    renderMeta(document.querySelector('[data-proyecto-meta]'), proyecto);
     renderProcess(document.querySelector('[data-proyecto-process]'), proyecto);
     renderActions(document.querySelector('[data-proyecto-actions]'), proyecto);
     renderOtherProjects(document.querySelector('[data-proyecto-related]'), proyectoId);
+    notifyRendered();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
     const grid = document.querySelector('.work-container[data-render="grid"]');
     if (grid) {
       renderWorkGrid(grid);
+      notifyRendered();
     }
 
     const proyectoId = Number(document.body.dataset.proyectoId);

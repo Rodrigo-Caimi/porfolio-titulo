@@ -2,15 +2,6 @@
    Fonts de esta ficha (siguen por <link> Google en el HTML): DM Sans. */
 @layer casos {
 /* Ubicar GPS: recorrido con flecha naranja */
-/* TODO: unificar hide/reset de shell de ficha custom (title/meta/actions/back) con otras fichas */
-body[data-proyecto-id="8"] .project-detail-title,
-body[data-proyecto-id="8"] .work-detail-hero,
-body[data-proyecto-id="8"] .project-meta-section,
-body[data-proyecto-id="8"] .project-actions-section,
-body[data-proyecto-id="8"] .project-back-bar {
-  display: none;
-}
-
 body[data-proyecto-id="8"] {
   --bg: #141414;
   background: #141414;
@@ -346,70 +337,21 @@ body[data-proyecto-id="8"] .ubicar-gallery-item img {
   margin: 0 auto;
 }
 
-body[data-proyecto-id="8"] .ubicar-lightbox {
-  /* TODO: unificar chrome lightbox con @layer lightbox en base.css (sizing/open se repiten en mayo/noir/wine/ubicar) */
-  position: relative;
-  width: auto;
-  max-width: min(96vw, 1280px);
-  max-height: 92vh;
-  margin: auto;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  overflow: visible;
-}
-
 body[data-proyecto-id="8"] .ubicar-lightbox::backdrop {
   background: rgba(8, 8, 8, 0.9);
 }
 
 body[data-proyecto-id="8"] .ubicar-lightbox img {
-  display: block;
-  max-width: min(92vw, 1200px);
-  max-height: 84vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
   border-radius: 12px;
 }
 
 body[data-proyecto-id="8"] .ubicar-lightbox-close,
 body[data-proyecto-id="8"] .ubicar-lightbox-prev,
 body[data-proyecto-id="8"] .ubicar-lightbox-next {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  border: 0;
   background: rgba(20, 20, 20, 0.72);
-  color: #fff;
-  cursor: pointer;
 }
-
-body[data-proyecto-id="8"] .ubicar-lightbox-close {
-  top: -44px;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 28px;
-  line-height: 1;
-}
-
-body[data-proyecto-id="8"] .ubicar-lightbox-prev,
-body[data-proyecto-id="8"] .ubicar-lightbox-next {
-  top: 50%;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  font-size: 32px;
-  transform: translateY(-50%);
-}
-
-body[data-proyecto-id="8"] .ubicar-lightbox-prev { left: -56px; }
-body[data-proyecto-id="8"] .ubicar-lightbox-next { right: -56px; }
 
 body[data-proyecto-id="8"] .other-projects-section {
-  /* TODO: unificar acento related (fondo/h2::after) con var de ficha compartida */
   background: linear-gradient(180deg, #141414 0%, #ececec 72px, #ececec 100%);
   padding-top: 96px;
 }
@@ -510,13 +452,6 @@ body[data-proyecto-id="8"] .other-projects-section {
     max-height: none;
     object-fit: cover;
     object-position: center 42%;
-  }
-
-  body[data-proyecto-id="8"] .ubicar-lightbox-prev { left: 8px; /* TODO: unificar offsets mobile lightbox con base @layer lightbox */ }
-  body[data-proyecto-id="8"] .ubicar-lightbox-next { right: 8px; }
-  body[data-proyecto-id="8"] .ubicar-lightbox-close {
-    top: 8px;
-    right: 8px;
   }
 }
 

@@ -2,22 +2,14 @@
    Fonts de esta ficha (siguen por <link> Google en el HTML): DM Sans. */
 @layer casos {
 /* Mayo Amarillo: case study editorial */
-/* TODO: unificar hide/reset de shell de ficha custom (title/meta/actions/back) con otras fichas */
 body[data-proyecto-id="2"] {
   --mayo-yellow: #f0c400;
   --mayo-ink: #111111;
   --mayo-muted: #555555;
   --mayo-line: #e2e2e2;
   --mayo-max: 1600px;
+  --related-accent: var(--mayo-yellow);
   background: #fff;
-}
-
-body[data-proyecto-id="2"] .project-detail-title,
-body[data-proyecto-id="2"] .work-detail-hero,
-body[data-proyecto-id="2"] .project-meta-section,
-body[data-proyecto-id="2"] .project-actions-section,
-body[data-proyecto-id="2"] .project-back-bar {
-  display: none;
 }
 
 body[data-proyecto-id="2"] main {
@@ -614,70 +606,23 @@ body[data-proyecto-id="2"] .mayo-cta--ghost:hover {
   color: #fff;
 }
 
-body[data-proyecto-id="2"] .mayo-lightbox {
-  /* TODO: unificar chrome lightbox con @layer lightbox en base.css (sizing/open se repiten en mayo/noir/wine/ubicar) */
-  width: min(92vw, 1200px);
-  max-width: 92vw;
-  max-height: 90vh;
-  padding: 0;
-  border: 0;
-  background: transparent;
-}
-
 body[data-proyecto-id="2"] .mayo-lightbox::backdrop {
   background: rgba(0, 0, 0, 0.82);
 }
 
 body[data-proyecto-id="2"] .mayo-lightbox img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 86vh;
-  object-fit: contain;
   background: #111;
 }
 
 body[data-proyecto-id="2"] .mayo-lightbox-close,
 body[data-proyecto-id="2"] .mayo-lightbox-prev,
 body[data-proyecto-id="2"] .mayo-lightbox-next {
-  position: absolute;
-  border: 0;
   background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  cursor: pointer;
 }
-
-body[data-proyecto-id="2"] .mayo-lightbox-close {
-  top: -44px;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 28px;
-  line-height: 1;
-}
-
-body[data-proyecto-id="2"] .mayo-lightbox-prev,
-body[data-proyecto-id="2"] .mayo-lightbox-next {
-  top: 50%;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  font-size: 32px;
-  transform: translateY(-50%);
-}
-
-body[data-proyecto-id="2"] .mayo-lightbox-prev { left: -56px; }
-body[data-proyecto-id="2"] .mayo-lightbox-next { right: -56px; }
 
 body[data-proyecto-id="2"] .other-projects-section {
-  /* TODO: unificar acento related (fondo/h2::after) con var de ficha compartida */
   background: #fff;
   padding: 64px 0 72px;
-}
-
-body[data-proyecto-id="2"] .other-projects-section h2::after {
-  background: var(--mayo-yellow);
 }
 
 @media (max-width: 1024px) {
@@ -805,13 +750,6 @@ body[data-proyecto-id="2"] .other-projects-section h2::after {
   body[data-proyecto-id="2"] .mayo-cta,
   body[data-proyecto-id="2"] .mayo-close-actions {
     width: 100%;
-  }
-
-  body[data-proyecto-id="2"] .mayo-lightbox-prev { left: 8px; /* TODO: unificar offsets mobile lightbox con base @layer lightbox */ }
-  body[data-proyecto-id="2"] .mayo-lightbox-next { right: 8px; }
-  body[data-proyecto-id="2"] .mayo-lightbox-close {
-    top: 8px;
-    right: 8px;
   }
 }
 

@@ -2,16 +2,6 @@
    Fonts de esta ficha (siguen por <link> Google en el HTML): DM Sans. */
 @layer casos {
 /* Proyecto Fotográfico: hero cinematográfico + galería editorial */
-/* TODO: unificar hide/reset de shell de ficha custom (title/meta/actions/back) con otras fichas */
-body[data-proyecto-id="4"] .project-back-bar,
-body[data-proyecto-id="4"] .project-detail-title,
-body[data-proyecto-id="4"] .project-meta-section,
-body[data-proyecto-id="4"] .project-actions-section {
-  display: none;
-  margin: 0;
-  padding: 0;
-}
-
 body[data-proyecto-id="4"] .work-detail-hero,
 body[data-proyecto-id="4"] .golden-section,
 body[data-proyecto-id="4"] .other-projects-section {
