@@ -236,16 +236,14 @@ body[data-proyecto-id="2"] .mayo-poster .mayo-photo {
   background: #f6f6f6;
 }
 
-body[data-proyecto-id="2"] .mayo-poster img,
-body[data-proyecto-id="2"] .mayo-feed-item img {
+body[data-proyecto-id="2"] .mayo-poster img {
   width: 100%;
   height: auto;
   max-height: none;
   object-fit: contain;
 }
 
-body[data-proyecto-id="2"] .mayo-poster figcaption,
-body[data-proyecto-id="2"] .mayo-piece figcaption {
+body[data-proyecto-id="2"] .mayo-poster figcaption {
   display: none;
 }
 
@@ -594,16 +592,6 @@ body[data-proyecto-id="2"] .mayo-cta--solid {
 body[data-proyecto-id="2"] .mayo-cta--solid:hover {
   background: #ffd84a;
   color: #111;
-}
-
-body[data-proyecto-id="2"] .mayo-cta--ghost {
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  color: #fff;
-}
-
-body[data-proyecto-id="2"] .mayo-cta--ghost:hover {
-  border-color: #fff;
-  color: #fff;
 }
 
 body[data-proyecto-id="2"] .mayo-lightbox::backdrop {
