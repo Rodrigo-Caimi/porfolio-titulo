@@ -203,9 +203,7 @@ body[data-proyecto-id="5"] .reel-phone-screen {
 }
 
 body[data-proyecto-id="5"] .reel-vimeo,
-body[data-proyecto-id="5"] .reel-phone-screen iframe,
-body[data-proyecto-id="5"] .reel-phone-screen .shot,
-body[data-proyecto-id="5"] .reel-phone-screen .shot-media {
+body[data-proyecto-id="5"] .reel-phone-screen iframe {
   position: absolute;
   inset: 0;
   width: 100%;

@@ -74,61 +74,10 @@
     }).join('');
   }
 
-  function isVimeoItem(item) {
-    return item && (item.type === 'vimeo' || /player\.vimeo\.com|vimeo\.com\/\d+/.test(item.src || ''));
-  }
-
-  function vimeoEmbedUrl(src) {
-    if (!src) return '';
-    const player = String(src).match(/player\.vimeo\.com\/video\/(\d+)/);
-    if (player) return 'https://player.vimeo.com/video/' + player[1];
-    const page = String(src).match(/vimeo\.com\/(?:video\/)?(\d+)/);
-    if (page) return 'https://player.vimeo.com/video/' + page[1];
-    return src;
-  }
-
-  function vimeoEmbedHtml(item) {
-    const url = vimeoEmbedUrl(item && item.src);
-    return (
-      '<iframe class="shot-media vimeo-embed"' +
-        ' src="' + url + '"' +
-        ' title="' + ((item && item.alt) || 'Video') + '"' +
-        ' loading="lazy"' +
-        ' allow="fullscreen; picture-in-picture"' +
-        ' allowfullscreen' +
-        ' referrerpolicy="strict-origin-when-cross-origin">' +
-      '</iframe>'
-    );
-  }
-
-  function renderShot(item, index) {
-    const eager = index === 0;
-    const loading = eager ? 'eager' : 'lazy';
-    const isMedia = isVimeoItem(item);
-    let media;
-
-    if (isVimeoItem(item)) {
-      media = vimeoEmbedHtml(item);
-    } else {
-      media =
-        '<img class="shot-media" src="' + asset(item.src) + '" alt="' + (item.alt || '') + '" loading="' + loading + '" decoding="async"' +
-        (eager ? ' fetchpriority="high"' : '') +
-        ' />';
-    }
-
-    return '<figure class="shot' + (isMedia ? ' shot--video' : '') + (isVimeoItem(item) ? ' shot--vimeo' : '') + '">' + media + '</figure>';
-  }
-
   function renderGallery(container, proyecto) {
     if (!container) return;
 
-    const items = proyecto.gallery || [];
-    if (isCustomCase(proyecto) || !items.length) {
-      container.innerHTML = '';
-      return;
-    }
-
-    // Foto (id 4) y ORT (id 5): markup estático en sus HTML
+    // Galerías de ficha: markup estático en cada HTML
     container.innerHTML = '';
   }
 

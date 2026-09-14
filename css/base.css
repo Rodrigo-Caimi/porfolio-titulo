@@ -2015,44 +2015,6 @@ textarea {
   align-items: stretch;
 }
 
-[data-proyecto-gallery] {
-  width: 100%;
-  align-self: stretch;
-}
-
-/* .shot: vivo en ORT (reel) y embeds Vimeo/video */
-.shot {
-  position: relative;
-  margin: 0;
-  width: 100%;
-  border-radius: 18px;
-  overflow: hidden;
-  background: transparent;
-  align-self: start;
-}
-
-.shot img,
-.shot video {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: unset;
-  background: transparent;
-}
-
-.shot--video {
-  aspect-ratio: var(--shot-ratio, 16 / 9);
-}
-
-.shot--video img,
-.shot--video video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .golden-section {
   max-width: var(--container);
   width: 100%;
