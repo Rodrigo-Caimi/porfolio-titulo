@@ -270,22 +270,6 @@ body[data-proyecto-id="8"] .ubicar-step--result .ubicar-copy {
   max-width: none;
 }
 
-body[data-proyecto-id="8"] .ubicar-step--result .ubicar-num {
-  box-shadow: 0 0 0 5px #e6e6e6;
-}
-
-body[data-proyecto-id="8"] .ubicar-step--result .ubicar-copy p {
-  color: #2a2a2a;
-}
-
-body[data-proyecto-id="8"] .ubicar-step--result .ubicar-result-lead {
-  color: #111;
-}
-
-body[data-proyecto-id="8"] .ubicar-step--result h3 {
-  color: #141414;
-}
-
 body[data-proyecto-id="8"] .ubicar-gallery {
   width: 100%;
   max-width: none;

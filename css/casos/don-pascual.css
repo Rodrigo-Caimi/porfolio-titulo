@@ -610,17 +610,6 @@ body[data-proyecto-id="7"] .wine-btn--solid:hover {
   color: #f5f2ea;
 }
 
-body[data-proyecto-id="7"] .wine-btn--ghost {
-  background: transparent;
-  color: #1c1914;
-  border-color: #1c1914;
-}
-
-body[data-proyecto-id="7"] .wine-btn--ghost:hover {
-  background: rgba(28, 25, 20, 0.06);
-  color: #1c1914;
-}
-
 body[data-proyecto-id="7"] .wine-lightbox::backdrop {
   background: rgba(8, 8, 8, 0.9);
 }
