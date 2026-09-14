@@ -167,15 +167,9 @@ const PROYECTOS = [
     cardHeight: 1421,
     cardImage: 'IMAGENES/Don pascual/don-pascual-card.webp',
     cardAlt: 'Don Pascual - Edición Limitada Invierno 2026',
-    role: 'Campaña integral: concepto, piezas fijas, video y audio',
-    tools: 'ChatGPT, Runway, Suno, ElevenLabs',
     processLayout: 'editorial',
+    // Lightbox: galería del mosaico (detalle en trabajos/don-pascual.html)
     editorial: {
-      intro: 'Una campaña de edición limitada pensada para que etiqueta, piezas gráficas y video compartan la misma atmósfera de invierno.',
-      bottle: {
-        src: 'IMAGENES/Don pascual/don pascualfinal.webp',
-        alt: 'Botella Don Pascual Chardonnay Edición Limitada 2026'
-      },
       gallery: [
         { src: 'IMAGENES/Don pascual/don-pascual-afiche.webp', alt: 'Afiche Don Pascual Edición Limitada', w: 1130, h: 1600 },
         { src: 'IMAGENES/Don pascual/don-pascual-campana.webp', alt: 'Mockup de campaña Don Pascual junto al fuego', w: 1600, h: 640 },
@@ -187,35 +181,7 @@ const PROYECTOS = [
         { src: 'IMAGENES/Don pascual/Plano 7-Tomando Vino.webp', alt: 'Escena de campaña Don Pascual tomando vino', w: 900, h: 1600 },
         { src: 'IMAGENES/Don pascual/don-pascual-botella-fuego.webp', alt: 'Botella Don Pascual junto al fuego', w: 900, h: 1600 }
       ]
-    },
-    gallery: [],
-    processTitle: 'Cómo se pensó este proyecto',
-    process: [
-      {
-        title: 'Problema',
-        text: 'La Edición Limitada Invierno 2026 de Don Pascual necesitaba una campaña premium coherente: etiqueta, video y piezas de comunicación con una misma atmósfera, sin parecer un collage de herramientas distintas.'
-      },
-      {
-        title: 'Mi rol',
-        text: 'Definí el concepto creativo y produje el sistema de campaña: reinterpretación de marca, etiqueta ilustrada, afiche, aplicaciones y video promocional con música y voces alineadas al tono.'
-      },
-      {
-        title: 'Decisión clave',
-        text: 'Prioricé una narrativa cálida de invierno —íntima y contemporánea— y usé IA solo donde aceleraba producción (imagen, movimiento, audio), manteniendo dirección creativa y coherencia visual en todas las piezas.'
-      },
-      {
-        title: 'Resultado',
-        text: 'Un set de campaña listo para presentar: etiqueta, mockups de marca, piezas gráficas y video publicitario que conectan el producto con una atmósfera de cosecha especial.'
-      }
-    ],
-    actions: [
-      {
-        label: 'Documentación del proyecto',
-        href: 'DOCUMENTOS/DON-PASCUAL.pdf',
-        download: 'DON-PASCUAL.pdf'
-      }
-    ],
-    related: [6, 5]
+    }
   },
   {
     id: 8,
@@ -230,59 +196,15 @@ const PROYECTOS = [
     cardHeight: 1067,
     cardImage: 'IMAGENES/Ubicar gps/ubicar-logo-card.webp',
     cardAlt: 'Vidriera Ubicar GPS',
-    role: 'Sistema visual de vidriera: iconos, piezas de producto y marca en local',
-    tools: 'Illustrator, Photoshop',
     processLayout: 'trail',
+    // Lightbox: piezas de vidriera (detalle en trabajos/ubicar-gps.html)
     trail: {
-      intro: 'Un sistema de comunicación para rastreo y seguridad: iconos, piezas de producto y vidriera con un mismo hilo naranja.',
-      steps: [
-        {
-          src: 'IMAGENES/Ubicar gps/Camaras Final.webp',
-          alt: 'Pieza Ubicar GPS de cámaras de seguridad',
-          w: 1341,
-          h: 2000
-        },
-        {
-          src: 'IMAGENES/Ubicar gps/Iconos Finales.webp',
-          alt: 'Sistema de iconos Ubicar GPS',
-          w: 2000,
-          h: 1602
-        },
-        {
-          src: 'IMAGENES/Ubicar gps/Flotas Final.webp',
-          alt: 'Pieza Ubicar GPS de rastreo satelital para flotas',
-          w: 1341,
-          h: 2000
-        }
-      ],
       result: [
         { src: 'IMAGENES/Ubicar gps/flotas y camaras.webp', alt: 'Vidriera Ubicar GPS de flotas y cámaras', w: 1050, h: 1400 },
         { src: 'IMAGENES/Ubicar gps/iconos1 vehiculos.webp', alt: 'Iconos Ubicar GPS para vehículos, mascotas y cámaras', w: 1120, h: 1400 },
         { src: 'IMAGENES/Ubicar gps/iconos2 gps.webp', alt: 'Iconos Ubicar GPS para niños, SOS y cámaras espía', w: 1120, h: 1400 },
         { src: 'IMAGENES/Ubicar gps/Ubicar Logo.webp', alt: 'Logo Ubicar GPS aplicado en vidriera', w: 1050, h: 1400 }
       ]
-    },
-    gallery: [],
-    processTitle: 'Cómo se pensó este proyecto',
-    process: [
-      {
-        title: 'Problema',
-        text: 'UbicarGPS necesitaba comunicar distintos servicios —rastreo de flotas, cámaras de seguridad y soluciones asociadas— en una misma vidriera, de forma clara y visible desde la calle, sin saturar la información.'
-      },
-      {
-        title: 'Mi rol',
-        text: 'Organicé la información en un sistema visual simple, combinando iconografía, jerarquía tipográfica e imágenes de producto para lograr una lectura rápida, con el naranja como hilo conductor entre todas las piezas.'
-      },
-      {
-        title: 'Decisión clave',
-        text: 'Traduje información técnica a mensajes visuales simples. Cada servicio tiene su propia pieza, pero todos comparten la misma lógica de color, iconografía y jerarquía.'
-      },
-      {
-        title: 'Resultado',
-        text: 'Un sistema gráfico coherente llevado a una aplicación real: cinco piezas de vidriera que integran productos, servicios, iconografía e identidad de marca en un mismo recorrido visual.'
-      }
-    ],
-    actions: [],
-    related: [7, 6]
+    }
   }
 ];
