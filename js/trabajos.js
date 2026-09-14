@@ -316,106 +316,23 @@
     );
   }
 
-  function ubicarImgAttrs(photo, eager) {
-    const wh = (photo.w && photo.h)
-      ? ' width="' + photo.w + '" height="' + photo.h + '"'
-      : '';
-    const load = eager
-      ? ' loading="eager" fetchpriority="high"'
-      : ' loading="lazy"';
-    return wh + load + ' decoding="async"';
+  function bindUbicarInteractions(root, proyecto) {
+    if (!root) return;
+    const result = (proyecto && proyecto.trail && proyecto.trail.result) || [];
+    bindUbicarTrail(root.querySelector('.ubicar-trail'));
+    bindSimpleLightbox(root.querySelector('.ubicar-gallery'), root.querySelector('.ubicar-lightbox'), result);
   }
 
   function renderTrailProcess(container, proyecto) {
-    const trail = proyecto.trail || {};
-    const steps = proyecto.process || [];
-    const photos = trail.steps || [];
-    const result = trail.result || [];
+    if (!container) return;
 
-    function stepHtml(item, n, photo, eager) {
-      if (!item) return '';
-      const num = (n < 10 ? '0' : '') + n;
-      const image = photo && photo.src
-        ? '<figure class="ubicar-shot">' +
-            '<img src="' + asset(photo.src) + '" alt="' + (photo.alt || '') + '"' + ubicarImgAttrs(photo, eager) + '>' +
-          '</figure>'
-        : '';
-
-      return (
-        '<article class="ubicar-step ubicar-step--' + n + '">' +
-          '<div class="ubicar-copy">' +
-            '<div class="ubicar-kicker">' +
-              '<span class="ubicar-num">' + num + '</span>' +
-              '<h3>' + item.title + '</h3>' +
-            '</div>' +
-            '<p>' + item.text + '</p>' +
-          '</div>' +
-          image +
-        '</article>'
-      );
+    // Markup estático en trabajos/ubicar-gps.html; JS solo dibuja la línea y el lightbox
+    if (container.querySelector('.ubicar-page')) {
+      bindUbicarInteractions(container, proyecto);
+      return;
     }
 
-    const galleryHtml = result.map(function (item, index) {
-      return (
-        '<button type="button" class="ubicar-gallery-item" data-ubicar-index="' + index + '" aria-label="Ampliar: ' + (item.alt || '') + '">' +
-          '<img src="' + asset(item.src) + '" alt="' + (item.alt || '') + '"' + ubicarImgAttrs(item, false) + '>' +
-        '</button>'
-      );
-    }).join('');
-
-    const resultStep = steps[3]
-      ? '<article class="ubicar-step ubicar-step--4 ubicar-step--result">' +
-          '<div class="ubicar-copy">' +
-            '<div class="ubicar-kicker">' +
-              '<span class="ubicar-num">04</span>' +
-              '<h3>' + steps[3].title + '</h3>' +
-            '</div>' +
-            '<p class="ubicar-result-lead">Del diseño a una aplicación real.</p>' +
-            '<p>' + steps[3].text + '</p>' +
-          '</div>' +
-        '</article>'
-      : '';
-
-    container.innerHTML =
-      '<div class="ubicar-page">' +
-        '<div class="ubicar-intro">' +
-          '<a class="ubicar-back" href="' + homeHref() + '">' +
-            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-              '<path d="M15 18l-6-6 6-6"></path>' +
-            '</svg>' +
-            '<span>Volver al inicio</span>' +
-          '</a>' +
-          '<h1>' + (proyecto.pageTitle || proyecto.title) + '</h1>' +
-          (trail.intro ? '<p class="ubicar-lead">' + trail.intro + '</p>' : '') +
-          '<p class="ubicar-process-label">Cómo se pensó este <em>proyecto</em></p>' +
-        '</div>' +
-        '<div class="ubicar-trail">' +
-          '<svg class="ubicar-line" aria-hidden="true">' +
-            '<defs>' +
-              '<marker id="ubicar-arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">' +
-                '<path d="M0 0 L12 6 L0 12 Z" fill="#ff5a00"></path>' +
-              '</marker>' +
-            '</defs>' +
-            '<path class="ubicar-line-path"></path>' +
-          '</svg>' +
-          stepHtml(steps[0], 1, photos[0], true) +
-          stepHtml(steps[1], 2, photos[1], false) +
-          stepHtml(steps[2], 3, photos[2], false) +
-          resultStep +
-        '</div>' +
-        (galleryHtml
-          ? '<section class="ubicar-gallery" aria-label="Aplicación real en el local">' + galleryHtml + '</section>'
-          : '') +
-        '<dialog class="ubicar-lightbox" aria-label="Imagen ampliada">' +
-          '<button type="button" class="ubicar-lightbox-close" aria-label="Cerrar">×</button>' +
-          '<button type="button" class="ubicar-lightbox-prev" aria-label="Imagen anterior">‹</button>' +
-          '<img alt="">' +
-          '<button type="button" class="ubicar-lightbox-next" aria-label="Imagen siguiente">›</button>' +
-        '</dialog>' +
-      '</div>';
-
-    bindUbicarTrail(container.querySelector('.ubicar-trail'));
-    bindSimpleLightbox(container.querySelector('.ubicar-gallery'), container.querySelector('.ubicar-lightbox'), result);
+    container.innerHTML = '';
   }
 
   function bindUbicarTrail(trail) {
@@ -1424,6 +1341,17 @@
     if (!proyecto) return;
 
     document.title = (proyecto.pageTitle || proyecto.title) + ' — Rodrigo Caimi';
+
+    // Ubicar (id 8): HTML estático; JS solo trail SVG + lightbox
+    if (proyecto.processLayout === 'trail') {
+      const root = document.querySelector('.ubicar-case') || document;
+      if (root.querySelector('.ubicar-page')) {
+        bindUbicarInteractions(root, proyecto);
+        renderOtherProjects(document.querySelector('[data-proyecto-related]'), proyectoId);
+        notifyRendered();
+        return;
+      }
+    }
 
     renderGallery(document.querySelector('[data-proyecto-gallery]'), proyecto);
     renderProcess(document.querySelector('[data-proyecto-process]'), proyecto);
