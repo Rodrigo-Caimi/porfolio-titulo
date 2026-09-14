@@ -445,38 +445,6 @@ body[data-proyecto-id="7"] .don-mosaic {
   margin: 0;
 }
 
-body[data-proyecto-id="7"] .don-mosaic-lines {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: visible;
-}
-
-body[data-proyecto-id="7"] .don-mosaic-lines path {
-  fill: none;
-  stroke: #c5b08a;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-body[data-proyecto-id="7"] .don-mosaic-lines path.don-trail-main {
-  stroke-width: 1.15;
-  opacity: 0.82;
-}
-
-body[data-proyecto-id="7"] .don-mosaic-lines path.don-trail-echo {
-  stroke-width: 0.6;
-  opacity: 0.26;
-}
-
-body[data-proyecto-id="7"] .don-mosaic-lines circle {
-  fill: #c5b08a;
-  opacity: 0.92;
-}
-
 body[data-proyecto-id="7"] .don-mosaic-item {
   display: block;
   position: relative;
@@ -724,8 +692,7 @@ body[data-proyecto-id="7"] .don-footerbrand {
     height: auto;
   }
 
-  body[data-proyecto-id="7"] .don-lines,
-  body[data-proyecto-id="7"] .don-mosaic-lines {
+  body[data-proyecto-id="7"] .don-lines {
     display: none;
   }
 

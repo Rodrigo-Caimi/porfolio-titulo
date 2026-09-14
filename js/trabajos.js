@@ -64,7 +64,6 @@
     if (!root) return;
     const gallery = (proyecto && proyecto.don && proyecto.don.gallery) || [];
     bindDonArrows(root.querySelector('.don-stage'));
-    bindDonMosaicLines(root.querySelector('.don-mosaic-wrap'));
     bindSimpleLightbox(
       root.querySelector('.don-mosaic'),
       root.querySelector('.don-lightbox'),
@@ -287,79 +286,6 @@
 
     const redraw = function () { window.requestAnimationFrame(draw); };
     if (!bottle.complete) bottle.addEventListener('load', redraw, { once: true });
-    let timer = 0;
-    window.addEventListener('resize', function () {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(redraw, 120);
-    });
-    redraw();
-  }
-
-  function bindDonMosaicLines(wrap) {
-    if (!wrap) return;
-    const mosaic = wrap.querySelector('.don-mosaic');
-    const svg = wrap.querySelector('.don-mosaic-lines');
-    if (!mosaic || !svg) return;
-    const ns = 'http://www.w3.org/2000/svg';
-
-    function curve(a, b, amp) {
-      const mx = (a.x + b.x) / 2 + amp;
-      const my = (a.y + b.y) / 2;
-      return 'M' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) +
-        ' Q' + mx.toFixed(1) + ' ' + my.toFixed(1) +
-        ' ' + b.x.toFixed(1) + ' ' + b.y.toFixed(1);
-    }
-
-    function center(el) {
-      const wr = wrap.getBoundingClientRect();
-      const r = el.getBoundingClientRect();
-      return {
-        x: r.left - wr.left + r.width / 2,
-        y: r.top - wr.top + r.height / 2
-      };
-    }
-
-    function el(name, attrs) {
-      const node = document.createElementNS(ns, name);
-      Object.keys(attrs).forEach(function (key) { node.setAttribute(key, attrs[key]); });
-      return node;
-    }
-
-    function draw() {
-      while (svg.firstChild) svg.removeChild(svg.firstChild);
-      if (window.matchMedia('(max-width: 900px)').matches) return;
-      const wr = wrap.getBoundingClientRect();
-      if (!wr.width || !wr.height) return;
-      svg.setAttribute('viewBox', '0 0 ' + wr.width + ' ' + wr.height);
-      svg.setAttribute('width', String(wr.width));
-      svg.setAttribute('height', String(wr.height));
-
-      const items = mosaic.querySelectorAll('.don-mosaic-item');
-      if (items.length < 2) return;
-      const nodes = [];
-      for (let i = 0; i < items.length; i++) {
-        nodes.push(center(items[i].querySelector('img') || items[i]));
-      }
-
-      const frag = document.createDocumentFragment();
-      for (let i = 0; i < nodes.length - 1; i++) {
-        const a = nodes[i];
-        const b = nodes[i + 1];
-        const len = Math.hypot(b.x - a.x, b.y - a.y);
-        if (len < 140) continue;
-        const amp = (i % 2 === 0 ? 1 : -1) * Math.min(120, len * 0.22);
-        frag.appendChild(el('path', { class: 'don-trail-echo', d: curve(a, b, amp * 1.1) }));
-        frag.appendChild(el('path', { class: 'don-trail-main', d: curve(a, b, amp) }));
-        frag.appendChild(el('circle', { cx: a.x.toFixed(1), cy: a.y.toFixed(1), r: '3.4' }));
-        frag.appendChild(el('circle', { cx: b.x.toFixed(1), cy: b.y.toFixed(1), r: '3.4' }));
-      }
-      svg.appendChild(frag);
-    }
-
-    const redraw = function () { window.requestAnimationFrame(draw); };
-    mosaic.querySelectorAll('img').forEach(function (img) {
-      img.addEventListener('load', redraw);
-    });
     let timer = 0;
     window.addEventListener('resize', function () {
       window.clearTimeout(timer);
