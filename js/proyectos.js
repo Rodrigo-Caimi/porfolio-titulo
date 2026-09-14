@@ -11,42 +11,16 @@ const PROYECTOS = [
     cardHeight: 1120,
     cardImage: 'IMAGENES/Mayo amarillo/mayo-amarillo-card.webp',
     cardAlt: 'Mayo Amarillo - Campaña',
-    role: 'Campaña de concientización vial · Dirección visual, sistema gráfico y adaptación audiovisual',
-    tools: 'Photoshop · Illustrator · Premiere Pro',
     processLayout: 'mayo',
+    // Lightbox: solo piezas que abre el HTML (trabajos/mayo-amarillo.html)
     gallery: [
       { src: 'IMAGENES/Mayo amarillo/Afiche-de-campana.webp', alt: 'Afiche de campaña Mayo Amarillo' },
-      { src: 'IMAGENES/Mayo amarillo/Mayo-Amarillo-2024-1024x307.png.webp', alt: 'Listón de campaña Mayo Amarillo 2024', width: 1024, height: 307 },
-      { src: 'IMAGENES/Mayo amarillo/2-Posteoig.jpg', alt: 'Posteo Instagram Mayo Amarillo 2', width: 1080, height: 1320 },
-      { src: 'IMAGENES/Mayo amarillo/3-PosteoIG.jpg', alt: 'Posteo Instagram Mayo Amarillo 3', width: 1080, height: 1320 },
       { src: 'IMAGENES/Mayo amarillo/5-PosteoIgMayo.webp', alt: 'Posteo Instagram Mayo Amarillo 5' },
       { src: 'IMAGENES/Mayo amarillo/4-PosteoIGMayoa.jpg', alt: 'Posteo Instagram Mayo Amarillo 4' },
       { src: 'IMAGENES/Mayo amarillo/1-PosteoIgMayoA.webp', alt: 'Posteo Instagram Mayo Amarillo EN VIVO' },
+      { src: 'IMAGENES/Mayo amarillo/2-Posteoig.jpg', alt: 'Posteo Instagram Mayo Amarillo 2', width: 1080, height: 1320 },
       { src: 'IMAGENES/Mayo amarillo/reel-ig-Final.gif', alt: 'gif de la campaña', width: 1080, height: 1920 }
-    ],
-    processTitle: 'Cómo se pensó este proyecto',
-    process: [
-      {
-        title: 'CÓMO SE PENSÓ ESTA CAMPAÑA',
-        text: 'Mayo Amarillo parte del registro real de un accidente para generar conciencia sobre las consecuencias de una imprudencia al volante. La propuesta utiliza el lenguaje visual de un noticiero para transformar la escena en un mensaje directo, cercano y de fuerte impacto emocional.'
-      },
-      {
-        title: 'DESARROLLO Y PRODUCCIÓN',
-        text: 'El desarrollo partió de una escena real y pasó por distintas exploraciones de composición y jerarquía hasta definir el sistema final. Se trabajó con color selectivo, fondo desenfocado y recursos propios del lenguaje televisivo para dirigir la atención y reforzar el mensaje central.'
-      },
-      {
-        title: 'Resultado y alcance',
-        text: 'La campaña logró generar conciencia sobre la seguridad vial con mensajes claros, visualmente impactantes que conectan con la audiencia en múltiples canales, funcionando en formato impreso y redes sociales y manteniendo coherencia visual constantemente.'
-      }
-    ],
-    actions: [
-      {
-        label: 'Información de la campaña',
-        href: 'DOCUMENTOS/Mayo-amarillo-porfolio.pdf',
-        download: 'Mayo-amarillo-porfolio.pdf'
-      }
-    ],
-    related: [5, 4]
+    ]
   },
   {
     id: 4,
@@ -89,23 +63,20 @@ const PROYECTOS = [
     cardHeight: 427,
     cardImage: 'IMAGENES/Noir Estudio/noir-interior-card.webp',
     cardAlt: 'Noir Estudio - Identidad de marca',
-    role: 'Dirección de identidad: concepto, sistema visual y aplicaciones',
-    heroLead: 'Desarrollo de identidad visual y experiencia digital, desde el concepto de marca hasta sus aplicaciones y diseño UX/UI.',
-    tools: 'Figma',
     processLayout: 'noir',
+    // Lightbox: hero + servicios + galería (detalle en trabajos/noir-estudio.html)
     heroSlider: [
       { src: 'IMAGENES/Noir Estudio/noir-interior.jpg', alt: 'Interior Noir Estudio' },
       { src: 'IMAGENES/Noir Estudio/Slider2.webp', alt: 'Slider 2 — Herramientas y productos Noir Estudio' },
       { src: 'IMAGENES/Noir Estudio/Slider3.webp', alt: 'Slider 3 — Piezas de marca Noir Estudio' }
     ],
     serviceCards: [
-      { title: 'Perfilado', text: 'Afeitado y definición de barba.', src: 'IMAGENES/Noir Estudio/afeitado.jpg', alt: 'Perfilado Noir Estudio' },
-      { title: 'Experiencia Noir', text: 'El ritual de atención en el estudio.', src: 'IMAGENES/Noir Estudio/experiencia-Noir.webp', alt: 'Experiencia Noir Estudio' },
-      { title: 'Color y corrección', text: 'Coloración profesional y balance de tono.', src: 'IMAGENES/Noir Estudio/noir-productos.jpg', alt: 'Color y corrección Noir Estudio' },
-      { title: 'Diseño de corte', text: 'Corte a medida según el estilo.', src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Diseño de corte Noir Estudio' },
-      { title: 'Acabado y estilo', text: 'El look final y el peinado.', src: 'IMAGENES/Noir Estudio/noir-acabado.webp', alt: 'Acabado y estilo Noir Estudio' }
+      { src: 'IMAGENES/Noir Estudio/afeitado.jpg', alt: 'Perfilado Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/experiencia-Noir.webp', alt: 'Experiencia Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-productos.jpg', alt: 'Color y corrección Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-herramientas.jpg', alt: 'Diseño de corte Noir Estudio' },
+      { src: 'IMAGENES/Noir Estudio/noir-acabado.webp', alt: 'Acabado y estilo Noir Estudio' }
     ],
-    servicesNote: 'Las tarjetas funcionan como unidades de información independientes: cada servicio se identifica rápidamente por imagen, nombre y descripción, ayudando al usuario a comparar opciones y entender la propuesta sin sobrecargar la interfaz.',
     gallery: [
       { src: 'IMAGENES/Noir Estudio/cuadro-echo-bien.webp', alt: 'Antes de la transformación Noir Estudio' },
       { src: 'IMAGENES/Noir Estudio/terminado1.webp', alt: 'Corte terminado Noir Estudio' },
@@ -115,44 +86,7 @@ const PROYECTOS = [
       { src: 'IMAGENES/Noir Estudio/grid3.webp', alt: 'Pieza de campaña Noir Estudio', wide: true },
       { src: 'IMAGENES/Noir Estudio/mapa-1.webp', alt: 'Mapa de ubicación Noir Estudio', wide: true },
       { src: 'IMAGENES/Noir Estudio/mapa-2.webp', alt: 'Detalle de mapa Noir Estudio', wide: true }
-    ],
-    processTitle: 'Cómo se pensó este proyecto',
-    process: [
-      {
-        title: 'Problema',
-        text: 'Noir Estudio necesitaba construir una identidad premium para barbería & estilo y trasladarla a una experiencia digital coherente. El desafío era lograr una estética exclusiva sin caer en los códigos genéricos de las barberías oscuras y mantener claridad tanto en la marca como en la navegación del sitio.'
-      },
-      {
-        title: 'Mi rol',
-        text: 'Desarrollé la identidad visual y diseñé la experiencia web en Figma. Trabajé el sistema de marca, tipografías, paleta cromática, aplicaciones y mockups, junto con la estructura y diseño de la interfaz: servicios, transformaciones, experiencia Noir, ubicación y reserva.'
-      },
-      {
-        title: 'Decisión clave',
-        text: 'Construí el sistema alrededor de una paleta de negros y carbón con acentos dorados y una composición limpia. En la web prioricé jerarquía, fotografías protagonistas y una navegación simple para que la estética premium no comprometiera la claridad ni la experiencia de uso.'
-      },
-      {
-        title: 'Resultado',
-        text: 'Una identidad consistente que se extiende del espacio físico a la experiencia digital. El resultado integra marca, aplicaciones e interfaz dentro de un mismo universo visual, con una web pensada para presentar los servicios, generar confianza y facilitar el contacto con el estudio.'
-      }
-    ],
-    actions: [
-      {
-        label: 'Documentación del proyecto',
-        href: 'DOCUMENTOS/Noir-estudio-porfolio.pdf',
-        download: 'Noir-estudio-porfolio.pdf'
-      },
-      {
-        label: 'Prototipo para PC',
-        href: 'https://www.figma.com/proto/NUjf3slMWEIzsOJaHKwF4n/Noir-Estudio?node-id=321-16&p=f&t=XUCHV8rGCX53Johv-1&scaling=min-zoom&content-scaling=fixed&page-id=321%3A15',
-        external: true
-      },
-      {
-        label: 'Prototipo para celu',
-        href: 'https://www.figma.com/proto/NUjf3slMWEIzsOJaHKwF4n/Noir-Estudio?node-id=801-1695&p=f&t=JDHiKh6b9bp6WhuM-1&scaling=min-zoom&content-scaling=fixed&page-id=686%3A299',
-        external: true
-      }
-    ],
-    related: [7, 8]
+    ]
   },
   {
     id: 7,
