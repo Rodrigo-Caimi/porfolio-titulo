@@ -547,11 +547,11 @@ body[data-proyecto-id="7"] .don-video-embed {
 
 @media (min-width: 901px) {
   body[data-proyecto-id="7"] .don-mosaic-item img {
-    max-height: min(63.6vh, 554px);
+    max-height: min(73.14vh, 637px);
   }
 
   body[data-proyecto-id="7"] .don-video-embed {
-    width: calc(min(63.6vh, 554px) * 1.5 * 9 / 16);
+    width: calc(min(73.14vh, 637px) * 1.5 * 9 / 16);
   }
 }
 
