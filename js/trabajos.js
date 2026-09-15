@@ -64,7 +64,7 @@
     if (!root) return;
     const gallery = (proyecto && proyecto.don && proyecto.don.gallery) || [];
     bindSimpleLightbox(
-      root.querySelector('.don-mosaic'),
+      root.querySelector('.don-mosaic-wrap'),
       root.querySelector('.don-lightbox'),
       gallery,
       {
